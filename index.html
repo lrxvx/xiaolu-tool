@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开发者工具箱 | 高效在线工具集合</title>
+    <meta name="description" content="免费在线工具集合，包含编码转换、数据处理、图像处理等实用工具">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 5%;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .logo-text span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover, 
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* 主要内容布局 */
+        .container {
+            display: flex;
+            flex: 1;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 20px;
+            width: 100%;
+            gap: 24px;
+        }
+        
+        /* 左侧广告位样式 */
+        .ad-sidebar {
+            width: 240px;
+            flex-shrink: 0;
+        }
+        
+        .ad-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+        
+        .ad-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ad-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .ad-content {
+            padding: 20px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--gray);
+        }
+        
+        .ad-content i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .ad-content h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 主内容区 - 工具列表 */
+        .main-content {
+            flex: 1;
+        }
+        
+        .page-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .page-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            background: white;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            font-size: 1rem;
+            padding-left: 50px;
+            transition: var(--transition);
+        }
+        
+        .search-box:focus {
+            outline: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.2);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .tools-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 3rem;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            height: 160px; /* 显著减小高度 */
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tool-header {
+            padding: 15px;
+            background: linear-gradient(135deg, #f0f4ff, #e6eeff);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        
+        .tool-card:hover .tool-icon {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.4);
+        }
+
+        .tool-title-wrapper {
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .tool-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .tool-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .tool-content {
+            padding: 12px 15px;
+        }
+
+        .tool-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 0;
+        }
+
+        
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .tag {
+            background: #eef5ff;
+            color: var(--primary);
+            padding: 3px 8px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .tool-link {
+            margin-top: auto;
+            display: inline-block;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .tool-link:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        /* 右侧信息栏 */
+        .info-sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .stats-card h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .stats-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        
+        .stat-item {
+            margin-bottom: 20px;
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        .popular-tools {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 25px;
+        }
+        
+        .popular-tools h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .popular-tools h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        
+        .popular-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .popular-tool {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 15px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .popular-tool:hover {
+            transform: translateY(-3px);
+            background: #eef2ff;
+        }
+        
+        .popular-tool i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .popular-tool h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .popular-tool p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        .profile-card {
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 30px 25px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .profile-card::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .profile-name {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-title {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+        
+        .social-links a:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .contact-info {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-info p {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3rem 0 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .contact-info-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+
+
+        @media (max-width: 1200px) {
+            .tools-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .tools-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tools-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .tool-card {
+                height: auto;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="navbar">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">Dev<span>Tools</span></div>
+            </a>
+            
+            <div class="nav-links">
+                <a href="#" class="active">首页</a>
+                <a href="#">所有工具</a>
+                <a href="#">最新工具</a>
+                <a href="#">我的博客</a>
+                <a href="#">关于我</a>
+            </div>
+            
+            <div class="user-section">
+                <div class="user-avatar">JD</div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 主体内容 -->
+    <div class="container">
+        <!-- 左侧广告位 -->
+        <aside class="ad-sidebar">
+            <div class="ad-card">
+                <div class="ad-header">推荐资源</div>
+                <div class="ad-content">
+                    <i class="fas fa-server"></i>
+                    <h3>云服务器特惠</h3>
+                    <p>高性能云服务器，新用户首年1折起</p>
+                </div>
+            </div>
+            
+            <div class="ad-card">
+                <div class="ad-header">赞助商</div>
+                <div class="ad-content">
+                    <i class="fab fa-js"></i>
+                    <h3>前端框架课程</h3>
+                    <p>React/Vue 高级实战课程限时优惠</p>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- 主内容区 - 工具列表 -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>开发者实用工具集</h1>
+                <p>精心挑选的免费在线工具，提高开发效率，无需安装，即开即用</p>
+            </div>
+            
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-box" placeholder="搜索工具...">
+            </div>
+            
+            <div class="tools-container" id="toolsContainer">
+                <!-- 工具列表将通过JavaScript动态加载 -->
+            </div>
+        </main>
+        
+        <!-- 右侧信息栏 -->
+        <aside class="info-sidebar">
+            <!-- 工具统计 -->
+            <div class="stats-card">
+                <h3>站点统计</h3>
+                <div class="stat-item">
+                    <div class="stat-value">128</div>
+                    <div class="stat-label">工具数量</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">7,289,635</div>
+                    <div class="stat-label">使用次数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">258,963</div>
+                    <div class="stat-label">用户数量</div>
+                </div>
+            </div>
+            
+            <!-- 热门工具 -->
+            <div class="popular-tools">
+                <h3>热门工具</h3>
+                <div class="popular-grid">
+                    <div class="popular-tool">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h4>Base64 转换</h4>
+                        <p>文本/文件编码解码</p>
+                    </div>
+                    <div class="popular-tool">
+                        <i class="fas fa-palette"></i>
+                        <h4>颜色选择器</h4>
+                        <p>RGB/HEX 转换</p>
+                    </div>
+                    <div class="popular-tool">
+                        <i class="fas fa-qrcode"></i>
+                        <h4>二维码生成</h4>
+                        <p>链接转二维码</p>
+                    </div>
+                    <div class="popular-tool">
+                        <i class="fas fa-file-image"></i>
+                        <h4>图片压缩</h4>
+                        <p>优化图片大小</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 站长介绍 -->
+            <div class="profile-card">
+                <div class="profile-avatar">xiaolu</div>
+                <h3 class="profile-name">小路</h3>
+                <p class="profile-title">程序员 & AI编程，在职场做副业</p>
+                
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> contact@devtools.com</p>
+                    <p><i class="fas fa-globe"></i> blog.devtools.com</p>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-zhihu"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>关于本站</h3>
+                <p>DevTools 是一个免费在线工具集合网站，旨在为开发者提供便捷高效的开发工具，所有工具均可直接在浏览器中使用，无需安装。</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>工具分类</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-code"></i> 编码工具</a></li>
+                    <li><a href="#"><i class="fas fa-text-height"></i> 文本处理</a></li>
+                    <li><a href="#"><i class="fas fa-image"></i> 图像工具</a></li>
+                    <li><a href="#"><i class="fas fa-calculator"></i> 计算工具</a></li>
+                    <li><a href="#"><i class="fas fa-database"></i> 数据转换</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>快速链接</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-home"></i> 网站首页</a></li>
+                    <li><a href="#"><i class="fas fa-star"></i> 热门工具</a></li>
+                    <li><a href="#"><i class="fas fa-plus-circle"></i> 新增工具</a></li>
+                    <li><a href="#"><i class="fas fa-blog"></i> 技术博客</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> 联系站长</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>联系我</h3>
+                <div class="contact-info-footer">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>lrxvx@qq.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>xxx</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <span>xxxxxx</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 DevTools 开发者工具箱 | xxxx | 本网站由 GitHub + Netlify 驱动
+        </div>
+    </footer>
+    
+    <script>
+        // 模拟从tool-list.json加载工具数据
+        document.addEventListener('DOMContentLoaded', function() {
+            // 模拟的JSON数据 - 实际中替换为从服务器加载
+            const toolsData = [
+                {
+                    id: 1,
+                    name: "Base64 编码解码",
+                    description: "在线进行Base64编码和解码操作，支持文本和文件转换",
+                    path: "/tools/base64-encoder",
+                    icon: "fas fa-exchange-alt",
+                    tags: ["编码", "转换", "文本处理"]
+                },
+                {
+                    id: 2,
+                    name: "JSON 格式化工具",
+                    description: "将压缩的JSON数据格式化为易读的结构化形式",
+                    path: "/tools/json-formatter",
+                    icon: "fas fa-braille",
+                    tags: ["JSON", "格式化", "开发"]
+                },
+                {
+                    id: 3,
+                    name: "颜色选择器",
+                    description: "RGB/HEX颜色转换与调色板生成工具",
+                    path: "/tools/color-picker",
+                    icon: "fas fa-palette",
+                    tags: ["设计", "颜色", "CSS"]
+                },
+                {
+                    id: 4,
+                    name: "正则表达式测试",
+                    description: "在线测试和调试正则表达式，支持多种匹配模式",
+                    path: "/tools/regex-tester",
+                    icon: "fas fa-terminal",
+                    tags: ["正则", "开发", "测试"]
+                },
+                {
+                    id: 5,
+                    name: "二维码生成器",
+                    description: "将文本、URL等信息转换为二维码图像",
+                    path: "/tools/qr-generator",
+                    icon: "fas fa-qrcode",
+                    tags: ["工具", "分享", "图像"]
+                },
+                {
+                    id: 6,
+                    name: "时间戳转换",
+                    description: "Unix时间戳与日期时间之间的相互转换工具",
+                    path: "/tools/timestamp-converter",
+                    icon: "fas fa-clock",
+                    tags: ["时间", "转换", "开发"]
+                },
+                {
+                    id: 7,
+                    name: "Markdown 编辑器",
+                    description: "实时预览的Markdown编辑器，支持导出HTML",
+                    path: "/tools/markdown-editor",
+                    icon: "fab fa-markdown",
+                    tags: ["写作", "编辑", "文档"]
+                },
+                {
+                    id: 8,
+                    name: "图片压缩工具",
+                    description: "在线压缩JPG/PNG图片，减少文件大小",
+                    path: "/tools/image-compressor",
+                    icon: "fas fa-file-image",
+                    tags: ["图像", "优化", "压缩"]
+                },
+                {
+                    id: 9,
+                    name: "密码生成器",
+                    description: "创建安全随机的密码，可自定义长度和字符集",
+                    path: "/tools/password-generator",
+                    icon: "fas fa-lock",
+                    tags: ["安全", "工具", "实用"]
+                }
+            ];
+            
+           // 工具卡片生成代码
+             const toolsContainer = document.getElementById('toolsContainer');
+            
+            // 生成工具卡片
+            toolsData.forEach(tool => {
+                const toolCard = document.createElement('a');
+                toolCard.className = 'tool-card';
+                toolCard.href = tool.path;
+                toolCard.target = '_blank';
+                
+                // 生成标签HTML
+                let tagsHTML = '';
+                tool.tags.forEach(tag => {
+                    tagsHTML += `<span class="tag">${tag}</span>`;
+                });
+                
+                toolCard.innerHTML = `
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="${tool.icon}"></i>
+                        </div>
+                        <div class="tool-title-wrapper">
+                            <h3>${tool.name}</h3>
+                            <div class="tool-tags">
+                                ${tagsHTML}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tool-content">
+                        <p>${tool.description}</p>
+                    </div>
+                `;
+                
+                toolsContainer.appendChild(toolCard);
+            });
+            
+            // 搜索功能
+            const searchBox = document.querySelector('.search-box');
+            searchBox.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const toolCards = document.querySelectorAll('.tool-card');
+                
+                toolCards.forEach(card => {
+                    const toolName = card.querySelector('h3').textContent.toLowerCase();
+                    const toolDesc = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (toolName.includes(searchTerm) || toolDesc.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
