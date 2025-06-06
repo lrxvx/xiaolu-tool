@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>开发者工具箱 | 高效在线工具集合</title>
-    <meta name="description" content="免费在线工具集合，包含编码转换、数据处理、图像处理等实用工具">
+    <title>内容创作者工具箱 | 高效在线工具集合</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -204,6 +203,16 @@
         /* 主内容区 - 工具列表 */
         .main-content {
             flex: 1;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            min-height: 500px;
+        }
+        
+        .tool-container {
+            max-width: 900px;
+            margin: 0 auto;
         }
         
         .page-header {
@@ -274,7 +283,7 @@
             display: block;
             text-decoration: none;
             color: inherit;
-            height: 160px; /* 显著减小高度 */
+            height: 160px;
         }
         
         .tool-card:hover {
@@ -288,6 +297,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            height: 100%;
         }
         
         .tool-icon {
@@ -308,12 +318,12 @@
             transform: scale(1.1);
             box-shadow: 0 4px 12px rgba(67, 97, 238, 0.4);
         }
-
+        
         .tool-title-wrapper {
             flex-grow: 1;
             overflow: hidden;
         }
-
+        
         .tool-card h3 {
             font-size: 1.1rem;
             margin-bottom: 8px;
@@ -322,28 +332,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        
-        .tool-card p {
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-        
-        .tool-content {
-            padding: 12px 15px;
-        }
-
-        .tool-content p {
-            color: var(--gray);
-            font-size: 0.9rem;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin: 0;
-        }
-
         
         .tool-tags {
             display: flex;
@@ -360,22 +348,69 @@
             font-weight: 500;
         }
         
-        .tool-link {
-            margin-top: auto;
-            display: inline-block;
+        .tool-content {
+            padding: 12px 15px;
+        }
+        
+        .tool-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 0;
+        }
+        
+        /* 工具详情页样式 */
+        .tool-detail {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tool-header-detail {
             text-align: center;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .tool-header-detail .tool-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+        
+        .tool-functionality {
+            background: #f8f9ff;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .tool-description {
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .back-to-home {
+            display: inline-block;
+            margin-top: 20px;
             padding: 10px 20px;
-            border-radius: 12px;
+            background: #eef5ff;
+            color: var(--primary);
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
         }
         
-        .tool-link:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
+        .back-to-home:hover {
+            background: var(--primary);
+            color: white;
         }
         
         /* 右侧信息栏 */
@@ -681,30 +716,95 @@
         }
         
         /* 响应式设计 */
-
-
         @media (max-width: 1200px) {
             .tools-container {
                 grid-template-columns: repeat(3, 1fr);
             }
+            
+            .ad-sidebar {
+                width: 200px;
+            }
+            
+            .info-sidebar {
+                width: 250px;
+            }
         }
-
-        @media (max-width: 900px) {
+        
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .ad-sidebar, 
+            .info-sidebar {
+                width: 100%;
+                display: flex;
+                gap: 20px;
+            }
+            
+            .ad-card {
+                flex: 1;
+                margin-bottom: 0;
+            }
+            
+            .info-sidebar > div {
+                flex: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            
+            .nav-links {
+                order: 3;
+                width: 100%;
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            .ad-sidebar,
+            .info-sidebar {
+                flex-direction: column;
+            }
+            
             .tools-container {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .popular-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
-
-        @media (max-width: 600px) {
+        
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .user-avatar {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
             .tools-container {
                 grid-template-columns: 1fr;
             }
             
-            .tool-card {
-                height: auto;
+            .popular-grid {
+                grid-template-columns: 1fr;
             }
         }
-        
     </style>
 </head>
 <body>
@@ -755,21 +855,9 @@
             </div>
         </aside>
         
-        <!-- 主内容区 - 工具列表 -->
-        <main class="main-content">
-            <div class="page-header">
-                <h1>开发者实用工具集</h1>
-                <p>精心挑选的免费在线工具，提高开发效率，无需安装，即开即用</p>
-            </div>
-            
-            <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-box" placeholder="搜索工具...">
-            </div>
-            
-            <div class="tools-container" id="toolsContainer">
-                <!-- 工具列表将通过JavaScript动态加载 -->
-            </div>
+        <!-- 主内容区 -->
+        <main class="main-content" id="mainContent">
+            <!-- 内容区由JavaScript动态加载 -->
         </main>
         
         <!-- 右侧信息栏 -->
@@ -820,13 +908,13 @@
             
             <!-- 站长介绍 -->
             <div class="profile-card">
-                <div class="profile-avatar">xiaolu</div>
+                <div class="profile-avatar">lu</div>
                 <h3 class="profile-name">小路</h3>
-                <p class="profile-title">程序员 & AI编程，在职场做副业</p>
+                <p class="profile-title">程序员 & 副业人</p>
                 
                 <div class="contact-info">
-                    <p><i class="fas fa-envelope"></i> contact@devtools.com</p>
-                    <p><i class="fas fa-globe"></i> blog.devtools.com</p>
+                    <p><i class="fas fa-envelope"></i> xxx@xxx.com</p>
+                    <p><i class="fas fa-globe"></i> blog.xxx.com</p>
                 </div>
                 
                 <div class="social-links">
@@ -844,7 +932,7 @@
         <div class="footer-content">
             <div class="footer-column">
                 <h3>关于本站</h3>
-                <p>DevTools 是一个免费在线工具集合网站，旨在为开发者提供便捷高效的开发工具，所有工具均可直接在浏览器中使用，无需安装。</p>
+                <p>DevTools 是一个免费在线工具集合网站，旨在为内容创作者提供便捷高效的开发工具，所有工具均可直接在浏览器中使用，无需安装。</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-github"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -880,113 +968,190 @@
                 <div class="contact-info-footer">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>lrxvx@qq.com</span>
+                        <span>xxx@xxxx.com</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>xxx</span>
+                        <span>xxxx</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-globe"></i>
-                        <span>xxxxxx</span>
+                        <span>www.xxxxxx.com</span>
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="copyright">
-            &copy; 2025 DevTools 开发者工具箱 | xxxx | 本网站由 GitHub + Netlify 驱动
+            &copy; 2025 DevTools 工具箱 | xxx | 本网站由 GitHub + Netlify 驱动
         </div>
     </footer>
     
     <script>
-        // 模拟从tool-list.json加载工具数据
-        document.addEventListener('DOMContentLoaded', function() {
-            // 模拟的JSON数据 - 实际中替换为从服务器加载
-            const toolsData = [
-                {
-                    id: 1,
-                    name: "Base64 编码解码",
-                    description: "在线进行Base64编码和解码操作，支持文本和文件转换",
-                    path: "/tools/base64-encoder",
-                    icon: "fas fa-exchange-alt",
-                    tags: ["编码", "转换", "文本处理"]
-                },
-                {
-                    id: 2,
-                    name: "JSON 格式化工具",
-                    description: "将压缩的JSON数据格式化为易读的结构化形式",
-                    path: "/tools/json-formatter",
-                    icon: "fas fa-braille",
-                    tags: ["JSON", "格式化", "开发"]
-                },
-                {
-                    id: 3,
-                    name: "颜色选择器",
-                    description: "RGB/HEX颜色转换与调色板生成工具",
-                    path: "/tools/color-picker",
-                    icon: "fas fa-palette",
-                    tags: ["设计", "颜色", "CSS"]
-                },
-                {
-                    id: 4,
-                    name: "正则表达式测试",
-                    description: "在线测试和调试正则表达式，支持多种匹配模式",
-                    path: "/tools/regex-tester",
-                    icon: "fas fa-terminal",
-                    tags: ["正则", "开发", "测试"]
-                },
-                {
-                    id: 5,
-                    name: "二维码生成器",
-                    description: "将文本、URL等信息转换为二维码图像",
-                    path: "/tools/qr-generator",
-                    icon: "fas fa-qrcode",
-                    tags: ["工具", "分享", "图像"]
-                },
-                {
-                    id: 6,
-                    name: "时间戳转换",
-                    description: "Unix时间戳与日期时间之间的相互转换工具",
-                    path: "/tools/timestamp-converter",
-                    icon: "fas fa-clock",
-                    tags: ["时间", "转换", "开发"]
-                },
-                {
-                    id: 7,
-                    name: "Markdown 编辑器",
-                    description: "实时预览的Markdown编辑器，支持导出HTML",
-                    path: "/tools/markdown-editor",
-                    icon: "fab fa-markdown",
-                    tags: ["写作", "编辑", "文档"]
-                },
-                {
-                    id: 8,
-                    name: "图片压缩工具",
-                    description: "在线压缩JPG/PNG图片，减少文件大小",
-                    path: "/tools/image-compressor",
-                    icon: "fas fa-file-image",
-                    tags: ["图像", "优化", "压缩"]
-                },
-                {
-                    id: 9,
-                    name: "密码生成器",
-                    description: "创建安全随机的密码，可自定义长度和字符集",
-                    path: "/tools/password-generator",
-                    icon: "fas fa-lock",
-                    tags: ["安全", "工具", "实用"]
-                }
-            ];
+        // 工具数据
+        const toolsData = [
+            {
+                id: 1,
+                name: "Base64 编码解码",
+                description: "在线进行Base64编码和解码操作，支持文本和文件转换",
+                path: "base64-encoder",
+                icon: "fas fa-exchange-alt",
+                tags: ["编码", "转换", "文本处理"]
+            },
+            {
+                id: 2,
+                name: "JSON 格式化工具",
+                description: "将压缩的JSON数据格式化为易读的结构化形式",
+                path: "json-formatter",
+                icon: "fas fa-braille",
+                tags: ["JSON", "格式化", "开发"]
+            },
+            {
+                id: 3,
+                name: "颜色选择器",
+                description: "RGB/HEX颜色转换与调色板生成工具",
+                path: "color-picker",
+                icon: "fas fa-palette",
+                tags: ["设计", "颜色", "CSS"]
+            },
+            {
+                id: 4,
+                name: "正则表达式测试",
+                description: "在线测试和调试正则表达式，支持多种匹配模式",
+                path: "regex-tester",
+                icon: "fas fa-terminal",
+                tags: ["正则", "开发", "测试"]
+            },
+            {
+                id: 5,
+                name: "二维码生成器",
+                description: "将文本、URL等信息转换为二维码图像",
+                path: "qr-generator",
+                icon: "fas fa-qrcode",
+                tags: ["工具", "分享", "图像"]
+            },
+            {
+                id: 6,
+                name: "时间戳转换",
+                description: "Unix时间戳与日期时间之间的相互转换工具",
+                path: "timestamp-converter",
+                icon: "fas fa-clock",
+                tags: ["时间", "转换", "开发"]
+            },
+            {
+                id: 7,
+                name: "Markdown 编辑器",
+                description: "实时预览的Markdown编辑器，支持导出HTML",
+                path: "markdown-editor",
+                icon: "fab fa-markdown",
+                tags: ["写作", "编辑", "文档"]
+            },
+            {
+                id: 8,
+                name: "图片压缩工具",
+                description: "在线压缩JPG/PNG图片，减少文件大小",
+                path: "image-compressor",
+                icon: "fas fa-file-image",
+                tags: ["图像", "优化", "压缩"]
+            },
+            {
+                id: 9,
+                name: "密码生成器",
+                description: "创建安全随机的密码，可自定义长度和字符集",
+                path: "password-generator",
+                icon: "fas fa-lock",
+                tags: ["安全", "工具", "实用"]
+            }
+        ];
+        
+        // 获取URL参数
+        function getUrlParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        
+        // 渲染工具详情页
+        function renderToolDetail(toolId) {
+            const tool = toolsData.find(t => t.id == toolId);
+            if (!tool) return false;
             
-           // 工具卡片生成代码
-             const toolsContainer = document.getElementById('toolsContainer');
+            const mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = `
+                <div class="tool-container">
+                    <div class="page-header">
+                        <h1>${tool.name}</h1>
+                        <p>${tool.description}</p>
+                    </div>
+                    
+                    <div class="tool-detail">
+                        <div class="tool-header-detail">
+                            <div class="tool-icon">
+                                <i class="${tool.icon}"></i>
+                            </div>
+                            <div class="tool-tags">
+                                ${tool.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="tool-functionality">
+                            <h2>功能演示</h2>
+                            <div style="background:#fff; padding:20px; border-radius:10px; min-height:300px; display:flex; align-items:center; justify-content:center;">
+                                <div style="text-align:center; color:#666;">
+                                    <i class="${tool.icon}" style="font-size:4rem; margin-bottom:20px; color:#4361ee;"></i>
+                                    <p>${tool.name} 功能区域</p>
+                                    <p>这里将显示具体的工具实现</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-description">
+                            <h2>工具介绍</h2>
+                            <p>${tool.name}是一个强大的在线工具，专为开发者设计，用于${tool.description.toLowerCase()}。它提供了简单易用的界面和丰富的功能，让您能够高效地完成相关任务。</p>
+                            <p>使用${tool.name}，您可以：</p>
+                            <ul>
+                                <li>快速完成相关操作，无需安装任何软件</li>
+                                <li>在浏览器中直接使用，无需注册或登录</li>
+                                <li>获得即时结果，提高工作效率</li>
+                                <li>安全可靠，所有处理都在本地完成</li>
+                            </ul>
+                        </div>
+                        
+                        <a href="?" class="back-to-home"><i class="fas fa-arrow-left"></i> 返回工具列表</a>
+                    </div>
+                </div>
+            `;
+            
+            return true;
+        }
+        
+        // 渲染工具列表
+        function renderToolList() {
+            const mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = `
+                <div class="tool-container">
+                    <div class="page-header">
+                        <h1>开发者实用工具集</h1>
+                        <p>精心挑选的免费在线工具，提高开发效率，无需安装，即开即用</p>
+                    </div>
+                    
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-box" placeholder="搜索工具...">
+                    </div>
+                    
+                    <div class="tools-container" id="toolsContainer">
+                        <!-- 工具列表将通过JavaScript动态加载 -->
+                    </div>
+                </div>
+            `;
+            
+            const toolsContainer = document.getElementById('toolsContainer');
             
             // 生成工具卡片
             toolsData.forEach(tool => {
                 const toolCard = document.createElement('a');
                 toolCard.className = 'tool-card';
-                toolCard.href = tool.path;
-                toolCard.target = '_blank';
+                toolCard.href = `?tool=${tool.id}`;
                 
                 // 生成标签HTML
                 let tagsHTML = '';
@@ -1006,9 +1171,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tool-content">
-                        <p>${tool.description}</p>
-                    </div>
                 `;
                 
                 toolsContainer.appendChild(toolCard);
@@ -1022,15 +1184,25 @@
                 
                 toolCards.forEach(card => {
                     const toolName = card.querySelector('h3').textContent.toLowerCase();
-                    const toolDesc = card.querySelector('p').textContent.toLowerCase();
                     
-                    if (toolName.includes(searchTerm) || toolDesc.includes(searchTerm)) {
-                        card.style.display = 'flex';
+                    if (toolName.includes(searchTerm)) {
+                        card.style.display = 'block';
                     } else {
                         card.style.display = 'none';
                     }
                 });
             });
+        }
+        
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            const toolId = getUrlParam('tool');
+            
+            if (toolId && renderToolDetail(toolId)) {
+                // 成功渲染工具详情页
+            } else {
+                renderToolList();
+            }
         });
     </script>
 </body>
