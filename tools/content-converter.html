@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容转换器 | 将各种格式内容转为Markdown博客</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --warning: #ffb703;
+            --danger: #e63946;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 5%;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .logo-text span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover, 
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after, 
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        /* 主要内容区域 */
+        main {
+            flex: 1;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .tool-header p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tool-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-section {
+            margin-bottom: 20px;
+        }
+        
+        .tool-section h3 {
+            margin-bottom: 10px;
+            color: #444;
+            font-size: 1.1rem;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .input-group input[type="text"],
+        .input-group input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .input-group input[type="text"]:focus,
+        .input-group input[type="date"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .input-group input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        
+        .tag-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            min-height: 42px;
+        }
+        
+        .tag {
+            display: flex;
+            align-items: center;
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+        
+        .tag .remove-tag {
+            margin-left: 6px;
+            cursor: pointer;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .tag-input {
+            flex: 1;
+            min-width: 100px;
+            border: none;
+            outline: none;
+            padding: 4px;
+            font-size: 0.9rem;
+            background: transparent;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            transition: var(--transition);
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(67, 97, 238, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(67, 97, 238, 0.2);
+        }
+        
+        button.secondary {
+            background: linear-gradient(135deg, var(--gray), #495057);
+            box-shadow: 0 4px 12px rgba(108, 117, 125, 0.2);
+        }
+        
+        button.secondary:hover {
+            box-shadow: 0 6px 16px rgba(108, 117, 125, 0.3);
+        }
+        
+        .preview-container {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .preview-container h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .preview-container h3 i {
+            color: var(--primary);
+        }
+        
+        .preview-content {
+            white-space: pre-wrap;
+            font-family: 'Consolas', 'Monaco', monospace;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            max-height: 500px;
+            overflow-y: auto;
+            line-height: 1.5;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-right: 10px;
+            font-weight: 500;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+        
+        .tab:hover {
+            color: var(--primary);
+        }
+        
+        .tab.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .info-text {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #e7f0ff;
+            border-left: 4px solid #4361ee;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .error-text {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ffe7e7;
+            border-left: 4px solid #ee4343;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: white;
+            padding: 2rem 5%;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--gray);
+        }
+        
+        .footer-content p {
+            margin: 0.5rem 0;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .tool-header p {
+                font-size: 1rem;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                padding: 10px 15px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+      <div class="navbar">
+        <a href="../index.html" class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-tools"></i>
+          </div>
+          <div class="logo-text">小路<span>工具箱</span></div>
+        </a>
+        <div class="nav-links">
+          <a href="../index.html">首页</a>
+          <a href="content-converter.html" class="active">内容转换</a>
+          <a href="base64-encoder.html">Base64</a>
+        </div>
+      </div>
+    </header>
+    
+    <!-- 主要内容 -->
+    <main>
+        <div class="tool-header">
+            <h1>内容转换工具</h1>
+            <p>将飞书文档、PDF、公众号文章等内容转换为Markdown格式，自动生成博客前置信息</p>
+        </div>
+        
+        <div class="tool-container">
+            <div class="info-text">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>使用提示：</strong> 您可以通过粘贴内容、上传文件或输入URL三种方式获取原文，然后设置博客信息，最后生成Markdown格式内容。
+                </div>
+            </div>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="paste">粘贴内容</div>
+            <div class="tab" data-tab="upload">上传文件</div>
+            <div class="tab" data-tab="url">输入URL</div>
+        </div>
+
+        <div class="tab-content active" id="paste-content">
+            <div class="input-group">
+                <label for="paste-area">粘贴内容（支持飞书文档、公众号文章等）</label>
+                <textarea id="paste-area" placeholder="在此粘贴文章内容..."></textarea>
+            </div>
+        </div>
+
+        <div class="tab-content" id="upload-content">
+            <div class="input-group">
+                <label for="file-upload">上传文件（支持PDF、Word、TXT等）</label>
+                <input type="file" id="file-upload" accept=".pdf,.docx,.doc,.txt">
+            </div>
+            <div class="error-text" id="file-error"></div>
+        </div>
+
+        <div class="tab-content" id="url-content">
+            <div class="input-group">
+                <label for="url-input">输入文章URL（支持公众号、飞书文档等）</label>
+                <input type="text" id="url-input" placeholder="https://...">
+            </div>
+            <div class="error-text" id="url-error"></div>
+        </div>
+
+        <div class="tool-section">
+            <h3>博客信息设置</h3>
+            
+            <div class="input-group">
+                <label for="title-input">文章标题</label>
+                <input type="text" id="title-input" placeholder="例如：092 做副业为什么容易断？">
+            </div>
+            
+            <div class="input-group">
+                <label for="description-input">文章描述</label>
+                <input type="text" id="description-input" placeholder="例如：副业100问，第92问">
+            </div>
+            
+            <div class="input-group">
+                <label for="date-input">发布日期</label>
+                <input type="date" id="date-input">
+            </div>
+            
+            <div class="input-group">
+                <label for="tags-container">标签（按Enter添加）</label>
+                <div class="tag-input-container" id="tags-container">
+                    <input type="text" class="tag-input" id="tag-input" placeholder="添加标签...">
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="author-input">作者</label>
+                <input type="text" id="author-input" placeholder="例如：小路" value="小路">
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button id="convert-btn"><i class="fas fa-magic"></i> 转换为Markdown</button>
+            <button id="copy-btn" class="secondary"><i class="far fa-copy"></i> 复制Markdown</button>
+            <button id="download-btn" class="secondary"><i class="fas fa-download"></i> 下载Markdown</button>
+        </div>
+
+        <div class="preview-container">
+            <h3><i class="far fa-eye"></i> Markdown预览</h3>
+            <div class="preview-content" id="preview-content"></div>
+        </div>
+    </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+      <div class="footer-content">
+        <p>© 2023 小路工具箱 | 内容转换工具</p>
+        <p>将飞书文档、PDF、公众号文章等内容转换为Markdown格式</p>
+      </div>
+    </footer>
+
+    <script>
+        // 初始化日期为今天
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0];
+            document.getElementById('date-input').value = formattedDate;
+            
+            // 初始化标签输入
+            initTagInput();
+            
+            // 初始化标签页
+            initTabs();
+        });
+        
+        // 标签页切换功能
+        function initTabs() {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // 移除所有活动标签
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // 添加当前活动标签
+                    tab.classList.add('active');
+                    
+                    // 隐藏所有内容
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // 显示当前内容
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-content`).classList.add('active');
+                });
+            });
+        }
+        
+        // 标签输入功能
+        function initTagInput() {
+            const tagInput = document.getElementById('tag-input');
+            const tagsContainer = document.getElementById('tags-container');
+            
+            // 添加默认标签
+            addTag('副业100问');
+            addTag('副业');
+            
+            tagInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && tagInput.value.trim() !== '') {
+                    e.preventDefault();
+                    addTag(tagInput.value.trim());
+                    tagInput.value = '';
+                }
+            });
+            
+            function addTag(tagText) {
+                // 检查标签是否已存在
+                const existingTags = Array.from(tagsContainer.querySelectorAll('.tag')).map(tag => 
+                    tag.textContent.trim().replace('×', '').trim()
+                );
+                
+                if (existingTags.includes(tagText)) {
+                    return; // 如果标签已存在，不添加
+                }
+                
+                const tag = document.createElement('div');
+                tag.className = 'tag';
+                tag.innerHTML = `${tagText} <span class="remove-tag">×</span>`;
+                
+                // 添加删除标签的功能
+                tag.querySelector('.remove-tag').addEventListener('click', function() {
+                    tagsContainer.removeChild(tag);
+                });
+                
+                // 在输入框前插入标签
+                tagsContainer.insertBefore(tag, tagInput);
+            }
+        }
+        
+        // 获取所有标签
+        function getAllTags() {
+            const tags = [];
+            document.querySelectorAll('.tag').forEach(tag => {
+                const tagText = tag.textContent.trim().replace('×', '').trim();
+                tags.push(tagText);
+            });
+            return tags;
+        }
+        
+        // 文件上传处理
+        document.getElementById('file-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const fileError = document.getElementById('file-error');
+            fileError.style.display = 'none';
+            
+            // 检查文件类型
+            const validTypes = ['.pdf', '.docx', '.doc', '.txt'];
+            const fileExt = file.name.substring(file.name.lastIndexOf('.'));
+            if (!validTypes.includes(fileExt.toLowerCase())) {
+                fileError.textContent = '不支持的文件类型，请上传PDF、Word或TXT文件';
+                fileError.style.display = 'block';
+                return;
+            }
+            
+            // 这里只是模拟文件读取，实际项目中需要使用适当的库解析不同类型的文件
+            if (fileExt.toLowerCase() === '.txt') {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('paste-area').value = e.target.result;
+                    // 自动切换到粘贴标签页
+                    document.querySelector('.tab[data-tab="paste"]').click();
+                };
+                reader.readAsText(file);
+            } else {
+                // 对于PDF和Word文件，在实际应用中需要使用专门的库
+                fileError.textContent = '注意：PDF和Word文件需要在服务器端处理，此演示版本仅支持TXT文件';
+                fileError.style.display = 'block';
+            }
+        });
+        
+        // 转换按钮点击事件
+        document.getElementById('convert-btn').addEventListener('click', function() {
+            // 获取活动的标签页
+            const activeTab = document.querySelector('.tab.active').getAttribute('data-tab');
+            let content = '';
+            
+            // 根据不同的标签页获取内容
+            if (activeTab === 'paste') {
+                content = document.getElementById('paste-area').value;
+            } else if (activeTab === 'url') {
+                const url = document.getElementById('url-input').value;
+                if (!url) {
+                    document.getElementById('url-error').textContent = '请输入有效的URL';
+                    document.getElementById('url-error').style.display = 'block';
+                    return;
+                }
+                // 在实际应用中，这里需要发送请求获取URL内容
+                content = `从URL获取的内容将在这里显示（${url}）`;
+            }
+            
+            if (!content) {
+                alert('请输入或上传内容');
+                return;
+            }
+            
+            // 获取博客信息
+            const title = document.getElementById('title-input').value || '未命名文章';
+            const description = document.getElementById('description-input').value || '';
+            const date = document.getElementById('date-input').value || new Date().toISOString().split('T')[0];
+            const tags = getAllTags();
+            const author = document.getElementById('author-input').value || '小路';
+            
+            // 检测内容类型并处理
+            const contentType = detectContentType(content);
+            let processedContent;
+            
+            if (contentType === 'feishu') {
+                processedContent = processFeishuContent(content);
+            } else if (contentType === 'wechat') {
+                processedContent = processWechatContent(content);
+            } else {
+                processedContent = processGenericContent(content);
+            }
+            
+            // 生成Markdown
+            const markdown = generateMarkdown(content, title, description, date, tags, author);
+            
+            // 显示预览
+            document.getElementById('preview-content').textContent = markdown;
+        });
+        
+        // 复制按钮点击事件
+        document.getElementById('copy-btn').addEventListener('click', function() {
+            const markdown = document.getElementById('preview-content').textContent;
+            if (!markdown) {
+                alert('请先转换内容');
+                return;
+            }
+            
+            navigator.clipboard.writeText(markdown).then(() => {
+                alert('Markdown已复制到剪贴板');
+            }).catch(err => {
+                console.error('复制失败:', err);
+                alert('复制失败，请手动复制');
+            });
+        });
+        
+        // 下载按钮点击事件
+        document.getElementById('download-btn').addEventListener('click', function() {
+            const markdown = document.getElementById('preview-content').textContent;
+            if (!markdown) {
+                alert('请先转换内容');
+                return;
+            }
+            
+            const title = document.getElementById('title-input').value || '未命名文章';
+            const fileName = title.replace(/[^\w\s\u4e00-\u9fa5]/gi, '-').trim() + '.md';
+            
+            const blob = new Blob([markdown], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+        
+        // 生成Markdown函数
+function generateMarkdown(content, title, description, date, tags, author) {
+    // 格式化日期为YYYY-MM-DD
+    const formattedDate = new Date(date).toISOString().split('T')[0];
+    
+    // 检测内容类型并处理
+    const contentType = detectContentType(content);
+    let processedContent;
+    
+    if (contentType === 'feishu') {
+        processedContent = processFeishuContent(content);
+    } else if (contentType === 'wechat') {
+        processedContent = processWechatContent(content);
+    } else {
+        processedContent = processGenericContent(content);
+    }
+    
+    // 构建frontmatter
+    let markdown = '---\n';
+    markdown += `title: ${title}\n`;
+    markdown += `description: ${description}\n`;
+    markdown += `date: ${formattedDate}\n`;
+    markdown += `tags: [${tags.join(', ')}]\n`;
+    markdown += `author: ${author}\n`;
+    markdown += '---\n\n';
+    
+    // 添加标题
+    markdown += `# ${title}\n\n`;
+    
+    // 添加处理后的内容
+    markdown += processedContent;
+    
+    // 添加分隔线
+    markdown += '\n\n---';
+    
+    return markdown;
+}
+        
+        // 检测内容类型
+        function detectContentType(content) {
+            // 检测飞书文档特征
+            if (content.includes('飞书文档') || content.includes('feishu.cn') || 
+                content.includes('lark.') || content.includes('飞书')) {
+                return 'feishu';
+            }
+            
+            // 检测微信公众号特征
+            if (content.includes('微信公众号') || content.includes('mp.weixin.qq.com') || 
+                content.includes('公众号') || content.includes('原创')) {
+                return 'wechat';
+            }
+            
+            // 默认为通用内容
+            return 'generic';
+        }
+        
+        // 处理飞书文档内容
+        function processFeishuContent(content) {
+            let processed = content;
+            
+            // 移除飞书文档特有的元素
+            processed = processed.replace(/\[飞书文档\].*?\n/g, '');
+            processed = processed.replace(/飞书文档使用指南.*?\n/g, '');
+            processed = processed.replace(/复制链接.*?\n/g, '');
+            
+            // 处理飞书文档中的标题格式
+            processed = processed.replace(/^(.*?)\n={3,}$/gm, '# $1');
+            processed = processed.replace(/^(.*?)\n-{3,}$/gm, '## $1');
+            
+            // 处理飞书文档中的列表
+            processed = processed.replace(/^\s*[•◦○]\s+(.+)$/gm, '- $1');
+            
+            return processed;
+        }
+        
+        // 处理微信公众号内容
+        function processWechatContent(content) {
+            let processed = content;
+            
+            // 移除微信公众号特有的元素
+            processed = processed.replace(/微信公众号：.*?\n/g, '');
+            processed = processed.replace(/公众号：.*?\n/g, '');
+            processed = processed.replace(/长按识别二维码关注.*?\n/g, '');
+            processed = processed.replace(/点击"阅读原文".*?\n/g, '');
+            
+            // 处理微信公众号中的标题格式
+            processed = processed.replace(/^【(.*?)】$/gm, '## $1');
+            processed = processed.replace(/^\d+[、.．]\s*(.+)$/gm, '### $1');
+            
+            // 处理微信公众号中的加粗文本
+            processed = processed.replace(/「([^」]+)」/g, '**$1**');
+            processed = processed.replace(/『([^』]+)』/g, '*$1*');
+            
+            return processed;
+        }
+        
+        // 处理通用内容
+        function processGenericContent(content) {
+            let processed = content;
+            
+            // 处理标题（假设以数字和点开头的行是标题）
+            processed = processed.replace(/^(\d+)[、.．]\s*(.+)$/gm, '## $1. $2');
+            
+            // 处理列表（假设以数字和点开头，且有缩进的行是列表项）
+            processed = processed.replace(/^\s*(\d+)[、.．]\s*(.+)$/gm, '$1. $2');
+            
+            // 处理引用（假设以>开头的行是引用）
+            processed = processed.replace(/^>(.*?)$/gm, '> $1');
+            
+            // 处理强调（假设*包围的文本是强调）
+            processed = processed.replace(/\*(.*?)\*/g, '**$1**');
+            
+            return processed;
+        }
+        
+        // 处理内容函数 - 兼容旧代码，现在会根据内容类型调用相应的处理函数
+        function processContent(content) {
+            // 检测内容类型
+            const contentType = detectContentType(content);
+            
+            // 根据内容类型调用相应的处理函数
+            if (contentType === 'feishu') {
+                return processFeishuContent(content);
+            } else if (contentType === 'wechat') {
+                return processWechatContent(content);
+            } else {
+                return processGenericContent(content);
+            }
+        }
+        
+        // 检测内容类型
+        function detectContentType(content) {
+            // 检测飞书文档特征
+            if (content.includes('飞书文档') || content.includes('feishu.cn') || 
+                content.includes('lark.') || content.includes('飞书')) {
+                return 'feishu';
+            }
+            
+            // 检测微信公众号特征
+            if (content.includes('微信公众号') || content.includes('mp.weixin.qq.com') || 
+                content.includes('公众号') || content.includes('原创')) {
+                return 'wechat';
+            }
+            
+            // 默认为通用内容
+            return 'generic';
+        }
+        
+        // 处理飞书文档内容
+        function processFeishuContent(content) {
+            let processed = content;
+            
+            // 移除飞书文档特有的元素
+            processed = processed.replace(/\[飞书文档\].*?\n/g, '');
+            processed = processed.replace(/飞书文档使用指南.*?\n/g, '');
+            processed = processed.replace(/复制链接.*?\n/g, '');
+            
+            // 处理飞书文档中的标题格式
+            processed = processed.replace(/^(.*?)\n={3,}$/gm, '# $1');
+            processed = processed.replace(/^(.*?)\n-{3,}$/gm, '## $1');
+            
+            // 处理飞书文档中的列表
+            processed = processed.replace(/^\s*[•◦○]\s+(.+)$/gm, '- $1');
+            
+            return processed;
+        }
+        
+        // 处理微信公众号内容
+        function processWechatContent(content) {
+            let processed = content;
+            
+            // 移除微信公众号特有的元素
+            processed = processed.replace(/微信公众号：.*?\n/g, '');
+            processed = processed.replace(/公众号：.*?\n/g, '');
+            processed = processed.replace(/长按识别二维码关注.*?\n/g, '');
+            processed = processed.replace(/点击"阅读原文".*?\n/g, '');
+            
+            // 处理微信公众号中的标题格式
+            processed = processed.replace(/^【(.*?)】$/gm, '## $1');
+            processed = processed.replace(/^\d+[、.．]\s*(.+)$/gm, '### $1');
+            
+            // 处理微信公众号中的加粗文本
+            processed = processed.replace(/「([^」]+)」/g, '**$1**');
+            processed = processed.replace(/『([^』]+)』/g, '*$1*');
+            
+            return processed;
+        }
+        
+        // 处理通用内容
+        function processGenericContent(content) {
+            let processed = content;
+            
+            // 处理标题（假设以数字和点开头的行是标题）
+            processed = processed.replace(/^(\d+)[、.．]\s*(.+)$/gm, '## $1. $2');
+            
+            // 处理列表（假设以数字和点开头，且有缩进的行是列表项）
+            processed = processed.replace(/^\s*(\d+)[、.．]\s*(.+)$/gm, '$1. $2');
+            
+            // 处理引用（假设以>开头的行是引用）
+            processed = processed.replace(/^>(.*?)$/gm, '> $1');
+            
+            // 处理强调（假设*包围的文本是强调）
+            processed = processed.replace(/\*(.*?)\*/g, '**$1**');
+            
+            return processed;
+        }
+    </script>
+</body>
+</html>

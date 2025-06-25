@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容卡片生成器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 导航栏样式 */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 5%;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .logo-text span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover, 
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after, 
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* 工具内容样式 */
+        .tool-container {
+            flex: 1;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .tool-header h1 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .tool-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .tool-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .preview-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .color-option.active {
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--gray);
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .buttons-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* 卡片预览样式 */
+        .card-preview {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .content-card {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1 / 1;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-inner {
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .card-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .card-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .card-table td {
+            padding: 0.8rem;
+            vertical-align: top;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .card-table tr:first-child td {
+            text-align: center;
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .card-footer {
+            text-align: center;
+            font-size: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .card-brand {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .tool-content {
+                grid-template-columns: 1fr;
+            }
+
+            .content-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <nav class="navbar">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">小路<span>工具箱</span></div>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html">首页</a>
+                <a href="content-converter.html">内容转换</a>
+                <a href="base64-encoder.html">Base64工具</a>
+                <a href="content-card-generator.html" class="active">内容卡片</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- 工具内容 -->
+    <div class="tool-container">
+        <div class="tool-header">
+            <h1>内容卡片生成器</h1>
+            <p>创建精美的内容对比卡片，支持多种背景颜色和自定义内容</p>
+        </div>
+
+        <div class="tool-content">
+            <!-- 左侧输入区域 -->
+            <div class="input-section">
+                <div class="form-group">
+                    <label for="cardTitle">卡片标题</label>
+                    <input type="text" id="cardTitle" placeholder="例如：凡是不赚钱的人脑子都非常复杂">
+                </div>
+
+                <div class="form-group">
+                    <label for="cardSubtitle">核心观点</label>
+                    <input type="text" id="cardSubtitle" placeholder="例如：越没钱的人，心里越复杂">
+                </div>
+
+                <div class="form-group">
+                    <label for="leftColumnTitle">左列标题</label>
+                    <input type="text" id="leftColumnTitle" placeholder="例如：不赚钱的人每天都在想什么？">
+                </div>
+
+                <div class="form-group">
+                    <label for="leftColumnContent">左列内容</label>
+                    <textarea id="leftColumnContent" placeholder="输入左列内容，每行一个点..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="rightColumnTitle">右列标题</label>
+                    <input type="text" id="rightColumnTitle" placeholder="例如：能赚钱的人想法简单直接：">
+                </div>
+
+                <div class="form-group">
+                    <label for="rightColumnContent">右列内容</label>
+                    <textarea id="rightColumnContent" placeholder="输入右列内容，每行一个点..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="cardFooter">底部总结</label>
+                    <input type="text" id="cardFooter" placeholder="例如：其实赚钱很简单：少犹豫，多动手">
+                </div>
+
+                <div class="form-group">
+                    <label for="brandName">品牌名称</label>
+                    <input type="text" id="brandName" placeholder="例如：RAN BRAND CONSULTING">
+                </div>
+
+                <div class="form-group">
+                    <label>背景颜色</label>
+                    <div class="color-options">
+                        <div class="color-option active" style="background-color: #f8f9fa;" data-color="#f8f9fa" data-text="#212529"></div>
+                        <div class="color-option" style="background-color: #e9ecef;" data-color="#e9ecef" data-text="#212529"></div>
+                        <div class="color-option" style="background-color: #dee2e6;" data-color="#dee2e6" data-text="#212529"></div>
+                        <div class="color-option" style="background-color: #4361ee;" data-color="#4361ee" data-text="#ffffff"></div>
+                        <div class="color-option" style="background-color: #3a0ca3;" data-color="#3a0ca3" data-text="#ffffff"></div>
+                        <div class="color-option" style="background-color: #4cc9f0;" data-color="#4cc9f0" data-text="#212529"></div>
+                        <div class="color-option" style="background-color: #f72585;" data-color="#f72585" data-text="#ffffff"></div>
+                        <div class="color-option" style="background-color: #7209b7;" data-color="#7209b7" data-text="#ffffff"></div>
+                        <div class="color-option" style="background-color: #4d908e;" data-color="#4d908e" data-text="#ffffff"></div>
+                        <div class="color-option" style="background-color: #277da1;" data-color="#277da1" data-text="#ffffff"></div>
+                    </div>
+                </div>
+
+                <div class="buttons-group">
+                    <button id="generateBtn" class="btn">
+                        <i class="fas fa-magic"></i> 生成卡片
+                    </button>
+                    <button id="resetBtn" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> 重置
+                    </button>
+                </div>
+            </div>
+
+            <!-- 右侧预览区域 -->
+            <div class="preview-section">
+                <div class="card-preview">
+                    <div class="content-card" id="contentCard">
+                        <div class="card-inner">
+                            <div class="card-brand" id="cardBrand">RAN BRAND CONSULTING</div>
+                            <div class="card-header">
+                                <h2 class="card-title" id="previewTitle">凡是不赚钱的人脑子都非常复杂</h2>
+                                <p class="card-subtitle" id="previewSubtitle">越没钱的人，心里越复杂</p>
+                            </div>
+                            <table class="card-table">
+                                <tr>
+                                    <td id="previewLeftTitle">不赚钱的人每天都在想什么？</td>
+                                    <td id="previewRightTitle">能赚钱的人想法简单直接：</td>
+                                </tr>
+                                <tr>
+                                    <td id="previewLeftContent">
+                                        这项目到底靠不靠谱？<br>
+                                        要是失败了可怎么办？<br>
+                                        别人会不会笑话我？<br>
+                                        现在开始做是不是太晚了？<br>
+                                        我要不要再等两年？
+                                    </td>
+                                    <td id="previewRightContent">
+                                        先干了再说。<br>
+                                        试试才知道。<br>
+                                        别人笑我？管他呢。<br>
+                                        市场饱和？<br>
+                                        那是没本事的人说的。
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="card-footer" id="previewFooter">
+                                其实赚钱很简单：少犹豫，多动手
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons-group" style="justify-content: center;">
+                    <button id="downloadBtn" class="btn">
+                        <i class="fas fa-download"></i> 下载图片
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入html2canvas库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <script>
+        // 获取DOM元素
+        const cardTitle = document.getElementById('cardTitle');
+        const cardSubtitle = document.getElementById('cardSubtitle');
+        const leftColumnTitle = document.getElementById('leftColumnTitle');
+        const leftColumnContent = document.getElementById('leftColumnContent');
+        const rightColumnTitle = document.getElementById('rightColumnTitle');
+        const rightColumnContent = document.getElementById('rightColumnContent');
+        const cardFooter = document.getElementById('cardFooter');
+        const brandName = document.getElementById('brandName');
+        const generateBtn = document.getElementById('generateBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const colorOptions = document.querySelectorAll('.color-option');
+        
+        // 预览元素
+        const contentCard = document.getElementById('contentCard');
+        const cardInner = contentCard.querySelector('.card-inner');
+        const previewTitle = document.getElementById('previewTitle');
+        const previewSubtitle = document.getElementById('previewSubtitle');
+        const previewLeftTitle = document.getElementById('previewLeftTitle');
+        const previewLeftContent = document.getElementById('previewLeftContent');
+        const previewRightTitle = document.getElementById('previewRightTitle');
+        const previewRightContent = document.getElementById('previewRightContent');
+        const previewFooter = document.getElementById('previewFooter');
+        const cardBrand = document.getElementById('cardBrand');
+        
+        // 当前选中的颜色
+        let currentBgColor = '#f8f9fa';
+        let currentTextColor = '#212529';
+        
+        // 颜色选择事件
+        colorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // 移除所有active类
+                colorOptions.forEach(opt => opt.classList.remove('active'));
+                // 添加active类到当前选中的颜色
+                option.classList.add('active');
+                // 更新当前颜色
+                currentBgColor = option.dataset.color;
+                currentTextColor = option.dataset.text;
+                // 更新预览卡片颜色
+                updateCardColors();
+            });
+        });
+        
+        // 更新卡片颜色
+        function updateCardColors() {
+            contentCard.style.backgroundColor = currentBgColor;
+            cardInner.style.color = currentTextColor;
+        }
+        
+        // 生成卡片
+        generateBtn.addEventListener('click', () => {
+            // 更新标题和副标题
+            previewTitle.textContent = cardTitle.value || previewTitle.textContent;
+            previewSubtitle.textContent = cardSubtitle.value || previewSubtitle.textContent;
+            
+            // 更新左列
+            previewLeftTitle.textContent = leftColumnTitle.value || previewLeftTitle.textContent;
+            previewLeftContent.innerHTML = formatContent(leftColumnContent.value) || previewLeftContent.innerHTML;
+            
+            // 更新右列
+            previewRightTitle.textContent = rightColumnTitle.value || previewRightTitle.textContent;
+            previewRightContent.innerHTML = formatContent(rightColumnContent.value) || previewRightContent.innerHTML;
+            
+            // 更新底部和品牌
+            previewFooter.textContent = cardFooter.value || previewFooter.textContent;
+            cardBrand.textContent = brandName.value || cardBrand.textContent;
+            
+            // 更新颜色
+            updateCardColors();
+        });
+        
+        // 格式化内容，将每行转换为带<br>的HTML
+        function formatContent(content) {
+            if (!content) return '';
+            return content.split('\n').join('<br>');
+        }
+        
+        // 重置表单
+        resetBtn.addEventListener('click', () => {
+            // 清空所有输入
+            cardTitle.value = '';
+            cardSubtitle.value = '';
+            leftColumnTitle.value = '';
+            leftColumnContent.value = '';
+            rightColumnTitle.value = '';
+            rightColumnContent.value = '';
+            cardFooter.value = '';
+            brandName.value = '';
+            
+            // 重置颜色选择
+            colorOptions.forEach(opt => opt.classList.remove('active'));
+            colorOptions[0].classList.add('active');
+            currentBgColor = '#f8f9fa';
+            currentTextColor = '#212529';
+            updateCardColors();
+        });
+        
+        // 下载图片
+        downloadBtn.addEventListener('click', () => {
+            html2canvas(contentCard, {
+                scale: 2, // 提高分辨率
+                backgroundColor: currentBgColor,
+                logging: false
+            }).then(canvas => {
+                // 创建下载链接
+                const link = document.createElement('a');
+                link.download = '内容卡片.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+        
+        // 初始化
+        updateCardColors();
+    </script>
+</body>
+</html>

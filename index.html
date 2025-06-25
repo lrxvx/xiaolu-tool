@@ -105,571 +105,298 @@
         .nav-links a::after {
             content: '';
             position: absolute;
+            width: 0;
+            height: 2px;
             bottom: 0;
             left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 10px;
+            background-color: var(--primary);
             transition: var(--transition);
         }
         
-        .nav-links a:hover::after,
+        .nav-links a:hover::after, 
         .nav-links a.active::after {
             width: 100%;
         }
         
-        .user-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
         
-        .user-avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            overflow: hidden;
-            background: linear-gradient(135deg, var(--accent), var(--success));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        /* 主要内容布局 */
-        .container {
-            display: flex;
-            flex: 1;
+        /* 英雄区域 - 现在在 main 外部 */
+        .hero {
+            padding: 3rem 5%;
             max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 20px;
+            margin: 0 auto;
             width: 100%;
-            gap: 24px;
         }
         
-        /* 左侧广告位样式 */
-        .ad-sidebar {
-            width: 240px;
-            flex-shrink: 0;
-        }
-        
-        .ad-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            margin-bottom: 24px;
-            transition: var(--transition);
-        }
-        
-        .ad-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .ad-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 12px 16px;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-        
-        .ad-content {
-            padding: 20px;
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--gray);
-        }
-        
-        .ad-content i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-        
-        .ad-content h3 {
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-        
-        /* 主内容区 - 工具列表 */
-        .main-content {
+        /* 主要内容区域 */
+        main {
             flex: 1;
-            background: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 30px;
-            min-height: 500px;
-        }
-        
-        .tool-container {
-            max-width: 900px;
+            padding: 0 5% 2rem;
+            max-width: 1400px;
             margin: 0 auto;
+            width: 100%;
         }
         
-        .page-header {
-            margin-bottom: 2rem;
+        /* 英雄区域样式 */
+        .hero {
             text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 0; /* 移除底部边距，因为 main 已经有内边距 */
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
         }
         
-        .page-header h1 {
+        .hero h1 {
             font-size: 2.5rem;
-            color: var(--dark);
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
+            color: var(--dark);
         }
         
-        .page-header p {
+        .hero p {
+            font-size: 1.2rem;
             color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto;
+            max-width: 800px;
+            margin: 0 auto 2rem;
         }
         
         .search-container {
             max-width: 600px;
-            margin: 0 auto 2rem;
+            margin: 0 auto;
             position: relative;
         }
         
-        .search-box {
+        .search-input {
             width: 100%;
-            padding: 14px 20px;
+            padding: 1rem 1.5rem;
+            padding-left: 3rem;
             border: none;
-            background: white;
             border-radius: 50px;
-            box-shadow: var(--shadow);
             font-size: 1rem;
-            padding-left: 50px;
+            box-shadow: var(--shadow);
             transition: var(--transition);
         }
         
-        .search-box:focus {
+        .search-input:focus {
             outline: none;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.2);
+            box-shadow: 0 4px 20px rgba(67, 97, 238, 0.2);
         }
         
         .search-icon {
             position: absolute;
-            left: 20px;
+            left: 1.2rem;
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
         }
         
-        .tools-container {
+        /* 工具卡片网格 */
+        .tools-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tools-heading h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+        
+        .view-options {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .view-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+        
+        .view-btn:hover, 
+        .view-btn.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        .tools-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 3rem;
         }
         
         .tool-card {
-            background: white;
-            border-radius: 16px;
+            background-color: white;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            display: block;
-            text-decoration: none;
-            color: inherit;
-            height: 160px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .tool-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
         
-        .tool-header {
-            padding: 15px;
-            background: linear-gradient(135deg, #f0f4ff, #e6eeff);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            height: 100%;
+        .tool-card-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+        }
+        
+        .tool-card-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tool-card-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
         }
         
         .tool-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 14px;
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            opacity: 0.2;
+        }
+        
+        .tool-card-body {
+            padding: 1.5rem;
+            flex: 1;
+        }
+        
+        .tool-card-body p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tool-card-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-            transition: var(--transition);
-        }
-        
-        .tool-card:hover .tool-icon {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.4);
-        }
-        
-        .tool-title-wrapper {
-            flex-grow: 1;
-            overflow: hidden;
-        }
-        
-        .tool-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: var(--dark);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         
         .tool-tags {
             display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
+            gap: 0.5rem;
         }
         
-        .tag {
-            background: #eef5ff;
+        .tool-tag {
+            background-color: rgba(67, 97, 238, 0.1);
             color: var(--primary);
-            padding: 3px 8px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 500;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
         }
         
-        .tool-content {
-            padding: 12px 15px;
-        }
-        
-        .tool-content p {
-            color: var(--gray);
-            font-size: 0.9rem;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin: 0;
-        }
-        
-        /* 工具详情页样式 */
-        .tool-detail {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-        
-        .tool-header-detail {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .tool-header-detail .tool-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            font-size: 2rem;
-        }
-        
-        .tool-functionality {
-            background: #f8f9ff;
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .tool-description {
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-        
-        .back-to-home {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #eef5ff;
-            color: var(--primary);
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        
-        .back-to-home:hover {
-            background: var(--primary);
+        .tool-btn {
+            background-color: var(--primary);
             color: white;
-        }
-        
-        /* 右侧信息栏 */
-        .info-sidebar {
-            width: 300px;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-        
-        .stats-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 25px;
-            text-align: center;
-        }
-        
-        .stats-card h3 {
-            color: var(--dark);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .stats-card h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 10px;
-        }
-        
-        .stat-item {
-            margin-bottom: 20px;
-        }
-        
-        .stat-value {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            color: var(--gray);
-            font-size: 1rem;
-        }
-        
-        .popular-tools {
-            background: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 25px;
-        }
-        
-        .popular-tools h3 {
-            color: var(--dark);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .popular-tools h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 10px;
-        }
-        
-        .popular-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .popular-tool {
-            background: #f8f9ff;
-            border-radius: 12px;
-            padding: 15px;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
             transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .tool-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* 分类部分 */
+        .categories {
+            margin-bottom: 3rem;
+        }
+        
+        .categories-heading {
+            margin-bottom: 1.5rem;
+        }
+        
+        .categories-heading h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
             cursor: pointer;
         }
         
-        .popular-tool:hover {
-            transform: translateY(-3px);
-            background: #eef2ff;
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
         
-        .popular-tool i {
-            font-size: 1.5rem;
+        .category-icon {
+            font-size: 2rem;
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 1rem;
         }
         
-        .popular-tool h4 {
-            font-size: 1rem;
-            margin-bottom: 5px;
+        .category-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
         }
         
-        .popular-tool p {
-            font-size: 0.85rem;
+        .category-card p {
             color: var(--gray);
+            font-size: 0.9rem;
         }
         
-        .profile-card {
-            background: linear-gradient(135deg, #4b6cb7, #182848);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 30px 25px;
-            color: white;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .profile-card::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-        
-        .profile-card::after {
-            content: '';
-            position: absolute;
-            bottom: -30px;
-            left: -30px;
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-        }
-        
-        .profile-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            z-index: 2;
-            background: linear-gradient(135deg, #ff7e5f, #feb47b);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .profile-name {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .profile-title {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            transition: var(--transition);
-            font-size: 1.1rem;
-        }
-        
-        .social-links a:hover {
-            background: white;
-            color: var(--primary);
-            transform: translateY(-3px);
-        }
-        
-        .contact-info {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 20px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .contact-info p {
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        /* 页脚样式 */
+        /* 页脚 */
         footer {
-            background: var(--dark);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 3rem 0 2rem;
+            background-color: white;
+            padding: 3rem 5%;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
         }
         
         .footer-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 5%;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
         
         .footer-column h3 {
-            color: white;
+            font-size: 1.2rem;
             margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 10px;
+            color: var(--dark);
         }
         
         .footer-links {
@@ -681,528 +408,619 @@
         }
         
         .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
+            color: var(--gray);
             transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
         
         .footer-links a:hover {
-            color: white;
-            transform: translateX(5px);
+            color: var(--primary);
         }
         
-        .contact-info-footer {
+        .footer-social {
             display: flex;
-            flex-direction: column;
             gap: 1rem;
+            margin-top: 1rem;
         }
         
-        .contact-item {
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+            color: white;
         }
         
         .copyright {
             text-align: center;
             padding-top: 2rem;
             margin-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            color: var(--gray);
+        }
+        
+        /* 主内容区域布局 */
+        .main-content {
+            flex: 1;
+            margin-right: 20px;
+            min-width: 0; /* 防止内容溢出 */
+            max-width: calc(100% - 320px); /* 确保在大屏幕上不会过宽 */
+        }
+        
+        /* 侧边栏样式 */
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px; /* 与顶部保持一定距离，避免与导航栏重叠 */
+            height: fit-content;
+            align-self: flex-start;
+        }
+        
+        /* 个人资料卡片 */
+        .profile-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .profile-avatar {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+        
+        .profile-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .profile-header p {
+            opacity: 0.9;
             font-size: 0.9rem;
         }
         
-        /* 响应式设计 */
-        @media (max-width: 1200px) {
-            .tools-container {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .ad-sidebar {
-                width: 200px;
-            }
-            
-            .info-sidebar {
-                width: 250px;
-            }
+        .profile-body {
+            padding: 20px;
         }
         
-        @media (max-width: 992px) {
-            .container {
+        .profile-body p {
+            margin-bottom: 10px;
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .profile-footer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* 最近更新 */
+        .recent-updates {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+        
+        .recent-updates h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+        
+        .updates-list {
+            list-style: none;
+        }
+        
+        .updates-list li {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .updates-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .update-date {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        
+        .update-text {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* 主内容和侧边栏布局 */
+        main {
+            display: flex;
+            flex-wrap: nowrap; /* 防止换行 */
+            gap: 20px; /* 统一间距 */
+            align-items: flex-start; /* 顶部对齐 */
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            main {
                 flex-direction: column;
+                flex-wrap: wrap;
             }
             
-            .ad-sidebar, 
-            .info-sidebar {
+            .main-content {
+                margin-right: 0;
+                margin-bottom: 20px;
                 width: 100%;
-                display: flex;
-                gap: 20px;
+                max-width: 100%; /* 在小屏幕上占满宽度 */
             }
             
-            .ad-card {
-                flex: 1;
-                margin-bottom: 0;
-            }
-            
-            .info-sidebar > div {
-                flex: 1;
+            .sidebar {
+                width: 100%;
+                position: static; /* 取消粘性定位 */
+                margin-top: 20px;
             }
         }
         
         @media (max-width: 768px) {
             .navbar {
-                flex-wrap: wrap;
+                padding: 1rem 0;
             }
             
             .nav-links {
-                order: 3;
-                width: 100%;
-                margin-top: 1rem;
-                justify-content: center;
+                display: none;
             }
             
-            .ad-sidebar,
-            .info-sidebar {
-                flex-direction: column;
+            .mobile-menu-btn {
+                display: block;
             }
             
-            .tools-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .popular-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .logo-text {
-                font-size: 1.2rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-            
-            .user-avatar {
-                width: 36px;
-                height: 36px;
-            }
-            
-            .page-header h1 {
+            .hero h1 {
                 font-size: 2rem;
             }
             
-            .tools-container {
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .tools-heading {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .tools-grid {
                 grid-template-columns: 1fr;
             }
             
-            .popular-grid {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        /* 工具详情页样式 */
+        .tool-detail {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-detail-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+        
+        .tool-detail-header h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-detail-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+        
+        .tool-detail-content {
+            padding: 2rem;
+        }
+        
+        .tool-detail-footer {
+            padding: 1.5rem 2rem;
+            background-color: rgba(0, 0, 0, 0.02);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .tool-detail-footer .tool-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .back-btn:hover {
+            color: var(--primary);
+        }
+        
+        /* 加载动画 */
+        #loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(67, 97, 238, 0.2);
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
     <!-- 导航栏 -->
     <header>
-        <div class="navbar">
-            <a href="#" class="logo">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
                 <div class="logo-icon">
                     <i class="fas fa-tools"></i>
                 </div>
-                <div class="logo-text">Dev<span>Tools</span></div>
+                <div class="logo-text">内容创作者<span>工具箱</span></div>
             </a>
             
             <div class="nav-links">
-                <a href="#" class="active">首页</a>
+                <a href="index.html" class="active">首页</a>
                 <a href="#">所有工具</a>
-                <a href="#">最新工具</a>
-                <a href="#">我的博客</a>
-                <a href="#">关于我</a>
+                <a href="#">关于</a>
+                <a href="#">联系我们</a>
             </div>
             
-            <div class="user-section">
-                <div class="user-avatar">JD</div>
-            </div>
-        </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
     </header>
     
-    <!-- 主体内容 -->
-    <div class="container">
-        <!-- 左侧广告位 -->
-        <aside class="ad-sidebar">
-            <div class="ad-card">
-                <div class="ad-header">推荐资源</div>
-                <div class="ad-content">
-                    <i class="fas fa-server"></i>
-                    <h3>云服务器特惠</h3>
-                    <p>高性能云服务器，新用户首年1折起</p>
-                </div>
-            </div>
-            
-            <div class="ad-card">
-                <div class="ad-header">赞助商</div>
-                <div class="ad-content">
-                    <i class="fab fa-js"></i>
-                    <h3>前端框架课程</h3>
-                    <p>React/Vue 高级实战课程限时优惠</p>
-                </div>
-            </div>
-        </aside>
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <h1>高效内容创作工具集合</h1>
+        <p>为内容创作者、自媒体运营者和数字营销人员提供的一站式在线工具箱，提升创作效率，释放创意潜能。</p>
         
-        <!-- 主内容区 -->
-        <main class="main-content" id="mainContent">
-            <!-- 内容区由JavaScript动态加载 -->
-        </main>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="搜索工具..." id="search-input">
+        </div>
+    </section>
+    
+    <!-- 主要内容 -->
+    <main>
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <!-- 左侧工具区域 -->
         
-        <!-- 右侧信息栏 -->
-        <aside class="info-sidebar">
-            <!-- 工具统计 -->
-            <div class="stats-card">
-                <h3>站点统计</h3>
-                <div class="stat-item">
-                    <div class="stat-value">128</div>
-                    <div class="stat-label">工具数量</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">7,289,635</div>
-                    <div class="stat-label">使用次数</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">258,963</div>
-                    <div class="stat-label">用户数量</div>
+        <!-- 热门工具 -->
+        <section class="tools">
+            <div class="tools-heading">
+                <h2>热门工具</h2>
+                
+                <div class="view-options">
+                    <button class="view-btn active" id="grid-view-btn">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" id="list-view-btn">
+                        <i class="fas fa-list"></i>
+                    </button>
                 </div>
             </div>
             
-            <!-- 热门工具 -->
-            <div class="popular-tools">
-                <h3>热门工具</h3>
-                <div class="popular-grid">
-                    <div class="popular-tool">
-                        <i class="fas fa-exchange-alt"></i>
-                        <h4>Base64 转换</h4>
-                        <p>文本/文件编码解码</p>
-                    </div>
-                    <div class="popular-tool">
-                        <i class="fas fa-palette"></i>
-                        <h4>颜色选择器</h4>
-                        <p>RGB/HEX 转换</p>
-                    </div>
-                    <div class="popular-tool">
-                        <i class="fas fa-qrcode"></i>
-                        <h4>二维码生成</h4>
-                        <p>链接转二维码</p>
-                    </div>
-                    <div class="popular-tool">
-                        <i class="fas fa-file-image"></i>
-                        <h4>图片压缩</h4>
-                        <p>优化图片大小</p>
-                    </div>
-                </div>
+            <div class="tools-grid" id="tools-container">
+                <!-- 工具卡片将通过JavaScript动态加载 -->
+            </div>
+        </section>
+        
+        <!-- 工具分类 -->
+        <section class="categories">
+            <div class="categories-heading">
+                <h2>工具分类</h2>
             </div>
             
-            <!-- 站长介绍 -->
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>文本处理</h3>
+                    <p>文本格式转换、编辑和优化</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>图像处理</h3>
+                    <p>图片编辑、优化和转换</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>编码工具</h3>
+                    <p>各种编码和解码工具</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>SEO工具</h3>
+                    <p>搜索引擎优化辅助工具</p>
+                </div>
+            </div>
+        </section>
+        </div>
+        
+        <!-- 右侧个人介绍面板 -->
+        <div class="sidebar">
             <div class="profile-card">
-                <div class="profile-avatar">lu</div>
-                <h3 class="profile-name">小路</h3>
-                <p class="profile-title">程序员 & 副业人</p>
-                
-                <div class="contact-info">
-                    <p><i class="fas fa-envelope"></i> xxx@xxx.com</p>
-                    <p><i class="fas fa-globe"></i> blog.xxx.com</p>
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>小路</h3>
+                    <p>内容创作者 | 技术爱好者</p>
                 </div>
-                
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-weixin"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-zhihu"></i></a>
-                    <a href="#"><i class="fab fa-weibo"></i></a>
+                <div class="profile-body">
+                    <p>👋 你好！我是小路，一名热爱技术和内容创作的开发者。</p>
+                    <p>🛠️ 这个工具箱是我为内容创作者打造的实用工具集合，希望能帮助你提高创作效率。</p>
+                    <p>💡 如果你有任何建议或者想法，欢迎与我联系！</p>
+                </div>
+                <div class="profile-footer">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
-        </aside>
-    </div>
+            
+            <div class="recent-updates">
+                <h3>最近更新</h3>
+                <ul class="updates-list">
+                    <li>
+                        <span class="update-date">2025-06-15</span>
+                        <span class="update-text">新增内容卡片生成器工具</span>
+                    </li>
+                    <li>
+                        <span class="update-date">2025-06-10</span>
+                        <span class="update-text">优化内容转换器功能</span>
+                    </li>
+                    <li>
+                        <span class="update-date">2025-06-05</span>
+                        <span class="update-text">工具箱正式上线</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
     
     <!-- 页脚 -->
     <footer>
         <div class="footer-content">
             <div class="footer-column">
-                <h3>关于本站</h3>
-                <p>DevTools 是一个免费在线工具集合网站，旨在为内容创作者提供便捷高效的开发工具，所有工具均可直接在浏览器中使用，无需安装。</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                <h3>关于我们</h3>
+                <p>内容创作者工具箱是一个为内容创作者、自媒体运营者和数字营销人员提供高效工具的平台。</p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
                 </div>
-            </div>
-            
-            <div class="footer-column">
-                <h3>工具分类</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-code"></i> 编码工具</a></li>
-                    <li><a href="#"><i class="fas fa-text-height"></i> 文本处理</a></li>
-                    <li><a href="#"><i class="fas fa-image"></i> 图像工具</a></li>
-                    <li><a href="#"><i class="fas fa-calculator"></i> 计算工具</a></li>
-                    <li><a href="#"><i class="fas fa-database"></i> 数据转换</a></li>
-                </ul>
             </div>
             
             <div class="footer-column">
                 <h3>快速链接</h3>
                 <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-home"></i> 网站首页</a></li>
-                    <li><a href="#"><i class="fas fa-star"></i> 热门工具</a></li>
-                    <li><a href="#"><i class="fas fa-plus-circle"></i> 新增工具</a></li>
-                    <li><a href="#"><i class="fas fa-blog"></i> 技术博客</a></li>
-                    <li><a href="#"><i class="fas fa-envelope"></i> 联系站长</a></li>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="#">所有工具</a></li>
+                    <li><a href="#">关于</a></li>
+                    <li><a href="#">联系我们</a></li>
                 </ul>
             </div>
             
             <div class="footer-column">
-                <h3>联系我</h3>
-                <div class="contact-info-footer">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>xxx@xxxx.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>xxxx</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-globe"></i>
-                        <span>www.xxxxxx.com</span>
-                    </div>
-                </div>
+                <h3>热门工具</h3>
+                <ul class="footer-links">
+                    <li><a href="tools/content-converter.html">内容转换器</a></li>
+                    <li><a href="tools/base64-encoder.html">Base64编码解码</a></li>
+                    <li><a href="#">图片压缩</a></li>
+                    <li><a href="#">SEO分析</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>联系我们</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> contact@example.com</li>
+                    <li><i class="fas fa-phone"></i> +86 123 4567 8901</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 北京市朝阳区</li>
+                </ul>
             </div>
         </div>
         
         <div class="copyright">
-            &copy; 2025 DevTools 工具箱 | xxx | 本网站由 GitHub + Netlify 驱动
+            <p>&copy; 2025 内容创作者工具箱. 保留所有权利.</p>
         </div>
     </footer>
     
+    <!-- 加载动画 -->
+    <div id="loading" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    
     <script>
-        // 工具数据
-        const toolsData = [
-            {
-                id: 1,
-                name: "Base64 编码解码",
-                description: "在线进行Base64编码和解码操作，支持文本和文件转换",
-                path: "base64-encoder",
-                icon: "fas fa-exchange-alt",
-                tags: ["编码", "转换", "文本处理"]
-            },
-            {
-                id: 2,
-                name: "JSON 格式化工具",
-                description: "将压缩的JSON数据格式化为易读的结构化形式",
-                path: "json-formatter",
-                icon: "fas fa-braille",
-                tags: ["JSON", "格式化", "开发"]
-            },
-            {
-                id: 3,
-                name: "颜色选择器",
-                description: "RGB/HEX颜色转换与调色板生成工具",
-                path: "color-picker",
-                icon: "fas fa-palette",
-                tags: ["设计", "颜色", "CSS"]
-            },
-            {
-                id: 4,
-                name: "正则表达式测试",
-                description: "在线测试和调试正则表达式，支持多种匹配模式",
-                path: "regex-tester",
-                icon: "fas fa-terminal",
-                tags: ["正则", "开发", "测试"]
-            },
-            {
-                id: 5,
-                name: "二维码生成器",
-                description: "将文本、URL等信息转换为二维码图像",
-                path: "qr-generator",
-                icon: "fas fa-qrcode",
-                tags: ["工具", "分享", "图像"]
-            },
-            {
-                id: 6,
-                name: "时间戳转换",
-                description: "Unix时间戳与日期时间之间的相互转换工具",
-                path: "timestamp-converter",
-                icon: "fas fa-clock",
-                tags: ["时间", "转换", "开发"]
-            },
-            {
-                id: 7,
-                name: "Markdown 编辑器",
-                description: "实时预览的Markdown编辑器，支持导出HTML",
-                path: "markdown-editor",
-                icon: "fab fa-markdown",
-                tags: ["写作", "编辑", "文档"]
-            },
-            {
-                id: 8,
-                name: "图片压缩工具",
-                description: "在线压缩JPG/PNG图片，减少文件大小",
-                path: "image-compressor",
-                icon: "fas fa-file-image",
-                tags: ["图像", "优化", "压缩"]
-            },
-            {
-                id: 9,
-                name: "密码生成器",
-                description: "创建安全随机的密码，可自定义长度和字符集",
-                path: "password-generator",
-                icon: "fas fa-lock",
-                tags: ["安全", "工具", "实用"]
+        // 从JSON文件加载工具数据
+        async function loadTools() {
+            try {
+                const response = await fetch('tools.json');
+                if (!response.ok) {
+                    throw new Error('无法加载工具数据');
+                }
+                const tools = await response.json();
+                renderTools(tools);
+            } catch (error) {
+                console.error('加载工具数据失败:', error);
+                document.getElementById('tools-container').innerHTML = '<p class="error-message">加载工具数据失败，请刷新页面重试。</p>';
             }
-        ];
-        
-        // 获取URL参数
-        function getUrlParam(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
         }
         
-        // 渲染工具详情页
-        function renderToolDetail(toolId) {
-            const tool = toolsData.find(t => t.id == toolId);
-            if (!tool) return false;
+        // 渲染工具卡片
+        function renderTools(tools) {
+            const toolsContainer = document.getElementById('tools-container');
+            toolsContainer.innerHTML = '';
             
-            const mainContent = document.getElementById('mainContent');
-            mainContent.innerHTML = `
-                <div class="tool-container">
-                    <div class="page-header">
-                        <h1>${tool.name}</h1>
-                        <p>${tool.description}</p>
-                    </div>
-                    
-                    <div class="tool-detail">
-                        <div class="tool-header-detail">
-                            <div class="tool-icon">
-                                <i class="${tool.icon}"></i>
-                            </div>
-                            <div class="tool-tags">
-                                ${tool.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                            </div>
-                        </div>
-                        
-                        <div class="tool-functionality">
-                            <h2>功能演示</h2>
-                            <div style="background:#fff; padding:20px; border-radius:10px; min-height:300px; display:flex; align-items:center; justify-content:center;">
-                                <div style="text-align:center; color:#666;">
-                                    <i class="${tool.icon}" style="font-size:4rem; margin-bottom:20px; color:#4361ee;"></i>
-                                    <p>${tool.name} 功能区域</p>
-                                    <p>这里将显示具体的工具实现</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="tool-description">
-                            <h2>工具介绍</h2>
-                            <p>${tool.name}是一个强大的在线工具，专为开发者设计，用于${tool.description.toLowerCase()}。它提供了简单易用的界面和丰富的功能，让您能够高效地完成相关任务。</p>
-                            <p>使用${tool.name}，您可以：</p>
-                            <ul>
-                                <li>快速完成相关操作，无需安装任何软件</li>
-                                <li>在浏览器中直接使用，无需注册或登录</li>
-                                <li>获得即时结果，提高工作效率</li>
-                                <li>安全可靠，所有处理都在本地完成</li>
-                            </ul>
-                        </div>
-                        
-                        <a href="?" class="back-to-home"><i class="fas fa-arrow-left"></i> 返回工具列表</a>
-                    </div>
-                </div>
-            `;
-            
-            return true;
-        }
-        
-        // 渲染工具列表
-        function renderToolList() {
-            const mainContent = document.getElementById('mainContent');
-            mainContent.innerHTML = `
-                <div class="tool-container">
-                    <div class="page-header">
-                        <h1>开发者实用工具集</h1>
-                        <p>精心挑选的免费在线工具，提高开发效率，无需安装，即开即用</p>
-                    </div>
-                    
-                    <div class="search-container">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="text" class="search-box" placeholder="搜索工具...">
-                    </div>
-                    
-                    <div class="tools-container" id="toolsContainer">
-                        <!-- 工具列表将通过JavaScript动态加载 -->
-                    </div>
-                </div>
-            `;
-            
-            const toolsContainer = document.getElementById('toolsContainer');
-            
-            // 生成工具卡片
-            toolsData.forEach(tool => {
-                const toolCard = document.createElement('a');
-                toolCard.className = 'tool-card';
-                toolCard.href = `?tool=${tool.id}`;
+            tools.forEach(tool => {
+                const tagsString = tool.tags.join(',').toLowerCase();
+                const tagsHtml = tool.tags.map(tag => `<span class="tool-tag">${tag}</span>`).join('');
                 
-                // 生成标签HTML
-                let tagsHTML = '';
-                tool.tags.forEach(tag => {
-                    tagsHTML += `<span class="tag">${tag}</span>`;
-                });
+                const toolCard = document.createElement('div');
+                toolCard.className = 'tool-card';
+                toolCard.setAttribute('data-tags', tagsString);
                 
                 toolCard.innerHTML = `
-                    <div class="tool-header">
-                        <div class="tool-icon">
-                            <i class="${tool.icon}"></i>
+                    <div class="tool-card-header">
+                        <h3>${tool.name}</h3>
+                        <p>${tool.shortDesc}</p>
+                        <i class="${tool.icon} tool-icon"></i>
+                    </div>
+                    <div class="tool-card-body">
+                        <p>${tool.description}</p>
+                    </div>
+                    <div class="tool-card-footer">
+                        <div class="tool-tags">
+                            ${tagsHtml}
                         </div>
-                        <div class="tool-title-wrapper">
-                            <h3>${tool.name}</h3>
-                            <div class="tool-tags">
-                                ${tagsHTML}
-                            </div>
-                        </div>
+                        <a href="${tool.url}" class="tool-btn">使用工具</a>
                     </div>
                 `;
                 
                 toolsContainer.appendChild(toolCard);
             });
+        }
+        
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 加载工具数据
+            loadTools();
             
             // 搜索功能
-            const searchBox = document.querySelector('.search-box');
-            searchBox.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
+            document.getElementById('search-input').addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
                 const toolCards = document.querySelectorAll('.tool-card');
                 
                 toolCards.forEach(card => {
-                    const toolName = card.querySelector('h3').textContent.toLowerCase();
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('.tool-card-body p').textContent.toLowerCase();
+                    const tags = card.getAttribute('data-tags').toLowerCase();
                     
-                    if (toolName.includes(searchTerm)) {
-                        card.style.display = 'block';
+                    if (title.includes(searchTerm) || description.includes(searchTerm) || tags.includes(searchTerm)) {
+                        card.style.display = 'flex';
                     } else {
                         card.style.display = 'none';
                     }
                 });
             });
-        }
-        
-        // 页面初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            const toolId = getUrlParam('tool');
             
-            if (toolId && renderToolDetail(toolId)) {
-                // 成功渲染工具详情页
-            } else {
-                renderToolList();
-            }
+            // 视图切换功能
+            document.getElementById('grid-view-btn').addEventListener('click', function() {
+                document.getElementById('tools-container').className = 'tools-grid';
+                document.getElementById('grid-view-btn').classList.add('active');
+                document.getElementById('list-view-btn').classList.remove('active');
+            });
+            
+            document.getElementById('list-view-btn').addEventListener('click', function() {
+                document.getElementById('tools-container').className = 'tools-list';
+                document.getElementById('list-view-btn').classList.add('active');
+                document.getElementById('grid-view-btn').classList.remove('active');
+            });
+            
+            // 移动菜单功能
+            document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
         });
     </script>
 </body>

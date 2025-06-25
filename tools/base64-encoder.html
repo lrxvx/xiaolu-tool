@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 编码解码工具</title>
+    <style>
+        .tool-detail-content {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .tool-detail-content h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .tool-detail-content textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .tool-detail-content button {
+            padding: 10px 20px;
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+        .tool-detail-content button:hover {
+            background-color: #3f37c9;
+        }
+    </style>
+</head>
+<body>
+    <div class="tool-detail-content">
+        <h2>Base64 编码解码</h2>
+        <textarea id="input" placeholder="输入文本或Base64编码..."></textarea>
+        <button onclick="encodeBase64()">编码</button>
+        <button onclick="decodeBase64()">解码</button>
+        <textarea id="output" placeholder="结果将显示在这里..." readonly></textarea>
+    </div>
+
+    <script>
+        function encodeBase64() {
+            const input = document.getElementById('input').value;
+            const output = btoa(encodeURIComponent(input));
+            document.getElementById('output').value = output;
+        }
+
+        function decodeBase64() {
+            const input = document.getElementById('input').value;
+            try {
+                const output = decodeURIComponent(atob(input));
+                document.getElementById('output').value = output;
+            } catch (e) {
+                document.getElementById('output').value = '解码失败，请输入有效的Base64编码。';
+            }
+        }
+    </script>
+</body>
+</html>

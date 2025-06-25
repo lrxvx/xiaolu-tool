@@ -1,0 +1,38 @@
+[
+  {
+    "id": "content-converter",
+    "name": "内容转换器",
+    "shortDesc": "将各种格式内容转为Markdown博客",
+    "icon": "fas fa-exchange-alt",
+    "description": "将飞书文档、PDF文件或公众号文章转换为符合博客风格的Markdown格式，自动生成frontmatter信息。",
+    "tags": ["Markdown", "博客"],
+    "url": "tools/content-converter.html"
+  },
+  {
+    "id": "base64-encoder",
+    "name": "Base64 编码解码",
+    "shortDesc": "文本与Base64互相转换",
+    "icon": "fas fa-code",
+    "description": "快速将文本转换为Base64编码，或将Base64编码解码为原始文本，支持中文和特殊字符。",
+    "tags": ["编码", "解码"],
+    "url": "tools/base64-encoder.html"
+  },
+  {
+    "id": "example-tool",
+    "name": "示例工具",
+    "shortDesc": "工具模板示例",
+    "icon": "fas fa-vial",
+    "description": "这是一个示例工具，展示了工具的基本结构和样式。您可以基于此模板开发新的工具。",
+    "tags": ["示例", "模板"],
+    "url": "tools/example-tool.html"
+  },
+  {
+    "id": "content-card-generator",
+    "name": "内容卡片生成器",
+    "shortDesc": "创建精美的内容对比卡片",
+    "icon": "fas fa-image",
+    "description": "生成标题+核心观点+对比表格+总结性建议的内容卡片，支持多种背景颜色，可下载为图片。",
+    "tags": ["图片", "卡片", "对比"],
+    "url": "tools/content-card-generator.html"
+  }
+]
