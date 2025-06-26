@@ -61,5 +61,23 @@
     "description": "输入月薪、工作天数和时长，实时计算每秒钟赚取的金额，让摸鱼更有成就感。支持元、角、分单位切换。",
     "tags": ["计算器", "摸鱼", "薪资"],
     "url": "tools/idle-calculator.html"
+  },
+  {
+    "id": "wealth-freedom-calculator",
+    "name": "财富自由计算器",
+    "shortDesc": "计算达到财富自由的时间",
+    "icon": "fas fa-chart-line",
+    "description": "根据您的月收入、月支出和当前年龄，计算达到财富自由所需的时间，并提供实时倒计时和进度显示。",
+    "tags": ["财富自由", "理财", "计算器"],
+    "url": "tools/wealth-freedom-calculator.html"
+  },
+  {
+    "id": "house-car-countdown",
+    "name": "买房买车倒计时",
+    "shortDesc": "计算购房购车目标倒计时",
+    "icon": "fas fa-home",
+    "description": "设定购房或购车目标，计算还需多少时间和金钱达成目标，还能换算成奶茶杯数让目标更有趣。",
+    "tags": ["买房", "买车", "倒计时", "理财"],
+    "url": "tools/house-car-countdown.html"
   }
 ]
