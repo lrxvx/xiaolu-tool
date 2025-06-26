@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>摸鱼计算器 - 小路工具箱</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #7209b7;
+            --light: #f8f9ff;
+            --dark: #333333;
+            --gray: #888888;
+            --success: #4361ee;
+            --shadow: 0 8px 30px rgba(67, 97, 238, 0.15);
+            --transition: all 0.3s ease;
+            --highlight: #4361ee;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* 导航栏样式 */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 5%;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .logo-text span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover, 
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after, 
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* 工具内容样式 */
+        .tool-container {
+            flex: 1;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .tool-header h1 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .tool-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .tool-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .preview-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+         .form-group select:focus {
+             outline: none;
+             border-color: var(--primary);
+             box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+         }
+
+         .btn {
+             padding: 0.9rem 1.8rem;
+             background-color: var(--primary);
+             color: white;
+             border: none;
+             border-radius: 30px;
+             cursor: pointer;
+             font-size: 1rem;
+             font-weight: 600;
+             transition: var(--transition);
+             display: inline-flex;
+             align-items: center;
+             gap: 0.6rem;
+             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.25);
+             width: 100%;
+             justify-content: center;
+         }
+
+         .btn:hover {
+             background-color: var(--secondary);
+             transform: translateY(-3px);
+             box-shadow: 0 6px 20px rgba(67, 97, 238, 0.35);
+         }
+
+        .money-display {
+            margin: 2rem 0;
+        }
+        
+        .money {
+             font-size: 3.5rem;
+             font-weight: bold;
+             color: var(--primary);
+             margin: 1rem 0;
+             text-shadow: 0 2px 4px rgba(67, 97, 238, 0.2);
+         }
+        
+        .unit {
+            font-size: 1.5rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .status-text {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-stop {
+            background-color: var(--gray);
+            margin-top: 1rem;
+        }
+
+        .btn-stop:hover {
+            background-color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 0;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .tool-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .money {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">小路<span>工具箱</span></div>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html">首页</a>
+                <a href="#" class="active">牛马计算器</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="tool-container">
+        <div class="tool-header">
+            <h1><i class="fas fa-calculator"></i> 牛马计算器</h1>
+            <p>计算你每秒钟赚了多少钱，让摸鱼更有成就感</p>
+        </div>
+        
+        <div class="tool-content">
+            <div class="input-section">
+                <h3 style="margin-bottom: 1rem; color: var(--dark);"><i class="fas fa-cog"></i> 薪资设置</h3>
+                
+                <div class="form-group">
+                    <label for="salary"><i class="fas fa-money-bill-wave"></i> 月薪</label>
+                    <input type="number" id="salary" placeholder="输入您的月薪">
+                </div>
+                
+                <div class="form-group">
+                    <label for="workdays"><i class="fas fa-calendar-day"></i> 每月工作天数</label>
+                    <input type="number" id="workdays" value="22" min="1" max="31">
+                </div>
+                
+                <div class="form-group">
+                    <label for="hours"><i class="fas fa-clock"></i> 每天工作时长(小时)</label>
+                    <input type="number" id="hours" value="8" min="1" max="24">
+                </div>
+                
+                <div class="form-group">
+                    <label for="currency"><i class="fas fa-coins"></i> 货币单位</label>
+                    <select id="currency">
+                        <option value="1">元</option>
+                        <option value="0.1">角</option>
+                        <option value="0.01">分</option>
+                    </select>
+                </div>
+                
+                <button class="btn" id="start">
+                    <i class="fas fa-play"></i> 开始计算
+                </button>
+                
+                <button class="btn btn-stop" id="stop" style="display: none;">
+                    <i class="fas fa-stop"></i> 停止计算
+                </button>
+            </div>
+            
+            <div class="preview-section">
+                <h3 style="margin-bottom: 1rem; color: var(--dark);"><i class="fas fa-chart-line"></i> 实时收入</h3>
+                
+                <div class="status-text" id="status">请设置薪资信息并开始计算</div>
+                
+                <div class="money-display">
+                    <div class="money" id="money">0.00</div>
+                    <div class="unit" id="unit">元</div>
+                </div>
+                
+                <div style="color: var(--gray); font-size: 0.9rem;">
+                    <i class="fas fa-info-circle"></i> 每秒收入: <span id="perSecond">0.00</span> <span id="perSecondUnit">元</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let timer;
+        let moneyPerSecond = 0;
+        let isRunning = false;
+        
+        const startBtn = document.getElementById('start');
+        const stopBtn = document.getElementById('stop');
+        const statusEl = document.getElementById('status');
+        const moneyEl = document.getElementById('money');
+        const unitEl = document.getElementById('unit');
+        const perSecondEl = document.getElementById('perSecond');
+        const perSecondUnitEl = document.getElementById('perSecondUnit');
+        
+        startBtn.addEventListener('click', function() {
+            const salary = parseFloat(document.getElementById('salary').value);
+            const workdays = parseInt(document.getElementById('workdays').value);
+            const hours = parseInt(document.getElementById('hours').value);
+            const currency = parseFloat(document.getElementById('currency').value);
+            const unitText = document.getElementById('currency').options[document.getElementById('currency').selectedIndex].text;
+            
+            if (isNaN(salary) || salary <= 0) {
+                showStatus('请输入有效的月薪', 'error');
+                return;
+            }
+            
+            if (isNaN(workdays) || workdays <= 0) {
+                showStatus('请输入有效的工作天数', 'error');
+                return;
+            }
+            
+            if (isNaN(hours) || hours <= 0) {
+                showStatus('请输入有效的工作时长', 'error');
+                return;
+            }
+            
+            // 计算每秒赚多少钱
+            const secondsPerMonth = workdays * hours * 3600;
+            moneyPerSecond = (salary / secondsPerMonth) * currency;
+            
+            // 更新单位显示
+            unitEl.textContent = unitText;
+            perSecondUnitEl.textContent = unitText;
+            perSecondEl.textContent = moneyPerSecond.toFixed(4);
+            
+            // 清除之前的计时器
+            if (timer) clearInterval(timer);
+            
+            // 开始计时
+            let totalMoney = 0;
+            isRunning = true;
+            showStatus('计算中...每秒都在赚钱！', 'success');
+            
+            // 切换按钮状态
+            startBtn.style.display = 'none';
+            stopBtn.style.display = 'block';
+            
+            timer = setInterval(() => {
+                totalMoney += moneyPerSecond;
+                moneyEl.textContent = totalMoney.toFixed(2);
+            }, 1000);
+        });
+        
+        stopBtn.addEventListener('click', function() {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+            }
+            
+            isRunning = false;
+            showStatus('已停止计算，点击开始重新计算', 'info');
+            
+            // 切换按钮状态
+            startBtn.style.display = 'block';
+            stopBtn.style.display = 'none';
+            
+            // 重置显示
+            moneyEl.textContent = '0.00';
+            unitEl.textContent = '元';
+            perSecondEl.textContent = '0.00';
+            perSecondUnitEl.textContent = '元';
+        });
+        
+        function showStatus(message, type = 'info') {
+             statusEl.textContent = message;
+             statusEl.style.color = type === 'error' ? '#e74c3c' : 
+                                   type === 'success' ? 'var(--primary)' : 
+                                   'var(--gray)';
+         }
+        
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            showStatus('请设置薪资信息并开始计算', 'info');
+        });
+    </script>
+</body>
+</html>

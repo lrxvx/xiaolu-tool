@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小红书日记卡片生成器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary: #ff2e4d;
+            --secondary: #ff4f67;
+            --dark: #333333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f6f6f6;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .tool-header {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .tool-header h1 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .tool-header p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        .input-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+        
+        .preview-section {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .card-preview {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .controls {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .color-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .color-option.active {
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        /* 小红书日记卡片样式 */
+        #diary-card {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            position: relative;
+            overflow: hidden;
+            background-color: #fff1f1;
+        }
+        
+        .card-header {
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .card-date {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 15px;
+        }
+        
+        .card-content {
+            margin-bottom: 20px;
+        }
+        
+        .diary-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .diary-item-number {
+            font-weight: bold;
+            margin-right: 8px;
+            color: var(--primary);
+        }
+        
+        .diary-item-text {
+            flex: 1;
+        }
+        
+        .card-footer {
+            font-size: 0.9rem;
+            color: #888;
+            text-align: right;
+            margin-top: 20px;
+            font-style: italic;
+        }
+        
+        .watermark {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 0.8rem;
+            color: rgba(0, 0, 0, 0.2);
+            transform: rotate(-45deg);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .input-section, .preview-section {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tool-header">
+            <h1>小红书日记卡片生成器</h1>
+            <p>输入你的日记内容，生成精美的小红书风格日记卡片</p>
+        </div>
+        
+        <div class="input-section">
+            <textarea id="diary-input" placeholder="输入你的日记内容...">小路的一人企业日记第47天：IP写作，回访学员 
+
+2025/6/24，周二，在职场做副业 
+
+1、挖掘生财宝典的内容，写文 
+
+2、整理cubox的内容，将它用起来，作为信息内容存储空间 
+
+3、根据两篇小红书APP产品创业失败案例，写文，内容可同步多平台 
+
+4、IP写作入门40天行动营发帖，招募，解答问题 
+
+5、回访一些学员，跟进情况 
+
+6、公众号4篇，小红书3条，视频号2条，多篇短文</textarea>
+            
+            <div class="button-group">
+                <button onclick="generateCard()"><i class="fas fa-magic"></i> 生成卡片</button>
+                <button onclick="resetInput()"><i class="fas fa-redo"></i> 重置</button>
+            </div>
+            
+            <div>
+                <p>选择卡片背景颜色：</p>
+                <div class="color-options">
+                    <div class="color-option active" style="background-color: #fff1f1;" data-color="#fff1f1"></div>
+                    <div class="color-option" style="background-color: #f1f8ff;" data-color="#f1f8ff"></div>
+                    <div class="color-option" style="background-color: #f1fff2;" data-color="#f1fff2"></div>
+                    <div class="color-option" style="background-color: #fff8f1;" data-color="#fff8f1"></div>
+                    <div class="color-option" style="background-color: #f8f1ff;" data-color="#f8f1ff"></div>
+                    <div class="color-option" style="background-color: #fffef1;" data-color="#fffef1"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="preview-section">
+            <div class="card-preview">
+                <div id="diary-card">
+                    <div class="card-header">
+                        <div class="card-title">小路的一人企业日记第47天：IP写作，回访学员</div>
+                        <div class="card-date">2025/6/24，周二，在职场做副业</div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <div class="diary-item">
+                            <span class="diary-item-number">1、</span>
+                            <span class="diary-item-text">挖掘生财宝典的内容，写文</span>
+                        </div>
+                        <div class="diary-item">
+                            <span class="diary-item-number">2、</span>
+                            <span class="diary-item-text">整理cubox的内容，将它用起来，作为信息内容存储空间</span>
+                        </div>
+                        <div class="diary-item">
+                            <span class="diary-item-number">3、</span>
+                            <span class="diary-item-text">根据两篇小红书APP产品创业失败案例，写文，内容可同步多平台</span>
+                        </div>
+                        <div class="diary-item">
+                            <span class="diary-item-number">4、</span>
+                            <span class="diary-item-text">IP写作入门40天行动营发帖，招募，解答问题</span>
+                        </div>
+                        <div class="diary-item">
+                            <span class="diary-item-number">5、</span>
+                            <span class="diary-item-text">回访一些学员，跟进情况</span>
+                        </div>
+                        <div class="diary-item">
+                            <span class="diary-item-number">6、</span>
+                            <span class="diary-item-text">公众号4篇，小红书3条，视频号2条，多篇短文</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        — 小路的日常记录 —
+                    </div>
+                    
+                    <div class="watermark">小路工具箱</div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button onclick="downloadCard()"><i class="fas fa-download"></i> 下载卡片</button>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--gray);">提示：点击下载按钮将生成图片并自动下载</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 选择背景颜色
+        const colorOptions = document.querySelectorAll('.color-option');
+        colorOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // 移除所有active类
+                colorOptions.forEach(opt => opt.classList.remove('active'));
+                // 添加active类到当前选中的颜色
+                this.classList.add('active');
+                // 更改卡片背景颜色
+                const color = this.getAttribute('data-color');
+                document.getElementById('diary-card').style.backgroundColor = color;
+            });
+        });
+        
+        // 生成卡片
+        function generateCard() {
+            const input = document.getElementById('diary-input').value;
+            if (!input.trim()) {
+                alert('请输入日记内容！');
+                return;
+            }
+            
+            // 解析输入内容
+            const lines = input.split('\n').filter(line => line.trim());
+            
+            let title = '';
+            let date = '';
+            let items = [];
+            
+            // 提取标题和日期
+            if (lines.length > 0) {
+                title = lines[0].trim();
+            }
+            
+            if (lines.length > 1) {
+                date = lines[1].trim();
+            }
+            
+            // 提取日记项目
+            for (let i = 2; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line.match(/^\d+[、,\.]\s*.+/)) {
+                    const parts = line.split(/^(\d+[、,\.]\s*)/);
+                    if (parts.length >= 3) {
+                        items.push({
+                            number: parts[1].trim(),
+                            text: parts[2].trim()
+                        });
+                    } else {
+                        items.push({
+                            number: '',
+                            text: line
+                        });
+                    }
+                } else {
+                    items.push({
+                        number: '',
+                        text: line
+                    });
+                }
+            }
+            
+            // 更新卡片内容
+            document.querySelector('.card-title').textContent = title;
+            document.querySelector('.card-date').textContent = date;
+            
+            const contentDiv = document.querySelector('.card-content');
+            contentDiv.innerHTML = '';
+            
+            items.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'diary-item';
+                
+                if (item.number) {
+                    const numberSpan = document.createElement('span');
+                    numberSpan.className = 'diary-item-number';
+                    numberSpan.textContent = item.number;
+                    itemDiv.appendChild(numberSpan);
+                }
+                
+                const textSpan = document.createElement('span');
+                textSpan.className = 'diary-item-text';
+                textSpan.textContent = item.text;
+                itemDiv.appendChild(textSpan);
+                
+                contentDiv.appendChild(itemDiv);
+            });
+        }
+        
+        // 重置输入
+        function resetInput() {
+            document.getElementById('diary-input').value = '';
+        }
+        
+        // 下载卡片
+        function downloadCard() {
+            const card = document.getElementById('diary-card');
+            
+            html2canvas(card, {
+                scale: 2, // 提高图片质量
+                backgroundColor: null,
+                logging: false
+            }).then(canvas => {
+                // 创建下载链接
+                const link = document.createElement('a');
+                link.download = '小红书日记卡片.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+        
+        // 页面加载时自动生成一次卡片
+        window.onload = function() {
+            generateCard();
+        };
+    </script>
+</body>
+</html>

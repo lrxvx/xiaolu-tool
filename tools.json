@@ -34,5 +34,32 @@
     "description": "生成标题+核心观点+对比表格+总结性建议的内容卡片，支持多种背景颜色，可下载为图片。",
     "tags": ["图片", "卡片", "对比"],
     "url": "tools/content-card-generator.html"
+  },
+  {
+    "id": "xiaohongshu-diary-card",
+    "name": "小红书日记卡片",
+    "shortDesc": "生成小红书风格日记卡片",
+    "icon": "fas fa-book",
+    "description": "输入日记内容，自动生成精美的小红书风格日记卡片，支持多种背景颜色，可下载为图片。",
+    "tags": ["小红书", "日记", "卡片"],
+    "url": "tools/xiaohongshu-diary-card.html"
+  },
+  {
+    "id": "daily-quote-card",
+    "name": "每日一句卡片生成器",
+    "shortDesc": "生成精美的每日一句卡片",
+    "icon": "fas fa-quote-left",
+    "description": "输入名言警句或励志语录，生成精美的每日一句卡片，支持多种样式和颜色，可下载为图片。",
+    "tags": ["名言", "卡片", "励志"],
+    "url": "tools/daily-quote-card.html"
+  },
+  {
+    "id": "idle-calculator",
+    "name": "摸鱼计算器",
+    "shortDesc": "计算每秒钟赚了多少钱",
+    "icon": "fas fa-calculator",
+    "description": "输入月薪、工作天数和时长，实时计算每秒钟赚取的金额，让摸鱼更有成就感。支持元、角、分单位切换。",
+    "tags": ["计算器", "摸鱼", "薪资"],
+    "url": "tools/idle-calculator.html"
   }
 ]

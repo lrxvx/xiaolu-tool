@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>每日一句卡片生成器 - 小路工具箱</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary: #ff2e63;
+            --secondary: #ff4b8b;
+            --accent: #ff85a1;
+            --light: #fff5f7;
+            --dark: #333333;
+            --gray: #888888;
+            --success: #ff85a1;
+            --shadow: 0 8px 30px rgba(255, 46, 99, 0.15);
+            --transition: all 0.3s ease;
+            --highlight: #ff2e63;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffecf1 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* 导航栏样式 */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 5%;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .logo-text span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover, 
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after, 
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* 工具内容样式 */
+        .tool-container {
+            flex: 1;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .tool-header h1 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .tool-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .tool-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .preview-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .color-option.active {
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .btn {
+            padding: 0.9rem 1.8rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 4px 15px rgba(255, 46, 99, 0.25);
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 46, 99, 0.35);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 46, 99, 0.15);
+            color: var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 46, 99, 0.25);
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(255, 46, 99, 0.15);
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            border-radius: 20px;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .buttons-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .font-size-controls {
+            display: flex;
+            gap: 0.3rem;
+            margin-top: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .font-size-btn {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.75rem;
+        }
+        
+        .font-size-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .font-size-input {
+            width: 45px;
+            padding: 0.3rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-align: center;
+            margin: 0 0.3rem;
+        }
+        
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .color-picker-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        .color-picker {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .color-picker::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        
+        .color-picker::-webkit-color-swatch {
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+        }
+        
+        /* 文件上传样式 */
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .file-upload-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: rgba(255, 46, 99, 0.15);
+            color: var(--primary);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .file-upload-btn:hover {
+            background-color: rgba(255, 46, 99, 0.25);
+        }
+        
+        .file-upload input[type="file"] {
+            display: none;
+        }
+        
+        .file-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            border: 1px dashed #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #f9f9f9;
+        }
+        
+        .file-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        /* 比例选择器样式 */
+        .ratio-selector {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        
+        .ratio-option {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.75rem;
+            background-color: rgba(255, 46, 99, 0.15);
+            color: var(--primary);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .ratio-option.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .ratio-custom {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.5rem;
+        }
+        
+        .ratio-custom input {
+            width: 45px;
+            padding: 0.3rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+
+        /* 卡片预览样式 */
+        .card-preview {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .quote-card {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1/1;
+            background-color: var(--light);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(255, 46, 99, 0.12), 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 5px solid #ff2e63; /* 添加红色边框，使用主题色 */
+        }
+        
+        .quote-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 46, 99, 0.18), 0 6px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        @media (min-width: 769px) {
+            .preview-section {
+                position: sticky;
+                top: 80px;
+                align-self: flex-start;
+                max-height: calc(100vh - 100px);
+                overflow-y: auto;
+            }
+        }
+
+        .card-inner {
+            padding: 2.5rem 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-header-text {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .quote-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .quote-author {
+            font-size: 1.2rem;
+            color: var(--gray);
+            font-weight: 500;
+            font-style: italic;
+            margin-top: 0.5rem;
+            display: block;
+            width: 100%;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 1rem;
+        }
+
+        .card-logo {
+            max-width: 60px;
+            max-height: 60px;
+            display: block;
+            margin-top: 0.5rem;
+            border-radius: 50%; /* 使Logo变成圆形 */
+            object-fit: cover; /* 确保图片填充整个区域 */
+            border: 2px solid #ff2e63; /* 添加边框，与卡片边框颜色一致 */
+            padding: 3px; /* 内边距，使Logo与边框有一定间距 */
+            background-color: white; /* 背景色，增强视觉效果 */
+        }
+
+        .card-join-text {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .tool-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .quote-card {
+                max-width: 100%;
+            }
+            
+            .tool-container {
+                padding: 1rem;
+            }
+            
+            .input-section, .preview-section {
+                padding: 1rem;
+            }
+            
+            .form-group {
+                margin-bottom: 1rem;
+            }
+            
+            .font-size-controls {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+            
+            .color-picker-container {
+                flex-wrap: wrap;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.4rem;
+            }
+            
+            .btn-small {
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .card-inner {
+                padding: 1.5rem 1rem;
+            }
+            
+            .quote-text {
+                font-size: 1.5rem;
+            }
+            
+            .quote-author {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <nav class="navbar">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">小路<span>工具箱</span></div>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html">首页</a>
+                <a href="content-converter.html">内容转换</a>
+                <a href="base64-encoder.html">Base64工具</a>
+                <a href="content-card-generator.html">内容卡片</a>
+                <a href="daily-quote-card.html" class="active">每日一句</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- 工具内容 -->
+    <div class="tool-container">
+        <div class="tool-header">
+            <h1>每日一句卡片生成器</h1>
+            <p>创建精美的每日一句卡片，支持自定义内容和多种比例</p>
+        </div>
+
+        <div class="tool-content">
+            <!-- 左侧输入区域 -->
+            <div class="input-section">
+                <div class="form-group">
+                    <label for="quoteText">金句内容</label>
+                    <textarea id="quoteText" placeholder="例如：这个世界上，有没有天上掉馅饼的事儿？大概率是没有的。如果有，那么大概率是想砸死你。"></textarea>
+                    <div class="font-size-controls">
+                        <span class="color-picker-label">字号:</span>
+                        <input type="number" id="quoteFontSize" class="font-size-input" value="28" min="12" max="48">
+                        <span class="color-picker-label">px</span>
+                        <button type="button" class="btn btn-small btn-secondary font-size-btn" data-target="quote" data-size="small">小</button>
+                        <button type="button" class="btn btn-small btn-secondary font-size-btn active" data-target="quote" data-size="medium">中</button>
+                        <button type="button" class="btn btn-small btn-secondary font-size-btn" data-target="quote" data-size="large">大</button>
+                    </div>
+                    <div class="color-picker-container">
+                        <span class="color-picker-label">字体颜色:</span>
+                        <input type="color" id="quoteColor" class="color-picker" value="#333333">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="authorText">作者</label>
+                    <input type="text" id="authorText" placeholder="例如：老马">
+                    <div class="font-size-controls">
+                        <span class="color-picker-label">字号:</span>
+                        <input type="number" id="authorFontSize" class="font-size-input" value="20" min="10" max="36">
+                        <span class="color-picker-label">px</span>
+                        <button type="button" class="btn btn-small btn-secondary font-size-btn" data-target="author" data-size="small">小</button>
+                        <button type="button" class="btn btn-small btn-secondary font-size-btn active" data-target="author" data-size="medium">中</button>
+                        <button type="button" class="btn btn-small btn-secondary font-size-btn" data-target="author" data-size="large">大</button>
+                    </div>
+                    <div class="color-picker-container">
+                        <span class="color-picker-label">字体颜色:</span>
+                        <input type="color" id="authorColor" class="color-picker" value="#888888">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="headerText">卡片标题</label>
+                    <input type="text" id="headerText" placeholder="例如：每日一句">
+                    <div class="font-size-controls">
+                        <span class="color-picker-label">字号:</span>
+                        <input type="number" id="headerFontSize" class="font-size-input" value="24" min="10" max="36">
+                        <span class="color-picker-label">px</span>
+                        <button type="button" class="btn btn-small btn-secondary font-size-btn" data-target="header" data-size="small">小</button>
+                        <button type="button" class="btn btn-small btn-secondary font-size-btn active" data-target="header" data-size="medium">中</button>
+                        <button type="button" class="btn btn-small btn-secondary font-size-btn" data-target="header" data-size="large">大</button>
+                    </div>
+                    <div class="color-picker-container">
+                        <span class="color-picker-label">字体颜色:</span>
+                        <input type="color" id="headerColor" class="color-picker" value="#333333">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="joinText">左下角文本</label>
+                    <input type="text" id="joinText" placeholder="例如：加入《老马和他的朋友们》知识星球，可查看更多干货、金句">
+                    <div class="font-size-controls">
+                        <span class="color-picker-label">字号:</span>
+                        <input type="number" id="joinFontSize" class="font-size-input" value="16" min="10" max="28">
+                        <span class="color-picker-label">px</span>
+                        <button type="button" class="btn btn-small btn-secondary font-size-btn" data-target="join" data-size="small">小</button>
+                        <button type="button" class="btn btn-small btn-secondary font-size-btn active" data-target="join" data-size="medium">中</button>
+                        <button type="button" class="btn btn-small btn-secondary font-size-btn" data-target="join" data-size="large">大</button>
+                    </div>
+                    <div class="color-picker-container">
+                        <span class="color-picker-label">字体颜色:</span>
+                        <input type="color" id="joinColor" class="color-picker" value="#ff2e63">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="logoUpload">Logo上传</label>
+                    <div class="file-upload">
+                        <div class="file-preview" id="logoPreview">
+                            <i class="fas fa-image" style="color: #ddd; font-size: 1.5rem;"></i>
+                        </div>
+                        <label for="logoFile" class="file-upload-btn">选择图片</label>
+                        <input type="file" id="logoFile" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>卡片比例</label>
+                    <div class="ratio-selector">
+                        <button type="button" class="ratio-option active" data-ratio="1:1">1:1</button>
+                        <button type="button" class="ratio-option" data-ratio="4:3">4:3</button>
+                        <button type="button" class="ratio-option" data-ratio="3:4">3:4</button>
+                        <button type="button" class="ratio-option" data-ratio="16:9">16:9</button>
+                        <button type="button" class="ratio-option" data-ratio="9:16">9:16</button>
+                        <button type="button" class="ratio-option" data-ratio="custom">自定义</button>
+                    </div>
+                    <div class="ratio-custom" style="display: none;">
+                        <input type="number" id="ratioWidth" value="1" min="1" max="100">
+                        <span>:</span>
+                        <input type="number" id="ratioHeight" value="1" min="1" max="100">
+                        <button type="button" class="btn btn-small btn-secondary" id="applyRatioBtn">应用</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>背景颜色</label>
+                    <div class="color-options">
+                        <div class="color-option active" style="background-color: #fff5f7;" data-color="#fff5f7" data-text="#333333"></div>
+                        <div class="color-option" style="background-color: #e9ecef;" data-color="#e9ecef" data-text="#212529"></div>
+                        <div class="color-option" style="background-color: #dee2e6;" data-color="#dee2e6" data-text="#212529"></div>
+                        <div class="color-option" style="background-color: #4361ee;" data-color="#4361ee" data-text="#ffffff"></div>
+                        <div class="color-option" style="background-color: #3a0ca3;" data-color="#3a0ca3" data-text="#ffffff"></div>
+                        <div class="color-option" style="background-color: #4cc9f0;" data-color="#4cc9f0" data-text="#212529"></div>
+                        <div class="color-option" style="background-color: #f72585;" data-color="#f72585" data-text="#ffffff"></div>
+                        <div class="color-option" style="background-color: #7209b7;" data-color="#7209b7" data-text="#ffffff"></div>
+                        <div class="color-option" style="background-color: #4d908e;" data-color="#4d908e" data-text="#ffffff"></div>
+                        <div class="color-option" style="background-color: #277da1;" data-color="#277da1" data-text="#ffffff"></div>
+                    </div>
+                </div>
+
+                <div class="buttons-group">
+                    <button id="generateBtn" class="btn">
+                        <i class="fas fa-magic"></i> 生成卡片
+                    </button>
+                    <button id="resetBtn" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> 重置
+                    </button>
+                </div>
+            </div>
+
+            <!-- 右侧预览区域 -->
+            <div class="preview-section">
+                <div class="card-preview">
+                    <div class="quote-card" id="quoteCard">
+                        <div class="card-inner">
+                            <div class="card-header">
+                                <div class="card-header-text" id="previewHeader">每日一句</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="quote-text" id="previewQuote">这个世界上，有没有天上掉馅饼的事儿？大概率是没有的。如果有，那么大概率是想砸死你。</div>
+                                <div class="quote-author" id="previewAuthor">—— 老马</div>
+                                <img class="card-logo" id="previewLogo" style="display: none;">
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-join-text" id="previewJoin">加入《老马和他的朋友们》知识星球，可查看更多干货、金句</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons-group" style="justify-content: center;">
+                    <button id="downloadBtn" class="btn">
+                        <i class="fas fa-download"></i> 下载图片
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入html2canvas库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <script>
+        /**
+         * 每日一句卡片生成器 - 模块化实现
+         * 将功能拆分为独立模块，提高代码可维护性和可读性
+         */
+        const QuoteCardGenerator = (function() {
+            // 配置常量
+            /**
+             * 全局配置对象
+             * 包含应用的所有默认设置，如内容、颜色、字体大小等
+             * 修改这里的值会影响整个应用的默认行为
+             */
+            const CONFIG = {
+                /**
+                 * 默认内容配置
+                 * 定义所有文本字段的默认值
+                 */
+                defaultContent: {
+                    quote: '这提前布局的好处，不慌，游刃有余。人生没有一帆顺风的，做好B计划，很有必要，副业是主业的B计划。',
+                    author: '—— 小路',
+                    header: '每日一句',
+                    join: '加入《行动·AI副业·写作赚钱（免费）》知识星球，可查看更多干货'
+                },
+                
+                /**
+                 * 默认颜色配置
+                 * 定义卡片的背景色和默认文本颜色
+                 */
+                defaultColors: {
+                    background: '#fff5f7', // 卡片背景色
+                    text: '#333333'        // 默认文本颜色
+                },
+                
+                /**
+                 * 字体大小预设配置
+                 * 为每个文本元素定义小、中、大三种尺寸
+                 * 单位：像素(px)
+                 */
+                fontSizePresets: {
+                    quote: { small: 24, medium: 28, large: 32 },    // 金句字号
+                    author: { small: 16, medium: 20, large: 24 },    // 作者字号
+                    header: { small: 20, medium: 24, large: 28 },    // 标题字号
+                    join: { small: 14, medium: 16, large: 18 }       // 加入文本字号
+                },
+                
+                /**
+                 * 默认字体颜色配置
+                 * 为每个文本元素定义默认颜色
+                 * 格式：十六进制颜色代码
+                 */
+                defaultFontColors: {
+                    quote: '#333333',    // 金句颜色
+                    author: '#888888',   // 作者颜色
+                    header: '#333333',   // 标题颜色
+                    join: '#ff2e63'      // 加入文本颜色
+                },
+                
+                /**
+                 * 默认比例配置
+                 * 定义卡片的默认宽高比
+                 */
+                defaultRatio: '1:1'
+            };
+            
+            /**
+             * DOM元素缓存对象
+             * 存储所有需要操作的DOM元素引用，避免重复查询DOM
+             * 在initElements函数中初始化
+             */
+            const elements = {
+                inputs: {},         // 所有输入元素（文本框、文本域等）
+                previews: {},       // 所有预览元素（标题、内容、页脚等）
+                controls: {},       // 所有控制元素（按钮、颜色选项等）
+                fontSizeInputs: {}, // 字体大小输入框
+                colorPickers: {},   // 颜色选择器
+                ratioControls: {}   // 比例控制元素
+            };
+            
+            /**
+             * 应用状态对象
+             * 存储应用的当前状态，包括颜色、字体大小、自定义设置等
+             * 这些状态会影响UI的渲染和行为
+             */
+            const state = {
+                /**
+                 * 当前颜色设置
+                 * 存储当前选中的背景色和文本颜色
+                 */
+                currentBgColor: CONFIG.defaultColors.background,  // 当前背景颜色
+                currentTextColor: CONFIG.defaultColors.text,      // 当前文本颜色
+                
+                /**
+                 * 字体大小预设选择
+                 * 存储每个文本元素当前选中的字体大小预设（small/medium/large）
+                 */
+                fontSizes: {
+                    quote: 'medium',   // 金句字体大小预设
+                    author: 'medium',  // 作者字体大小预设
+                    header: 'medium',  // 标题字体大小预设
+                    join: 'medium'     // 加入文本字体大小预设
+                },
+                
+                /**
+                 * 自定义字体大小设置
+                 * 存储每个文本元素的具体字体大小值（像素）
+                 * 可以通过数字输入框自定义
+                 */
+                customFontSizes: {
+                    quote: CONFIG.fontSizePresets.quote.medium,
+                    author: CONFIG.fontSizePresets.author.medium,
+                    header: CONFIG.fontSizePresets.header.medium,
+                    join: CONFIG.fontSizePresets.join.medium
+                },
+                
+                /**
+                 * 自定义字体颜色设置
+                 * 存储每个文本元素的具体颜色值
+                 * 可以通过颜色选择器自定义
+                 */
+                customFontColors: { ...CONFIG.defaultFontColors },
+                
+                /**
+                 * 卡片比例设置
+                 * 存储当前选中的卡片宽高比
+                 */
+                currentRatio: CONFIG.defaultRatio,
+                
+                /**
+                 * 自定义比例设置
+                 * 存储用户自定义的宽高比值
+                 */
+                customRatio: {
+                    width: 1,
+                    height: 1
+                },
+                
+                /**
+                 * Logo设置
+                 * 存储用户上传的Logo图片URL
+                 */
+                logoUrl: null
+            };
+            
+            /**
+             * 初始化DOM元素引用
+             * 获取页面中所有需要操作的DOM元素，并存储在elements对象中
+             * 这样可以避免重复查询DOM，提高性能
+             */
+            function initElements() {
+                // 输入元素 - 用户可编辑的文本输入框
+                elements.inputs.quoteText = document.getElementById('quoteText');       // 金句输入框
+                elements.inputs.authorText = document.getElementById('authorText');     // 作者输入框
+                elements.inputs.headerText = document.getElementById('headerText');     // 标题输入框
+                elements.inputs.joinText = document.getElementById('joinText');         // 加入文本输入框
+                elements.inputs.logoFile = document.getElementById('logoFile');         // Logo文件输入框
+                
+                // 控制元素 - 按钮和交互控件
+                elements.controls.generateBtn = document.getElementById('generateBtn');     // 生成卡片按钮
+                elements.controls.resetBtn = document.getElementById('resetBtn');           // 重置按钮
+                elements.controls.downloadBtn = document.getElementById('downloadBtn');     // 下载按钮
+                elements.controls.colorOptions = document.querySelectorAll('.color-option'); // 颜色选项列表
+                elements.controls.fontSizeBtns = document.querySelectorAll('.font-size-btn'); // 字体大小按钮
+                elements.controls.logoPreview = document.getElementById('logoPreview');     // Logo预览容器
+                
+                // 字号输入框 - 用于自定义各部分文本的字体大小
+                elements.fontSizeInputs.quote = document.getElementById('quoteFontSize');     // 金句字体大小输入框
+                elements.fontSizeInputs.author = document.getElementById('authorFontSize');   // 作者字体大小输入框
+                elements.fontSizeInputs.header = document.getElementById('headerFontSize');   // 标题字体大小输入框
+                elements.fontSizeInputs.join = document.getElementById('joinFontSize');       // 加入文本字体大小输入框
+                
+                // 颜色选择器 - 用于自定义各部分文本的颜色
+                elements.colorPickers.quote = document.getElementById('quoteColor');         // 金句颜色选择器
+                elements.colorPickers.author = document.getElementById('authorColor');       // 作者颜色选择器
+                elements.colorPickers.header = document.getElementById('headerColor');       // 标题颜色选择器
+                elements.colorPickers.join = document.getElementById('joinColor');           // 加入文本颜色选择器
+                
+                // 比例控制元素 - 用于设置卡片的宽高比
+                elements.ratioControls.options = document.querySelectorAll('.ratio-option');  // 比例选项按钮
+                elements.ratioControls.customContainer = document.querySelector('.ratio-custom'); // 自定义比例容器
+                elements.ratioControls.widthInput = document.getElementById('ratioWidth');    // 宽度输入框
+                elements.ratioControls.heightInput = document.getElementById('ratioHeight');  // 高度输入框
+                elements.ratioControls.applyBtn = document.getElementById('applyRatioBtn');  // 应用比例按钮
+                
+                // 预览元素 - 卡片预览区域的各个组件
+                elements.previews.quoteCard = document.getElementById('quoteCard');          // 整个卡片容器
+                elements.previews.cardInner = elements.previews.quoteCard.querySelector('.card-inner'); // 卡片内部容器
+                elements.previews.header = document.getElementById('previewHeader');         // 预览区标题
+                elements.previews.quote = document.getElementById('previewQuote');           // 预览区金句
+                elements.previews.author = document.getElementById('previewAuthor');         // 预览区作者
+                elements.previews.join = document.getElementById('previewJoin');             // 预览区加入文本
+                elements.previews.logo = document.getElementById('previewLogo');             // 预览区Logo
+            }
+        
+            /**
+             * 防抖函数 - 减少频繁触发事件
+             * @param {Function} fn - 要执行的函数
+             * @param {number} delay - 延迟时间(毫秒)
+             * @returns {Function} - 防抖处理后的函数
+             */
+            function debounce(fn, delay = 300) {
+                let timer;
+                return function(...args) {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => fn.apply(this, args), delay);
+                };
+            }
+            
+            /**
+             * 更新卡片颜色
+             * 根据当前状态中的颜色设置更新卡片预览区域的背景色和文本颜色
+             * 在颜色选择器值变化时调用
+             */
+            function updateCardColors() {
+                elements.previews.quoteCard.style.backgroundColor = state.currentBgColor; // 设置卡片背景色
+                elements.previews.cardInner.style.color = state.currentTextColor;         // 设置卡片文本颜色
+            }
+            
+            /**
+             * 根据预设更新数字输入框的值
+             * 当用户选择字体大小预设（小/中/大）时，更新对应的数字输入框的值
+             * @param {string} target - 目标元素类型
+             * @param {string} size - 尺寸类型(small/medium/large)
+             */
+            function updateFontSizeInputs(target, size) {
+                // 从配置中获取预设字体大小
+                const fontSize = CONFIG.fontSizePresets[target][size];
+                
+                // 更新输入框值
+                elements.fontSizeInputs[target].value = fontSize;
+                
+                // 更新状态
+                state.customFontSizes[target] = fontSize;
+            }
+            
+            /**
+             * 应用字体大小和颜色到预览
+             * 将当前状态中的自定义字体大小和颜色应用到预览区域的各个元素
+             * 在字体大小或颜色变化时调用
+             */
+            function applyFontSizes() {
+                // 应用自定义字号 - 将状态中的字体大小值应用到预览元素
+                elements.previews.quote.style.fontSize = `${state.customFontSizes.quote}px`;     // 设置金句字体大小
+                elements.previews.author.style.fontSize = `${state.customFontSizes.author}px`;   // 设置作者字体大小
+                elements.previews.header.style.fontSize = `${state.customFontSizes.header}px`;   // 设置标题字体大小
+                elements.previews.join.style.fontSize = `${state.customFontSizes.join}px`;       // 设置加入文本字体大小
+                
+                // 应用自定义颜色 - 将状态中的颜色值应用到预览元素
+                elements.previews.quote.style.color = state.customFontColors.quote;             // 设置金句颜色
+                elements.previews.author.style.color = state.customFontColors.author;           // 设置作者颜色
+                elements.previews.header.style.color = state.customFontColors.header;           // 设置标题颜色
+                elements.previews.join.style.color = state.customFontColors.join;               // 设置加入文本颜色
+            }
+            
+            /**
+             * 应用卡片比例
+             * 根据当前状态中的比例设置更新卡片预览区域的宽高比
+             * 在比例选择器值变化时调用
+             */
+            function applyCardRatio() {
+                let ratio;
+                
+                // 如果是自定义比例，使用自定义值
+                if (state.currentRatio === 'custom') {
+                    ratio = `${state.customRatio.width}/${state.customRatio.height}`;
+                } else {
+                    // 否则使用预设比例
+                    ratio = state.currentRatio.replace(':', '/');
+                }
+                
+                // 应用比例到卡片
+                elements.previews.quoteCard.style.aspectRatio = ratio;
+            }
+            
+            /**
+             * 格式化内容，将每行转换为带<br>的HTML
+             * 用于将文本框中的换行符转换为HTML中的换行标签
+             * 在更新预览内容时调用
+             * 
+             * @param {string} content - 原始文本内容
+             * @returns {string} - 转换后的HTML格式内容
+             */
+            function formatContent(content) {
+                if (!content) return ''; // 如果内容为空，返回空字符串
+                return content.split('\n').join('<br>'); // 将所有换行符替换为<br>标签
+            }
+            
+            /**
+             * 净化输入内容，防止XSS攻击
+             * 转义HTML特殊字符，确保用户输入的内容不会被解释为HTML代码
+             * 在更新预览内容前调用
+             * 
+             * @param {string} input - 用户输入的原始内容
+             * @returns {string} - 经过安全处理的内容
+             */
+            function sanitizeInput(input) {
+                if (!input) return ''; // 如果输入为空，返回空字符串
+                return input
+                    .replace(/&/g, '&amp;')   // 替换 & 为 &amp;
+                    .replace(/</g, '&lt;')    // 替换 < 为 &lt;
+                    .replace(/>/g, '&gt;')    // 替换 > 为 &gt;
+                    .replace(/"/g, '&quot;')  // 替换 " 为 &quot;
+                    .replace(/'/g, '&#039;');  // 替换 ' 为 &#039;
+            }
+            
+            /**
+             * 初始化事件监听
+             * 为所有交互元素添加事件监听器，实现用户交互功能
+             * 在应用初始化时调用
+             */
+            function initEventListeners() {
+                // 颜色选择事件 - 处理背景颜色和文本颜色的选择
+                elements.controls.colorOptions.forEach(option => {
+                    option.addEventListener('click', () => {
+                        // 移除所有颜色选项的active类，重置选中状态
+                        elements.controls.colorOptions.forEach(opt => opt.classList.remove('active'));
+                        // 添加active类到当前选中的颜色选项
+                        option.classList.add('active');
+                        // 更新当前颜色状态
+                        state.currentBgColor = option.dataset.color; // 从data-color属性获取背景色
+                        state.currentTextColor = option.dataset.text; // 从data-text属性获取文本色
+                        // 更新预览卡片颜色
+                        updateCardColors();
+                    });
+                });
+                
+                // 字体大小选择事件 - 处理各文本元素的字体大小预设选择
+                elements.controls.fontSizeBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const target = btn.dataset.target; // 获取目标元素类型（金句、作者等）
+                        const size = btn.dataset.size;     // 获取字体大小预设（small/medium/large）
+                        
+                        // 更新当前选中的按钮状态 - 同一组按钮中只能有一个处于选中状态
+                        document.querySelectorAll(`.font-size-btn[data-target="${target}"]`).forEach(b => {
+                            b.classList.remove('active'); // 移除同组所有按钮的active类
+                        });
+                        btn.classList.add('active'); // 为当前点击的按钮添加active类
+                        
+                        // 保存字体大小设置到应用状态
+                        state.fontSizes[target] = size;
+                        
+                        // 根据预设更新数字输入框的值
+                        updateFontSizeInputs(target, size);
+                        
+                        // 应用字体大小
+                        applyFontSizes();
+                    });
+                });
+                
+                // 初始化字号输入框事件
+                initFontSizeInputEvents();
+                
+                // 初始化字体颜色选择器事件
+                initFontColorPickerEvents();
+                
+                // 初始化比例选择器事件
+                initRatioSelectorEvents();
+                
+                // 初始化Logo上传事件
+                initLogoUploadEvents();
+                
+                // 初始化文本输入事件
+                initTextInputEvents();
+            }
+        
+            /**
+             * 初始化数字字号输入框事件
+             */
+            function initFontSizeInputEvents() {
+                // 遍历所有字号输入框
+                Object.entries(elements.fontSizeInputs).forEach(([target, input]) => {
+                    const defaultSize = CONFIG.fontSizePresets[target].medium;
+                    
+                    // 使用防抖函数减少频繁更新
+                    const debouncedUpdate = debounce((value) => {
+                        // 验证输入值
+                        if (isNaN(value) || value < 8 || value > 72) {
+                            // 恢复到默认值
+                            input.value = defaultSize;
+                            state.customFontSizes[target] = defaultSize;
+                            alert('字体大小必须在8-72像素之间');
+                        } else {
+                            // 更新自定义字号设置
+                            state.customFontSizes[target] = value;
+                        }
+                        
+                        // 应用字体大小
+                        applyFontSizes();
+                    }, 300);
+                    
+                    // 监听输入事件
+                    input.addEventListener('input', () => {
+                        const value = parseInt(input.value) || defaultSize;
+                        debouncedUpdate(value);
+                    });
+                });
+            }
+            
+            /**
+             * 初始化字体颜色选择器事件
+             */
+            function initFontColorPickerEvents() {
+                // 遍历所有字体颜色选择器
+                Object.entries(elements.colorPickers).forEach(([target, picker]) => {
+                    picker.addEventListener('input', () => {
+                        // 更新自定义颜色设置
+                        state.customFontColors[target] = picker.value;
+                        
+                        // 应用自定义颜色
+                        applyFontSizes(); // 已合并颜色应用功能
+                    });
+                });
+            }
+            
+            /**
+             * 初始化比例选择器事件
+             */
+            function initRatioSelectorEvents() {
+                // 比例选项点击事件
+                elements.ratioControls.options.forEach(option => {
+                    option.addEventListener('click', () => {
+                        // 移除所有比例选项的active类
+                        elements.ratioControls.options.forEach(opt => opt.classList.remove('active'));
+                        // 添加active类到当前选中的比例选项
+                        option.classList.add('active');
+                        
+                        // 获取选中的比例
+                        const ratio = option.dataset.ratio;
+                        state.currentRatio = ratio;
+                        
+                        // 如果选择了自定义比例，显示自定义比例输入框
+                        if (ratio === 'custom') {
+                            elements.ratioControls.customContainer.style.display = 'flex';
+                        } else {
+                            elements.ratioControls.customContainer.style.display = 'none';
+                            // 应用选中的比例
+                            applyCardRatio();
+                        }
+                    });
+                });
+                
+                // 应用自定义比例按钮点击事件
+                elements.ratioControls.applyBtn.addEventListener('click', () => {
+                    // 获取自定义宽高比值
+                    const width = parseInt(elements.ratioControls.widthInput.value) || 1;
+                    const height = parseInt(elements.ratioControls.heightInput.value) || 1;
+                    
+                    // 更新自定义比例状态
+                    state.customRatio.width = width;
+                    state.customRatio.height = height;
+                    
+                    // 应用自定义比例
+                    applyCardRatio();
+                });
+            }
+            
+            /**
+             * 初始化Logo上传事件
+             */
+            function initLogoUploadEvents() {
+                elements.inputs.logoFile.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        // 检查文件类型
+                        if (!file.type.match('image.*')) {
+                            alert('请选择图片文件');
+                            return;
+                        }
+                        
+                        // 创建FileReader读取文件
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            // 更新Logo预览
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            elements.controls.logoPreview.innerHTML = '';
+                            elements.controls.logoPreview.appendChild(img);
+                            
+                            // 更新状态和预览区Logo
+                            state.logoUrl = e.target.result;
+                            elements.previews.logo.src = e.target.result;
+                            elements.previews.logo.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+            
+            /**
+             * 初始化文本输入事件
+             */
+            function initTextInputEvents() {
+                // 金句输入事件
+                elements.inputs.quoteText.addEventListener('input', debounce(() => {
+                    updateCardContent();
+                }, 300));
+                
+                // 作者输入事件
+                elements.inputs.authorText.addEventListener('input', debounce(() => {
+                    updateCardContent();
+                }, 300));
+                
+                // 标题输入事件
+                elements.inputs.headerText.addEventListener('input', debounce(() => {
+                    updateCardContent();
+                }, 300));
+                
+                // 加入文本输入事件
+                elements.inputs.joinText.addEventListener('input', debounce(() => {
+                    updateCardContent();
+                }, 300));
+            }
+            
+            /**
+             * 初始化应用
+             * 应用的主入口函数，负责初始化所有组件和功能
+             * 在页面加载完成后调用
+             */
+            function init() {
+                // 步骤1: 初始化DOM元素引用 - 获取所有需要操作的DOM元素
+                initElements();
+                
+                // 步骤2: 初始化事件监听 - 为颜色选择器、字体大小按钮等添加事件监听器
+                initEventListeners();
+                
+                // 步骤3: 初始化按钮事件 - 为生成卡片、下载图片等按钮添加事件监听器
+                initButtonEvents();
+                
+                // 步骤4: 填充默认内容 - 将默认内容填充到输入框和预览区域
+                fillDefaultContent();
+                
+                // 步骤5: 更新卡片内容 - 根据输入框内容更新预览区域
+                updateCardContent();
+                
+                // 步骤6: 更新卡片颜色 - 应用默认颜色设置
+                updateCardColors();
+                
+                // 步骤7: 更新字体大小 - 应用默认字体大小设置
+                applyFontSizes();
+                
+                // 步骤8: 应用默认比例 - 设置卡片默认宽高比
+                applyCardRatio();
+            }
+            
+            /**
+             * 填充默认内容
+             * 将配置中的默认内容填充到输入框和预览区域
+             */
+            function fillDefaultContent() {
+                // 填充输入框
+                elements.inputs.quoteText.value = CONFIG.defaultContent.quote;
+                elements.inputs.authorText.value = CONFIG.defaultContent.author;
+                elements.inputs.headerText.value = CONFIG.defaultContent.header;
+                elements.inputs.joinText.value = CONFIG.defaultContent.join;
+                
+                // 填充预览区域
+                updateCardContent();
+            }
+            
+            /**
+             * 更新卡片内容
+             * 根据输入框内容更新预览区域的文本内容
+             */
+            function updateCardContent() {
+                // 获取输入框内容
+                const quoteText = elements.inputs.quoteText.value || CONFIG.defaultContent.quote;
+                const authorText = elements.inputs.authorText.value || CONFIG.defaultContent.author;
+                const headerText = elements.inputs.headerText.value || CONFIG.defaultContent.header;
+                const joinText = elements.inputs.joinText.value || CONFIG.defaultContent.join;
+                
+                // 净化输入内容，防止XSS攻击
+                const safeQuoteText = sanitizeInput(quoteText);
+                const safeAuthorText = sanitizeInput(authorText);
+                const safeHeaderText = sanitizeInput(headerText);
+                const safeJoinText = sanitizeInput(joinText);
+                
+                // 更新预览区域内容
+                elements.previews.quote.innerHTML = formatContent(safeQuoteText);
+                elements.previews.author.textContent = safeAuthorText;
+                elements.previews.header.textContent = safeHeaderText;
+                elements.previews.join.textContent = safeJoinText;
+            }
+            
+            /**
+             * 生成卡片
+             * 更新预览内容、卡片颜色和字体大小
+             */
+            function generateCard() {
+                // 更新卡片内容
+                updateCardContent();
+                
+                // 更新卡片颜色
+                updateCardColors();
+                
+                // 更新字体大小
+                applyFontSizes();
+            }
+            
+            /**
+             * 下载卡片
+             * 使用html2canvas将预览区域转换为图片并下载
+             */
+            function downloadCard() {
+                // 显示加载状态
+                elements.controls.downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 生成中...';
+                elements.controls.downloadBtn.disabled = true;
+                
+                // 使用html2canvas将预览区域转换为图片
+                html2canvas(elements.previews.quoteCard, {
+                    scale: 2, // 提高图片质量
+                    backgroundColor: null, // 透明背景
+                    logging: false, // 关闭日志
+                    allowTaint: true, // 允许跨域图片
+                    useCORS: true // 使用CORS加载跨域图片
+                }).then(canvas => {
+                    // 创建下载链接
+                    const link = document.createElement('a');
+                    link.download = '每日一句-' + new Date().getTime() + '.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    
+                    // 恢复按钮状态
+                    elements.controls.downloadBtn.innerHTML = '<i class="fas fa-download"></i> 下载图片';
+                    elements.controls.downloadBtn.disabled = false;
+                }).catch(err => {
+                    console.error('下载图片失败:', err);
+                    alert('下载图片失败，请重试');
+                    
+                    // 恢复按钮状态
+                    elements.controls.downloadBtn.innerHTML = '<i class="fas fa-download"></i> 下载图片';
+                    elements.controls.downloadBtn.disabled = false;
+                });
+            }
+            
+            /**
+             * 初始化按钮事件
+             * 为生成卡片和下载图片按钮添加事件监听器
+             */
+            function initButtonEvents() {
+                // 生成卡片按钮点击事件
+                elements.controls.generateBtn.addEventListener('click', generateCard);
+                
+                // 下载图片按钮点击事件
+                elements.controls.downloadBtn.addEventListener('click', downloadCard);
+                
+                // 重置按钮点击事件
+                elements.controls.resetBtn.addEventListener('click', resetForm);
+            }
+            
+            /**
+             * 重置表单
+             * 将所有输入框、颜色选择和字体大小重置为默认值
+             */
+            function resetForm() {
+                // 重置输入框
+                elements.inputs.quoteText.value = CONFIG.defaultContent.quote;
+                elements.inputs.authorText.value = CONFIG.defaultContent.author;
+                elements.inputs.headerText.value = CONFIG.defaultContent.header;
+                elements.inputs.joinText.value = CONFIG.defaultContent.join;
+                
+                // 重置颜色选择
+                elements.controls.colorOptions.forEach(option => {
+                    option.classList.remove('active');
+                    if (option.dataset.color === CONFIG.defaultColors.background) {
+                        option.classList.add('active');
+                    }
+                });
+                
+                // 重置状态中的颜色
+                state.currentBgColor = CONFIG.defaultColors.background;
+                state.currentTextColor = CONFIG.defaultColors.text;
+                
+                // 重置字体大小按钮
+                elements.controls.fontSizeBtns.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.size === 'medium') {
+                        btn.classList.add('active');
+                    }
+                });
+                
+                // 重置字体大小状态
+                Object.keys(state.fontSizes).forEach(key => {
+                    state.fontSizes[key] = 'medium';
+                    state.customFontSizes[key] = CONFIG.fontSizePresets[key].medium;
+                });
+                
+                // 重置字体大小输入框
+                elements.fontSizeInputs.quote.value = CONFIG.fontSizePresets.quote.medium;
+                elements.fontSizeInputs.author.value = CONFIG.fontSizePresets.author.medium;
+                elements.fontSizeInputs.header.value = CONFIG.fontSizePresets.header.medium;
+                elements.fontSizeInputs.join.value = CONFIG.fontSizePresets.join.medium;
+                
+                // 重置字体颜色
+                Object.entries(CONFIG.defaultFontColors).forEach(([key, value]) => {
+                    state.customFontColors[key] = value;
+                    elements.colorPickers[key].value = value;
+                });
+                
+                // 重置比例选择
+                elements.ratioControls.options.forEach(option => {
+                    option.classList.remove('active');
+                    if (option.dataset.ratio === CONFIG.defaultRatio) {
+                        option.classList.add('active');
+                    }
+                });
+                
+                // 隐藏自定义比例输入框
+                elements.ratioControls.customContainer.style.display = 'none';
+                
+                // 重置比例状态
+                state.currentRatio = CONFIG.defaultRatio;
+                state.customRatio = { width: 1, height: 1 };
+                
+                // 重置比例输入框
+                elements.ratioControls.widthInput.value = 1;
+                elements.ratioControls.heightInput.value = 1;
+                
+                // 重置Logo
+                state.logoUrl = null;
+                elements.controls.logoPreview.innerHTML = '<i class="fas fa-image" style="color: #ddd; font-size: 1.5rem;"></i>';
+                elements.previews.logo.style.display = 'none';
+                elements.inputs.logoFile.value = '';
+                
+                // 更新预览
+                updateCardContent();
+                updateCardColors();
+                applyFontSizes();
+                applyCardRatio();
+            }
+            
+            // 返回公共方法
+            return {
+                init: init
+            };
+        })();
+        
+        // 页面加载完成后初始化应用
+        document.addEventListener('DOMContentLoaded', function() {
+            QuoteCardGenerator.init();
+        });
+    </script>
+</body>
+</html>
