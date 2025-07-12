@@ -307,7 +307,7 @@
         
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
             margin-bottom: 3rem;
         }
@@ -651,6 +651,49 @@
             color: var(--gray);
         }
         
+        .update-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-bottom: 3px;
+        }
+        
+        .update-type.feature {
+            background-color: rgba(76, 201, 240, 0.1);
+            color: #4cc9f0;
+        }
+        
+        .update-type.improvement {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+        
+        .update-type.bugfix {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+        
+        .update-type.content {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+        
+        .updates-loading {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            padding: 10px;
+        }
+        
+        .update-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
         /* 主内容和侧边栏布局 */
         main {
             display: flex;
@@ -677,6 +720,10 @@
                 width: 100%;
                 position: static; /* 取消粘性定位 */
                 margin-top: 20px;
+            }
+            
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
@@ -924,6 +971,9 @@
                     <p>👋 你好！我是小路，一名热爱技术和内容创作的开发者。</p>
                     <p>🛠️ 这个工具箱是我为内容创作者打造的实用工具集合，希望能帮助你提高创作效率。</p>
                     <p>💡 如果你有任何建议或者想法，欢迎与我联系！</p>
+                    <p>📱 微信号：<strong>xiaoluv12</strong></p>
+                    <p>🌟 <a href="https://t.zsxq.com/17wTksRxX" target="_blank" style="color: var(--primary); text-decoration: none;">知识星球</a></p>
+                    <p>📝 公众号：<a href="https://mp.weixin.qq.com/s/rmEHqGeNgRIQ0_Jzqx0jiA" target="_blank" style="color: var(--primary); text-decoration: none;">小路成长笔记</a></p>
                 </div>
                 <div class="profile-footer">
                     <a href="#" class="social-link"><i class="fab fa-github"></i></a>
@@ -934,20 +984,12 @@
             
             <div class="recent-updates">
                 <h3>最近更新</h3>
-                <ul class="updates-list">
-                    <li>
-                        <span class="update-date">2025-06-15</span>
-                        <span class="update-text">新增内容卡片生成器工具</span>
-                    </li>
-                    <li>
-                        <span class="update-date">2025-06-10</span>
-                        <span class="update-text">优化内容转换器功能</span>
-                    </li>
-                    <li>
-                        <span class="update-date">2025-06-05</span>
-                        <span class="update-text">工具箱正式上线</span>
-                    </li>
+                <ul class="updates-list" id="updates-list">
+                    <!-- 更新内容将通过JavaScript动态加载 -->
                 </ul>
+                <div class="updates-loading" id="updates-loading" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i> 加载中...
+                </div>
             </div>
         </div>
     </main>
@@ -1021,6 +1063,81 @@
             }
         }
         
+        // 从JSON文件加载更新数据
+        async function loadUpdates() {
+            const loadingElement = document.getElementById('updates-loading');
+            const updatesListElement = document.getElementById('updates-list');
+            
+            try {
+                loadingElement.style.display = 'block';
+                const response = await fetch('updates.json');
+                if (!response.ok) {
+                    throw new Error('无法加载更新数据');
+                }
+                const updates = await response.json();
+                renderUpdates(updates.slice(0, 5)); // 只显示最近5条更新
+            } catch (error) {
+                console.error('加载更新数据失败:', error);
+                updatesListElement.innerHTML = '<li><span class="update-text">加载更新数据失败</span></li>';
+            } finally {
+                loadingElement.style.display = 'none';
+            }
+        }
+        
+        // 渲染更新列表
+        function renderUpdates(updates) {
+            const updatesListElement = document.getElementById('updates-list');
+            updatesListElement.innerHTML = '';
+            
+            const typeIcons = {
+                'feature': 'fas fa-plus-circle',
+                'improvement': 'fas fa-arrow-up',
+                'bugfix': 'fas fa-bug',
+                'content': 'fas fa-edit'
+            };
+            
+            const typeLabels = {
+                'feature': '新功能',
+                'improvement': '优化',
+                'bugfix': '修复',
+                'content': '内容'
+            };
+            
+            updates.forEach(update => {
+                const listItem = document.createElement('li');
+                listItem.className = 'update-item';
+                
+                const typeIcon = typeIcons[update.type] || 'fas fa-circle';
+                const typeLabel = typeLabels[update.type] || '更新';
+                
+                listItem.innerHTML = `
+                    <span class="update-type ${update.type}">
+                        <i class="${typeIcon}"></i>
+                        ${typeLabel}
+                    </span>
+                    <span class="update-date">${update.date}</span>
+                    <span class="update-text">${update.title}</span>
+                `;
+                
+                // 添加点击事件，显示详细描述
+                listItem.addEventListener('click', function() {
+                    const existingDesc = listItem.querySelector('.update-description');
+                    if (existingDesc) {
+                        existingDesc.remove();
+                    } else {
+                        const descElement = document.createElement('div');
+                        descElement.className = 'update-description';
+                        descElement.style.cssText = 'font-size: 0.8rem; color: var(--gray); margin-top: 5px; padding: 5px; background: rgba(0,0,0,0.02); border-radius: 4px; cursor: default;';
+                        descElement.textContent = update.description;
+                        listItem.appendChild(descElement);
+                    }
+                });
+                
+                listItem.style.cursor = 'pointer';
+                updatesListElement.appendChild(listItem);
+            });
+        }
+        
         // 渲染工具卡片
         function renderTools(tools) {
             const toolsContainer = document.getElementById('tools-container');
@@ -1059,6 +1176,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             // 加载工具数据
             loadTools();
+            // 加载最近更新
+            loadUpdates();
             
             // 搜索功能
             document.getElementById('search-input').addEventListener('input', function(e) {

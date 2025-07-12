@@ -1,0 +1,51 @@
+[
+    {
+        "date": "2025-07-12",
+        "title": "最近更新功能优化",
+        "description": "实现动态加载更新内容，支持多种更新类型标签和交互功能",
+        "type": "improvement",
+        "tool": "homepage"
+    },
+    {
+        "date": "2025-07-11",
+        "title": "PDF水印工具增强",
+        "description": "新增强大的水印移除功能，支持文字匹配、位置定位和自动检测",
+        "type": "feature",
+        "tool": "pdf-watermark"
+    },
+    {
+        "date": "2025-07-10",
+        "title": "首页布局优化",
+        "description": "工具展示改为一行三个，提升视觉效果和空间利用率",
+        "type": "improvement",
+        "tool": "homepage"
+    },
+    {
+        "date": "2025-07-09",
+        "title": "中文字体加载优化",
+        "description": "PDF水印工具新增多源字体加载机制，解决中文字体加载失败问题",
+        "type": "bugfix",
+        "tool": "pdf-watermark"
+    },
+    {
+        "date": "2025-07-08",
+        "title": "个人介绍更新",
+        "description": "添加微信号、知识星球和公众号链接，方便用户联系",
+        "type": "content",
+        "tool": "homepage"
+    },
+    {
+        "date": "2025-07-05",
+        "title": "文件加密工具",
+        "description": "集成zip.js库，支持WinZIP AES和PKWare ZipCrypto加密",
+        "type": "feature",
+        "tool": "file-encryptor"
+    },
+    {
+        "date": "2025-07-03",
+        "title": "内容卡片生成器",
+        "description": "新增内容卡片生成器工具，支持多种卡片样式",
+        "type": "feature",
+        "tool": "content-card-generator"
+    }
+]
