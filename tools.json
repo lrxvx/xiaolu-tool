@@ -79,5 +79,41 @@
     "description": "设定购房或购车目标，计算还需多少时间和金钱达成目标，还能换算成奶茶杯数让目标更有趣。",
     "tags": ["买房", "买车", "倒计时", "理财"],
     "url": "tools/house-car-countdown.html"
+  },
+  {
+    "id": "poster-batch-processor",
+    "name": "海报批量处理工具",
+    "shortDesc": "批量合并背景图与前景图生成海报",
+    "icon": "fas fa-images",
+    "description": "专业的海报批量处理工具，支持背景图与多张图片合并，自动居中适配，支持缩放旋转，一键生成高质量海报。",
+    "tags": ["海报", "图片合并", "批量处理", "设计"],
+    "url": "tools/poster-batch-processor.html"
+  },
+  {
+    "id": "image-to-pdf",
+    "name": "图片转PDF工具",
+    "shortDesc": "将多张图片快速转换为PDF文档",
+    "icon": "fas fa-file-pdf",
+    "description": "支持JPG、PNG、GIF、BMP等格式，可拖拽上传多张图片，支持拖拽排序，一键生成PDF文档并下载。",
+    "tags": ["PDF", "图片转换", "批量处理", "文档"],
+    "url": "tools/image-to-pdf.html"
+  },
+  {
+    "id": "file-encryptor",
+    "name": "文件加密工具",
+    "shortDesc": "为PDF/Word/Excel文件添加密码保护",
+    "icon": "fas fa-shield-alt",
+    "description": "支持PDF、Word、Excel文件加密，使用军用级AES-256加密算法，支持批量加密，本地处理确保安全。",
+    "tags": ["加密", "密码保护", "文档安全", "批量处理"],
+    "url": "tools/file-encryptor.html"
+  },
+  {
+    "id": "pdf-watermark",
+    "name": "PDF水印处理工具",
+    "shortDesc": "PDF加水印和去水印专业工具",
+    "icon": "fas fa-stamp",
+    "description": "专业的PDF水印处理工具，支持添加自定义文字水印和移除水印，可调整字体大小、颜色、透明度、旋转角度和位置，支持批量处理。",
+    "tags": ["PDF", "水印", "文档保护", "批量处理", "版权保护"],
+    "url": "tools/pdf-watermark.html"
   }
 ]

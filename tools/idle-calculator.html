@@ -292,12 +292,17 @@
                 <div class="logo-icon">
                     <i class="fas fa-tools"></i>
                 </div>
-                <div class="logo-text">小路<span>工具箱</span></div>
+                <div class="logo-text">内容创作者<span>工具箱</span></div>
             </a>
             <div class="nav-links">
                 <a href="../index.html">首页</a>
-                <a href="#" class="active">牛马计算器</a>
+                <a href="#">所有工具</a>
+                <a href="#">关于</a>
+                <a href="#">联系我们</a>
             </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
@@ -454,6 +459,25 @@
         document.addEventListener('DOMContentLoaded', function() {
             showStatus('请设置薪资信息并开始计算', 'info');
         });
+        
+        // 移动菜单功能
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+        });
     </script>
+
+    <!-- 页脚 -->
+    <footer style="background-color: white; padding: 2rem 5%; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05); margin-top: auto;">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <div style="margin-bottom: 1rem;">
+                <span style="color: var(--gray); margin-right: 2rem;">© 2025 牛马计算器</span>
+                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; margin-right: 1rem; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">技术支持</a>
+                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">问题反馈</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

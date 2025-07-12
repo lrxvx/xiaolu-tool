@@ -1,9 +1,61 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>买房买车倒计时 - 小路工具站</title>
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Free House Car Countdown Calculator | Savings Goal Tracker</title>
+    <meta name="title" content="Free House Car Countdown Calculator | Savings Goal Tracker">
+    <meta name="description" content="Calculate how long it takes to save for a house or car. Free online savings countdown calculator with goal tracking and financial planning tools.">
+    <meta name="keywords" content="house savings calculator, car savings calculator, countdown timer, savings goal tracker, financial planning, money calculator, purchase planner">
+    <meta name="author" content="Xiaolu Tools">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tools.xiaolu.com/tools/house-car-countdown.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.xiaolu.com/tools/house-car-countdown.html">
+    <meta property="og:title" content="Free House Car Countdown Calculator | Savings Goal Tracker">
+    <meta property="og:description" content="Calculate how long it takes to save for a house or car. Free online savings countdown calculator with goal tracking and financial planning.">
+    <meta property="og:image" content="https://tools.xiaolu.com/images/house-car-countdown-og.png">
+    <meta property="og:site_name" content="Xiaolu Tools">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.xiaolu.com/tools/house-car-countdown.html">
+    <meta property="twitter:title" content="Free House Car Countdown Calculator | Savings Goal Tracker">
+    <meta property="twitter:description" content="Calculate how long it takes to save for a house or car. Free online savings countdown calculator with goal tracking.">
+    <meta property="twitter:image" content="https://tools.xiaolu.com/images/house-car-countdown-twitter.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "House Car Countdown Calculator",
+      "description": "Calculate how long it takes to save for a house or car",
+      "url": "https://tools.xiaolu.com/tools/house-car-countdown.html",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Savings goal calculation",
+        "Countdown timer",
+        "Financial planning",
+        "Goal tracking",
+        "Multiple currencies",
+        "Real-time updates",
+        "No registration required",
+        "Privacy-focused"
+      ]
+    }
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -446,14 +498,22 @@
     <header>
         <nav class="navbar">
             <a href="../index.html" class="logo">
-                <i class="fas fa-deer logo-icon"></i>
-                <span class="logo-text">小路<span>工具站</span></span>
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">内容创作者<span>工具箱</span></div>
             </a>
-            <ul class="nav-links">
-                <li><a href="../index.html">首页</a></li>
-                <li><a href="#" class="active">工具</a></li>
-                <li><a href="#">关于</a></li>
-            </ul>
+            
+            <div class="nav-links">
+                <a href="../index.html">首页</a>
+                <a href="#">所有工具</a>
+                <a href="#">关于</a>
+                <a href="#">联系我们</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
@@ -870,6 +930,25 @@
                 });
             });
         });
+        
+        // 移动菜单功能
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+        });
     </script>
+
+    <!-- 页脚 -->
+    <footer style="background-color: white; padding: 2rem 5%; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05); margin-top: auto;">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <div style="margin-bottom: 1rem;">
+                <span style="color: var(--gray); margin-right: 2rem;">© 2025 买房买车倒计时</span>
+                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; margin-right: 1rem; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">技术支持</a>
+                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">问题反馈</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
