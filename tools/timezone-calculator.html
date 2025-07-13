@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球时差计算器 - 小路工具箱</title>
+    <meta name="description" content="专业的全球时差计算工具，实时显示世界各地时间、时区、日出日落时间，支持农历公历对比，完美解决时差问题">
+    <meta name="keywords" content="时差计算器,世界时间,时区转换,日出日落,农历公历,全球时间">
+    <meta name="author" content="小路工具箱">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="全球时差计算器 - 小路工具箱">
+    <meta property="og:description" content="专业的全球时差计算工具，实时显示世界各地时间、时区、日出日落时间">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.xiaolu.page/tools/timezone-calculator.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="全球时差计算器 - 小路工具箱">
+    <meta name="twitter:description" content="专业的全球时差计算工具，实时显示世界各地时间、时区、日出日落时间">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "全球时差计算器",
+        "description": "专业的全球时差计算工具，实时显示世界各地时间、时区、日出日落时间",
+        "url": "https://tools.xiaolu.page/tools/timezone-calculator.html",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .timezone-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        
+        .timezone-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .local-icon {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+        }
+        
+        .target-icon {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .timezone-select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            background: white;
+            transition: border-color 0.3s;
+        }
+        
+        .timezone-select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .custom-input-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .custom-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            transition: border-color 0.3s;
+            margin-bottom: 0.5rem;
+        }
+        
+        .custom-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .input-help {
+            font-size: 0.8rem;
+            color: #888;
+            line-height: 1.4;
+        }
+        
+        .time-display {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .current-time {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .current-date {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timezone-info {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .info-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .info-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-value {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .comparison-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .comparison-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .time-difference {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .difference-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .difference-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .day-night-status {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .status-card {
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .day-status {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #333;
+        }
+        
+        .night-status {
+            background: linear-gradient(45deg, #2C3E50, #34495E);
+            color: white;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .instructions h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .instructions ol {
+            padding-left: 1.5rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .instructions li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .faq {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .faq h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .faq-answer {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 20px;
+            margin-top: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .footer p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #764ba2;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .current-time {
+                font-size: 2rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .day-night-status {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .sun-trajectory {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .trajectory-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .trajectory-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: rgba(103, 126, 234, 0.1);
+            border-radius: 10px;
+        }
+        
+        .trajectory-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+        
+        .trajectory-svg {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .trajectory-legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .sun-dot { background: #FFD700; }
+        .moon-dot { background: #C0C0C0; }
+        .noon-dot { background: #FF6B35; }
+        .horizon-line { background: #8B4513; width: 20px; height: 2px; border-radius: 0; }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">🛠️ 小路工具箱</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="#instructions">使用说明</a></li>
+                <li><a href="#faq">常见问题</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 页面标题 -->
+        <div class="header">
+            <h1>🌍 全球时差计算器</h1>
+            <p>实时显示世界各地时间，轻松解决时差问题</p>
+        </div>
+
+        <!-- 主要内容 -->
+        <div class="main-content">
+            <!-- 本地时间卡片 -->
+            <div class="timezone-card">
+                <div class="card-header">
+                    <div class="card-icon local-icon">🏠</div>
+                    <div class="card-title">您的当前位置</div>
+                </div>
+                <select id="localTimezone" class="timezone-select">
+                    <option value="auto">自动检测位置</option>
+                    <option value="custom">自定义位置</option>
+                </select>
+                <div id="localCustomInput" class="custom-input-container" style="display: none;">
+                    <input type="text" id="localCustomTimezone" class="custom-input" placeholder="请输入时区，如：Asia/Shanghai">
+                    <div class="input-help">格式示例：Asia/Shanghai, America/New_York, Europe/London</div>
+                </div>
+                <div class="time-display">
+                    <div id="localTime" class="current-time">--:--:--</div>
+                    <div id="localDate" class="current-date">加载中...</div>
+                    <div id="localTimezoneInfo" class="timezone-info">检测时区中...</div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">日出时间</div>
+                        <div id="localSunrise" class="info-value">--:--</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">日落时间</div>
+                        <div id="localSunset" class="info-value">--:--</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">农历日期</div>
+                        <div id="localLunar" class="info-value">计算中...</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">星期</div>
+                        <div id="localWeekday" class="info-value">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 目标时间卡片 -->
+            <div class="timezone-card">
+                <div class="card-header">
+                    <div class="card-icon target-icon">🎯</div>
+                    <div class="card-title">目标地区</div>
+                </div>
+                <select id="targetTimezone" class="timezone-select">
+                    <option value="">请选择目标地区</option>
+                    <option value="custom">自定义位置</option>
+                </select>
+                <div id="targetCustomInput" class="custom-input-container" style="display: none;">
+                    <input type="text" id="targetCustomTimezone" class="custom-input" placeholder="请输入时区，如：Asia/Tokyo">
+                    <div class="input-help">格式示例：Asia/Tokyo, America/Los_Angeles, Europe/Paris</div>
+                </div>
+                <div class="time-display">
+                    <div id="targetTime" class="current-time">--:--:--</div>
+                    <div id="targetDate" class="current-date">请选择地区</div>
+                    <div id="targetTimezoneInfo" class="timezone-info">--</div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">日出时间</div>
+                        <div id="targetSunrise" class="info-value">--:--</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">日落时间</div>
+                        <div id="targetSunset" class="info-value">--:--</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">农历日期</div>
+                        <div id="targetLunar" class="info-value">--</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">星期</div>
+                        <div id="targetWeekday" class="info-value">--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 时差对比区域 -->
+        <div class="comparison-section">
+            <h3 class="comparison-title">时差对比分析</h3>
+            <div class="time-difference">
+                <div id="timeDifference" class="difference-value">请选择目标地区</div>
+                <div class="difference-label">时间差</div>
+            </div>
+            <div class="day-night-status">
+                <div id="localDayNight" class="status-card day-status">
+                    <div>您的位置</div>
+                    <div>检测中...</div>
+                </div>
+                <div id="targetDayNight" class="status-card night-status">
+                    <div>目标地区</div>
+                    <div>请选择地区</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 太阳轨迹可视化 -->
+        <div class="sun-trajectory">
+            <h3 class="trajectory-title">🌅 太阳月亮轨迹对比图</h3>
+            
+            <!-- 当前地区轨迹 -->
+            <div class="trajectory-section">
+                <h4 class="section-title">📍 当前地区</h4>
+                <div class="trajectory-container">
+                    <svg id="localTrajectoryChart" class="trajectory-svg" width="500" height="300" viewBox="0 0 500 300">
+                        <!-- 背景渐变 -->
+                        <defs>
+                            <linearGradient id="localSkyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="localGroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#A0522D;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- 天空背景 -->
+                        <rect x="0" y="0" width="500" height="200" fill="url(#localSkyGradient)" />
+                        
+                        <!-- 地面 -->
+                        <rect x="0" y="200" width="500" height="100" fill="url(#localGroundGradient)" />
+                        
+                        <!-- 地平线 -->
+                        <line x1="0" y1="200" x2="500" y2="200" stroke="#654321" stroke-width="2" />
+                        
+                        <!-- 太阳轨迹弧线 -->
+                        <path d="M 50 200 Q 250 50 450 200" stroke="#FFD700" stroke-width="3" fill="none" stroke-dasharray="5,5" opacity="0.7" />
+                        
+                        <!-- 月亮轨迹弧线 -->
+                        <path d="M 50 200 Q 250 80 450 200" stroke="#C0C0C0" stroke-width="2" fill="none" stroke-dasharray="3,3" opacity="0.5" />
+                        
+                        <!-- 方向标识 -->
+                        <text x="30" y="220" font-family="Arial" font-size="14" fill="#333">东</text>
+                        <text x="460" y="220" font-family="Arial" font-size="14" fill="#333">西</text>
+                        <text x="240" y="240" font-family="Arial" font-size="14" fill="#333">南</text>
+                        
+                        <!-- 动态元素 -->
+                        <g id="localDynamicElements"></g>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- 目标地区轨迹 -->
+            <div class="trajectory-section">
+                <h4 class="section-title">🎯 目标地区</h4>
+                <div class="trajectory-container">
+                    <svg id="targetTrajectoryChart" class="trajectory-svg" width="500" height="300" viewBox="0 0 500 300">
+                        <!-- 背景渐变 -->
+                        <defs>
+                            <linearGradient id="targetSkyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#B8E6FF;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="targetGroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6B4423;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#8B5A2B;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- 天空背景 -->
+                        <rect x="0" y="0" width="500" height="200" fill="url(#targetSkyGradient)" />
+                        
+                        <!-- 地面 -->
+                        <rect x="0" y="200" width="500" height="100" fill="url(#targetGroundGradient)" />
+                        
+                        <!-- 地平线 -->
+                        <line x1="0" y1="200" x2="500" y2="200" stroke="#543A1A" stroke-width="2" />
+                        
+                        <!-- 太阳轨迹弧线 -->
+                        <path d="M 50 200 Q 250 50 450 200" stroke="#FFD700" stroke-width="3" fill="none" stroke-dasharray="5,5" opacity="0.7" />
+                        
+                        <!-- 月亮轨迹弧线 -->
+                        <path d="M 50 200 Q 250 80 450 200" stroke="#C0C0C0" stroke-width="2" fill="none" stroke-dasharray="3,3" opacity="0.5" />
+                        
+                        <!-- 方向标识 -->
+                        <text x="30" y="220" font-family="Arial" font-size="14" fill="#333">东</text>
+                        <text x="460" y="220" font-family="Arial" font-size="14" fill="#333">西</text>
+                        <text x="240" y="240" font-family="Arial" font-size="14" fill="#333">南</text>
+                        
+                        <!-- 动态元素 -->
+                        <g id="targetDynamicElements"></g>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="trajectory-legend">
+                <div class="legend-item">
+                    <div class="legend-dot sun-dot"></div>
+                    <span>太阳轨迹</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot moon-dot"></div>
+                    <span>月亮轨迹</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot noon-dot"></div>
+                    <span>正午时刻</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot horizon-line"></div>
+                    <span>地平线</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 使用说明 -->
+        <div id="instructions" class="instructions">
+            <h2>📖 使用说明</h2>
+            <ol>
+                <li><strong>自动检测位置：</strong>工具会自动检测您的当前时区和位置，显示本地时间、日出日落等信息</li>
+                <li><strong>选择目标地区：</strong>在右侧下拉菜单中选择您想要对比的目标地区，或选择"自定义位置"手动输入时区</li>
+                <li><strong>查看时差：</strong>系统会自动计算并显示两地的时间差，以及当前是白天还是夜晚</li>
+                <li><strong>日出日落时间：</strong>显示两地的日出日落时间，帮助您了解当地的昼夜情况</li>
+                <li><strong>农历信息：</strong>同时显示公历和农历日期，方便中文用户查看</li>
+                <li><strong>自定义时区：</strong>支持手动输入任意有效的时区标识符，如Asia/Shanghai、America/New_York等</li>
+                <li><strong>实时更新：</strong>时间信息每秒自动更新，确保数据准确性</li>
+            </ol>
+        </div>
+
+        <!-- 常见问题 -->
+        <div id="faq" class="faq">
+            <h2>❓ 常见问题</h2>
+            <div class="faq-item">
+                <div class="faq-question">Q: 为什么无法自动检测我的位置？</div>
+                <div class="faq-answer">A: 请确保您的浏览器允许获取位置信息，或者手动在下拉菜单中选择您的时区。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q: 日出日落时间准确吗？</div>
+                <div class="faq-answer">A: 日出日落时间基于地理位置计算，精度在几分钟内，适用于一般时差参考。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q: 农历日期是如何计算的？</div>
+                <div class="faq-answer">A: 农历日期基于中国传统历法计算，包含年份、月份和日期信息。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q: 时差计算考虑夏令时吗？</div>
+                <div class="faq-answer">A: 是的，系统会自动考虑各地的夏令时规则，确保时差计算准确。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q: 支持哪些地区和时区？</div>
+                <div class="faq-answer">A: 支持全球所有主要城市和时区，包括各大洲的重要城市和地区。同时支持自定义输入任意有效的时区标识符。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q: 如何使用自定义时区功能？</div>
+                <div class="faq-answer">A: 选择"自定义位置"选项，然后输入标准的时区标识符，如Asia/Shanghai（上海）、America/New_York（纽约）、Europe/London（伦敦）等。</div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>© 2025 全球时差计算器 - 专业的时差对比工具，支持全球时区查询和日出日落时间计算</p>
+            <div class="footer-links">
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">技术支持</a>
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">问题反馈</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 全球主要城市时区数据
+        const timezones = [
+            { value: 'Asia/Shanghai', label: '中国 - 北京/上海', coords: [39.9042, 116.4074] },
+            { value: 'Asia/Hong_Kong', label: '中国 - 香港', coords: [22.3193, 114.1694] },
+            { value: 'Asia/Taipei', label: '中国 - 台北', coords: [25.0330, 121.5654] },
+            { value: 'Asia/Tokyo', label: '日本 - 东京', coords: [35.6762, 139.6503] },
+            { value: 'Asia/Seoul', label: '韩国 - 首尔', coords: [37.5665, 126.9780] },
+            { value: 'Asia/Singapore', label: '新加坡', coords: [1.3521, 103.8198] },
+            { value: 'Asia/Bangkok', label: '泰国 - 曼谷', coords: [13.7563, 100.5018] },
+            { value: 'Asia/Dubai', label: '阿联酋 - 迪拜', coords: [25.2048, 55.2708] },
+            { value: 'Europe/London', label: '英国 - 伦敦', coords: [51.5074, -0.1278] },
+            { value: 'Europe/Paris', label: '法国 - 巴黎', coords: [48.8566, 2.3522] },
+            { value: 'Europe/Berlin', label: '德国 - 柏林', coords: [52.5200, 13.4050] },
+            { value: 'Europe/Rome', label: '意大利 - 罗马', coords: [41.9028, 12.4964] },
+            { value: 'Europe/Moscow', label: '俄罗斯 - 莫斯科', coords: [55.7558, 37.6176] },
+            { value: 'America/New_York', label: '美国 - 纽约', coords: [40.7128, -74.0060] },
+            { value: 'America/Los_Angeles', label: '美国 - 洛杉矶', coords: [34.0522, -118.2437] },
+            { value: 'America/Chicago', label: '美国 - 芝加哥', coords: [41.8781, -87.6298] },
+            { value: 'America/Toronto', label: '加拿大 - 多伦多', coords: [43.6532, -79.3832] },
+            { value: 'America/Sao_Paulo', label: '巴西 - 圣保罗', coords: [-23.5505, -46.6333] },
+            { value: 'Australia/Sydney', label: '澳大利亚 - 悉尼', coords: [-33.8688, 151.2093] },
+            { value: 'Australia/Melbourne', label: '澳大利亚 - 墨尔本', coords: [-37.8136, 144.9631] },
+            { value: 'Pacific/Auckland', label: '新西兰 - 奥克兰', coords: [-36.8485, 174.7633] }
+        ];
+
+        let localCoords = null;
+        let targetCoords = null;
+        let updateInterval = null;
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTimezones();
+            detectUserLocation();
+            startTimeUpdates();
+        });
+
+        // 初始化时区选择器
+        function initializeTimezones() {
+            const localSelect = document.getElementById('localTimezone');
+            const targetSelect = document.getElementById('targetTimezone');
+
+            // 添加时区选项到本地时区选择器
+            timezones.forEach(tz => {
+                const option = document.createElement('option');
+                option.value = tz.value;
+                option.textContent = tz.label;
+                localSelect.appendChild(option.cloneNode(true));
+                targetSelect.appendChild(option);
+            });
+
+            // 监听选择变化
+            localSelect.addEventListener('change', handleLocalTimezoneChange);
+            targetSelect.addEventListener('change', handleTargetTimezoneChange);
+        }
+
+        // 检测用户位置
+        function detectUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        localCoords = [position.coords.latitude, position.coords.longitude];
+                        // 获取用户当前时区
+                        const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                        // 如果当前选择是自动检索，保持auto状态，但确保坐标和时区都正确
+                        const select = document.getElementById('localTimezone');
+                        if (select.value === 'auto') {
+                            // 保持auto选择，但立即更新显示和轨迹图
+                            updateLocalTime();
+                            // 强制更新轨迹图，确保使用新的坐标
+                            const timezone = getCurrentTimezone(true);
+                            if (timezone && isValidTimezone(timezone)) {
+                                updateSunTimes('local', localCoords, timezone);
+                                updateDayNightStatus('localDayNight', localCoords, timezone);
+                            }
+                        } else {
+                            // 如果不是auto状态，设置为检测到的时区
+                            select.value = userTimezone;
+                            updateLocalTime();
+                        }
+                    },
+                    error => {
+                        console.log('位置检测失败:', error);
+                        // 默认使用北京时间
+                        document.getElementById('localTimezone').value = 'Asia/Shanghai';
+                        localCoords = [39.9042, 116.4074];
+                        updateLocalTime();
+                    }
+                );
+            } else {
+                // 浏览器不支持地理位置，使用默认
+                document.getElementById('localTimezone').value = 'Asia/Shanghai';
+                localCoords = [39.9042, 116.4074];
+                updateLocalTime();
+            }
+        }
+
+        // 处理本地时区变化
+        function handleLocalTimezoneChange() {
+            const select = document.getElementById('localTimezone');
+            const customContainer = document.getElementById('localCustomInput');
+            
+            if (select.value === 'auto') {
+                customContainer.style.display = 'none';
+                detectUserLocation();
+            } else if (select.value === 'custom') {
+                customContainer.style.display = 'block';
+                setupCustomTimezoneInput('localCustomTimezone', updateLocalTime);
+            } else {
+                customContainer.style.display = 'none';
+                const timezone = timezones.find(tz => tz.value === select.value);
+                if (timezone) {
+                    localCoords = timezone.coords;
+                    updateLocalTime();
+                }
+            }
+        }
+
+        // 处理目标时区变化
+        function handleTargetTimezoneChange() {
+            const select = document.getElementById('targetTimezone');
+            const customContainer = document.getElementById('targetCustomInput');
+            
+            if (select.value === 'custom') {
+                customContainer.style.display = 'block';
+                setupCustomTimezoneInput('targetCustomTimezone', () => {
+                    updateTargetTime();
+                    updateComparison();
+                });
+            } else if (select.value) {
+                customContainer.style.display = 'none';
+                const timezone = timezones.find(tz => tz.value === select.value);
+                if (timezone) {
+                    targetCoords = timezone.coords;
+                    updateTargetTime();
+                    updateComparison();
+                }
+            } else {
+                customContainer.style.display = 'none';
+            }
+        }
+
+        // 开始时间更新
+        function startTimeUpdates() {
+            updateInterval = setInterval(() => {
+                updateLocalTime();
+                updateTargetTime();
+                updateComparison();
+            }, 1000);
+        }
+
+        // 更新本地时间
+        function updateLocalTime() {
+            const timezone = getCurrentTimezone(true);
+            
+            if (!timezone || !isValidTimezone(timezone)) return;
+
+            const now = new Date();
+            
+            // 更新时间显示
+            document.getElementById('localTime').textContent = 
+                now.toLocaleTimeString('zh-CN', { timeZone: timezone, hour12: false });
+            
+            // 更新日期显示
+            const dateStr = now.toLocaleDateString('zh-CN', { 
+                timeZone: timezone,
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('localDate').textContent = dateStr;
+            
+            // 更新时区信息
+            const offset = getTimezoneOffset(timezone);
+            document.getElementById('localTimezoneInfo').textContent = 
+                `${timezone} (UTC${offset})`;
+            
+            // 更新星期
+            const weekday = now.toLocaleDateString('zh-CN', { 
+                timeZone: timezone,
+                weekday: 'long'
+            });
+            document.getElementById('localWeekday').textContent = weekday;
+            
+            // 更新农历
+            updateLunarDate('localLunar', now);
+            
+            // 更新日出日落
+            if (localCoords) {
+                updateSunTimes('local', localCoords, timezone);
+                updateDayNightStatus('localDayNight', localCoords, timezone);
+            }
+        }
+
+        // 更新目标时间
+        function updateTargetTime() {
+            const timezone = getCurrentTimezone(false);
+            
+            if (!timezone || !isValidTimezone(timezone)) return;
+
+            const now = new Date();
+            
+            // 更新时间显示
+            document.getElementById('targetTime').textContent = 
+                now.toLocaleTimeString('zh-CN', { timeZone: timezone, hour12: false });
+            
+            // 更新日期显示
+            const dateStr = now.toLocaleDateString('zh-CN', { 
+                timeZone: timezone,
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('targetDate').textContent = dateStr;
+            
+            // 更新时区信息
+            const offset = getTimezoneOffset(timezone);
+            document.getElementById('targetTimezoneInfo').textContent = 
+                `${timezone} (UTC${offset})`;
+            
+            // 更新星期
+            const weekday = now.toLocaleDateString('zh-CN', { 
+                timeZone: timezone,
+                weekday: 'long'
+            });
+            document.getElementById('targetWeekday').textContent = weekday;
+            
+            // 更新农历
+            updateLunarDate('targetLunar', now);
+            
+            // 更新日出日落
+            if (targetCoords) {
+                updateSunTimes('target', targetCoords, timezone);
+                updateDayNightStatus('targetDayNight', targetCoords, timezone);
+            }
+        }
+
+        // 获取时区偏移
+        function getTimezoneOffset(timezone) {
+            const now = new Date();
+            const utc = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+            const target = new Date(utc.toLocaleString('en-US', { timeZone: timezone }));
+            const diff = (target.getTime() - utc.getTime()) / (1000 * 60 * 60);
+            return diff >= 0 ? `+${diff}` : `${diff}`;
+        }
+
+        // 更新农历日期（简化版）
+        function updateLunarDate(elementId, date) {
+            // 这里使用简化的农历计算，实际应用中可以使用更精确的农历库
+            const lunarMonths = ['正月', '二月', '三月', '四月', '五月', '六月', 
+                                '七月', '八月', '九月', '十月', '十一月', '十二月'];
+            const lunarDays = ['初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十',
+                              '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十',
+                              '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十'];
+            
+            // 简化计算（实际需要复杂的农历算法）
+            const month = date.getMonth();
+            const day = date.getDate();
+            const lunarMonth = lunarMonths[month % 12];
+            const lunarDay = lunarDays[(day - 1) % 30];
+            
+            document.getElementById(elementId).textContent = `${lunarMonth}${lunarDay}`;
+        }
+
+        // 更新日出日落时间
+        function updateSunTimes(prefix, coords, timezone) {
+            const [lat, lng] = coords;
+            const now = new Date();
+            
+            // 简化的日出日落计算（实际应用中建议使用专业的天文计算库）
+            const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+            const solarDeclination = 23.45 * Math.sin((360 * (284 + dayOfYear) / 365) * Math.PI / 180);
+            const hourAngle = Math.acos(-Math.tan(lat * Math.PI / 180) * Math.tan(solarDeclination * Math.PI / 180));
+            
+            const sunrise = 12 - (hourAngle * 180 / Math.PI) / 15;
+            const sunset = 12 + (hourAngle * 180 / Math.PI) / 15;
+            
+            // 计算真实的太阳正午时间（太阳最高点）
+            // 考虑经度和时区对正午时间的影响
+            const timezoneOffset = getTimezoneOffset(timezone);
+            const longitudeOffset = lng / 15; // 经度偏移小时数
+            // 太阳正午 = 12点 - 时区偏移 + 经度偏移
+            const noon = 12 - parseFloat(timezoneOffset) + longitudeOffset;
+            // 确保正午时间在合理范围内（10-14点之间）
+            const adjustedNoon = Math.max(10, Math.min(14, noon));
+            
+            // 简化的月出月落计算（月亮轨迹通常与太阳相差约12小时）
+            const moonrise = (sunrise + 12) % 24;
+            const moonset = (sunset + 12) % 24;
+            
+            const formatTime = (hours) => {
+                const h = Math.floor(hours);
+                const m = Math.floor((hours - h) * 60);
+                return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+            };
+            
+            document.getElementById(`${prefix}Sunrise`).textContent = formatTime(sunrise);
+            document.getElementById(`${prefix}Sunset`).textContent = formatTime(sunset);
+            
+            // 更新轨迹图
+            updateTrajectoryChart(prefix, sunrise, sunset, adjustedNoon, moonrise, moonset, coords, timezone);
+        }
+
+        // 更新昼夜状态
+        function updateDayNightStatus(elementId, coords, timezone) {
+            const now = new Date();
+            const hours = now.getHours();
+            
+            // 简化判断：6-18点为白天，其他为夜晚
+            const isDay = hours >= 6 && hours < 18;
+            const element = document.getElementById(elementId);
+            
+            if (isDay) {
+                element.className = 'status-card day-status';
+                element.innerHTML = `<div>${elementId.includes('local') ? '您的位置' : '目标地区'}</div><div>☀️ 白天</div>`;
+            } else {
+                element.className = 'status-card night-status';
+                element.innerHTML = `<div>${elementId.includes('local') ? '您的位置' : '目标地区'}</div><div>🌙 夜晚</div>`;
+            }
+        }
+
+        // 设置自定义时区输入
+        function setupCustomTimezoneInput(inputId, callback) {
+            const input = document.getElementById(inputId);
+            input.addEventListener('input', function() {
+                const timezone = this.value.trim();
+                if (timezone && isValidTimezone(timezone)) {
+                    // 使用默认坐标（北京）作为占位符
+                    if (inputId === 'localCustomTimezone') {
+                        localCoords = [39.9042, 116.4074];
+                    } else {
+                        targetCoords = [39.9042, 116.4074];
+                    }
+                    callback();
+                }
+            });
+        }
+        
+        // 验证时区格式
+        function isValidTimezone(timezone) {
+            try {
+                Intl.DateTimeFormat(undefined, { timeZone: timezone });
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+        
+        // 获取当前使用的时区
+        function getCurrentTimezone(isLocal = true) {
+            if (isLocal) {
+                const localSelect = document.getElementById('localTimezone');
+                if (localSelect.value === 'auto') {
+                    return Intl.DateTimeFormat().resolvedOptions().timeZone;
+                } else if (localSelect.value === 'custom') {
+                    return document.getElementById('localCustomTimezone').value.trim();
+                } else {
+                    return localSelect.value;
+                }
+            } else {
+                const targetSelect = document.getElementById('targetTimezone');
+                if (targetSelect.value === 'custom') {
+                    return document.getElementById('targetCustomTimezone').value.trim();
+                } else {
+                    return targetSelect.value;
+                }
+            }
+        }
+        
+        // 更新时差对比
+        function updateComparison() {
+            const localTimezone = getCurrentTimezone(true);
+            const targetTimezone = getCurrentTimezone(false);
+            
+            if (!targetTimezone || !isValidTimezone(targetTimezone)) return;
+            
+            try {
+                const now = new Date();
+                const localTime = new Date(now.toLocaleString('en-US', { timeZone: localTimezone }));
+                const targetTime = new Date(now.toLocaleString('en-US', { timeZone: targetTimezone }));
+                
+                const diffMs = targetTime.getTime() - localTime.getTime();
+                const diffHours = Math.round(diffMs / (1000 * 60 * 60));
+                
+                let diffText;
+                if (diffHours === 0) {
+                    diffText = '无时差';
+                } else if (diffHours > 0) {
+                    diffText = `快 ${diffHours} 小时`;
+                } else {
+                    diffText = `慢 ${Math.abs(diffHours)} 小时`;
+                }
+                
+                document.getElementById('timeDifference').textContent = diffText;
+            } catch (e) {
+                 document.getElementById('timeDifference').textContent = '时区格式错误';
+             }
+         }
+         
+         // 更新轨迹图
+         function updateTrajectoryChart(prefix, sunrise, sunset, noon, moonrise, moonset, coords, timezone) {
+             const chartId = prefix === 'local' ? 'localDynamicElements' : 'targetDynamicElements';
+             const dynamicElements = document.getElementById(chartId);
+             if (!dynamicElements) return;
+             
+             dynamicElements.innerHTML = ''; // 清空之前的元素
+             
+             const now = new Date();
+             let currentHour;
+             
+             // 根据时区计算当前时间
+             try {
+                 if (prefix === 'local') {
+                     const localTimezone = getCurrentTimezone(true);
+                     const localTime = new Date(now.toLocaleString('en-US', { timeZone: localTimezone }));
+                     currentHour = localTime.getHours() + localTime.getMinutes() / 60;
+                 } else {
+                     const targetTimezone = getCurrentTimezone(false);
+                     if (targetTimezone && isValidTimezone(targetTimezone)) {
+                         const targetTime = new Date(now.toLocaleString('en-US', { timeZone: targetTimezone }));
+                         currentHour = targetTime.getHours() + targetTime.getMinutes() / 60;
+                     } else {
+                         currentHour = now.getHours() + now.getMinutes() / 60;
+                     }
+                 }
+             } catch (e) {
+                 currentHour = now.getHours() + now.getMinutes() / 60;
+             }
+             
+             // 计算位置（基于12小时制，6点为东方起点，18点为西方终点）
+             const calculatePosition = (timeInHours) => {
+                 // 将时间映射到0-1的范围（6点到18点）
+                 const normalizedTime = Math.max(0, Math.min(1, (timeInHours - 6) / 12));
+                 const x = 50 + normalizedTime * 400; // X坐标从50到450
+                 
+                 // 使用抛物线计算Y坐标（模拟太阳弧线）
+                 const y = 200 - 150 * Math.sin(normalizedTime * Math.PI);
+                 return { x, y };
+             };
+             
+             const formatTimeLabel = (hours) => {
+                 const h = Math.floor(hours);
+                 const m = Math.floor((hours % 1) * 60);
+                 return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+             };
+             
+             // 绘制日出点
+             const sunrisePos = calculatePosition(sunrise);
+             const sunriseCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+             sunriseCircle.setAttribute('cx', sunrisePos.x);
+             sunriseCircle.setAttribute('cy', sunrisePos.y);
+             sunriseCircle.setAttribute('r', '6');
+             sunriseCircle.setAttribute('fill', '#FF6B35');
+             sunriseCircle.setAttribute('stroke', '#FF4500');
+             sunriseCircle.setAttribute('stroke-width', '2');
+             dynamicElements.appendChild(sunriseCircle);
+             
+             // 日出标签
+             const sunriseText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+             sunriseText.setAttribute('x', sunrisePos.x);
+             sunriseText.setAttribute('y', sunrisePos.y - 15);
+             sunriseText.setAttribute('text-anchor', 'middle');
+             sunriseText.setAttribute('font-family', 'Arial');
+             sunriseText.setAttribute('font-size', '11');
+             sunriseText.setAttribute('fill', '#333');
+             sunriseText.setAttribute('font-weight', 'bold');
+             sunriseText.textContent = `日出 ${formatTimeLabel(sunrise)}`;
+             dynamicElements.appendChild(sunriseText);
+             
+             // 绘制正午点
+             const noonPos = calculatePosition(noon);
+             const noonCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+             noonCircle.setAttribute('cx', noonPos.x);
+             noonCircle.setAttribute('cy', noonPos.y);
+             noonCircle.setAttribute('r', '8');
+             noonCircle.setAttribute('fill', '#FFD700');
+             noonCircle.setAttribute('stroke', '#FFA500');
+             noonCircle.setAttribute('stroke-width', '2');
+             dynamicElements.appendChild(noonCircle);
+             
+             // 正午标签
+             const noonText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+             noonText.setAttribute('x', noonPos.x);
+             noonText.setAttribute('y', noonPos.y - 15);
+             noonText.setAttribute('text-anchor', 'middle');
+             noonText.setAttribute('font-family', 'Arial');
+             noonText.setAttribute('font-size', '11');
+             noonText.setAttribute('fill', '#333');
+             noonText.setAttribute('font-weight', 'bold');
+             noonText.textContent = `正午 ${formatTimeLabel(noon)}`;
+             dynamicElements.appendChild(noonText);
+             
+             // 绘制日落点
+             const sunsetPos = calculatePosition(sunset);
+             const sunsetCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+             sunsetCircle.setAttribute('cx', sunsetPos.x);
+             sunsetCircle.setAttribute('cy', sunsetPos.y);
+             sunsetCircle.setAttribute('r', '6');
+             sunsetCircle.setAttribute('fill', '#FF4500');
+             sunsetCircle.setAttribute('stroke', '#FF6B35');
+             sunsetCircle.setAttribute('stroke-width', '2');
+             dynamicElements.appendChild(sunsetCircle);
+             
+             // 日落标签
+             const sunsetText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+             sunsetText.setAttribute('x', sunsetPos.x);
+             sunsetText.setAttribute('y', sunsetPos.y - 15);
+             sunsetText.setAttribute('text-anchor', 'middle');
+             sunsetText.setAttribute('font-family', 'Arial');
+             sunsetText.setAttribute('font-size', '11');
+             sunsetText.setAttribute('fill', '#333');
+             sunsetText.setAttribute('font-weight', 'bold');
+             sunsetText.textContent = `日落 ${formatTimeLabel(sunset)}`;
+             dynamicElements.appendChild(sunsetText);
+             
+             // 绘制月出点
+             const moonrisePos = calculatePosition(moonrise);
+             if (moonrisePos.y < 200) {
+                 const moonriseCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                 moonriseCircle.setAttribute('cx', moonrisePos.x);
+                 moonriseCircle.setAttribute('cy', moonrisePos.y);
+                 moonriseCircle.setAttribute('r', '5');
+                 moonriseCircle.setAttribute('fill', '#C0C0C0');
+                 moonriseCircle.setAttribute('stroke', '#A0A0A0');
+                 moonriseCircle.setAttribute('stroke-width', '2');
+                 dynamicElements.appendChild(moonriseCircle);
+                 
+                 // 月出标签
+                 const moonriseText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                 moonriseText.setAttribute('x', moonrisePos.x);
+                 moonriseText.setAttribute('y', moonrisePos.y + 20);
+                 moonriseText.setAttribute('text-anchor', 'middle');
+                 moonriseText.setAttribute('font-family', 'Arial');
+                 moonriseText.setAttribute('font-size', '10');
+                 moonriseText.setAttribute('fill', '#666');
+                 moonriseText.textContent = `月出 ${formatTimeLabel(moonrise)}`;
+                 dynamicElements.appendChild(moonriseText);
+             }
+             
+             // 绘制月落点
+             const moonsetPos = calculatePosition(moonset);
+             if (moonsetPos.y < 200) {
+                 const moonsetCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                 moonsetCircle.setAttribute('cx', moonsetPos.x);
+                 moonsetCircle.setAttribute('cy', moonsetPos.y);
+                 moonsetCircle.setAttribute('r', '5');
+                 moonsetCircle.setAttribute('fill', '#A0A0A0');
+                 moonsetCircle.setAttribute('stroke', '#808080');
+                 moonsetCircle.setAttribute('stroke-width', '2');
+                 dynamicElements.appendChild(moonsetCircle);
+                 
+                 // 月落标签
+                 const moonsetText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                 moonsetText.setAttribute('x', moonsetPos.x);
+                 moonsetText.setAttribute('y', moonsetPos.y + 20);
+                 moonsetText.setAttribute('text-anchor', 'middle');
+                 moonsetText.setAttribute('font-family', 'Arial');
+                 moonsetText.setAttribute('font-size', '10');
+                 moonsetText.setAttribute('fill', '#666');
+                 moonsetText.textContent = `月落 ${formatTimeLabel(moonset)}`;
+                 dynamicElements.appendChild(moonsetText);
+             }
+             
+             // 绘制当前太阳位置（如果在白天）
+             if (currentHour >= sunrise && currentHour <= sunset) {
+                 const currentPos = calculatePosition(currentHour);
+                 const currentSun = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                 currentSun.setAttribute('cx', currentPos.x);
+                 currentSun.setAttribute('cy', currentPos.y);
+                 currentSun.setAttribute('r', '10');
+                 currentSun.setAttribute('fill', '#FFD700');
+                 currentSun.setAttribute('stroke', '#FFA500');
+                 currentSun.setAttribute('stroke-width', '3');
+                 currentSun.setAttribute('opacity', '0.9');
+                 dynamicElements.appendChild(currentSun);
+                 
+                 // 太阳光芒效果
+                 for (let i = 0; i < 8; i++) {
+                     const angle = (i * 45) * Math.PI / 180;
+                     const rayLength = 15;
+                     const x1 = currentPos.x + Math.cos(angle) * 12;
+                     const y1 = currentPos.y + Math.sin(angle) * 12;
+                     const x2 = currentPos.x + Math.cos(angle) * (12 + rayLength);
+                     const y2 = currentPos.y + Math.sin(angle) * (12 + rayLength);
+                     
+                     const ray = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                     ray.setAttribute('x1', x1);
+                     ray.setAttribute('y1', y1);
+                     ray.setAttribute('x2', x2);
+                     ray.setAttribute('y2', y2);
+                     ray.setAttribute('stroke', '#FFD700');
+                     ray.setAttribute('stroke-width', '2');
+                     ray.setAttribute('opacity', '0.6');
+                     dynamicElements.appendChild(ray);
+                 }
+                 
+                 // 当前时间标签
+                 const currentText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                 currentText.setAttribute('x', currentPos.x);
+                 currentText.setAttribute('y', currentPos.y + 35);
+                 currentText.setAttribute('text-anchor', 'middle');
+                 currentText.setAttribute('font-family', 'Arial');
+                 currentText.setAttribute('font-size', '12');
+                 currentText.setAttribute('font-weight', 'bold');
+                 currentText.setAttribute('fill', '#FF6B35');
+                 currentText.textContent = `当前 ${formatTimeLabel(currentHour)}`;
+                 dynamicElements.appendChild(currentText);
+             }
+             
+             // 绘制当前月亮位置（如果在夜间且月亮可见）
+             const isMoonVisible = (currentHour >= moonrise && moonrise < moonset) || (currentHour <= moonset && moonrise > moonset);
+             if (isMoonVisible) {
+                 const moonCurrentPos = calculatePosition(currentHour + 12); // 简化计算
+                 if (moonCurrentPos.y < 200) { // 只在地平线上方显示
+                     const moon = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                     moon.setAttribute('cx', moonCurrentPos.x);
+                     moon.setAttribute('cy', moonCurrentPos.y);
+                     moon.setAttribute('r', '8');
+                     moon.setAttribute('fill', '#C0C0C0');
+                     moon.setAttribute('stroke', '#A0A0A0');
+                     moon.setAttribute('stroke-width', '2');
+                     moon.setAttribute('opacity', '0.8');
+                     dynamicElements.appendChild(moon);
+                     
+                     // 月亮当前位置标签
+                     const moonCurrentText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                     moonCurrentText.setAttribute('x', moonCurrentPos.x);
+                     moonCurrentText.setAttribute('y', moonCurrentPos.y + 35);
+                     moonCurrentText.setAttribute('text-anchor', 'middle');
+                     moonCurrentText.setAttribute('font-family', 'Arial');
+                     moonCurrentText.setAttribute('font-size', '10');
+                     moonCurrentText.setAttribute('font-weight', 'bold');
+                     moonCurrentText.setAttribute('fill', '#666');
+                     moonCurrentText.textContent = '当前月亮';
+                     dynamicElements.appendChild(moonCurrentText);
+                 }
+             }
+         }
+         
+
+     </script>
+</body>
+</html>

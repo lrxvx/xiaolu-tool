@@ -1,5 +1,68 @@
 [
     {
+        "id": 13,
+        "title": "智能图片压缩工具",
+        "description": "新增专业的图片压缩工具，支持JPG、PNG、WebP、GIF等格式，智能压缩算法保持清晰度，自定义压缩质量和输出格式，支持批量处理和拖拽上传",
+        "date": "2025-07-13",
+        "type": "feature",
+        "tool": "image-compressor"
+    },
+    {
+        "id": 12,
+        "title": "图片水印去除工具",
+        "description": "新增专业的图片水印去除工具，支持AI智能检测和手动选择水印区域，使用先进的图像修复算法，支持多种图片格式批量处理",
+        "date": "2025-07-13",
+        "type": "feature",
+        "tool": "watermark-remover"
+    },
+    {
+        "id": 11,
+        "title": "动漫图片转铅笔线稿工具",
+        "description": "新增动漫图片转铅笔线稿工具，使用Sobel边缘检测算法生成高质量线稿，支持参数调节，适合儿童涂色使用",
+        "date": "2025-07-13",
+        "type": "feature",
+        "tool": "anime-to-sketch"
+    },
+    {
+        "id": 10,
+        "title": "图片格式转换工具",
+        "description": "新增图片转Word、Excel、PDF、合并长图等多种格式转换功能，支持JPG、PNG、GIF、BMP、WEBP等格式，本地处理保护隐私",
+        "date": "2025-07-12",
+        "type": "feature",
+        "tool": "image-format-converter"
+    },
+    {
+        "id": 9,
+        "title": "PDF转换工具功能完善",
+        "description": "集成PDF.js实现真实PDF解析，完善PDF转Word、Excel、图片、长图功能，提升转换质量和用户体验",
+        "date": "2025-07-12",
+        "type": "enhancement",
+        "tool": "pdf-converter"
+    },
+    {
+        "id": 8,
+        "title": "PDF格式转换工具",
+        "description": "新增PDF转Word、Excel、图片、长图等多种格式转换功能，支持本地处理保护隐私",
+        "date": "2025-07-12",
+        "type": "feature",
+        "tool": "pdf-converter"
+    },
+    {
+        "id": 7,
+        "title": "图片文字提取工具Bug修复",
+        "description": "修复SetImageFile错误，优化Tesseract.js版本兼容性，提升OCR识别稳定性",
+        "date": "2025-07-12",
+        "type": "bugfix",
+        "tool": "image-text-extractor"
+    },
+    {
+        "date": "2025-07-12",
+        "title": "图片文字提取工具",
+        "description": "新增OCR图片文字识别工具，支持中英文识别，批量处理多张图片，本地处理保护隐私",
+        "type": "feature",
+        "tool": "image-text-extractor"
+    },
+    {
         "date": "2025-07-12",
         "title": "最近更新功能优化",
         "description": "实现动态加载更新内容，支持多种更新类型标签和交互功能",

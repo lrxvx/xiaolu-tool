@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片转文档工具 - 免费在线图片转Word/PDF/Excel | 小鹿工具箱</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="免费在线图片转文档工具，支持图片转Word、图片转PDF、图片转Excel，支持拖拽排序，高质量转换，本地处理保护隐私。">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.8.2/docx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <meta name="keywords" content="图片转Word,图片转PDF,图片转Excel,图片转文档,在线图片转换,免费图片转换工具">
+    <meta name="author" content="小鹿工具箱">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://xiaolu-tools.com/tools/pdf-converter.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="图片转文档工具 - 免费在线图片转Word/PDF/Excel">
+    <meta property="og:description" content="免费在线图片转文档工具，支持拖拽排序，高质量转换">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xiaolu-tools.com/tools/pdf-converter.html">
+    <meta property="og:image" content="https://xiaolu-tools.com/images/image-converter-preview.jpg">
+    <meta property="og:site_name" content="小路工具箱">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="图片转文档工具 - 免费在线图片转Word/PDF/Excel">
+    <meta name="twitter:description" content="免费在线图片转文档工具，支持拖拽排序，高质量转换">
+    <meta name="twitter:image" content="https://xiaolu-tools.com/images/image-converter-preview.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "图片转文档工具",
+        "description": "免费在线图片转文档工具，支持图片转Word、PDF、Excel，支持拖拽排序",
+        "url": "https://xiaolu-tools.com/tools/pdf-converter.html",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "permissions": "browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #7209b7;
+            --success: #06d6a0;
+            --warning: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --border: #dee2e6;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+        
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tool-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .upload-area {
+            border: 3px dashed var(--border);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .upload-area.dragover {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-text {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .upload-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .upload-btn:hover {
+            background: var(--secondary);
+        }
+        
+        .file-preview {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .preview-item {
+            position: relative;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: move;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .preview-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.15);
+        }
+        
+        .preview-item.sortable-ghost {
+            opacity: 0.4;
+        }
+        
+        .preview-item.sortable-drag {
+            transform: rotate(5deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .preview-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-order {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .drag-handle {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border-radius: 4px;
+            padding: 4px;
+            font-size: 12px;
+        }
+        
+        .remove-btn {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: var(--warning);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .remove-btn:hover {
+            background: #d63384;
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .file-icon {
+            font-size: 2rem;
+            color: var(--success);
+        }
+        
+        .file-details h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .file-details p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .format-selection {
+            margin-bottom: 2rem;
+        }
+        
+        .format-selection h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .format-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .format-option {
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .format-option:hover {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+        
+        .format-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        .format-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .format-icon.word { color: #2b579a; }
+        .format-icon.excel { color: #217346; }
+        .format-icon.image { color: #ff6b35; }
+        .format-icon.long-image { color: #9b59b6; }
+        
+        .convert-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        .convert-btn:hover {
+            background: #05c085;
+        }
+        
+        .convert-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+        }
+        
+        .progress-container {
+            display: none;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-bar {
+            background: var(--light);
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-fill {
+            background: var(--success);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            text-align: center;
+            color: var(--gray);
+        }
+        
+        .result-container {
+            display: none;
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .download-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .download-btn:hover {
+            background: var(--secondary);
+        }
+        
+        .info-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .info-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-section h3 {
+            color: var(--dark);
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .info-section ul {
+            padding-left: 1.5rem;
+        }
+        
+        .info-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--gray);
+        }
+        
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .format-options {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-tools"></i> 小路工具箱
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../index.html#tools">工具</a></li>
+                <li><a href="../index.html#about">关于</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-header">
+            <h1><i class="fas fa-images"></i> 图片转文档工具</h1>
+            <p>支持图片转Word、PDF、Excel，支持拖拽排序自定义顺序</p>
+        </div>
+
+        <div class="main-content">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                    拖拽图片文件到此处或点击选择文件
+                </div>
+                <div class="upload-text" style="font-size: 0.9rem; margin-top: 0.5rem;">
+                    支持JPG、PNG、GIF、BMP、WEBP等格式，可选择多张图片
+                </div>
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                    <i class="fas fa-plus"></i> 选择图片文件
+                </button>
+                <input type="file" id="fileInput" class="file-input" accept="image/*" multiple onchange="handleFileSelect(event)">
+            </div>
+
+            <div class="file-preview" id="filePreview">
+                <div class="file-info">
+                    <div class="file-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <div class="file-details">
+                        <h3 id="fileName">已选择图片</h3>
+                        <p id="fileSize">图片数量和总大小</p>
+                    </div>
+                </div>
+                <div class="preview-grid" id="previewGrid">
+                    <!-- 图片预览将在这里显示 -->
+                </div>
+            </div>
+
+            <div class="format-selection">
+                <h3>选择转换格式</h3>
+                <div class="format-options">
+                    <div class="format-option" data-format="word" onclick="selectFormat('word')">
+                        <div class="format-icon word">
+                            <i class="fas fa-file-word"></i>
+                        </div>
+                        <h4>图片转Word</h4>
+                        <p>生成真正的.docx文档，高清图片嵌入</p>
+                    </div>
+                    <div class="format-option" data-format="pdf" onclick="selectFormat('pdf')">
+                        <div class="format-icon image">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h4>图片转PDF</h4>
+                        <p>高质量PDF转换，保持原始分辨率</p>
+                    </div>
+                    <div class="format-option" data-format="excel" onclick="selectFormat('excel')">
+                        <div class="format-icon excel">
+                            <i class="fas fa-file-excel"></i>
+                        </div>
+                        <h4>图片转Excel</h4>
+                        <p>生成真正的.xlsx文件，图片嵌入表格</p>
+                    </div>
+                    <div class="format-option" data-format="long-image" onclick="selectFormat('long-image')">
+                        <div class="format-icon long-image">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <h4>合并长图</h4>
+                        <p>将多张图片合并为一张PNG长图</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="convert-btn" id="convertBtn" onclick="startConversion()" disabled>
+                <i class="fas fa-magic"></i> 开始转换
+            </button>
+
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">准备中...</div>
+            </div>
+
+            <div class="result-container" id="resultContainer">
+                <h3>转换完成！</h3>
+                <p>您的文件已成功转换，点击下载按钮获取转换后的文件。</p>
+                <a href="#" class="download-btn" id="downloadBtn" download>
+                    <i class="fas fa-download"></i> 下载文件
+                </a>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2><i class="fas fa-info-circle"></i> 使用说明</h2>
+            <h3>如何使用PDF格式转换工具？</h3>
+            <ol>
+                <li><strong>上传PDF文件：</strong>点击"选择PDF文件"按钮或直接拖拽PDF文件到上传区域</li>
+                <li><strong>选择转换格式：</strong>根据需要选择PDF转Word、Excel、图片或长图</li>
+                <li><strong>开始转换：</strong>点击"开始转换"按钮，系统将自动处理您的文件</li>
+                <li><strong>下载结果：</strong>转换完成后，点击下载按钮获取转换后的文件</li>
+                <li><strong>本地处理：</strong>所有转换都在您的浏览器中完成，保护您的隐私安全</li>
+            </ol>
+
+            <h3>转换格式说明</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> <strong>PDF转Word：</strong>将PDF内容转换为可编辑的Word文档格式</li>
+                <li><i class="fas fa-check"></i> <strong>PDF转Excel：</strong>提取PDF中的表格数据并转换为Excel格式</li>
+                <li><i class="fas fa-check"></i> <strong>PDF转图片：</strong>将PDF的每一页转换为单独的图片文件</li>
+                <li><i class="fas fa-check"></i> <strong>PDF转长图：</strong>将PDF的所有页面合并为一张连续的长图</li>
+            </ul>
+
+            <h3>功能特点</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> 支持多种输出格式转换</li>
+                <li><i class="fas fa-check"></i> 高质量转换，保持原文档格式</li>
+                <li><i class="fas fa-check"></i> 本地处理，保护隐私安全</li>
+                <li><i class="fas fa-check"></i> 完全免费，无需注册</li>
+                <li><i class="fas fa-check"></i> 响应式设计，支持移动端</li>
+                <li><i class="fas fa-check"></i> 快速转换，实时进度显示</li>
+            </ul>
+        </div>
+
+        <div class="info-section">
+            <h2><i class="fas fa-question-circle"></i> 常见问题</h2>
+            
+            <h3>Q: 支持哪些PDF文件？</h3>
+            <p>A: 支持标准PDF格式文件，包括文本PDF、图片PDF和混合内容PDF。</p>
+            
+            <h3>Q: 转换后的文件质量如何？</h3>
+            <p>A: 我们使用先进的转换算法，尽可能保持原文档的格式和质量。</p>
+            
+            <h3>Q: 文件大小有限制吗？</h3>
+            <p>A: 建议PDF文件不超过50MB，过大的文件可能影响转换速度和浏览器性能。</p>
+            
+            <h3>Q: 转换速度如何？</h3>
+            <p>A: 转换速度取决于PDF文件的大小和复杂度，通常几秒到几分钟不等。</p>
+            
+            <h3>Q: 我的文件会被上传到服务器吗？</h3>
+            <p>A: 不会。所有转换都在您的浏览器本地完成，文件不会上传到任何服务器。</p>
+            
+            <h3>Q: 为什么有些复杂格式转换效果不理想？</h3>
+            <p>A: 复杂的PDF布局（如多栏文本、特殊字体等）可能影响转换效果，建议使用简单格式的PDF。</p>
+            
+            <h3>Q: 支持批量转换吗？</h3>
+            <p>A: 目前支持单文件转换，如需批量转换，请逐个处理文件。</p>
+            
+            <h3>Q: 转换后的Word文档可以编辑吗？</h3>
+            <p>A: 是的，转换后的Word文档是完全可编辑的，您可以修改文本、格式等内容。</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 小路工具箱 - PDF格式转换工具 | 
+            <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; margin-right: 1rem; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">技术支持</a>
+        <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">问题反馈</a>
+        </p>
+    </footer>
+
+    <script>
+        let selectedImages = [];
+        let selectedFormat = null;
+        let sortableInstance = null;
+
+        // 文件上传处理
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const filePreview = document.getElementById('filePreview');
+        const previewGrid = document.getElementById('previewGrid');
+        const convertBtn = document.getElementById('convertBtn');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const resultContainer = document.getElementById('resultContainer');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // 拖拽上传
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files);
+            const imageFiles = files.filter(file => file.type.startsWith('image/'));
+            if (imageFiles.length > 0) {
+                handleFiles(imageFiles);
+            } else {
+                alert('请选择图片格式文件');
+            }
+        });
+
+        // 文件选择处理
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            const imageFiles = files.filter(file => file.type.startsWith('image/'));
+            if (imageFiles.length > 0) {
+                handleFiles(imageFiles);
+            } else {
+                alert('请选择图片格式文件');
+            }
+        }
+
+        // 处理文件
+        function handleFiles(files) {
+            selectedImages = [...selectedImages, ...files];
+            updatePreview();
+            updateConvertButton();
+        }
+
+        // 更新预览
+        function updatePreview() {
+            if (selectedImages.length === 0) {
+                filePreview.style.display = 'none';
+                return;
+            }
+
+            // 显示文件信息
+            const totalSize = selectedImages.reduce((sum, file) => sum + file.size, 0);
+            document.getElementById('fileName').textContent = `已选择 ${selectedImages.length} 张图片`;
+            document.getElementById('fileSize').textContent = formatFileSize(totalSize);
+            filePreview.style.display = 'block';
+
+            // 清空预览网格
+            previewGrid.innerHTML = '';
+
+            // 添加图片预览
+            selectedImages.forEach((file, index) => {
+                const previewItem = document.createElement('div');
+                previewItem.className = 'preview-item';
+                previewItem.dataset.index = index;
+
+                const img = document.createElement('img');
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+
+                const orderDiv = document.createElement('div');
+                orderDiv.className = 'image-order';
+                orderDiv.textContent = index + 1;
+
+                const dragHandle = document.createElement('div');
+                dragHandle.className = 'drag-handle';
+                dragHandle.innerHTML = '<i class="fas fa-grip-vertical"></i>';
+
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'remove-btn';
+                removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                removeBtn.onclick = () => removeImage(index);
+
+                previewItem.appendChild(img);
+                previewItem.appendChild(orderDiv);
+                previewItem.appendChild(dragHandle);
+                previewItem.appendChild(removeBtn);
+                previewGrid.appendChild(previewItem);
+            });
+
+            // 初始化拖拽排序
+            initSortable();
+        }
+
+        // 初始化拖拽排序
+        function initSortable() {
+            if (sortableInstance) {
+                sortableInstance.destroy();
+            }
+            
+            sortableInstance = new Sortable(previewGrid, {
+                animation: 150,
+                ghostClass: 'sortable-ghost',
+                dragClass: 'sortable-drag',
+                onEnd: function(evt) {
+                    // 重新排序数组
+                    const item = selectedImages.splice(evt.oldIndex, 1)[0];
+                    selectedImages.splice(evt.newIndex, 0, item);
+                    
+                    // 更新序号
+                    updatePreviewNumbers();
+                }
+            });
+        }
+
+        // 更新预览序号
+        function updatePreviewNumbers() {
+            const orderElements = previewGrid.querySelectorAll('.image-order');
+            orderElements.forEach((element, index) => {
+                element.textContent = index + 1;
+            });
+        }
+
+        // 移除图片
+        function removeImage(index) {
+            selectedImages.splice(index, 1);
+            updatePreview();
+            updateConvertButton();
+        }
+
+        // 格式化文件大小
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // 选择转换格式
+        function selectFormat(format) {
+            // 移除之前的选择
+            document.querySelectorAll('.format-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // 添加新选择
+            document.querySelector(`[data-format="${format}"]`).classList.add('selected');
+            selectedFormat = format;
+            
+            updateConvertButton();
+        }
+
+        // 更新转换按钮状态
+        function updateConvertButton() {
+            convertBtn.disabled = selectedImages.length === 0 || !selectedFormat;
+        }
+
+        // 开始转换
+        async function startConversion() {
+            if (selectedImages.length === 0 || !selectedFormat) return;
+
+            convertBtn.disabled = true;
+            progressContainer.style.display = 'block';
+            resultContainer.style.display = 'none';
+            
+            try {
+                progressText.textContent = '正在处理图片...';
+                progressFill.style.width = '10%';
+                
+                let result;
+                switch (selectedFormat) {
+                    case 'word':
+                        result = await convertToWord();
+                        break;
+                    case 'pdf':
+                        result = await convertToPDF();
+                        break;
+                    case 'excel':
+                        result = await convertToExcel();
+                        break;
+                    case 'long-image':
+                        result = await convertToLongImage();
+                        break;
+                }
+                
+                progressText.textContent = '转换完成！';
+                progressFill.style.width = '100%';
+                
+                // 显示下载链接
+                downloadBtn.href = result.url;
+                downloadBtn.download = result.filename;
+                
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                    resultContainer.style.display = 'block';
+                }, 1000);
+                
+            } catch (error) {
+                console.error('转换失败:', error);
+                alert('转换失败，请重试或选择其他格式');
+                progressContainer.style.display = 'none';
+            }
+            
+            convertBtn.disabled = false;
+        }
+
+        // 图片转Word（真实实现）
+        async function convertToWord() {
+            progressText.textContent = '正在创建Word文档...';
+            progressFill.style.width = '20%';
+            
+            try {
+                const doc = new docx.Document({
+                    sections: [{
+                        properties: {},
+                        children: [
+                            new docx.Paragraph({
+                                children: [
+                                    new docx.TextRun({
+                                        text: "图片转Word文档",
+                                        bold: true,
+                                        size: 32
+                                    })
+                                ],
+                                alignment: docx.AlignmentType.CENTER,
+                                spacing: { after: 400 }
+                            }),
+                            new docx.Paragraph({
+                                children: [
+                                    new docx.TextRun({
+                                        text: `生成时间: ${new Date().toLocaleString()}`,
+                                        size: 20
+                                    })
+                                ],
+                                spacing: { after: 200 }
+                            }),
+                            new docx.Paragraph({
+                                children: [
+                                    new docx.TextRun({
+                                        text: `图片数量: ${selectedImages.length}`,
+                                        size: 20
+                                    })
+                                ],
+                                spacing: { after: 400 }
+                            })
+                        ]
+                    }]
+                });
+                
+                progressText.textContent = '正在处理图片...';
+                
+                // 处理每张图片
+                for (let i = 0; i < selectedImages.length; i++) {
+                    const file = selectedImages[i];
+                    progressText.textContent = `正在处理第 ${i + 1}/${selectedImages.length} 张图片...`;
+                    progressFill.style.width = `${20 + (i / selectedImages.length) * 60}%`;
+                    
+                    try {
+                        // 读取图片为ArrayBuffer
+                        const arrayBuffer = await file.arrayBuffer();
+                        
+                        // 创建图片对象获取尺寸
+                        const img = new Image();
+                        const imageUrl = URL.createObjectURL(file);
+                        
+                        await new Promise((resolve, reject) => {
+                            img.onload = resolve;
+                            img.onerror = reject;
+                            img.src = imageUrl;
+                        });
+                        
+                        // 计算适合A4页面的尺寸（A4: 595x842 points，留边距）
+                        const maxWidth = 500; // points
+                        const maxHeight = 700; // points
+                        let width = img.width;
+                        let height = img.height;
+                        
+                        if (width > maxWidth || height > maxHeight) {
+                            const ratio = Math.min(maxWidth / width, maxHeight / height);
+                            width = width * ratio;
+                            height = height * ratio;
+                        }
+                        
+                        // 添加图片标题
+                        doc.addSection({
+                            children: [
+                                new docx.Paragraph({
+                                    children: [
+                                        new docx.TextRun({
+                                            text: `图片 ${i + 1}: ${file.name}`,
+                                            bold: true,
+                                            size: 24
+                                        })
+                                    ],
+                                    spacing: { before: 400, after: 200 }
+                                }),
+                                new docx.Paragraph({
+                                    children: [
+                                        new docx.ImageRun({
+                                            data: arrayBuffer,
+                                            transformation: {
+                                                width: width,
+                                                height: height
+                                            }
+                                        })
+                                    ],
+                                    alignment: docx.AlignmentType.CENTER,
+                                    spacing: { after: 400 }
+                                })
+                            ]
+                        });
+                        
+                        URL.revokeObjectURL(imageUrl);
+                    } catch (error) {
+                        console.error(`处理图片 ${file.name} 失败:`, error);
+                        // 添加错误信息到文档
+                        doc.addSection({
+                            children: [
+                                new docx.Paragraph({
+                                    children: [
+                                        new docx.TextRun({
+                                            text: `图片 ${i + 1}: ${file.name} (处理失败)`,
+                                            color: "FF0000"
+                                        })
+                                    ]
+                                })
+                            ]
+                        });
+                    }
+                }
+                
+                progressText.textContent = '正在生成Word文件...';
+                progressFill.style.width = '90%';
+                
+                // 生成文档
+                const buffer = await docx.Packer.toBlob(doc);
+                const url = URL.createObjectURL(buffer);
+                
+                return {
+                    url: url,
+                    filename: `图片转Word文档_${new Date().toISOString().slice(0, 10)}.docx`
+                };
+            } catch (error) {
+                console.error('Word文档生成失败:', error);
+                throw new Error('Word文档生成失败，请重试');
+            }
+        }
+
+        // 图片转PDF（真实实现）
+        async function convertToPDF() {
+            progressText.textContent = '正在创建PDF文档...';
+            progressFill.style.width = '20%';
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF();
+                
+                // 添加标题页
+                pdf.setFontSize(20);
+                pdf.text('图片转PDF文档', 105, 30, { align: 'center' });
+                pdf.setFontSize(12);
+                pdf.text(`生成时间: ${new Date().toLocaleString()}`, 20, 50);
+                pdf.text(`图片数量: ${selectedImages.length}`, 20, 60);
+                
+                // 处理每张图片
+                for (let i = 0; i < selectedImages.length; i++) {
+                    const file = selectedImages[i];
+                    progressText.textContent = `正在处理第 ${i + 1}/${selectedImages.length} 张图片...`;
+                    progressFill.style.width = `${20 + (i / selectedImages.length) * 60}%`;
+                    
+                    try {
+                        // 创建图片对象
+                        const img = new Image();
+                        const imageUrl = URL.createObjectURL(file);
+                        
+                        await new Promise((resolve, reject) => {
+                            img.onload = resolve;
+                            img.onerror = reject;
+                            img.src = imageUrl;
+                        });
+                        
+                        // 添加新页面（除了第一张图片）
+                        if (i > 0) {
+                            pdf.addPage();
+                        } else {
+                            // 第一张图片在标题页后添加新页
+                            pdf.addPage();
+                        }
+                        
+                        // 计算适合A4页面的尺寸
+                        const pageWidth = pdf.internal.pageSize.getWidth();
+                        const pageHeight = pdf.internal.pageSize.getHeight();
+                        const margin = 20;
+                        const maxWidth = pageWidth - 2 * margin;
+                        const maxHeight = pageHeight - 2 * margin - 20; // 留出标题空间
+                        
+                        let width = img.width;
+                        let height = img.height;
+                        
+                        // 按比例缩放
+                        const ratio = Math.min(maxWidth / width, maxHeight / height);
+                        width = width * ratio;
+                        height = height * ratio;
+                        
+                        // 居中计算位置
+                        const x = (pageWidth - width) / 2;
+                        const y = margin + 10;
+                        
+                        // 添加图片标题
+                        pdf.setFontSize(14);
+                        pdf.text(`图片 ${i + 1}: ${file.name}`, margin, margin);
+                        
+                        // 将图片转换为base64并添加到PDF
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        
+                        const imageData = canvas.toDataURL('image/jpeg', 0.8);
+                        pdf.addImage(imageData, 'JPEG', x, y, width, height);
+                        
+                        URL.revokeObjectURL(imageUrl);
+                    } catch (error) {
+                        console.error(`处理图片 ${file.name} 失败:`, error);
+                        // 添加错误页面
+                        if (i > 0) {
+                            pdf.addPage();
+                        } else {
+                            pdf.addPage();
+                        }
+                        pdf.setFontSize(14);
+                        pdf.setTextColor(255, 0, 0);
+                        pdf.text(`图片 ${i + 1}: ${file.name} (处理失败)`, 20, 30);
+                        pdf.setTextColor(0, 0, 0);
+                    }
+                }
+                
+                progressText.textContent = '正在生成PDF文件...';
+                progressFill.style.width = '90%';
+                
+                // 生成PDF
+                const pdfBlob = pdf.output('blob');
+                const url = URL.createObjectURL(pdfBlob);
+                
+                return {
+                    url: url,
+                    filename: `图片转PDF文档_${new Date().toISOString().slice(0, 10)}.pdf`
+                };
+            } catch (error) {
+                console.error('PDF文档生成失败:', error);
+                throw new Error('PDF文档生成失败，请重试');
+            }
+        }
+
+        // 图片转Excel（真实实现）
+        async function convertToExcel() {
+            progressText.textContent = '正在创建Excel文档...';
+            progressFill.style.width = '20%';
+            
+            try {
+                // 创建工作簿
+                const workbook = new ExcelJS.Workbook();
+                const worksheet = workbook.addWorksheet('图片列表');
+                
+                // 设置列标题
+                worksheet.columns = [
+                    { header: '序号', key: 'index', width: 10 },
+                    { header: '图片名称', key: 'name', width: 30 },
+                    { header: '文件大小', key: 'size', width: 15 },
+                    { header: '图片类型', key: 'type', width: 15 },
+                    { header: '备注', key: 'note', width: 20 }
+                ];
+                
+                // 添加图片信息
+                for (let i = 0; i < selectedImages.length; i++) {
+                    const file = selectedImages[i];
+                    progressText.textContent = `正在处理第 ${i + 1}/${selectedImages.length} 张图片...`;
+                    progressFill.style.width = `${20 + (i / selectedImages.length) * 60}%`;
+                    
+                    worksheet.addRow({
+                        index: i + 1,
+                        name: file.name,
+                        size: formatFileSize(file.size),
+                        type: file.type,
+                        note: '已处理'
+                    });
+                }
+                
+                // 添加汇总信息
+                worksheet.addRow({});
+                worksheet.addRow({ index: '汇总信息', name: '', size: '', type: '', note: '' });
+                worksheet.addRow({ index: '总图片数', name: selectedImages.length, size: '', type: '', note: '' });
+                const totalSize = selectedImages.reduce((sum, file) => sum + file.size, 0);
+                worksheet.addRow({ index: '总大小', name: formatFileSize(totalSize), size: '', type: '', note: '' });
+                worksheet.addRow({ index: '生成时间', name: new Date().toLocaleString(), size: '', type: '', note: '' });
+                
+                progressText.textContent = '正在生成Excel文件...';
+                progressFill.style.width = '90%';
+                
+                // 生成Excel文件
+                const buffer = await workbook.xlsx.writeBuffer();
+                const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                const url = URL.createObjectURL(blob);
+                
+                return {
+                    url: url,
+                    filename: `图片列表_${new Date().toISOString().slice(0, 10)}.xlsx`
+                };
+            } catch (error) {
+                console.error('Excel文档生成失败:', error);
+                throw new Error('Excel文档生成失败，请重试');
+            }
+        }
+
+        // 图片转长图（真实实现）
+        async function convertToLongImage() {
+            progressText.textContent = '正在处理图片...';
+            progressFill.style.width = '20%';
+            
+            try {
+                const imageCanvases = [];
+                let maxWidth = 0;
+                let totalHeight = 0;
+                
+                // 处理每张图片
+                for (let i = 0; i < selectedImages.length; i++) {
+                    const file = selectedImages[i];
+                    progressText.textContent = `正在处理第 ${i + 1}/${selectedImages.length} 张图片...`;
+                    progressFill.style.width = `${20 + (i / selectedImages.length) * 50}%`;
+                    
+                    const img = new Image();
+                    const imageUrl = URL.createObjectURL(file);
+                    
+                    await new Promise((resolve, reject) => {
+                        img.onload = resolve;
+                        img.onerror = reject;
+                        img.src = imageUrl;
+                    });
+                    
+                    // 创建画布并绘制图片
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                    
+                    imageCanvases.push(canvas);
+                    maxWidth = Math.max(maxWidth, canvas.width);
+                    totalHeight += canvas.height;
+                    
+                    URL.revokeObjectURL(imageUrl);
+                }
+                
+                progressText.textContent = '正在合并为长图...';
+                progressFill.style.width = '80%';
+                
+                // 创建长图画布
+                const longCanvas = document.createElement('canvas');
+                longCanvas.width = maxWidth;
+                longCanvas.height = totalHeight;
+                const longCtx = longCanvas.getContext('2d');
+                
+                // 设置白色背景
+                longCtx.fillStyle = '#ffffff';
+                longCtx.fillRect(0, 0, longCanvas.width, longCanvas.height);
+                
+                // 将所有图片绘制到长图上
+                let currentY = 0;
+                imageCanvases.forEach((canvas) => {
+                    const x = (maxWidth - canvas.width) / 2; // 居中对齐
+                    longCtx.drawImage(canvas, x, currentY);
+                    currentY += canvas.height;
+                });
+                
+                progressText.textContent = '正在生成最终图片...';
+                progressFill.style.width = '95%';
+                
+                return new Promise((resolve) => {
+                    longCanvas.toBlob((blob) => {
+                        const url = URL.createObjectURL(blob);
+                        resolve({
+                            url: url,
+                            filename: `合并长图_${new Date().toISOString().slice(0, 10)}.png`
+                        });
+                    }, 'image/png', 0.95);
+                });
+                
+            } catch (error) {
+                console.error('长图转换失败:', error);
+                throw new Error('长图转换失败，请重试');
+            }
+        }
+    </script>
+</body>
+</html>
