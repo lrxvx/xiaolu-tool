@@ -6,6 +6,7 @@
     "icon": "fas fa-exchange-alt",
     "description": "将飞书文档、PDF文件或公众号文章转换为符合博客风格的Markdown格式，自动生成frontmatter信息。",
     "tags": ["Markdown", "博客"],
+    "categories": ["document-processing", "content-creation"],
     "url": "tools/content-converter.html"
   },
   {
@@ -15,6 +16,7 @@
     "icon": "fas fa-code",
     "description": "快速将文本转换为Base64编码，或将Base64编码解码为原始文本，支持中文和特殊字符。",
     "tags": ["编码", "解码"],
+    "categories": ["encoding-conversion"],
     "url": "tools/base64-encoder.html"
   },
   {
@@ -24,6 +26,7 @@
     "icon": "fas fa-vial",
     "description": "这是一个示例工具，展示了工具的基本结构和样式。您可以基于此模板开发新的工具。",
     "tags": ["示例", "模板"],
+    "categories": ["utility-tools"],
     "url": "tools/example-tool.html"
   },
   {
@@ -33,6 +36,7 @@
     "icon": "fas fa-image",
     "description": "生成标题+核心观点+对比表格+总结性建议的内容卡片，支持多种背景颜色，可下载为图片。",
     "tags": ["图片", "卡片", "对比"],
+    "categories": ["content-creation", "design-graphics"],
     "url": "tools/content-card-generator.html"
   },
   {
@@ -42,6 +46,7 @@
     "icon": "fas fa-book",
     "description": "输入日记内容，自动生成精美的小红书风格日记卡片，支持多种背景颜色，可下载为图片。",
     "tags": ["小红书", "日记", "卡片"],
+    "categories": ["content-creation", "design-graphics"],
     "url": "tools/xiaohongshu-diary-card.html"
   },
   {
@@ -51,6 +56,7 @@
     "icon": "fas fa-quote-left",
     "description": "输入名言警句或励志语录，生成精美的每日一句卡片，支持多种样式和颜色，可下载为图片。",
     "tags": ["名言", "卡片", "励志"],
+    "categories": ["content-creation", "design-graphics"],
     "url": "tools/daily-quote-card.html"
   },
   {
@@ -60,6 +66,7 @@
     "icon": "fas fa-calculator",
     "description": "输入月薪、工作天数和时长，实时计算每秒钟赚取的金额，让摸鱼更有成就感。支持元、角、分单位切换。",
     "tags": ["计算器", "摸鱼", "薪资"],
+    "categories": ["calculator-tools", "utility-tools"],
     "url": "tools/idle-calculator.html"
   },
   {
@@ -69,6 +76,7 @@
     "icon": "fas fa-chart-line",
     "description": "根据您的月收入、月支出和当前年龄，计算达到财富自由所需的时间，并提供实时倒计时和进度显示。",
     "tags": ["财富自由", "理财", "计算器"],
+    "categories": ["calculator-tools"],
     "url": "tools/wealth-freedom-calculator.html"
   },
   {
@@ -78,6 +86,7 @@
     "icon": "fas fa-home",
     "description": "设定购房或购车目标，计算还需多少时间和金钱达成目标，还能换算成奶茶杯数让目标更有趣。",
     "tags": ["买房", "买车", "倒计时", "理财"],
+    "categories": ["calculator-tools"],
     "url": "tools/house-car-countdown.html"
   },
   {
@@ -87,6 +96,7 @@
     "icon": "fas fa-images",
     "description": "专业的海报批量处理工具，支持背景图与多张图片合并，自动居中适配，支持缩放旋转，一键生成高质量海报。",
     "tags": ["海报", "图片合并", "批量处理", "设计"],
+    "categories": ["image-processing", "design-graphics"],
     "url": "tools/poster-batch-processor.html"
   },
   {
@@ -96,6 +106,7 @@
     "icon": "fas fa-file-pdf",
     "description": "支持JPG、PNG、GIF、BMP等格式，可拖拽上传多张图片，支持拖拽排序，一键生成PDF文档并下载。",
     "tags": ["PDF", "图片转换", "批量处理", "文档"],
+    "categories": ["image-processing", "document-processing"],
     "url": "tools/image-to-pdf.html"
   },
   {
@@ -105,6 +116,7 @@
     "icon": "fas fa-shield-alt",
     "description": "支持PDF、Word、Excel文件加密，使用军用级AES-256加密算法，支持批量加密，本地处理确保安全。",
     "tags": ["加密", "密码保护", "文档安全", "批量处理"],
+    "categories": ["document-processing", "security-privacy"],
     "url": "tools/file-encryptor.html"
   },
   {
@@ -114,6 +126,7 @@
     "icon": "fas fa-stamp",
     "description": "专业的PDF水印处理工具，支持添加自定义文字水印和移除水印，可调整字体大小、颜色、透明度、旋转角度和位置，支持批量处理。",
     "tags": ["PDF", "水印", "文档保护", "批量处理", "版权保护"],
+    "categories": ["document-processing", "security-privacy"],
     "url": "tools/pdf-watermark.html"
   },
   {
@@ -123,6 +136,7 @@
     "icon": "fas fa-text-width",
     "description": "使用先进OCR技术快速识别图片中的文字内容，支持中英文识别，支持多种图片格式，批量处理，本地处理保护隐私。",
     "tags": ["OCR", "文字识别", "图片处理", "批量处理", "文字提取"],
+    "categories": ["image-processing", "utility-tools"],
     "url": "tools/image-text-extractor.html"
   },
   {
@@ -132,6 +146,7 @@
     "icon": "fas fa-exchange-alt",
     "description": "支持PDF转Word、PDF转Excel、PDF转图片、PDF转长图等多种格式转换，高质量输出，本地处理保护隐私安全。",
     "tags": ["PDF转换", "格式转换", "Word", "Excel", "图片", "文档处理"],
+    "categories": ["document-processing", "encoding-conversion"],
     "url": "tools/pdf-converter.html"
   },
   {
@@ -141,6 +156,7 @@
     "icon": "fas fa-images",
     "description": "支持图片转Word、图片转Excel、图片转PDF、合并长图等多种格式转换，支持JPG、PNG、GIF、BMP、WEBP等格式，本地处理保护隐私。",
     "tags": ["图片转换", "格式转换", "Word", "Excel", "PDF", "长图合并", "图片处理"],
+    "categories": ["image-processing", "encoding-conversion"],
     "url": "tools/image-format-converter.html"
   },
   {
@@ -150,6 +166,7 @@
     "icon": "fas fa-pencil-alt",
     "description": "将动漫图片转换为铅笔线稿，适合儿童涂色使用。支持JPG、PNG等格式，可调整边缘检测强度、线条粗细和对比度，本地处理保护隐私。",
     "tags": ["动漫转线稿", "图片转铅笔画", "线稿生成", "涂色线稿", "图片处理", "儿童涂色"],
+    "categories": ["image-processing", "design-graphics"],
     "url": "tools/anime-to-sketch.html"
   },
   {
@@ -159,6 +176,7 @@
     "icon": "fas fa-eraser",
     "description": "专业的在线图片水印去除工具，支持AI智能检测和手动选择水印区域，一键清除各种水印。支持JPG、PNG、WEBP等多种格式，完全免费使用。",
     "tags": ["水印去除", "图片水印清除", "AI水印检测", "在线水印去除", "图片处理工具", "免费水印清除"],
+    "categories": ["image-processing", "security-privacy"],
     "url": "tools/watermark-remover.html"
   },
   {
@@ -168,6 +186,7 @@
     "icon": "fas fa-globe",
     "description": "专业的全球时差计算工具，实时显示世界各地时间、时区、日出日落时间，支持农历公历对比，完美解决时差问题。",
     "tags": ["时差计算", "世界时间", "时区转换", "日出日落", "农历公历", "全球时间"],
+    "categories": ["calculator-tools", "utility-tools"],
     "url": "tools/timezone-calculator.html"
   },
   {
@@ -177,6 +196,7 @@
     "icon": "fas fa-compress-alt",
     "description": "专业的在线图片压缩工具，支持批量压缩JPG、PNG、WebP等格式，智能算法保持图片清晰度，自定义压缩率，完全免费使用。",
     "tags": ["图片压缩", "在线压缩", "批量压缩", "JPG压缩", "PNG压缩", "WebP压缩", "图片优化"],
+    "categories": ["image-processing"],
     "url": "tools/image-compressor.html"
   }
 ]

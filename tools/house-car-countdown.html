@@ -83,88 +83,29 @@
             color: #333;
         }
 
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 0 5%;
-        }
+        /* 导航栏样式由组件提供 */
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 0;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        /* 导航栏样式由组件提供 */
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
+        /* 导航栏样式由组件提供 */
 
-        .logo-icon {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
-        }
+        /* 导航栏样式由组件提供 */
 
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--dark);
-        }
+        /* 导航栏样式由组件提供 */
 
         .logo-text span {
             color: var(--primary);
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
+        /* 导航栏样式由组件提供 */
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--gray);
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-            padding: 0.5rem 0;
-        }
+        /* 导航栏样式由组件提供 */
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary);
-        }
+        /* 导航栏样式由组件提供 */
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--primary);
-            transition: var(--transition);
-        }
+        /* 导航栏样式由组件提供 */
 
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
+        /* 导航栏样式由组件提供 */
 
         .tool-container {
             max-width: 1200px;
@@ -172,10 +113,7 @@
             padding: 0 2rem;
         }
 
-        .tool-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+        .tool-/* 导航栏样式由组件提供 */
 
         .tool-header h1 {
             font-size: 2.5rem;
@@ -480,9 +418,7 @@
                 flex-direction: column;
             }
 
-            .navbar {
-                padding: 1rem;
-            }
+            /* 导航栏样式由组件提供 */
 
             .tool-container {
                 padding: 0 1rem;
@@ -493,29 +429,14 @@
             }
         }
     </style>
+
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <a href="../index.html" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <div class="logo-text">内容创作者<span>工具箱</span></div>
-            </a>
-            
-            <div class="nav-links">
-                <a href="../index.html">首页</a>
-                <a href="#">所有工具</a>
-                <a href="#">关于</a>
-                <a href="#">联系我们</a>
-            </div>
-            
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </nav>
-    </header>
+    
+    <!-- 导航栏将通过JavaScript组件自动生成 -->
 
     <div class="tool-container">
         <div class="tool-header">
@@ -941,14 +862,7 @@
     </script>
 
     <!-- 页脚 -->
-    <footer style="background-color: white; padding: 2rem 5%; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05); margin-top: auto;">
-        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-            <div style="margin-bottom: 1rem;">
-                <span style="color: var(--gray); margin-right: 2rem;">© 2025 买房买车倒计时</span>
-                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; margin-right: 1rem; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">技术支持</a>
-                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">问题反馈</a>
-            </div>
-        </div>
-    </footer>
+    
+    <!-- 页脚将通过JavaScript组件自动生成 -->
 </body>
 </html>

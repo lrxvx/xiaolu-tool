@@ -89,389 +89,7 @@
             font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
         }
 
-        /* 导航栏样式 */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .logo-text {
-            color: var(--dark);
-        }
-
-        .logo-text span {
-            color: var(--primary);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--gray);
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--dark);
-            cursor: pointer;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            flex: 1;
-        }
-
-        .tool-header {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-
-        .tool-header h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .tool-header p {
-            color: var(--gray);
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-
-        .main-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .content-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .left-section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .right-section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border: 1px solid #f0f0f0;
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-            padding: 16px;
-            background: rgba(255,255,255,0.95);
-            border-radius: 12px 12px 0 0;
-        }
-
-        .usage-guide {
-            margin-top: 24px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        .guide-steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            padding: 16px;
-        }
-
-        .step {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            transition: transform 0.2s;
-        }
-
-        .step:hover {
-            transform: translateY(-4px);
-        }
-
-        .step-number {
-            width: 36px;
-            height: 36px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-
-        .step-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 6px;
-        }
-
-        .step-desc {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .card-header i {
-            font-size: 20px;
-            margin-right: 12px;
-            color: var(--primary);
-        }
-
-        .card-header h3 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .preview-card {
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #e0e0e0;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .preview-card:hover {
-            border-color: var(--primary);
-            background: linear-gradient(135deg, #f0f8ff 0%, #ffffff 100%);
-        }
-
-        .preview-placeholder {
-            text-align: center;
-            color: #666;
-            padding: 40px;
-        }
-
-        .preview-placeholder p {
-            margin: 0;
-            font-size: 16px;
-            line-height: 1.6;
-            color: #888;
-        }
-
-        .preview-placeholder i {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: var(--primary);
-            opacity: 0.6;
-        }
-
-        .tool-controls {
-            grid-column: 1 / -1;
-            background: var(--light);
-            padding: 20px;
-            border-radius: 12px;
-            border: 2px solid #e0e0e0;
-        }
-
-        .left-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .right-panel {
-            background: var(--light);
-            border-radius: 12px;
-            padding: 20px;
-            border: 2px dashed #e0e0e0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 400px;
-        }
-
-        .usage-guide {
-            grid-column: 1;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
-            font-size: 14px;
-        }
-
-        .section {
-            padding: 20px;
-            border: 2px dashed #e0e0e0;
-            border-radius: 12px;
-            transition: var(--transition);
-            background: white;
-        }
-
-        .section:hover {
-            border-color: var(--primary);
-            background: rgba(67, 97, 238, 0.02);
-        }
-
-        .section h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .upload-area {
-            border: 2px dashed #d0d7de;
-            border-radius: 12px;
-            padding: 32px 24px;
-            text-align: center;
-            background: #f8f9fa;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .upload-area:hover {
-            border-color: var(--primary);
-            background: #f0f8ff;
-        }
-
-        .upload-area.dragover {
-            border-color: var(--primary);
-            background: #e6f3ff;
-        }
-
-        .file-input {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-        }
-
-        .upload-content {
-            pointer-events: none;
-        }
-
-        .upload-icon {
-            font-size: 32px;
-            color: var(--primary);
-            margin-bottom: 12px;
-            opacity: 0.8;
-        }
-
-        .upload-text {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .upload-hint {
-             font-size: 14px;
-             color: #666;
-         }
-
-         /* 响应式设计 */
+        /* 导航栏样式由组件提供 *//* 响应式设计 */
          @media (max-width: 768px) {
              .content-wrapper {
                  grid-template-columns: 1fr;
@@ -480,16 +98,14 @@
              
              .main-content {
                  padding: 16px;
-             }
+             
+            flex: 1;}
              
              .card {
                  padding: 20px;
              }
              
-             .tool-header {
-                 padding: 24px;
-                 margin-bottom: 20px;
-             }
+             .tool-/* 导航栏样式由组件提供 */
              
              .tool-header h1 {
                  font-size: 2rem;
@@ -724,7 +340,8 @@
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
-            }
+            
+            flex: 1;}
             
             .tool-header h1 {
                 font-size: 2rem;
@@ -735,28 +352,15 @@
             }
         }
     </style>
+
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
 </head>
 <body>
     <!-- 导航栏 -->
-    <header>
-        <nav class="navbar">
-            <a href="../index.html" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <div class="logo-text">内容创作者<span>工具箱</span></div>
-            </a>
-            <div class="nav-links">
-                <a href="../index.html">首页</a>
-                <a href="#">所有工具</a>
-                <a href="#">关于</a>
-                <a href="#">联系我们</a>
-            </div>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </nav>
-    </header>
+    
+    <!-- 导航栏将通过JavaScript组件自动生成 -->
 
     <div class="container">
         <div class="tool-header">
@@ -1304,14 +908,7 @@
     </script>
 
     <!-- 页脚 -->
-    <footer style="background-color: white; padding: 2rem 5%; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05); margin-top: auto;">
-        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-            <div style="margin-bottom: 1rem;">
-                <span style="color: var(--gray); margin-right: 2rem;">© 2025 海报批量处理器</span>
-                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; margin-right: 1rem; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">技术支持</a>
-                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">问题反馈</a>
-            </div>
-        </div>
-    </footer>
+    
+    <!-- 页脚将通过JavaScript组件自动生成 -->
 </body>
 </html>

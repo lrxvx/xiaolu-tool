@@ -55,15 +55,7 @@
             line-height: 1.6;
         }
         
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
+        /* 导航栏样式由组件提供 */
         
         .nav-container {
             max-width: 1200px;
@@ -74,41 +66,22 @@
             align-items: center;
         }
         
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #007AFF;
-            text-decoration: none;
-        }
+        /* 导航栏样式由组件提供 */
         
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+        /* 导航栏样式由组件提供 */
         
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
+        /* 导航栏样式由组件提供 */
         
-        .nav-links a:hover {
-            color: #007AFF;
-        }
+        /* 导航栏样式由组件提供 */
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-        }
         
-        .tool-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: white;
-        }
+            flex: 1;}
+        
+        .tool-/* 导航栏样式由组件提供 */
         
         .tool-header h1 {
             font-size: 3rem;
@@ -130,7 +103,8 @@
             padding: 3rem;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             margin-bottom: 3rem;
-        }
+        
+            flex: 1;}
         
         .upload-area {
             border: 3px dashed #007AFF;
@@ -390,17 +364,17 @@
         }
         
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
+            /* 导航栏样式由组件提供 */
             
             .container {
                 padding: 1rem;
-            }
+            
+            flex: 1;}
             
             .main-content {
                 padding: 2rem 1.5rem;
-            }
+            
+            flex: 1;}
             
             .tool-header h1 {
                 font-size: 2rem;
@@ -426,19 +400,15 @@
             }
         }
     </style>
+
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
 </head>
 <body>
     <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="../index.html" class="logo">🦌 小路工具箱</a>
-            <ul class="nav-links">
-                <li><a href="../index.html">首页</a></li>
-                <li><a href="../index.html#tools">工具</a></li>
-                <li><a href="../index.html#about">关于</a></li>
-            </ul>
-        </div>
-    </nav>
+    
+    <!-- 导航栏将通过JavaScript组件自动生成 -->
 
     <div class="container">
         <!-- 工具标题 -->
@@ -557,18 +527,8 @@
     </div>
 
     <!-- 底部 -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="../index.html">返回首页</a>
-                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; margin-right: 1rem; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">技术支持</a>
-            <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">问题反馈</a>
-            </div>
-            <div class="footer-text">
-                © 2025 动漫图片转铅笔线稿工具 - 小路工具箱 | 让创作更简单
-            </div>
-        </div>
-    </footer>
+    
+    <!-- 页脚将通过JavaScript组件自动生成 -->
 
     <script>
         // DOM 元素

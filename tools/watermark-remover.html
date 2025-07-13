@@ -80,16 +80,10 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-        }
         
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 20px;
-        }
+            flex: 1;}
+        
+        ./* 导航栏样式由组件提供 */
         
         .header h1 {
             font-size: 2.5rem;
@@ -107,7 +101,8 @@
             grid-template-columns: 1fr 1fr;
             gap: 30px;
             margin-bottom: 40px;
-        }
+        
+            flex: 1;}
         
         .upload-section {
             background: var(--surface);
@@ -462,7 +457,8 @@
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
-            }
+            
+            flex: 1;}
             
             .header h1 {
                 font-size: 2rem;
@@ -471,7 +467,8 @@
             .main-content {
                 grid-template-columns: 1fr;
                 gap: 20px;
-            }
+            
+            flex: 1;}
             
             .mode-selector {
                 flex-direction: column;
@@ -486,13 +483,15 @@
             }
         }
     </style>
+
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <h1>🎨 图片水印去除工具</h1>
-            <p>智能AI检测 + 手动精确选择，轻松去除各种水印</p>
-        </header>
+        
+    <!-- 导航栏将通过JavaScript组件自动生成 -->
         
         <div class="main-content">
             <div class="upload-section">
@@ -658,14 +657,8 @@
             </div>
         </div>
         
-        <footer class="footer">
-            <div class="footer-links">
-                <a href="../index.html">返回首页</a>
-                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; margin-right: 1rem; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">技术支持</a>
-                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">问题反馈</a>
-            </div>
-            <p>&copy; 2025 图片水印去除工具 - 专业的在线水印清除工具</p>
-        </footer>
+        
+    <!-- 页脚将通过JavaScript组件自动生成 -->
     </div>
     
     <!-- 手动选择模态框 -->

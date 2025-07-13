@@ -49,17 +49,11 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: #333;
+            display: flex;
+            flex-direction: column;
         }
         
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        /* 导航栏样式由组件提供 */
         
         .nav-container {
             max-width: 1200px;
@@ -70,41 +64,22 @@
             padding: 0 2rem;
         }
         
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
-            text-decoration: none;
-        }
+        /* 导航栏样式由组件提供 */
         
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+        /* 导航栏样式由组件提供 */
         
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+        /* 导航栏样式由组件提供 */
         
-        .nav-links a:hover {
-            color: #667eea;
-        }
+        /* 导航栏样式由组件提供 */
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            flex: 1;
         }
         
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: white;
-        }
+        /* 导航栏样式由组件提供 */
         
         .header h1 {
             font-size: 2.5rem;
@@ -122,6 +97,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
             margin-bottom: 3rem;
+            flex: 1;
         }
         
         .timezone-card {
@@ -137,11 +113,7 @@
             transform: translateY(-5px);
         }
         
-        .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
+        /* 导航栏样式由组件提供 */
         
         .card-icon {
             width: 40px;
@@ -414,13 +386,12 @@
                 padding: 0 1rem;
             }
             
-            .nav-links {
-                gap: 1rem;
-            }
+            /* 导航栏样式由组件提供 */
             
             .container {
                 padding: 1rem;
-            }
+            
+            flex: 1;}
             
             .header h1 {
                 font-size: 2rem;
@@ -429,7 +400,8 @@
             .main-content {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
-            }
+            
+            flex: 1;}
             
             .current-time {
                 font-size: 2rem;
@@ -534,19 +506,15 @@
         .noon-dot { background: #FF6B35; }
         .horizon-line { background: #8B4513; width: 20px; height: 2px; border-radius: 0; }
     </style>
+
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
 </head>
 <body>
     <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="../index.html" class="logo">🛠️ 小路工具箱</a>
-            <ul class="nav-links">
-                <li><a href="../index.html">首页</a></li>
-                <li><a href="#instructions">使用说明</a></li>
-                <li><a href="#faq">常见问题</a></li>
-            </ul>
-        </div>
-    </nav>
+    
+    <!-- 导航栏将通过JavaScript组件自动生成 -->
 
     <div class="container">
         <!-- 页面标题 -->

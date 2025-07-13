@@ -81,17 +81,11 @@
             color: var(--dark);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-        }
         
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+            display: flex;
+            flex-direction: column;}
+        
+        /* 导航栏样式由组件提供 */
         
         .nav-container {
             max-width: 1200px;
@@ -102,41 +96,22 @@
             align-items: center;
         }
         
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            text-decoration: none;
-        }
+        /* 导航栏样式由组件提供 */
         
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+        /* 导航栏样式由组件提供 */
         
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+        /* 导航栏样式由组件提供 */
         
-        .nav-links a:hover {
-            color: var(--primary);
-        }
+        /* 导航栏样式由组件提供 */
         
         .container {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 2rem;
-        }
         
-        .tool-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: white;
-        }
+            flex: 1;}
+        
+        .tool-/* 导航栏样式由组件提供 */
         
         .tool-header h1 {
             font-size: 2.5rem;
@@ -155,7 +130,8 @@
             padding: 2rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
-        }
+        
+            flex: 1;}
         
         .upload-area {
             border: 3px dashed var(--border);
@@ -488,7 +464,8 @@
             
             .container {
                 padding: 0 1rem;
-            }
+            
+            flex: 1;}
             
             .tool-header h1 {
                 font-size: 2rem;
@@ -499,20 +476,14 @@
             }
         }
     </style>
+
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="../index.html" class="logo">
-                <i class="fas fa-tools"></i> 小路工具箱
-            </a>
-            <ul class="nav-links">
-                <li><a href="../index.html">首页</a></li>
-                <li><a href="../index.html#tools">工具</a></li>
-                <li><a href="../index.html#about">关于</a></li>
-            </ul>
-        </div>
-    </nav>
+    
+    <!-- 导航栏将通过JavaScript组件自动生成 -->
 
     <div class="container">
         <div class="tool-header">
@@ -665,12 +636,8 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <p>&copy; 2025 小路工具箱 - PDF格式转换工具 | 
-            <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; margin-right: 1rem; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">技术支持</a>
-        <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">问题反馈</a>
-        </p>
-    </footer>
+    
+    <!-- 页脚将通过JavaScript组件自动生成 -->
 
     <script>
         let selectedImages = [];

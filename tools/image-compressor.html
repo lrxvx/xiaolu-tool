@@ -51,6 +51,10 @@
     }
     </script>
     
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -64,19 +68,18 @@
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            flex: 1;
         }
         
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            color: white;
-        }
+        /* 导航栏样式由组件提供 */
         
         .header h1 {
             font-size: 2.5rem;
@@ -95,6 +98,7 @@
             padding: 40px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             margin-bottom: 40px;
+            flex: 1;
         }
         
         .upload-area {
@@ -427,7 +431,8 @@
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
-            }
+            
+            flex: 1;}
             
             .header h1 {
                 font-size: 2rem;
@@ -435,7 +440,8 @@
             
             .main-content {
                 padding: 25px;
-            }
+            
+            flex: 1;}
             
             .upload-area {
                 padding: 40px 15px;

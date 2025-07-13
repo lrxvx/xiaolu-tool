@@ -1,0 +1,325 @@
+/* 分类管理样式 */
+
+.category-filter-container {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f0f0f0;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.filter-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-header h3 i {
+    color: #667eea;
+    font-size: 1rem;
+}
+
+.btn-clear-filter {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #6c757d;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-clear-filter:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.category-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.category-item {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.category-item:hover {
+    background: #e9ecef;
+    border-color: var(--category-color, #667eea);
+    transform: translateY(-1px);
+}
+
+.category-item.active {
+    background: var(--category-color, #667eea);
+    border-color: var(--category-color, #667eea);
+    color: white;
+}
+
+.category-item.all-category {
+    --category-color: #667eea;
+    --category-color-rgb: 102, 126, 234;
+}
+
+.category-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.category-info {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.category-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.category-count {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.category-item:not(.active) .category-count {
+    background: rgba(0, 0, 0, 0.1);
+    color: #6c757d;
+}
+
+/* 筛选统计 */
+.filter-stats {
+    background: #f8f9fa;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    border-left: 4px solid #667eea;
+}
+
+.stats-text {
+    color: #495057;
+    font-size: 0.95rem;
+}
+
+.stats-text strong {
+    color: #667eea;
+    font-weight: 600;
+}
+
+/* 无结果提示 */
+.no-results-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+}
+
+.no-results-content i {
+    font-size: 4rem;
+    color: #dee2e6;
+    margin-bottom: 20px;
+}
+
+.no-results-content h3 {
+    color: #495057;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.no-results-content p {
+    color: #6c757d;
+    margin: 0;
+}
+
+/* 搜索框增强 */
+.search-container {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 16px 20px 16px 50px;
+    border: 2px solid #f0f0f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .category-grid {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+    }
+    
+    .category-item {
+        flex-shrink: 0;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .category-icon {
+        font-size: 0.9rem;
+    }
+    
+    .category-name {
+        font-size: 0.85rem;
+    }
+    
+    .category-count {
+        font-size: 0.75rem;
+        padding: 1px 4px;
+    }
+    
+    .filter-header {
+        flex-direction: row;
+        margin-bottom: 8px;
+    }
+    
+    .filter-header h3 {
+        font-size: 1rem;
+    }
+    
+    .btn-clear-filter {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .category-filter-container {
+        padding: 12px;
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-filter-container {
+        padding: 10px;
+        margin-bottom: 12px;
+    }
+    
+    .filter-header h3 {
+        font-size: 0.95rem;
+    }
+    
+    .category-item {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .category-name {
+        font-size: 0.8rem;
+    }
+    
+    .category-count {
+        font-size: 0.7rem;
+    }
+}
+
+/* 分类颜色变量 */
+.category-item[style*="--category-color: #667eea"] {
+    --category-color-rgb: 102, 126, 234;
+}
+
+.category-item[style*="--category-color: #f093fb"] {
+    --category-color-rgb: 240, 147, 251;
+}
+
+.category-item[style*="--category-color: #4facfe"] {
+    --category-color-rgb: 79, 172, 254;
+}
+
+.category-item[style*="--category-color: #43e97b"] {
+    --category-color-rgb: 67, 233, 123;
+}
+
+.category-item[style*="--category-color: #fa709a"] {
+    --category-color-rgb: 250, 112, 154;
+}
+
+.category-item[style*="--category-color: #ffecd2"] {
+    --category-color-rgb: 255, 236, 210;
+}
+
+.category-item[style*="--category-color: #ff9a9e"] {
+    --category-color-rgb: 255, 154, 158;
+}
+
+.category-item[style*="--category-color: #a8edea"] {
+    --category-color-rgb: 168, 237, 234;
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.category-item {
+    animation: fadeInUp 0.3s ease forwards;
+}
+
+.category-item:nth-child(1) { animation-delay: 0.1s; }
+.category-item:nth-child(2) { animation-delay: 0.2s; }
+.category-item:nth-child(3) { animation-delay: 0.3s; }
+.category-item:nth-child(4) { animation-delay: 0.4s; }
+.category-item:nth-child(5) { animation-delay: 0.5s; }
+.category-item:nth-child(6) { animation-delay: 0.6s; }
+.category-item:nth-child(7) { animation-delay: 0.7s; }
+.category-item:nth-child(8) { animation-delay: 0.8s; }
+.category-item:nth-child(9) { animation-delay: 0.9s; }

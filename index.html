@@ -80,6 +80,7 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/category-styles.css">
     <style>
         :root {
             --primary: #4361ee;
@@ -902,6 +903,12 @@
     <main>
         <!-- 主要内容区域 -->
         <div class="main-content">
+            <!-- 分类筛选区域 -->
+            <div id="category-filter"></div>
+            
+            <!-- 筛选统计 -->
+            <div class="filter-stats"></div>
+            
             <!-- 左侧工具区域 -->
         
         <!-- 热门工具 -->
@@ -1161,6 +1168,7 @@
                 const toolCard = document.createElement('div');
                 toolCard.className = 'tool-card';
                 toolCard.setAttribute('data-tags', tagsString);
+                toolCard.setAttribute('data-tool-id', tool.id);
                 
                 toolCard.innerHTML = `
                     <div class="tool-card-header">
@@ -1228,5 +1236,6 @@
             });
         });
     </script>
+    <script src="js/category-manager.js"></script>
 </body>
 </html>

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "image-processing",
+    "name": "图片处理",
+    "icon": "fas fa-image",
+    "description": "图片压缩、格式转换、水印处理、OCR识别等图片相关工具",
+    "color": "#667eea"
+  },
+  {
+    "id": "document-processing",
+    "name": "文档处理",
+    "icon": "fas fa-file-alt",
+    "description": "PDF处理、格式转换、文档加密、内容转换等文档相关工具",
+    "color": "#f093fb"
+  },
+  {
+    "id": "calculator-tools",
+    "name": "计算器工具",
+    "icon": "fas fa-calculator",
+    "description": "各种实用计算器，包括财务、时间、薪资等计算工具",
+    "color": "#4facfe"
+  },
+  {
+    "id": "content-creation",
+    "name": "内容创作",
+    "icon": "fas fa-palette",
+    "description": "卡片生成、海报制作、内容转换等创作类工具",
+    "color": "#43e97b"
+  },
+  {
+    "id": "encoding-conversion",
+    "name": "编码转换",
+    "icon": "fas fa-code",
+    "description": "Base64编码、格式转换、数据处理等编码转换工具",
+    "color": "#fa709a"
+  },
+  {
+    "id": "utility-tools",
+    "name": "实用工具",
+    "icon": "fas fa-tools",
+    "description": "时差计算、模板示例等各种实用小工具",
+    "color": "#ffecd2"
+  },
+  {
+    "id": "security-privacy",
+    "name": "安全隐私",
+    "icon": "fas fa-shield-alt",
+    "description": "文件加密、水印保护、隐私处理等安全相关工具",
+    "color": "#ff9a9e"
+  },
+  {
+    "id": "design-graphics",
+    "name": "设计图形",
+    "icon": "fas fa-paint-brush",
+    "description": "线稿生成、海报设计、图形处理等设计相关工具",
+    "color": "#a8edea"
+  }
+]

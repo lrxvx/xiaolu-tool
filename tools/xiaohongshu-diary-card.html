@@ -88,12 +88,10 @@
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-        }
         
-        .tool-header {
-            width: 100%;
-            margin-bottom: 20px;
-        }
+            flex: 1;}
+        
+        .tool-/* 导航栏样式由组件提供 */
         
         .tool-header h1 {
             font-size: 1.8rem;
@@ -207,9 +205,7 @@
             background-color: #fff1f1;
         }
         
-        .card-header {
-            margin-bottom: 20px;
-        }
+        .card-/* 导航栏样式由组件提供 */
         
         .card-title {
             font-size: 1.5rem;
@@ -264,13 +260,18 @@
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
-            }
+            
+            flex: 1;}
             
             .input-section, .preview-section {
                 width: 100%;
             }
         }
     </style>
+
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
 </head>
 <body>
     <div class="container">
@@ -483,14 +484,7 @@
     </script>
 
     <!-- 页脚 -->
-    <footer style="background-color: white; padding: 2rem 5%; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05); margin-top: auto;">
-        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-            <div style="margin-bottom: 1rem;">
-                <span style="color: var(--gray); margin-right: 2rem;">© 2025 小红书日记卡片生成器</span>
-                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; margin-right: 1rem; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">技术支持</a>
-                <a href="https://t.zsxq.com/17wTksRxX" style="color: var(--primary); text-decoration: none; transition: var(--transition);" onmouseover="this.style.color='var(--secondary)'" onmouseout="this.style.color='var(--primary)'">问题反馈</a>
-            </div>
-        </div>
-    </footer>
+    
+    <!-- 页脚将通过JavaScript组件自动生成 -->
 </body>
 </html>
