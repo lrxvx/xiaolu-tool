@@ -431,17 +431,36 @@
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
+            }
             
-            flex: 1;}
-            
-            .header h1 {
+            .tool-title {
                 font-size: 2rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 1rem;
+            }
+            
+            .tool-tags {
+                gap: 8px;
+            }
+            
+            .tag {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+            
+            .promotion-text {
+                padding: 20px;
+            }
+            
+            .promotion-text h2 {
+                font-size: 1.3rem;
             }
             
             .main-content {
                 padding: 25px;
-            
-            flex: 1;}
+            }
             
             .upload-area {
                 padding: 40px 15px;
@@ -467,6 +486,58 @@
             .instructions, .faq {
                 padding: 25px;
             }
+            
+            .tool-details {
+                padding: 25px 20px;
+            }
+            
+            .tool-details h2 {
+                font-size: 1.5rem;
+            }
+            
+            .advantages-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .scenarios {
+                grid-template-columns: 1fr;
+            }
+            
+            .support-section {
+                padding: 30px 20px;
+            }
+            
+            .support-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .support-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tool-intro {
+                padding: 30px 20px;
+            }
+            
+            .tool-title {
+                font-size: 1.8rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .advantage-item {
+                padding: 20px 15px;
+            }
+            
+            .scenario-item {
+                padding: 15px;
+            }
         }
         
         .hidden {
@@ -477,14 +548,224 @@
             opacity: 0.6;
             pointer-events: none;
         }
+
+        /* 工具介绍样式 */
+        .tool-intro {
+            text-align: center;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tool-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .tool-tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* 工具主体样式 */
+        .tool-body {
+            margin-bottom: 30px;
+        }
+
+        .promotion-text {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .promotion-text h2 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .promotion-text p {
+             color: #4a5568;
+             line-height: 1.7;
+             margin: 0;
+         }
+
+         /* 工具详细介绍样式 */
+         .tool-details {
+             background: white;
+             padding: 40px 30px;
+             border-radius: 12px;
+             margin-bottom: 30px;
+             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+         }
+
+         .tool-details h2 {
+             color: #2d3748;
+             margin-bottom: 25px;
+             font-size: 1.8rem;
+             text-align: center;
+         }
+
+         .advantages-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+             gap: 25px;
+             margin-bottom: 40px;
+         }
+
+         .advantage-item {
+             text-align: center;
+             padding: 25px;
+             background: #f8fafc;
+             border-radius: 12px;
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+         }
+
+         .advantage-item:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+         }
+
+         .advantage-icon {
+             font-size: 2.5rem;
+             margin-bottom: 15px;
+         }
+
+         .advantage-item h3 {
+             color: #2d3748;
+             margin-bottom: 10px;
+             font-size: 1.2rem;
+         }
+
+         .advantage-item p {
+             color: #4a5568;
+             line-height: 1.6;
+             margin: 0;
+         }
+
+         .scenarios {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+             gap: 20px;
+         }
+
+         .scenario-item {
+             padding: 20px;
+             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+             border-radius: 10px;
+             border-left: 4px solid #667eea;
+         }
+
+         .scenario-item h3 {
+             color: #2d3748;
+             margin-bottom: 8px;
+             font-size: 1.1rem;
+         }
+
+         .scenario-item p {
+             color: #4a5568;
+             line-height: 1.5;
+             margin: 0;
+         }
+
+         /* 技术支持样式 */
+         .support-section {
+             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+             color: white;
+             padding: 40px 30px;
+             border-radius: 12px;
+             text-align: center;
+             margin-bottom: 30px;
+         }
+
+         .support-section h2 {
+             margin-bottom: 15px;
+             font-size: 1.8rem;
+         }
+
+         .support-section p {
+             margin-bottom: 25px;
+             opacity: 0.9;
+             line-height: 1.6;
+         }
+
+         .support-links {
+             display: flex;
+             justify-content: center;
+             gap: 20px;
+             flex-wrap: wrap;
+         }
+
+         .support-link {
+             display: flex;
+             align-items: center;
+             gap: 8px;
+             background: rgba(255, 255, 255, 0.2);
+             padding: 12px 20px;
+             border-radius: 25px;
+             color: white;
+             text-decoration: none;
+             font-weight: 500;
+             transition: all 0.3s ease;
+             backdrop-filter: blur(10px);
+             border: 1px solid rgba(255, 255, 255, 0.3);
+         }
+
+         .support-link:hover {
+             background: rgba(255, 255, 255, 0.3);
+             transform: translateY(-2px);
+         }
+
+         .support-icon {
+             font-size: 1.2rem;
+         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 页头 -->
-        <div class="header">
-            <h1>🖼️ 智能图片压缩工具</h1>
-            <p>高效压缩，保持清晰度 - 支持批量处理，自定义压缩率</p>
+        <!-- 工具介绍 -->
+        <div class="tool-intro">
+            <h1 class="tool-title">🖼️ 智能图片压缩工具</h1>
+            <p class="tool-subtitle">专业级图片压缩解决方案，智能算法保持清晰度的同时大幅减小文件体积</p>
+            <div class="tool-tags">
+                <span class="tag">批量处理</span>
+                <span class="tag">智能压缩</span>
+                <span class="tag">多格式支持</span>
+                <span class="tag">本地处理</span>
+                <span class="tag">自定义设置</span>
+            </div>
+        </div>
+
+        <!-- 工具主体 -->
+        <div class="tool-body">
+            <div class="promotion-text">
+                <h2>🚀 为什么选择我们的图片压缩工具？</h2>
+                <p>在数字化时代，图片文件大小直接影响网站加载速度、存储成本和用户体验。我们的智能图片压缩工具采用先进的压缩算法，能够在保持图片质量的前提下显著减小文件体积，是网站优化、移动应用开发和日常图片处理的理想选择。</p>
+            </div>
         </div>
 
         <!-- 主要功能区域 -->
@@ -587,6 +868,77 @@
             <div class="faq-item">
                 <div class="faq-question">Q: 如何获得最佳压缩效果？</div>
                 <div class="faq-answer">A: 对于照片类图片，建议使用JPEG格式，质量设置70-85%；对于图标、截图等，建议使用PNG格式；WebP格式通常能提供最佳的压缩比。</div>
+            </div>
+        </div>
+
+        <!-- 工具详细介绍 -->
+        <div class="tool-details">
+            <h2>🎯 工具优势</h2>
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="advantage-icon">⚡</div>
+                    <h3>高效压缩</h3>
+                    <p>采用先进的压缩算法，平均可减小60-80%的文件体积，同时保持优秀的图片质量</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">🔒</div>
+                    <h3>隐私安全</h3>
+                    <p>所有处理在本地浏览器完成，图片不会上传到服务器，确保您的隐私和数据安全</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">🎛️</div>
+                    <h3>灵活设置</h3>
+                    <p>支持自定义压缩质量、尺寸限制、输出格式，满足不同场景的压缩需求</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">📦</div>
+                    <h3>批量处理</h3>
+                    <p>支持同时处理多张图片，提供批量压缩和下载功能，大幅提升工作效率</p>
+                </div>
+            </div>
+
+            <h2>🌟 应用场景</h2>
+            <div class="scenarios">
+                <div class="scenario-item">
+                    <h3>🌐 网站优化</h3>
+                    <p>压缩网站图片资源，提升页面加载速度，改善用户体验和SEO排名</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>📱 移动应用</h3>
+                    <p>减小应用包体积，降低用户下载和更新成本，提升应用性能</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>📧 邮件附件</h3>
+                    <p>压缩图片附件大小，避免邮件发送失败，提高传输效率</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>☁️ 云存储</h3>
+                    <p>节省云存储空间和流量费用，提高文件同步和备份速度</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>🎨 设计工作</h3>
+                    <p>为设计师提供快速的图片优化方案，平衡文件大小和视觉效果</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>📚 文档处理</h3>
+                    <p>压缩文档中的图片，减小PDF、Word等文件体积，便于分享传输</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技术支持 -->
+        <div class="support-section">
+            <h2>🛠️ 技术支持</h2>
+            <p>如果您在使用过程中遇到任何问题，或有功能建议，欢迎联系我们的技术团队。我们致力于为您提供最优质的图片压缩服务。</p>
+            <div class="support-links">
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank" class="support-link">
+                    <span class="support-icon">💬</span>
+                    <span>技术支持</span>
+                </a>
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank" class="support-link">
+                    <span class="support-icon">📝</span>
+                    <span>问题反馈</span>
+                </a>
             </div>
         </div>
 

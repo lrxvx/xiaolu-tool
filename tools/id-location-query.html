@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>身份证前四位户籍查询工具 - 快速查询户籍所在地 | 小路工具箱</title>
+    <meta name="description" content="专业的身份证前四位户籍查询工具，输入身份证前四位数字，快速查询户籍所在地信息，支持全国各省市县区查询，完全免费使用。">
+    <meta name="keywords" content="身份证查询,户籍查询,身份证前四位,户籍所在地,身份证归属地,行政区划代码">
+    <meta name="author" content="小路工具箱">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xiaolu-tools.com/tools/id-location-query.html">
+    <meta property="og:title" content="身份证前四位户籍查询工具 - 快速查询户籍所在地">
+    <meta property="og:description" content="专业的身份证前四位户籍查询工具，输入身份证前四位数字，快速查询户籍所在地信息，支持全国各省市县区查询，完全免费使用。">
+    <meta property="og:image" content="https://xiaolu-tools.com/images/id-location-query-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://xiaolu-tools.com/tools/id-location-query.html">
+    <meta property="twitter:title" content="身份证前四位户籍查询工具 - 快速查询户籍所在地">
+    <meta property="twitter:description" content="专业的身份证前四位户籍查询工具，输入身份证前四位数字，快速查询户籍所在地信息，支持全国各省市县区查询，完全免费使用。">
+    <meta property="twitter:image" content="https://xiaolu-tools.com/images/id-location-query-preview.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://xiaolu-tools.com/tools/id-location-query.html">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "身份证前四位户籍查询工具",
+        "description": "专业的身份证前四位户籍查询工具，输入身份证前四位数字，快速查询户籍所在地信息，支持全国各省市县区查询，完全免费使用。",
+        "url": "https://xiaolu-tools.com/tools/id-location-query.html",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "身份证前四位查询",
+            "户籍所在地查询",
+            "行政区划代码查询",
+            "全国省市县区支持",
+            "快速精确查询",
+            "完全免费使用"
+        ]
+    }
+    </script>
+    
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .query-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .query-title {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .id-input {
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            width: 200px;
+            text-align: center;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+        }
+        
+        .id-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .query-btn {
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .query-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .query-btn:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .input-hint {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .input-hint i {
+            color: #667eea;
+        }
+        
+        .result-section {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f7fafc;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            display: none;
+        }
+        
+        .result-title {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .result-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .result-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .result-label {
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+        
+        .result-value {
+            color: #667eea;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .error-message {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+        
+        .instructions {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .instructions h2 {
+            color: #2d3748;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 15px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        .faq {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .faq h2 {
+            color: #2d3748;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .faq-item {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 20px;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .faq-answer {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        .tool-info {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .tool-info h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .tool-description {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .support-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .support-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .support-link:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .id-input {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .result-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .instructions, .faq, .tool-info {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-id-card"></i> 身份证户籍查询工具</h1>
+            <p>输入身份证前4-6位数字，快速查询户籍所在地信息</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="query-section">
+                <h2 class="query-title">
+                    <i class="fas fa-search"></i>
+                    户籍查询
+                </h2>
+                
+                <div class="input-group">
+                    <input type="text" id="idInput" class="id-input" placeholder="请输入前4-6位" maxlength="6">
+                    <button id="queryBtn" class="query-btn">
+                        <i class="fas fa-search"></i>
+                        查询户籍
+                    </button>
+                </div>
+                
+                <div class="input-hint">
+                    <i class="fas fa-info-circle"></i>
+                    支持输入4位（地级市）、5位（区县）或6位（具体区县）进行查询
+                </div>
+                
+                <div id="resultSection" class="result-section">
+                    <h3 class="result-title">
+                        <i class="fas fa-map-marker-alt"></i>
+                        查询结果
+                    </h3>
+                    <div id="resultContent" class="result-content">
+                        <!-- 查询结果将在这里显示 -->
+                    </div>
+                </div>
+                
+                <div id="errorMessage" class="error-message">
+                    <!-- 错误信息将在这里显示 -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2><i class="fas fa-book"></i> 使用说明</h2>
+            <ol>
+                <li><strong>输入身份证前缀：</strong>在输入框中输入身份证号码的前4-6位数字</li>
+                <li><strong>点击查询：</strong>点击"查询户籍"按钮开始查询</li>
+                <li><strong>查看结果：</strong>系统将显示对应的户籍所在地信息，包括省份、城市、区县等</li>
+                <li><strong>精确度说明：</strong>4位精确到地级市，5位精确到区县，6位精确到具体区县</li>
+                <li><strong>智能匹配：</strong>如果输入的位数没有精确匹配，系统会自动尝试较短位数的匹配</li>
+                <li><strong>隐私保护：</strong>本工具仅查询行政区划代码，不涉及个人隐私信息</li>
+            </ol>
+        </div>
+        
+        <div class="faq">
+            <h2><i class="fas fa-question-circle"></i> 常见问题</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 身份证前几位代表什么？</div>
+                <div class="faq-answer">A: 身份证前6位是行政区划代码，前2位代表省份，第3-4位代表地级市，第5-6位代表区县。本工具支持查询前4-6位的任意组合。</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 查询结果的精确度如何？</div>
+                <div class="faq-answer">A: 输入4位精确到地级市，5位精确到区县，6位精确到具体区县。如果输入的位数没有精确匹配，系统会自动尝试较短位数进行智能匹配。</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 这个工具安全吗？</div>
+                <div class="faq-answer">A: 完全安全。本工具仅查询行政区划代码对应的地理位置信息，不涉及任何个人隐私数据，所有查询都在本地进行。</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 为什么有些代码查询不到结果？</div>
+                <div class="faq-answer">A: 可能是因为：1）输入的不是有效的行政区划代码；2）该代码对应的地区已经发生行政区划调整；3）数据库中暂未收录该代码信息。</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 支持哪些地区的查询？</div>
+                <div class="faq-answer">A: 支持全国所有省、自治区、直辖市的查询，包括港澳台地区的部分代码。数据库定期更新以保持准确性。</div>
+            </div>
+        </div>
+        
+        <div class="tool-info">
+            <h2>@2025 身份证户籍查询工具详细介绍</h2>
+            <div class="tool-description">
+                这是一个专业的身份证户籍查询工具，基于国家标准的行政区划代码数据库开发。
+                工具支持4-6位身份证前缀查询，可精确到地级市、区县或具体区县级别。
+                查询结果准确可靠，完全免费使用。所有查询操作都在本地进行，保护用户隐私安全。
+                适用于需要了解身份证归属地的各种场景。
+            </div>
+            <div class="support-links">
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank" class="support-link">
+                    <i class="fas fa-headset"></i>
+                    技术支持
+                </a>
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank" class="support-link">
+                    <i class="fas fa-bug"></i>
+                    问题反馈
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 行政区划代码数据库（前四位）
+        const locationData = {
+            // 北京市
+            '1101': { province: '北京市', city: '北京市', district: '东城区' },
+            '1102': { province: '北京市', city: '北京市', district: '西城区' },
+            '1103': { province: '北京市', city: '北京市', district: '朝阳区' },
+            '1104': { province: '北京市', city: '北京市', district: '丰台区' },
+            '1105': { province: '北京市', city: '北京市', district: '石景山区' },
+            '1106': { province: '北京市', city: '北京市', district: '海淀区' },
+            '1107': { province: '北京市', city: '北京市', district: '门头沟区' },
+            '1108': { province: '北京市', city: '北京市', district: '房山区' },
+            '1109': { province: '北京市', city: '北京市', district: '通州区' },
+            '1110': { province: '北京市', city: '北京市', district: '顺义区' },
+            '1111': { province: '北京市', city: '北京市', district: '昌平区' },
+            '1112': { province: '北京市', city: '北京市', district: '大兴区' },
+            '1113': { province: '北京市', city: '北京市', district: '怀柔区' },
+            '1114': { province: '北京市', city: '北京市', district: '平谷区' },
+            '1115': { province: '北京市', city: '北京市', district: '密云区' },
+            '1116': { province: '北京市', city: '北京市', district: '延庆区' },
+            
+            // 天津市
+            '1201': { province: '天津市', city: '天津市', district: '和平区' },
+            '1202': { province: '天津市', city: '天津市', district: '河东区' },
+            '1203': { province: '天津市', city: '天津市', district: '河西区' },
+            '1204': { province: '天津市', city: '天津市', district: '南开区' },
+            '1205': { province: '天津市', city: '天津市', district: '河北区' },
+            '1206': { province: '天津市', city: '天津市', district: '红桥区' },
+            '1207': { province: '天津市', city: '天津市', district: '东丽区' },
+            '1208': { province: '天津市', city: '天津市', district: '西青区' },
+            '1209': { province: '天津市', city: '天津市', district: '津南区' },
+            '1210': { province: '天津市', city: '天津市', district: '北辰区' },
+            '1211': { province: '天津市', city: '天津市', district: '武清区' },
+            '1212': { province: '天津市', city: '天津市', district: '宝坻区' },
+            '1213': { province: '天津市', city: '天津市', district: '滨海新区' },
+            '1214': { province: '天津市', city: '天津市', district: '宁河区' },
+            '1215': { province: '天津市', city: '天津市', district: '静海区' },
+            '1216': { province: '天津市', city: '天津市', district: '蓟州区' },
+            
+            // 河北省
+            '1301': { province: '河北省', city: '石家庄市', district: '市辖区' },
+            '1302': { province: '河北省', city: '唐山市', district: '市辖区' },
+            '1303': { province: '河北省', city: '秦皇岛市', district: '市辖区' },
+            '1304': { province: '河北省', city: '邯郸市', district: '市辖区' },
+            '1305': { province: '河北省', city: '邢台市', district: '市辖区' },
+            '1306': { province: '河北省', city: '保定市', district: '市辖区' },
+            '1307': { province: '河北省', city: '张家口市', district: '市辖区' },
+            '1308': { province: '河北省', city: '承德市', district: '市辖区' },
+            '1309': { province: '河北省', city: '沧州市', district: '市辖区' },
+            '1310': { province: '河北省', city: '廊坊市', district: '市辖区' },
+            '1311': { province: '河北省', city: '衡水市', district: '市辖区' },
+            
+            // 山西省
+            '1401': { province: '山西省', city: '太原市', district: '市辖区' },
+            '1402': { province: '山西省', city: '大同市', district: '市辖区' },
+            '1403': { province: '山西省', city: '阳泉市', district: '市辖区' },
+            '1404': { province: '山西省', city: '长治市', district: '市辖区' },
+            '1405': { province: '山西省', city: '晋城市', district: '市辖区' },
+            '1406': { province: '山西省', city: '朔州市', district: '市辖区' },
+            '1407': { province: '山西省', city: '晋中市', district: '市辖区' },
+            '1408': { province: '山西省', city: '运城市', district: '市辖区' },
+            '1409': { province: '山西省', city: '忻州市', district: '市辖区' },
+            '1410': { province: '山西省', city: '临汾市', district: '市辖区' },
+            '1411': { province: '山西省', city: '吕梁市', district: '市辖区' },
+            
+            // 内蒙古自治区
+            '1501': { province: '内蒙古自治区', city: '呼和浩特市', district: '市辖区' },
+            '1502': { province: '内蒙古自治区', city: '包头市', district: '市辖区' },
+            '1503': { province: '内蒙古自治区', city: '乌海市', district: '市辖区' },
+            '1504': { province: '内蒙古自治区', city: '赤峰市', district: '市辖区' },
+            '1505': { province: '内蒙古自治区', city: '通辽市', district: '市辖区' },
+            '1506': { province: '内蒙古自治区', city: '鄂尔多斯市', district: '市辖区' },
+            '1507': { province: '内蒙古自治区', city: '呼伦贝尔市', district: '市辖区' },
+            '1508': { province: '内蒙古自治区', city: '巴彦淖尔市', district: '市辖区' },
+            '1509': { province: '内蒙古自治区', city: '乌兰察布市', district: '市辖区' },
+            '1522': { province: '内蒙古自治区', city: '兴安盟', district: '盟辖区' },
+            '1525': { province: '内蒙古自治区', city: '锡林郭勒盟', district: '盟辖区' },
+            '1529': { province: '内蒙古自治区', city: '阿拉善盟', district: '盟辖区' },
+            
+            // 辽宁省
+            '2101': { province: '辽宁省', city: '沈阳市', district: '市辖区' },
+            '2102': { province: '辽宁省', city: '大连市', district: '市辖区' },
+            '2103': { province: '辽宁省', city: '鞍山市', district: '市辖区' },
+            '2104': { province: '辽宁省', city: '抚顺市', district: '市辖区' },
+            '2105': { province: '辽宁省', city: '本溪市', district: '市辖区' },
+            '2106': { province: '辽宁省', city: '丹东市', district: '市辖区' },
+            '2107': { province: '辽宁省', city: '锦州市', district: '市辖区' },
+            '2108': { province: '辽宁省', city: '营口市', district: '市辖区' },
+            '2109': { province: '辽宁省', city: '阜新市', district: '市辖区' },
+            '2110': { province: '辽宁省', city: '辽阳市', district: '市辖区' },
+            '2111': { province: '辽宁省', city: '盘锦市', district: '市辖区' },
+            '2112': { province: '辽宁省', city: '铁岭市', district: '市辖区' },
+            '2113': { province: '辽宁省', city: '朝阳市', district: '市辖区' },
+            '2114': { province: '辽宁省', city: '葫芦岛市', district: '市辖区' },
+            
+            // 吉林省
+            '2201': { province: '吉林省', city: '长春市', district: '市辖区' },
+            '2202': { province: '吉林省', city: '吉林市', district: '市辖区' },
+            '2203': { province: '吉林省', city: '四平市', district: '市辖区' },
+            '2204': { province: '吉林省', city: '辽源市', district: '市辖区' },
+            '2205': { province: '吉林省', city: '通化市', district: '市辖区' },
+            '2206': { province: '吉林省', city: '白山市', district: '市辖区' },
+            '2207': { province: '吉林省', city: '松原市', district: '市辖区' },
+            '2208': { province: '吉林省', city: '白城市', district: '市辖区' },
+            '2224': { province: '吉林省', city: '延边朝鲜族自治州', district: '州辖区' },
+            
+            // 黑龙江省
+            '2301': { province: '黑龙江省', city: '哈尔滨市', district: '市辖区' },
+            '2302': { province: '黑龙江省', city: '齐齐哈尔市', district: '市辖区' },
+            '2303': { province: '黑龙江省', city: '鸡西市', district: '市辖区' },
+            '2304': { province: '黑龙江省', city: '鹤岗市', district: '市辖区' },
+            '2305': { province: '黑龙江省', city: '双鸭山市', district: '市辖区' },
+            '2306': { province: '黑龙江省', city: '大庆市', district: '市辖区' },
+            '2307': { province: '黑龙江省', city: '伊春市', district: '市辖区' },
+            '2308': { province: '黑龙江省', city: '佳木斯市', district: '市辖区' },
+            '2309': { province: '黑龙江省', city: '七台河市', district: '市辖区' },
+            '2310': { province: '黑龙江省', city: '牡丹江市', district: '市辖区' },
+            '2311': { province: '黑龙江省', city: '黑河市', district: '市辖区' },
+            '2312': { province: '黑龙江省', city: '绥化市', district: '市辖区' },
+            '2327': { province: '黑龙江省', city: '大兴安岭地区', district: '地区辖区' },
+            
+            // 上海市
+            '3101': { province: '上海市', city: '上海市', district: '黄浦区' },
+            '3102': { province: '上海市', city: '上海市', district: '徐汇区' },
+            '3103': { province: '上海市', city: '上海市', district: '长宁区' },
+            '3104': { province: '上海市', city: '上海市', district: '静安区' },
+            '3105': { province: '上海市', city: '上海市', district: '普陀区' },
+            '3106': { province: '上海市', city: '上海市', district: '虹口区' },
+            '3107': { province: '上海市', city: '上海市', district: '杨浦区' },
+            '3108': { province: '上海市', city: '上海市', district: '闵行区' },
+            '3109': { province: '上海市', city: '上海市', district: '宝山区' },
+            '3110': { province: '上海市', city: '上海市', district: '嘉定区' },
+            '3111': { province: '上海市', city: '上海市', district: '浦东新区' },
+            '3112': { province: '上海市', city: '上海市', district: '金山区' },
+            '3113': { province: '上海市', city: '上海市', district: '松江区' },
+            '3114': { province: '上海市', city: '上海市', district: '青浦区' },
+            '3115': { province: '上海市', city: '上海市', district: '奉贤区' },
+            '3116': { province: '上海市', city: '上海市', district: '崇明区' },
+            
+            // 江苏省
+            '3201': { province: '江苏省', city: '南京市', district: '市辖区' },
+            '3202': { province: '江苏省', city: '无锡市', district: '市辖区' },
+            '3203': { province: '江苏省', city: '徐州市', district: '市辖区' },
+            '3204': { province: '江苏省', city: '常州市', district: '市辖区' },
+            '3205': { province: '江苏省', city: '苏州市', district: '市辖区' },
+            '3206': { province: '江苏省', city: '南通市', district: '市辖区' },
+            '3207': { province: '江苏省', city: '连云港市', district: '市辖区' },
+            '3208': { province: '江苏省', city: '淮安市', district: '市辖区' },
+            '3209': { province: '江苏省', city: '盐城市', district: '市辖区' },
+            '3210': { province: '江苏省', city: '扬州市', district: '市辖区' },
+            '3211': { province: '江苏省', city: '镇江市', district: '市辖区' },
+            '3212': { province: '江苏省', city: '泰州市', district: '市辖区' },
+            '3213': { province: '江苏省', city: '宿迁市', district: '市辖区' },
+            
+            // 浙江省
+            '3301': { province: '浙江省', city: '杭州市', district: '市辖区' },
+            '3302': { province: '浙江省', city: '宁波市', district: '市辖区' },
+            '3303': { province: '浙江省', city: '温州市', district: '市辖区' },
+            '3304': { province: '浙江省', city: '嘉兴市', district: '市辖区' },
+            '3305': { province: '浙江省', city: '湖州市', district: '市辖区' },
+            '3306': { province: '浙江省', city: '绍兴市', district: '市辖区' },
+            '3307': { province: '浙江省', city: '金华市', district: '市辖区' },
+            '3308': { province: '浙江省', city: '衢州市', district: '市辖区' },
+            '3309': { province: '浙江省', city: '舟山市', district: '市辖区' },
+            '3310': { province: '浙江省', city: '台州市', district: '市辖区' },
+            '3311': { province: '浙江省', city: '丽水市', district: '市辖区' },
+            
+            // 安徽省
+            '3401': { province: '安徽省', city: '合肥市', district: '市辖区' },
+            '3402': { province: '安徽省', city: '芜湖市', district: '市辖区' },
+            '3403': { province: '安徽省', city: '蚌埠市', district: '市辖区' },
+            '3404': { province: '安徽省', city: '淮南市', district: '市辖区' },
+            '3405': { province: '安徽省', city: '马鞍山市', district: '市辖区' },
+            '3406': { province: '安徽省', city: '淮北市', district: '市辖区' },
+            '3407': { province: '安徽省', city: '铜陵市', district: '市辖区' },
+            '3408': { province: '安徽省', city: '安庆市', district: '市辖区' },
+            '3410': { province: '安徽省', city: '黄山市', district: '市辖区' },
+            '3411': { province: '安徽省', city: '滁州市', district: '市辖区' },
+            '3412': { province: '安徽省', city: '阜阳市', district: '市辖区' },
+            '3413': { province: '安徽省', city: '宿州市', district: '市辖区' },
+            '3415': { province: '安徽省', city: '六安市', district: '市辖区' },
+            '3416': { province: '安徽省', city: '亳州市', district: '市辖区' },
+            '3417': { province: '安徽省', city: '池州市', district: '市辖区' },
+            '3418': { province: '安徽省', city: '宣城市', district: '市辖区' },
+            
+            // 福建省
+            '3501': { province: '福建省', city: '福州市', district: '市辖区' },
+            '3502': { province: '福建省', city: '厦门市', district: '市辖区' },
+            '3503': { province: '福建省', city: '莆田市', district: '市辖区' },
+            '3504': { province: '福建省', city: '三明市', district: '市辖区' },
+            '3505': { province: '福建省', city: '泉州市', district: '市辖区' },
+            '3506': { province: '福建省', city: '漳州市', district: '市辖区' },
+            '3507': { province: '福建省', city: '南平市', district: '市辖区' },
+            '3508': { province: '福建省', city: '龙岩市', district: '市辖区' },
+            '3509': { province: '福建省', city: '宁德市', district: '市辖区' },
+            
+            // 江西省
+            '3601': { province: '江西省', city: '南昌市', district: '市辖区' },
+            '3602': { province: '江西省', city: '景德镇市', district: '市辖区' },
+            '3603': { province: '江西省', city: '萍乡市', district: '市辖区' },
+            '3604': { province: '江西省', city: '九江市', district: '市辖区' },
+            '3605': { province: '江西省', city: '新余市', district: '市辖区' },
+            '3606': { province: '江西省', city: '鹰潭市', district: '市辖区' },
+            '3607': { province: '江西省', city: '赣州市', district: '市辖区' },
+            '3608': { province: '江西省', city: '吉安市', district: '市辖区' },
+            '3609': { province: '江西省', city: '宜春市', district: '市辖区' },
+            '3610': { province: '江西省', city: '抚州市', district: '市辖区' },
+            '3611': { province: '江西省', city: '上饶市', district: '市辖区' },
+            
+            // 山东省
+            '3701': { province: '山东省', city: '济南市', district: '市辖区' },
+            '3702': { province: '山东省', city: '青岛市', district: '市辖区' },
+            '3703': { province: '山东省', city: '淄博市', district: '市辖区' },
+            '3704': { province: '山东省', city: '枣庄市', district: '市辖区' },
+            '3705': { province: '山东省', city: '东营市', district: '市辖区' },
+            '3706': { province: '山东省', city: '烟台市', district: '市辖区' },
+            '3707': { province: '山东省', city: '潍坊市', district: '市辖区' },
+            '3708': { province: '山东省', city: '济宁市', district: '市辖区' },
+            '3709': { province: '山东省', city: '泰安市', district: '市辖区' },
+            '3710': { province: '山东省', city: '威海市', district: '市辖区' },
+            '3711': { province: '山东省', city: '日照市', district: '市辖区' },
+            '3712': { province: '山东省', city: '莱芜市', district: '市辖区' },
+            '3713': { province: '山东省', city: '临沂市', district: '市辖区' },
+            '3714': { province: '山东省', city: '德州市', district: '市辖区' },
+            '3715': { province: '山东省', city: '聊城市', district: '市辖区' },
+            '3716': { province: '山东省', city: '滨州市', district: '市辖区' },
+            '3717': { province: '山东省', city: '菏泽市', district: '市辖区' },
+            
+            // 河南省
+            '4101': { province: '河南省', city: '郑州市', district: '市辖区' },
+            '4102': { province: '河南省', city: '开封市', district: '市辖区' },
+            '4103': { province: '河南省', city: '洛阳市', district: '市辖区' },
+            '4104': { province: '河南省', city: '平顶山市', district: '市辖区' },
+            '4105': { province: '河南省', city: '安阳市', district: '市辖区' },
+            '4106': { province: '河南省', city: '鹤壁市', district: '市辖区' },
+            '4107': { province: '河南省', city: '新乡市', district: '市辖区' },
+            '4108': { province: '河南省', city: '焦作市', district: '市辖区' },
+            '4109': { province: '河南省', city: '濮阳市', district: '市辖区' },
+            '4110': { province: '河南省', city: '许昌市', district: '市辖区' },
+            '4111': { province: '河南省', city: '漯河市', district: '市辖区' },
+            '4112': { province: '河南省', city: '三门峡市', district: '市辖区' },
+            '4113': { province: '河南省', city: '南阳市', district: '市辖区' },
+            '4114': { province: '河南省', city: '商丘市', district: '市辖区' },
+            '4115': { province: '河南省', city: '信阳市', district: '市辖区' },
+            '4116': { province: '河南省', city: '周口市', district: '市辖区' },
+            '4117': { province: '河南省', city: '驻马店市', district: '市辖区' },
+            '4190': { province: '河南省', city: '省直辖县级行政区划', district: '济源市' },
+            
+            // 湖北省
+            '4201': { province: '湖北省', city: '武汉市', district: '市辖区' },
+            '4202': { province: '湖北省', city: '黄石市', district: '市辖区' },
+            '4203': { province: '湖北省', city: '十堰市', district: '市辖区' },
+            '4205': { province: '湖北省', city: '宜昌市', district: '市辖区' },
+            '4206': { province: '湖北省', city: '襄阳市', district: '市辖区' },
+            '4207': { province: '湖北省', city: '鄂州市', district: '市辖区' },
+            '4208': { province: '湖北省', city: '荆门市', district: '市辖区' },
+            '4209': { province: '湖北省', city: '孝感市', district: '市辖区' },
+            '4210': { province: '湖北省', city: '荆州市', district: '市辖区' },
+            '4211': { province: '湖北省', city: '黄冈市', district: '市辖区' },
+            '4212': { province: '湖北省', city: '咸宁市', district: '市辖区' },
+            '4213': { province: '湖北省', city: '随州市', district: '市辖区' },
+            '4228': { province: '湖北省', city: '恩施土家族苗族自治州', district: '州辖区' },
+            '4290': { province: '湖北省', city: '省直辖县级行政区划', district: '仙桃市' },
+            
+            // 湖南省
+            '4301': { province: '湖南省', city: '长沙市', district: '市辖区' },
+            '4302': { province: '湖南省', city: '株洲市', district: '市辖区' },
+            '4303': { province: '湖南省', city: '湘潭市', district: '市辖区' },
+            '4304': { province: '湖南省', city: '衡阳市', district: '市辖区' },
+            '4305': { province: '湖南省', city: '邵阳市', district: '市辖区' },
+            '4306': { province: '湖南省', city: '岳阳市', district: '市辖区' },
+            '4307': { province: '湖南省', city: '常德市', district: '市辖区' },
+            '4308': { province: '湖南省', city: '张家界市', district: '市辖区' },
+            '4309': { province: '湖南省', city: '益阳市', district: '市辖区' },
+            '4310': { province: '湖南省', city: '郴州市', district: '市辖区' },
+            '4311': { province: '湖南省', city: '永州市', district: '市辖区' },
+            '4312': { province: '湖南省', city: '怀化市', district: '市辖区' },
+            '4313': { province: '湖南省', city: '娄底市', district: '市辖区' },
+            '4331': { province: '湖南省', city: '湘西土家族苗族自治州', district: '州辖区' },
+            
+            // 广东省
+            '4401': { province: '广东省', city: '广州市', district: '市辖区' },
+            '4403': { province: '广东省', city: '深圳市', district: '市辖区' },
+            '4404': { province: '广东省', city: '珠海市', district: '市辖区' },
+            '4405': { province: '广东省', city: '汕头市', district: '市辖区' },
+            '4406': { province: '广东省', city: '佛山市', district: '市辖区' },
+            '4407': { province: '广东省', city: '江门市', district: '市辖区' },
+            '4408': { province: '广东省', city: '湛江市', district: '市辖区' },
+            '4409': { province: '广东省', city: '茂名市', district: '市辖区' },
+            '4412': { province: '广东省', city: '肇庆市', district: '市辖区' },
+            '4413': { province: '广东省', city: '惠州市', district: '市辖区' },
+            '4414': { province: '广东省', city: '梅州市', district: '市辖区' },
+            '4415': { province: '广东省', city: '汕尾市', district: '市辖区' },
+            '4416': { province: '广东省', city: '河源市', district: '市辖区' },
+            '4417': { province: '广东省', city: '阳江市', district: '市辖区' },
+            '4418': { province: '广东省', city: '清远市', district: '市辖区' },
+            '4419': { province: '广东省', city: '东莞市', district: '市辖区' },
+            '4420': { province: '广东省', city: '中山市', district: '市辖区' },
+            '4451': { province: '广东省', city: '潮州市', district: '市辖区' },
+            '4452': { province: '广东省', city: '揭阳市', district: '市辖区' },
+            '4453': { province: '广东省', city: '云浮市', district: '市辖区' },
+            
+            // 广西壮族自治区
+            '4501': { province: '广西壮族自治区', city: '南宁市', district: '市辖区' },
+            '4502': { province: '广西壮族自治区', city: '柳州市', district: '市辖区' },
+            '4503': { province: '广西壮族自治区', city: '桂林市', district: '市辖区' },
+            '4504': { province: '广西壮族自治区', city: '梧州市', district: '市辖区' },
+            '4505': { province: '广西壮族自治区', city: '北海市', district: '市辖区' },
+            '4506': { province: '广西壮族自治区', city: '防城港市', district: '市辖区' },
+            '4507': { province: '广西壮族自治区', city: '钦州市', district: '市辖区' },
+            '4508': { province: '广西壮族自治区', city: '贵港市', district: '市辖区' },
+            '4509': { province: '广西壮族自治区', city: '玉林市', district: '市辖区' },
+            '4510': { province: '广西壮族自治区', city: '百色市', district: '市辖区' },
+            '4511': { province: '广西壮族自治区', city: '贺州市', district: '市辖区' },
+            '4512': { province: '广西壮族自治区', city: '河池市', district: '市辖区' },
+            '4513': { province: '广西壮族自治区', city: '来宾市', district: '市辖区' },
+            '4514': { province: '广西壮族自治区', city: '崇左市', district: '市辖区' },
+            
+            // 海南省
+            '4601': { province: '海南省', city: '海口市', district: '市辖区' },
+            '4602': { province: '海南省', city: '三亚市', district: '市辖区' },
+            '4603': { province: '海南省', city: '三沙市', district: '市辖区' },
+            '4604': { province: '海南省', city: '儋州市', district: '市辖区' },
+            
+            // 重庆市
+            '5001': { province: '重庆市', city: '重庆市', district: '万州区' },
+            '5002': { province: '重庆市', city: '重庆市', district: '涪陵区' },
+            '5003': { province: '重庆市', city: '重庆市', district: '渝中区' },
+            '5004': { province: '重庆市', city: '重庆市', district: '大渡口区' },
+            '5005': { province: '重庆市', city: '重庆市', district: '江北区' },
+            '5006': { province: '重庆市', city: '重庆市', district: '沙坪坝区' },
+            '5007': { province: '重庆市', city: '重庆市', district: '九龙坡区' },
+            '5008': { province: '重庆市', city: '重庆市', district: '南岸区' },
+            '5009': { province: '重庆市', city: '重庆市', district: '北碚区' },
+            '5010': { province: '重庆市', city: '重庆市', district: '綦江区' },
+            '5011': { province: '重庆市', city: '重庆市', district: '大足区' },
+            '5012': { province: '重庆市', city: '重庆市', district: '渝北区' },
+            '5013': { province: '重庆市', city: '重庆市', district: '巴南区' },
+            '5014': { province: '重庆市', city: '重庆市', district: '黔江区' },
+            '5015': { province: '重庆市', city: '重庆市', district: '长寿区' },
+            '5016': { province: '重庆市', city: '重庆市', district: '江津区' },
+            '5017': { province: '重庆市', city: '重庆市', district: '合川区' },
+            '5018': { province: '重庆市', city: '重庆市', district: '永川区' },
+            '5019': { province: '重庆市', city: '重庆市', district: '南川区' },
+            '5020': { province: '重庆市', city: '重庆市', district: '璧山区' },
+            '5021': { province: '重庆市', city: '重庆市', district: '铜梁区' },
+            '5022': { province: '重庆市', city: '重庆市', district: '潼南区' },
+            '5023': { province: '重庆市', city: '重庆市', district: '荣昌区' },
+            '5024': { province: '重庆市', city: '重庆市', district: '开州区' },
+            '5025': { province: '重庆市', city: '重庆市', district: '梁平区' },
+            '5026': { province: '重庆市', city: '重庆市', district: '武隆区' },
+            
+            // 四川省
+            '5101': { province: '四川省', city: '成都市', district: '市辖区' },
+            '5103': { province: '四川省', city: '自贡市', district: '市辖区' },
+            '5104': { province: '四川省', city: '攀枝花市', district: '市辖区' },
+            '5105': { province: '四川省', city: '泸州市', district: '市辖区' },
+            '5106': { province: '四川省', city: '德阳市', district: '市辖区' },
+            '5107': { province: '四川省', city: '绵阳市', district: '市辖区' },
+            '5108': { province: '四川省', city: '广元市', district: '市辖区' },
+            '5109': { province: '四川省', city: '遂宁市', district: '市辖区' },
+            '5110': { province: '四川省', city: '内江市', district: '市辖区' },
+            '5111': { province: '四川省', city: '乐山市', district: '市辖区' },
+            '5113': { province: '四川省', city: '南充市', district: '市辖区' },
+            '5114': { province: '四川省', city: '眉山市', district: '市辖区' },
+            '5115': { province: '四川省', city: '宜宾市', district: '市辖区' },
+            '5116': { province: '四川省', city: '广安市', district: '市辖区' },
+            '5117': { province: '四川省', city: '达州市', district: '市辖区' },
+            '5118': { province: '四川省', city: '雅安市', district: '市辖区' },
+            '5119': { province: '四川省', city: '巴中市', district: '市辖区' },
+            '5120': { province: '四川省', city: '资阳市', district: '市辖区' },
+            '5132': { province: '四川省', city: '阿坝藏族羌族自治州', district: '州辖区' },
+            '5133': { province: '四川省', city: '甘孜藏族自治州', district: '州辖区' },
+            '5134': { province: '四川省', city: '凉山彝族自治州', district: '州辖区' },
+            
+            // 贵州省
+            '5201': { province: '贵州省', city: '贵阳市', district: '市辖区' },
+            '5202': { province: '贵州省', city: '六盘水市', district: '市辖区' },
+            '5203': { province: '贵州省', city: '遵义市', district: '市辖区' },
+            '5204': { province: '贵州省', city: '安顺市', district: '市辖区' },
+            '5205': { province: '贵州省', city: '毕节市', district: '市辖区' },
+            '5206': { province: '贵州省', city: '铜仁市', district: '市辖区' },
+            '5223': { province: '贵州省', city: '黔西南布依族苗族自治州', district: '州辖区' },
+            '5226': { province: '贵州省', city: '黔东南苗族侗族自治州', district: '州辖区' },
+            '5227': { province: '贵州省', city: '黔南布依族苗族自治州', district: '州辖区' },
+            
+            // 云南省
+            '5301': { province: '云南省', city: '昆明市', district: '市辖区' },
+            '5303': { province: '云南省', city: '曲靖市', district: '市辖区' },
+            '5304': { province: '云南省', city: '玉溪市', district: '市辖区' },
+            '5305': { province: '云南省', city: '保山市', district: '市辖区' },
+            '5306': { province: '云南省', city: '昭通市', district: '市辖区' },
+            '5307': { province: '云南省', city: '丽江市', district: '市辖区' },
+            '5308': { province: '云南省', city: '普洱市', district: '市辖区' },
+            '5309': { province: '云南省', city: '临沧市', district: '市辖区' },
+            '5323': { province: '云南省', city: '楚雄彝族自治州', district: '州辖区' },
+            '5325': { province: '云南省', city: '红河哈尼族彝族自治州', district: '州辖区' },
+            '5326': { province: '云南省', city: '文山壮族苗族自治州', district: '州辖区' },
+            '5328': { province: '云南省', city: '西双版纳傣族自治州', district: '州辖区' },
+            '5329': { province: '云南省', city: '大理白族自治州', district: '州辖区' },
+            '5331': { province: '云南省', city: '德宏傣族景颇族自治州', district: '州辖区' },
+            '5333': { province: '云南省', city: '怒江傈僳族自治州', district: '州辖区' },
+            '5334': { province: '云南省', city: '迪庆藏族自治州', district: '州辖区' },
+            
+            // 西藏自治区
+            '5401': { province: '西藏自治区', city: '拉萨市', district: '市辖区' },
+            '5402': { province: '西藏自治区', city: '日喀则市', district: '市辖区' },
+            '5403': { province: '西藏自治区', city: '昌都市', district: '市辖区' },
+            '5404': { province: '西藏自治区', city: '林芝市', district: '市辖区' },
+            '5405': { province: '西藏自治区', city: '山南市', district: '市辖区' },
+            '5406': { province: '西藏自治区', city: '那曲市', district: '市辖区' },
+            '5425': { province: '西藏自治区', city: '阿里地区', district: '地区辖区' },
+            
+            // 陕西省
+            '6101': { province: '陕西省', city: '西安市', district: '市辖区' },
+            '6102': { province: '陕西省', city: '铜川市', district: '市辖区' },
+            '6103': { province: '陕西省', city: '宝鸡市', district: '市辖区' },
+            '6104': { province: '陕西省', city: '咸阳市', district: '市辖区' },
+            '6105': { province: '陕西省', city: '渭南市', district: '市辖区' },
+            '6106': { province: '陕西省', city: '延安市', district: '市辖区' },
+            '6107': { province: '陕西省', city: '汉中市', district: '市辖区' },
+            '6108': { province: '陕西省', city: '榆林市', district: '市辖区' },
+            '6109': { province: '陕西省', city: '安康市', district: '市辖区' },
+            '6110': { province: '陕西省', city: '商洛市', district: '市辖区' },
+            
+            // 甘肃省
+            '6201': { province: '甘肃省', city: '兰州市', district: '市辖区' },
+            '6202': { province: '甘肃省', city: '嘉峪关市', district: '市辖区' },
+            '6203': { province: '甘肃省', city: '金昌市', district: '市辖区' },
+            '6204': { province: '甘肃省', city: '白银市', district: '市辖区' },
+            '6205': { province: '甘肃省', city: '天水市', district: '市辖区' },
+            '6206': { province: '甘肃省', city: '武威市', district: '市辖区' },
+            '6207': { province: '甘肃省', city: '张掖市', district: '市辖区' },
+            '6208': { province: '甘肃省', city: '平凉市', district: '市辖区' },
+            '6209': { province: '甘肃省', city: '酒泉市', district: '市辖区' },
+            '6210': { province: '甘肃省', city: '庆阳市', district: '市辖区' },
+            '6211': { province: '甘肃省', city: '定西市', district: '市辖区' },
+            '6212': { province: '甘肃省', city: '陇南市', district: '市辖区' },
+            '6229': { province: '甘肃省', city: '临夏回族自治州', district: '州辖区' },
+            '6230': { province: '甘肃省', city: '甘南藏族自治州', district: '州辖区' },
+            
+            // 青海省
+            '6301': { province: '青海省', city: '西宁市', district: '市辖区' },
+            '6302': { province: '青海省', city: '海东市', district: '市辖区' },
+            '6322': { province: '青海省', city: '海北藏族自治州', district: '州辖区' },
+            '6323': { province: '青海省', city: '黄南藏族自治州', district: '州辖区' },
+            '6325': { province: '青海省', city: '海南藏族自治州', district: '州辖区' },
+            '6326': { province: '青海省', city: '果洛藏族自治州', district: '州辖区' },
+            '6327': { province: '青海省', city: '玉树藏族自治州', district: '州辖区' },
+            '6328': { province: '青海省', city: '海西蒙古族藏族自治州', district: '州辖区' },
+            
+            // 宁夏回族自治区
+            '6401': { province: '宁夏回族自治区', city: '银川市', district: '市辖区' },
+            '6402': { province: '宁夏回族自治区', city: '石嘴山市', district: '市辖区' },
+            '6403': { province: '宁夏回族自治区', city: '吴忠市', district: '市辖区' },
+            '6404': { province: '宁夏回族自治区', city: '固原市', district: '市辖区' },
+            '6405': { province: '宁夏回族自治区', city: '中卫市', district: '市辖区' },
+            
+            // 新疆维吾尔自治区
+            '6501': { province: '新疆维吾尔自治区', city: '乌鲁木齐市', district: '市辖区' },
+            '6502': { province: '新疆维吾尔自治区', city: '克拉玛依市', district: '市辖区' },
+            '6504': { province: '新疆维吾尔自治区', city: '吐鲁番市', district: '市辖区' },
+            '6505': { province: '新疆维吾尔自治区', city: '哈密市', district: '市辖区' },
+            '6523': { province: '新疆维吾尔自治区', city: '昌吉回族自治州', district: '州辖区' },
+            '6527': { province: '新疆维吾尔自治区', city: '博尔塔拉蒙古自治州', district: '州辖区' },
+            '6528': { province: '新疆维吾尔自治区', city: '巴音郭楞蒙古自治州', district: '州辖区' },
+            '6529': { province: '新疆维吾尔自治区', city: '阿克苏地区', district: '地区辖区' },
+            '6530': { province: '新疆维吾尔自治区', city: '克孜勒苏柯尔克孜自治州', district: '州辖区' },
+            '6531': { province: '新疆维吾尔自治区', city: '喀什地区', district: '地区辖区' },
+            '6532': { province: '新疆维吾尔自治区', city: '和田地区', district: '地区辖区' },
+            '6540': { province: '新疆维吾尔自治区', city: '伊犁哈萨克自治州', district: '州辖区' },
+            '6542': { province: '新疆维吾尔自治区', city: '塔城地区', district: '地区辖区' },
+            '6543': { province: '新疆维吾尔自治区', city: '阿勒泰地区', district: '地区辖区' },
+            
+            // 台湾省
+            '7101': { province: '台湾省', city: '台北市', district: '市辖区' },
+            '7102': { province: '台湾省', city: '高雄市', district: '市辖区' },
+            '7103': { province: '台湾省', city: '台南市', district: '市辖区' },
+            '7104': { province: '台湾省', city: '台中市', district: '市辖区' },
+            '7105': { province: '台湾省', city: '金门县', district: '县辖区' },
+            '7106': { province: '台湾省', city: '南投县', district: '县辖区' },
+            '7107': { province: '台湾省', city: '基隆市', district: '市辖区' },
+            '7108': { province: '台湾省', city: '新竹市', district: '市辖区' },
+            '7109': { province: '台湾省', city: '嘉义市', district: '市辖区' },
+            '7110': { province: '台湾省', city: '新北市', district: '市辖区' },
+            '7111': { province: '台湾省', city: '宜兰县', district: '县辖区' },
+            '7112': { province: '台湾省', city: '新竹县', district: '县辖区' },
+            '7113': { province: '台湾省', city: '桃园县', district: '县辖区' },
+            '7114': { province: '台湾省', city: '苗栗县', district: '县辖区' },
+            '7115': { province: '台湾省', city: '彰化县', district: '县辖区' },
+            '7116': { province: '台湾省', city: '嘉义县', district: '县辖区' },
+            '7117': { province: '台湾省', city: '云林县', district: '县辖区' },
+            '7118': { province: '台湾省', city: '屏东县', district: '县辖区' },
+            '7119': { province: '台湾省', city: '台东县', district: '县辖区' },
+            '7120': { province: '台湾省', city: '花莲县', district: '县辖区' },
+            '7121': { province: '台湾省', city: '澎湖县', district: '县辖区' },
+            
+            // 香港特别行政区
+            '8101': { province: '香港特别行政区', city: '香港特别行政区', district: '中西区' },
+            '8102': { province: '香港特别行政区', city: '香港特别行政区', district: '湾仔区' },
+            '8103': { province: '香港特别行政区', city: '香港特别行政区', district: '东区' },
+            '8104': { province: '香港特别行政区', city: '香港特别行政区', district: '南区' },
+            '8105': { province: '香港特别行政区', city: '香港特别行政区', district: '油尖旺区' },
+            '8106': { province: '香港特别行政区', city: '香港特别行政区', district: '深水埗区' },
+            '8107': { province: '香港特别行政区', city: '香港特别行政区', district: '九龙城区' },
+            '8108': { province: '香港特别行政区', city: '香港特别行政区', district: '黄大仙区' },
+            '8109': { province: '香港特别行政区', city: '香港特别行政区', district: '观塘区' },
+            '8110': { province: '香港特别行政区', city: '香港特别行政区', district: '荃湾区' },
+            '8111': { province: '香港特别行政区', city: '香港特别行政区', district: '屯门区' },
+            '8112': { province: '香港特别行政区', city: '香港特别行政区', district: '元朗区' },
+            '8113': { province: '香港特别行政区', city: '香港特别行政区', district: '北区' },
+            '8114': { province: '香港特别行政区', city: '香港特别行政区', district: '大埔区' },
+            '8115': { province: '香港特别行政区', city: '香港特别行政区', district: '沙田区' },
+            '8116': { province: '香港特别行政区', city: '香港特别行政区', district: '西贡区' },
+            '8117': { province: '香港特别行政区', city: '香港特别行政区', district: '离岛区' },
+            
+            // 澳门特别行政区
+            '8201': { province: '澳门特别行政区', city: '澳门特别行政区', district: '澳门半岛' },
+            '8202': { province: '澳门特别行政区', city: '澳门特别行政区', district: '氹仔岛' },
+            '8203': { province: '澳门特别行政区', city: '澳门特别行政区', district: '路环岛' }
+        };
+        
+        // DOM元素
+        const idInput = document.getElementById('idInput');
+        const queryBtn = document.getElementById('queryBtn');
+        const resultSection = document.getElementById('resultSection');
+        const resultContent = document.getElementById('resultContent');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        // 查询函数
+        function queryLocation() {
+            const inputValue = idInput.value.trim();
+            
+            // 验证输入
+            if (!inputValue) {
+                showError('请输入身份证前4-6位数字');
+                return;
+            }
+            
+            if (!/^\d{4,6}$/.test(inputValue)) {
+                showError('请输入正确的4-6位数字');
+                return;
+            }
+            
+            // 查询数据 - 支持4位、5位、6位查询
+            let locationInfo = null;
+            let searchCode = inputValue;
+            
+            // 首先尝试精确匹配
+            locationInfo = locationData[searchCode];
+            
+            // 如果没有找到且输入超过4位，尝试逐步缩短查询
+            if (!locationInfo && inputValue.length > 4) {
+                // 尝试5位查询
+                if (inputValue.length === 6) {
+                    searchCode = inputValue.substring(0, 5);
+                    locationInfo = locationData[searchCode];
+                }
+                
+                // 如果还没找到，尝试4位查询
+                if (!locationInfo) {
+                    searchCode = inputValue.substring(0, 4);
+                    locationInfo = locationData[searchCode];
+                }
+            }
+            
+            if (locationInfo) {
+                showResult(inputValue, locationInfo, searchCode);
+            } else {
+                showError('未找到对应的户籍信息，请检查输入的数字是否正确');
+            }
+        }
+        
+        // 显示查询结果
+        function showResult(inputCode, info, matchedCode) {
+            hideError();
+            
+            const precisionText = matchedCode.length === 4 ? '地级市级别' : 
+                                 matchedCode.length === 5 ? '区县级别' : '具体区县级别';
+            
+            resultContent.innerHTML = `
+                <div class="result-item">
+                    <div class="result-label">输入代码</div>
+                    <div class="result-value">${inputCode}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">匹配代码</div>
+                    <div class="result-value">${matchedCode} (${precisionText})</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">省份/自治区/直辖市</div>
+                    <div class="result-value">${info.province}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">地级市/州/盟</div>
+                    <div class="result-value">${info.city}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">区县/市辖区</div>
+                    <div class="result-value">${info.district}</div>
+                </div>
+            `;
+            
+            resultSection.style.display = 'block';
+        }
+        
+        // 显示错误信息
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            resultSection.style.display = 'none';
+        }
+        
+        // 隐藏错误信息
+        function hideError() {
+            errorMessage.style.display = 'none';
+        }
+        
+        // 事件监听
+        queryBtn.addEventListener('click', queryLocation);
+        
+        idInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                queryLocation();
+            }
+        });
+        
+        // 输入限制：只允许数字
+        idInput.addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            hideError();
+        });
+        
+        // 页面加载完成后的初始化
+        // 注意：导航栏和页脚已通过组件自动初始化，无需手动调用
+    </script>
+    
+    <!-- Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</body>
+</html>

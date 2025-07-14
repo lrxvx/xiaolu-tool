@@ -1,5 +1,45 @@
 [
     {
+        "id": "grid-image-splitter",
+        "title": "九宫格切图工具",
+        "description": "一键将图片分割成九宫格，完美适配社交媒体发布，支持多种图片格式，智能裁剪处理，简单易用的在线工具",
+        "date": "2025-07-13",
+        "type": "新增工具",
+        "relatedTools": ["image-compressor", "image-format-converter"]
+    },
+    {
+        "id": "unit-converter",
+        "title": "多功能单位换算器",
+        "description": "支持12种单位类型换算，包括温度、重量、面积、体积、长度、压力、功率、角度、电容、时间、速度、二进制，工程计算必备工具",
+        "date": "2025-01-27",
+        "type": "新增工具",
+        "relatedTools": ["relative-calculator", "chinese-converter"]
+    },
+    {
+        "id": "relative-calculator",
+        "title": "亲戚关系计算器",
+        "description": "智能计算亲戚称谓，支持复杂关系路径构建，春节拜年必备工具",
+        "date": "2025-01-27",
+        "type": "新增工具",
+        "relatedTools": ["chinese-converter"]
+    },
+    {
+        "id": 15,
+        "title": "简体繁体字转换工具",
+        "description": "新增专业的简体繁体字转换工具，支持智能识别文本类型、双向转换、文件上传下载，适用于港澳台地区文档处理、学术研究、文化交流等场景",
+        "date": "2025-01-16",
+        "type": "feature",
+        "tool": "chinese-converter"
+    },
+    {
+        "id": 14,
+        "title": "身份证前四位户籍查询工具",
+        "description": "新增专业的身份证前四位户籍查询工具，支持全国各省市县区查询，输入身份证前四位数字快速查询户籍所在地信息，包含完整的行政区划代码数据库",
+        "date": "2025-01-15",
+        "type": "feature",
+        "tool": "id-location-query"
+    },
+    {
         "id": 13,
         "title": "智能图片压缩工具",
         "description": "新增专业的图片压缩工具，支持JPG、PNG、WebP、GIF等格式，智能压缩算法保持清晰度，自定义压缩质量和输出格式，支持批量处理和拖拽上传",

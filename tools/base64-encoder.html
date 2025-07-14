@@ -101,17 +101,62 @@
             width: 100%;
         }
         
+        /* 工具介绍样式 */
+        .tool-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            color: white;
+        }
+        
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .tool-features {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .feature-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-tag i {
+            margin-right: 0.5rem;
+        }
+        
+        /* 工具主体样式 */
         .tool-detail-content {
             padding: 30px;
             background-color: #fff;
             border-radius: 12px;
             box-shadow: var(--shadow);
+            margin-bottom: 2rem;
         }
+        
         .tool-detail-content h2 {
             color: var(--dark);
             margin-bottom: 20px;
             font-size: 1.8rem;
         }
+        
         .tool-detail-content textarea {
             width: 100%;
             height: 150px;
@@ -121,31 +166,266 @@
             border-radius: 8px;
             font-size: 1rem;
             transition: var(--transition);
+            resize: vertical;
         }
+        
         .tool-detail-content textarea:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
         }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
         .tool-detail-content button {
-            padding: 12px 24px;
+            padding: 12px 20px;
             background-color: var(--primary);
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
-            margin-right: 10px;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+        
         .tool-detail-content button:hover {
             background-color: var(--secondary);
             transform: translateY(-2px);
+        }
+        
+        /* 使用指南样式 */
+        .usage-guide, .faq-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .section-title {
+            color: var(--dark);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .guide-content {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .guide-step {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-content p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* 常见问题样式 */
+        .faq-content {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .faq-item {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1rem;
+            background: #f8f9fa;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(90deg);
+        }
+        
+        .faq-answer {
+            padding: 0 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 1rem;
+            max-height: 200px;
+        }
+        
+        .faq-answer p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        /* 工具详细介绍样式 */
+        .tool-info {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .info-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .info-content {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+        
+        .info-content ul {
+            margin: 1rem 0;
+        }
+        
+        .info-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 技术支持样式 */
+        .support-links {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .support-links h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .support-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .support-links a:hover {
+            text-decoration: underline;
         }
         
         /* 响应式设计 */
         @media (max-width: 768px) {
             .tool-container {
                 padding: 1rem 5%;
+            }
+            
+            .tool-title {
+                font-size: 2rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 1rem;
+            }
+            
+            .tool-features {
+                justify-content: center;
+            }
+            
+            .feature-tag {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .tool-detail-content button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .guide-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                align-self: center;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+                justify-content: center;
+            }
+            
+            .tool-info, .usage-guide, .faq-section, .support-links {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tool-intro {
+                padding: 1.5rem;
+            }
+            
+            .tool-title {
+                font-size: 1.8rem;
+            }
+            
+            .tool-detail-content {
+                padding: 20px;
+            }
+            
+            .tool-detail-content textarea {
+                height: 120px;
             }
         }
     </style>
@@ -157,28 +437,173 @@
     
     <!-- 工具内容 -->
     <div class="tool-container">
-    <div class="tool-detail-content">
-        <h2>Base64 编码解码</h2>
-        <textarea id="input" placeholder="输入文本或Base64编码..."></textarea>
-        <button onclick="encodeBase64()">编码</button>
-        <button onclick="decodeBase64()">解码</button>
-        <textarea id="output" placeholder="结果将显示在这里..." readonly></textarea>
+        <!-- 工具介绍 -->
+        <div class="tool-intro">
+            <h1 class="tool-title">Base64 编码解码工具</h1>
+            <p class="tool-subtitle">专业的在线Base64编码解码工具，支持文本与Base64格式的双向转换</p>
+            <div class="tool-features">
+                <span class="feature-tag"><i class="fas fa-shield-alt"></i> 安全可靠</span>
+                <span class="feature-tag"><i class="fas fa-bolt"></i> 实时转换</span>
+                <span class="feature-tag"><i class="fas fa-mobile-alt"></i> 移动友好</span>
+                <span class="feature-tag"><i class="fas fa-free-code-camp"></i> 完全免费</span>
+            </div>
         </div>
-    </div>
 
-    <!-- 页脚 -->
+        <!-- 工具主体 -->
+        <div class="tool-detail-content">
+            <h2>Base64 编码解码</h2>
+            <textarea id="input" placeholder="输入文本或Base64编码..."></textarea>
+            <div class="button-group">
+                <button onclick="encodeBase64()"><i class="fas fa-lock"></i> 编码</button>
+                <button onclick="decodeBase64()"><i class="fas fa-unlock"></i> 解码</button>
+                <button onclick="clearAll()"><i class="fas fa-eraser"></i> 清空</button>
+                <button onclick="copyResult()"><i class="fas fa-copy"></i> 复制结果</button>
+            </div>
+            <textarea id="output" placeholder="结果将显示在这里..." readonly></textarea>
+        </div>
+
+        <!-- 使用指南 -->
+        <div class="usage-guide">
+            <h2 class="section-title"><i class="fas fa-book"></i> 使用指南</h2>
+            <div class="guide-content">
+                <div class="guide-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>输入内容</h3>
+                        <p>在上方文本框中输入需要编码的文本，或输入需要解码的Base64字符串</p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>选择操作</h3>
+                        <p>点击"编码"按钮将文本转换为Base64格式，或点击"解码"按钮将Base64转换为文本</p>
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>获取结果</h3>
+                        <p>转换结果将显示在下方文本框中，点击"复制结果"按钮可快速复制到剪贴板</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 常见问题 -->
+        <div class="faq-section">
+            <h2 class="section-title"><i class="fas fa-question-circle"></i> 常见问题</h2>
+            <div class="faq-content">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>什么是Base64编码？</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Base64是一种基于64个可打印字符来表示二进制数据的编码方法。它常用于在HTTP环境下传递较长的标识信息，或在电子邮件中传输二进制数据。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Base64编码有什么用途？</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Base64编码主要用于：1）在URL中传输二进制数据；2）在电子邮件中嵌入图片；3）在JSON或XML中存储二进制数据；4）在网页中嵌入小图片（Data URI）；5）API接口中的数据传输。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>使用这个工具安全吗？</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>完全安全。我们的Base64编码解码工具完全在您的浏览器本地运行，不会将您的数据发送到任何服务器。您的隐私和数据安全得到完全保护。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-chevron-right"></i>
+                        <span>支持中文和特殊字符吗？</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>是的，我们的工具完全支持UTF-8编码，可以正确处理中文、日文、韩文、阿拉伯文等各种语言文字，以及各种特殊字符和表情符号。</p>
+                    </div>
+                </div>
+            </div>
+         </div>
+
+         <!-- 工具详细介绍 -->
+         <div class="tool-info">
+             <h2 class="info-title">@2025工具详细介绍</h2>
+             <div class="info-content">
+                 <p>Base64编码解码工具是小路工具箱提供的一款专业数据编码转换工具，专为开发者、系统管理员和数据处理人员设计。</p>
+                 <br>
+                 <p><strong>为什么选择我们的Base64工具：</strong></p>
+                 <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                     <li>🔒 <strong>隐私保护</strong> - 所有处理完全在本地进行，数据不上传服务器</li>
+                     <li>⚡ <strong>实时转换</strong> - 即时编码解码，无需等待</li>
+                     <li>🌍 <strong>多语言支持</strong> - 完美支持UTF-8编码，处理各种语言文字</li>
+                     <li>📱 <strong>跨平台兼容</strong> - 支持所有现代浏览器和移动设备</li>
+                     <li>🎯 <strong>精确可靠</strong> - 严格遵循RFC 4648标准，确保编码准确性</li>
+                     <li>🆓 <strong>完全免费</strong> - 无需注册，无使用限制</li>
+                 </ul>
+                 <br>
+                 <p><strong>工具优势：</strong></p>
+                 <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                     <li>支持大文本处理，无字符长度限制</li>
+                     <li>智能错误检测，提供友好的错误提示</li>
+                     <li>一键复制功能，提高工作效率</li>
+                     <li>清空重置功能，快速开始新的转换</li>
+                     <li>响应式设计，完美适配各种屏幕尺寸</li>
+                 </ul>
+                 <br>
+                 <p><strong>应用场景：</strong></p>
+                 <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                     <li>Web开发中的数据传输和存储</li>
+                     <li>API接口的数据编码处理</li>
+                     <li>电子邮件附件的文本表示</li>
+                     <li>URL安全字符串的生成</li>
+                     <li>配置文件中的敏感信息编码</li>
+                     <li>数据库中二进制数据的文本存储</li>
+                     <li>JSON/XML中的二进制数据嵌入</li>
+                 </ul>
+             </div>
+         </div>
+
+         <!-- 技术支持 -->
+         <div class="support-links">
+             <h3>技术支持和问题反馈</h3>
+             <p>如果您在使用过程中遇到问题或有改进建议，欢迎通过以下方式联系我们：</p>
+             <p><a href="https://t.zsxq.com/17wTksRxX" target="_blank">点击这里获取技术支持和问题反馈</a></p>
+         </div>
+     </div>
+
+     <!-- 页脚 -->
     
     <!-- 页脚将通过JavaScript组件自动生成 -->
 
     <script>
         function encodeBase64() {
             const input = document.getElementById('input').value;
-            const output = btoa(encodeURIComponent(input));
-            document.getElementById('output').value = output;
+            if (!input.trim()) {
+                alert('请输入要编码的文本');
+                return;
+            }
+            try {
+                const output = btoa(encodeURIComponent(input));
+                document.getElementById('output').value = output;
+            } catch (e) {
+                document.getElementById('output').value = '编码失败，请检查输入内容。';
+            }
         }
 
         function decodeBase64() {
             const input = document.getElementById('input').value;
+            if (!input.trim()) {
+                alert('请输入要解码的Base64字符串');
+                return;
+            }
             try {
                 const output = decodeURIComponent(atob(input));
                 document.getElementById('output').value = output;
@@ -186,6 +611,85 @@
                 document.getElementById('output').value = '解码失败，请输入有效的Base64编码。';
             }
         }
+        
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            document.getElementById('input').focus();
+        }
+        
+        function copyResult() {
+            const output = document.getElementById('output');
+            if (!output.value.trim()) {
+                alert('没有可复制的内容');
+                return;
+            }
+            
+            output.select();
+            output.setSelectionRange(0, 99999); // 移动设备兼容
+            
+            try {
+                document.execCommand('copy');
+                // 显示复制成功提示
+                const button = event.target;
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                button.style.backgroundColor = '#28a745';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.backgroundColor = '';
+                }, 2000);
+            } catch (err) {
+                alert('复制失败，请手动选择并复制');
+            }
+        }
+        
+        // FAQ交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // 关闭所有其他FAQ项
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // 切换当前项状态
+                    if (isActive) {
+                        item.classList.remove('active');
+                    } else {
+                        item.classList.add('active');
+                    }
+                });
+            });
+            
+            // 键盘快捷键支持
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case 'e':
+                            e.preventDefault();
+                            encodeBase64();
+                            break;
+                        case 'd':
+                            e.preventDefault();
+                            decodeBase64();
+                            break;
+                        case 'r':
+                            e.preventDefault();
+                            clearAll();
+                            break;
+                    }
+                }
+            });
+        });
         
         // 移动菜单功能由组件处理
     </script>

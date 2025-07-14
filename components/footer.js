@@ -73,51 +73,73 @@ class FooterComponent {
                 background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
                 color: white;
                 margin-top: auto;
+                position: relative;
+                width: 100%;
+                box-sizing: border-box;
             }
             
             .footer-content {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                grid-template-columns: repeat(4, 1fr);
                 gap: 2rem;
                 padding: 3rem 5%;
                 max-width: 1400px;
                 margin: 0 auto;
+                box-sizing: border-box;
+            }
+            
+            .footer-section {
+                min-width: 0;
+                box-sizing: border-box;
             }
             
             .footer-section h3 {
                 font-size: 1.2rem;
                 margin-bottom: 1rem;
                 color: #4361ee;
+                font-weight: 600;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             
             .footer-section p {
                 color: #a0aec0;
                 line-height: 1.6;
                 margin-bottom: 1rem;
+                word-wrap: break-word;
+                hyphens: auto;
             }
             
             .footer-links {
                 list-style: none;
+                padding: 0;
+                margin: 0;
             }
             
             .footer-links li {
                 margin-bottom: 0.5rem;
+                word-wrap: break-word;
             }
             
             .footer-links a {
                 color: #a0aec0;
                 text-decoration: none;
                 transition: all 0.3s ease;
+                display: inline-block;
+                word-wrap: break-word;
             }
             
             .footer-links a:hover {
                 color: #4361ee;
+                transform: translateX(3px);
             }
             
             .social-links {
                 display: flex;
                 gap: 1rem;
                 margin-top: 1rem;
+                flex-wrap: wrap;
             }
             
             .social-link {
@@ -131,6 +153,7 @@ class FooterComponent {
                 justify-content: center;
                 transition: all 0.3s ease;
                 text-decoration: none;
+                flex-shrink: 0;
             }
             
             .social-link:hover {
@@ -142,6 +165,7 @@ class FooterComponent {
             .footer-bottom {
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
                 padding: 1.5rem 5%;
+                background-color: rgba(0, 0, 0, 0.2);
             }
             
             .footer-bottom-content {
@@ -153,6 +177,16 @@ class FooterComponent {
             
             .footer-bottom-content p {
                 margin-bottom: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            /* 平板端样式 */
+            @media (max-width: 1024px) {
+                .footer-content {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 2rem;
+                    padding: 2.5rem 5%;
+                }
             }
             
             /* 移动端样式 */
@@ -161,10 +195,44 @@ class FooterComponent {
                     grid-template-columns: 1fr;
                     gap: 1.5rem;
                     padding: 2rem 5%;
+                    text-align: center;
+                }
+                
+                .footer-section h3 {
+                    white-space: normal;
                 }
                 
                 .social-links {
                     justify-content: center;
+                }
+                
+                .footer-bottom {
+                    padding: 1rem 5%;
+                }
+            }
+            
+            /* 超小屏幕样式 */
+            @media (max-width: 480px) {
+                .footer-content {
+                    padding: 1.5rem 3%;
+                    gap: 1rem;
+                }
+                
+                .footer-section h3 {
+                    font-size: 1.1rem;
+                }
+                
+                .footer-section p {
+                    font-size: 0.9rem;
+                }
+                
+                .footer-links a {
+                    font-size: 0.9rem;
+                }
+                
+                .social-link {
+                    width: 36px;
+                    height: 36px;
                 }
             }
         `;

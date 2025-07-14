@@ -88,7 +88,8 @@
             flex-direction: column;
         }
         
-        /* 导航栏样式由组件提供 *//* 主要内容区域 */
+        /* 导航栏样式由组件提供 */
+        /* 主要内容区域 */
         main {
             flex: 1;
             padding: 2rem 5%;
@@ -97,24 +98,257 @@
             width: 100%;
         }
         
-        .tool-/* 导航栏样式由组件提供 */
-        
-        .tool-header h1 {
+        /* 工具介绍样式 */
+        .tool-intro {
+            text-align: center;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, #4361ee 0%, #3f37c9 100%);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tool-title {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
-        
-        .tool-header p {
+
+        .tool-subtitle {
             font-size: 1.2rem;
-            color: var(--gray);
-            max-width: 800px;
-            margin: 0 auto;
+            margin-bottom: 25px;
+            opacity: 0.95;
+            line-height: 1.6;
         }
+
+        .tool-tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tool-tags .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* 工具主体样式 */
+        .tool-body {
+            margin-bottom: 30px;
+        }
+
+        .promotion-text {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #4361ee;
+        }
+
+        .promotion-text h2 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .promotion-text p {
+             color: #4a5568;
+             line-height: 1.7;
+             margin: 0;
+         }
+
+         /* 工具详细介绍样式 */
+         .tool-details {
+             background: white;
+             padding: 40px 30px;
+             border-radius: 12px;
+             margin-bottom: 30px;
+             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+         }
+
+         .tool-details h2 {
+             color: #2d3748;
+             margin-bottom: 25px;
+             font-size: 1.8rem;
+             text-align: center;
+         }
+
+         .advantages-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+             gap: 25px;
+             margin-bottom: 40px;
+         }
+
+         .advantage-item {
+             text-align: center;
+             padding: 25px;
+             background: #f8fafc;
+             border-radius: 12px;
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+         }
+
+         .advantage-item:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+         }
+
+         .advantage-icon {
+             font-size: 2.5rem;
+             margin-bottom: 15px;
+         }
+
+         .advantage-item h3 {
+             color: #2d3748;
+             margin-bottom: 10px;
+             font-size: 1.2rem;
+         }
+
+         .advantage-item p {
+             color: #4a5568;
+             line-height: 1.6;
+             margin: 0;
+         }
+
+         .scenarios {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+             gap: 20px;
+         }
+
+         .scenario-item {
+             padding: 20px;
+             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+             border-radius: 10px;
+             border-left: 4px solid #4361ee;
+         }
+
+         .scenario-item h3 {
+             color: #2d3748;
+             margin-bottom: 8px;
+             font-size: 1.1rem;
+         }
+
+         .scenario-item p {
+             color: #4a5568;
+             line-height: 1.5;
+             margin: 0;
+         }
+
+         /* 使用指南样式 */
+         .usage-guide {
+             background: white;
+             padding: 40px 30px;
+             border-radius: 12px;
+             margin-bottom: 30px;
+             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+         }
+
+         .usage-guide h2 {
+             color: #2d3748;
+             margin-bottom: 30px;
+             font-size: 1.8rem;
+             text-align: center;
+         }
+
+         .guide-steps {
+             display: grid;
+             gap: 25px;
+         }
+
+         .step-item {
+             display: flex;
+             align-items: flex-start;
+             gap: 20px;
+             padding: 20px;
+             background: #f8fafc;
+             border-radius: 12px;
+             border-left: 4px solid #4361ee;
+         }
+
+         .step-number {
+             background: #4361ee;
+             color: white;
+             width: 40px;
+             height: 40px;
+             border-radius: 50%;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             font-weight: bold;
+             font-size: 1.2rem;
+             flex-shrink: 0;
+         }
+
+         .step-content h3 {
+             color: #2d3748;
+             margin-bottom: 8px;
+             font-size: 1.2rem;
+         }
+
+         .step-content p {
+             color: #4a5568;
+             line-height: 1.6;
+             margin: 0;
+         }
+
+         /* 技术支持样式 */
+         .support-section {
+             background: linear-gradient(135deg, #4361ee 0%, #3f37c9 100%);
+             color: white;
+             padding: 40px 30px;
+             border-radius: 12px;
+             text-align: center;
+             margin-bottom: 30px;
+         }
+
+         .support-section h2 {
+             margin-bottom: 15px;
+             font-size: 1.8rem;
+         }
+
+         .support-section p {
+             margin-bottom: 25px;
+             opacity: 0.9;
+             line-height: 1.6;
+         }
+
+         .support-links {
+             display: flex;
+             justify-content: center;
+             gap: 20px;
+             flex-wrap: wrap;
+         }
+
+         .support-link {
+             display: flex;
+             align-items: center;
+             gap: 8px;
+             background: rgba(255, 255, 255, 0.2);
+             padding: 12px 20px;
+             border-radius: 25px;
+             color: white;
+             text-decoration: none;
+             font-weight: 500;
+             transition: all 0.3s ease;
+             backdrop-filter: blur(10px);
+             border: 1px solid rgba(255, 255, 255, 0.3);
+         }
+
+         .support-link:hover {
+             background: rgba(255, 255, 255, 0.3);
+             transform: translateY(-2px);
+         }
+
+         .support-icon {
+             font-size: 1.2rem;
+         }
         
         .tool-container {
             background-color: white;
@@ -393,7 +627,131 @@
                 padding: 10px 15px;
             }
             
+            /* 工具介绍响应式样式 */
+            .tool-title {
+                font-size: 2rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 1rem;
+            }
+            
+            .tool-tags {
+                justify-content: center;
+            }
+            
+            .tag {
+                font-size: 0.8rem;
+                padding: 4px 8px;
+            }
+            
+            /* 工具主体响应式样式 */
+            .promotion-text h2 {
+                font-size: 1.5rem;
+            }
+            
+            .promotion-text p {
+                font-size: 0.9rem;
+            }
+            
+            /* 工具详情响应式样式 */
+            .tool-details h2 {
+                font-size: 1.5rem;
+            }
+            
+            .advantages-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .advantage-item h3 {
+                font-size: 1.1rem;
+            }
+            
+            .advantage-item p {
+                font-size: 0.9rem;
+            }
+            
+            .scenarios {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .scenario-item h3 {
+                font-size: 1.1rem;
+            }
+            
+            .scenario-item p {
+                font-size: 0.9rem;
+            }
+            
+            /* 使用指南响应式样式 */
+            .usage-guide h2 {
+                font-size: 1.5rem;
+            }
+            
+            .step-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-bottom: 1rem;
+            }
+            
+            .step-content h3 {
+                font-size: 1.1rem;
+            }
+            
+            .step-content p {
+                font-size: 0.9rem;
+            }
+            
+            /* 技术支持响应式样式 */
+            .support-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .support-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .support-link {
+                font-size: 0.9rem;
+            }
+            
             /* 导航栏样式由组件提供 */
+        }
+        
+        @media (max-width: 480px) {
+            .tool-title {
+                font-size: 1.8rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .promotion-text h2 {
+                font-size: 1.3rem;
+            }
+            
+            .tool-details h2,
+            .usage-guide h2,
+            .support-section h2 {
+                font-size: 1.3rem;
+            }
+            
+            .advantage-icon {
+                font-size: 2rem;
+            }
+            
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 
@@ -408,9 +766,25 @@
     
     <!-- 主要内容 -->
     <main>
-        <div class="tool-header">
-            <h1>内容转换工具</h1>
-            <p>将飞书文档、PDF、公众号文章等内容转换为Markdown格式，自动生成博客前置信息</p>
+        <!-- 工具介绍 -->
+        <div class="tool-intro">
+            <h1 class="tool-title">📝 智能内容转换工具</h1>
+            <p class="tool-subtitle">一键将各种格式内容转换为标准Markdown，自动生成博客前置信息，让内容创作更高效</p>
+            <div class="tool-tags">
+                <span class="tag">多格式支持</span>
+                <span class="tag">智能转换</span>
+                <span class="tag">博客优化</span>
+                <span class="tag">批量处理</span>
+                <span class="tag">SEO友好</span>
+            </div>
+        </div>
+
+        <!-- 工具主体 -->
+        <div class="tool-body">
+            <div class="promotion-text">
+                <h2>🚀 为什么选择我们的内容转换工具？</h2>
+                <p>在内容创作时代，格式转换是每个创作者都会遇到的问题。我们的智能内容转换工具支持飞书文档、PDF、Word、公众号文章等多种格式，一键转换为标准Markdown格式，自动生成博客前置信息，让您专注于内容创作而非格式调整。</p>
+            </div>
         </div>
         
         <div class="tool-container">
@@ -492,6 +866,111 @@
             <div class="preview-content" id="preview-content"></div>
         </div>
     </div>
+        <!-- 工具详细介绍 -->
+        <div class="tool-details">
+            <h2>🎯 工具优势</h2>
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="advantage-icon">🔄</div>
+                    <h3>智能转换</h3>
+                    <p>支持飞书文档、PDF、Word、公众号文章等多种格式，智能识别内容结构并转换为标准Markdown</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">⚡</div>
+                    <h3>一键生成</h3>
+                    <p>自动生成博客前置信息（Front Matter），包括标题、描述、标签、日期等，符合主流博客平台规范</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">🎨</div>
+                    <h3>格式优化</h3>
+                    <p>智能处理标题层级、列表格式、引用块等，确保转换后的Markdown格式规范且美观</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">📱</div>
+                    <h3>多端适配</h3>
+                    <p>响应式设计，支持桌面端和移动端使用，随时随地进行内容转换</p>
+                </div>
+            </div>
+
+            <h2>🌟 应用场景</h2>
+            <div class="scenarios">
+                <div class="scenario-item">
+                    <h3>📝 博客写作</h3>
+                    <p>将各种格式的文章快速转换为Markdown，发布到GitHub Pages、Hexo、Hugo等静态博客平台</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>📚 技术文档</h3>
+                    <p>将Word文档、PDF资料转换为Markdown格式，便于在GitBook、Notion等平台管理和分享</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>🔄 内容迁移</h3>
+                    <p>从飞书、公众号等平台迁移内容到个人博客，保持格式一致性和可读性</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>📖 知识管理</h3>
+                    <p>将收集的文章、笔记统一转换为Markdown格式，建立个人知识库</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>🎯 SEO优化</h3>
+                    <p>自动生成符合SEO规范的前置信息，提升文章在搜索引擎中的排名</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>⚡ 批量处理</h3>
+                    <p>支持批量转换多个文档，大幅提升内容处理效率，节省时间成本</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 使用指南 -->
+        <div class="usage-guide">
+            <h2>📖 详细使用指南</h2>
+            <div class="guide-steps">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>选择输入方式</h3>
+                        <p>根据您的内容来源选择：粘贴内容、上传文件或输入URL三种方式之一</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>设置博客信息</h3>
+                        <p>填写文章标题、描述、发布日期、标签和作者信息，系统会自动生成前置信息</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>一键转换</h3>
+                        <p>点击"转换为Markdown"按钮，系统会智能识别内容格式并进行转换</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>预览和导出</h3>
+                        <p>在预览区域查看转换结果，确认无误后可复制内容或下载Markdown文件</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技术支持 -->
+        <div class="support-section">
+            <h2>🛠️ 技术支持</h2>
+            <p>如果您在使用过程中遇到任何问题，或有功能建议，欢迎联系我们的技术团队。我们致力于为您提供最优质的内容转换服务。</p>
+            <div class="support-links">
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank" class="support-link">
+                    <span class="support-icon">💬</span>
+                    <span>技术支持</span>
+                </a>
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank" class="support-link">
+                    <span class="support-icon">📝</span>
+                    <span>问题反馈</span>
+                </a>
+            </div>
+        </div>
     </main>
 
     <!-- 页脚 -->

@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>亲戚关系计算器 | 在线亲戚称谓查询工具 - 小路工具箱</title>
+    <meta name="title" content="亲戚关系计算器 | 在线亲戚称谓查询工具 - 小路工具箱">
+    <meta name="description" content="免费在线亲戚关系计算器，快速查询亲戚称谓，支持复杂家庭关系计算。输入与亲戚的关系路径，自动计算正确的称呼方式，适用于春节拜年、家庭聚会等场景。">
+    <meta name="keywords" content="亲戚关系计算器,亲戚称谓查询,家庭关系计算,亲戚称呼,家族关系,春节拜年,亲戚关系图,称谓计算,家庭树,亲属关系">
+    <meta name="author" content="小路工具箱">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tools.xiaolu.com/tools/relative-calculator.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.xiaolu.com/tools/relative-calculator.html">
+    <meta property="og:title" content="亲戚关系计算器 | 在线亲戚称谓查询工具 - 小路工具箱">
+    <meta property="og:description" content="免费在线亲戚关系计算器，快速查询亲戚称谓，支持复杂家庭关系计算。">
+    <meta property="og:image" content="https://tools.xiaolu.com/images/relative-calculator-og.png">
+    <meta property="og:site_name" content="小路工具箱">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.xiaolu.com/tools/relative-calculator.html">
+    <meta property="twitter:title" content="亲戚关系计算器 | 在线亲戚称谓查询工具">
+    <meta property="twitter:description" content="免费在线亲戚关系计算器，快速查询亲戚称谓，支持复杂家庭关系计算。">
+    <meta property="twitter:image" content="https://tools.xiaolu.com/images/relative-calculator-twitter.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "亲戚关系计算器",
+      "description": "免费在线亲戚关系计算器，快速查询亲戚称谓，支持复杂家庭关系计算",
+      "url": "https://tools.xiaolu.com/tools/relative-calculator.html",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "亲戚关系计算",
+        "称谓查询",
+        "家庭关系图",
+        "复杂关系计算",
+        "实时计算",
+        "无需注册",
+        "完全免费",
+        "隐私保护"
+      ]
+    }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --warning: #ffb703;
+            --danger: #e63946;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Microsoft YaHei', '微软雅黑';
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 导航栏样式由组件提供 */
+        
+        /* 主要内容区域 */
+        main {
+            flex: 1;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .tool-header p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tool-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .simple-calculator {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .calculator-header {
+            margin-bottom: 2rem;
+        }
+        
+        .calculator-header h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .calculator-header p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        .simple-input-section {
+            margin-bottom: 2rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group label {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .relation-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .relation-btn {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--dark);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .relation-btn:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+            color: var(--primary);
+        }
+        
+        .relation-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        .current-path {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem auto;
+            max-width: 600px;
+        }
+        
+        .path-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .path-text {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .path-content {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .path-clear {
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        .result-section {
+            margin-bottom: 2rem;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .result-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        
+        .result-content .result-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-content .result-subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .mode-toggle {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .advanced-mode {
+            border-top: 2px solid #e9ecef;
+            padding-top: 2rem;
+        }
+        
+        .calculator-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .input-panel {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .panel-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .relation-input {
+            margin-bottom: 1rem;
+        }
+        
+        .relation-input label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .relation-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            transition: var(--transition);
+        }
+        
+        .relation-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .relation-path {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 120px;
+            margin-bottom: 1rem;
+        }
+        
+        .path-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .path-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .path-arrow {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .result-panel {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .result-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        
+        .result-display {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .result-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: var(--dark);
+            border: 1px solid #dee2e6;
+        }
+        
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+        
+        .quick-relations {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .quick-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .quick-item {
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .quick-item:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .quick-relation {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-result {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        
+        .usage-guide {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .guide-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .guide-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .faq-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .faq-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 1rem 0;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .faq-answer {
+            color: var(--gray);
+            line-height: 1.6;
+            padding-left: 1.5rem;
+        }
+        
+        .tool-info {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-content {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+        
+        .info-content ul {
+            margin: 1rem 0;
+        }
+        
+        .info-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .support-links {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .support-links h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .support-links p {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .support-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .support-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem 3%;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .calculator-section {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .guide-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        /* 页脚样式由组件提供 */
+    </style>
+</head>
+<body>
+    <!-- 导航栏将通过JavaScript组件自动生成 -->
+
+    <main>
+        <div class="tool-header">
+            <h1><i class="fas fa-users"></i> 亲戚关系计算器</h1>
+            <p>快速计算亲戚称谓，解决复杂家庭关系问题，让您在家庭聚会中不再尴尬</p>
+        </div>
+
+        <!-- 简化版计算器 -->
+        <div class="tool-container">
+            <div class="simple-calculator">
+                <div class="calculator-header">
+                    <h3><i class="fas fa-magic"></i> 快速查询亲戚称谓</h3>
+                    <p>选择您与亲戚的关系，立即获得正确称呼</p>
+                </div>
+                
+                <div class="simple-input-section">
+                    <div class="input-group">
+                        <label>这个人是我的：</label>
+                        <div class="relation-buttons" id="relationButtons">
+                            <!-- 关系按钮将通过JavaScript生成 -->
+                        </div>
+                    </div>
+                    
+                    <div class="current-path" id="currentPath" style="display: none;">
+                        <div class="path-display">
+                            <span class="path-text">当前关系：</span>
+                            <span class="path-content" id="pathContent"></span>
+                            <button class="path-clear" onclick="clearSimplePath()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-section">
+                    <div class="result-card" id="resultCard">
+                        <div class="result-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <div class="result-content">
+                            <div class="result-title" id="simpleResultTitle">选择关系开始查询</div>
+                            <div class="result-subtitle" id="simpleResultSubtitle">点击上方按钮选择您与亲戚的关系</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 高级模式切换 -->
+        <div class="mode-toggle">
+            <button class="btn btn-secondary" onclick="toggleAdvancedMode()" id="modeToggleBtn">
+                <i class="fas fa-cog"></i>
+                高级模式
+            </button>
+        </div>
+        
+        <!-- 高级计算器（默认隐藏） -->
+        <div class="tool-container advanced-mode" id="advancedMode" style="display: none;">
+            <div class="calculator-section">
+                <div class="input-panel">
+                    <h3 class="panel-title">
+                        <i class="fas fa-route"></i>
+                        关系路径构建
+                    </h3>
+                    
+                    <div class="relation-input">
+                        <label for="relationSelect">选择关系：</label>
+                        <select id="relationSelect" class="relation-select">
+                            <option value="">请选择关系</option>
+                            <option value="father">父亲</option>
+                            <option value="mother">母亲</option>
+                            <option value="son">儿子</option>
+                            <option value="daughter">女儿</option>
+                            <option value="brother">哥哥/弟弟</option>
+                            <option value="sister">姐姐/妹妹</option>
+                            <option value="husband">丈夫</option>
+                            <option value="wife">妻子</option>
+                            <option value="grandfather_father">爷爷(父方)</option>
+                            <option value="grandmother_father">奶奶(父方)</option>
+                            <option value="grandfather_mother">外公(母方)</option>
+                            <option value="grandmother_mother">外婆(母方)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="relation-path" id="relationPath">
+                        <div style="color: var(--gray); text-align: center; padding: 2rem;">请选择关系来构建路径</div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="addRelation()">
+                            <i class="fas fa-plus"></i>
+                            添加关系
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearPath()">
+                            <i class="fas fa-trash"></i>
+                            清空路径
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="result-panel">
+                    <div class="result-title">计算结果</div>
+                    <div class="result-display" id="resultDisplay">
+                        请构建关系路径
+                    </div>
+                    <div class="result-description" id="resultDescription">
+                        添加关系后将自动计算称谓
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 常用关系快速查询 -->
+        <div class="quick-relations">
+            <h2 class="quick-title">
+                <i class="fas fa-bolt"></i>
+                常用关系快速查询
+            </h2>
+            <div class="quick-grid" id="quickGrid">
+                <!-- 快速关系项将通过JavaScript生成 -->
+            </div>
+        </div>
+
+        <!-- 使用指南 -->
+        <div class="usage-guide">
+            <h2 class="guide-title">
+                <i class="fas fa-lightbulb"></i>
+                使用指南
+            </h2>
+            <div class="guide-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>简单模式（推荐）</h4>
+                        <p>直接点击关系按钮，如"爸爸"、"妈妈"等，系统立即显示称谓。如需查询复杂关系，可继续点击后续选项。</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>常用关系</h4>
+                        <p>下方提供了20个最常用的亲戚关系，可以一键查询，适合大部分场景使用。</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>高级模式</h4>
+                        <p>如需计算特别复杂的关系，可点击"高级模式"按钮，使用路径构建功能进行精确计算。</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>实用技巧</h4>
+                        <p>春节拜年时，提前查询好称谓；家庭聚会时，可现场快速查询避免尴尬。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 常见问题 -->
+        <div class="faq-section">
+            <h2 class="faq-title">
+                <i class="fas fa-question-circle"></i>
+                常见问题
+            </h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    怎样最快查到亲戚称谓？
+                </div>
+                <div class="faq-answer">
+                    直接点击关系按钮即可！比如想知道"爸爸"怎么称呼，点击"爸爸"按钮就能看到结果。对于复杂关系，先点第一个关系，再点后续关系即可。
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    简单模式和高级模式有什么区别？
+                </div>
+                <div class="faq-answer">
+                    简单模式适合大部分情况，点击按钮就能查询；高级模式适合特别复杂的关系，可以精确构建关系路径。建议优先使用简单模式。
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    为什么有些称谓有多个选项？
+                </div>
+                <div class="faq-answer">
+                    因为年龄或地区差异，同一关系可能有不同称谓。比如父亲的兄弟，年长的叫"伯伯"，年幼的叫"叔叔"。选择适合的称谓即可。
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    春节拜年时怎么用这个工具？
+                </div>
+                <div class="faq-answer">
+                    提前查询好称谓，或者现场快速查询。比如要拜访"爸爸的哥哥"，点击"爸爸"→"的兄弟"，就知道应该叫"伯伯"或"叔叔"了。
+                </div>
+            </div>
+        </div>
+
+        <!-- 工具详细介绍 -->
+        <div class="tool-info">
+            <h2 class="info-title">@2025工具详细介绍</h2>
+            <div class="info-content">
+                <p>亲戚关系计算器是小路工具箱提供的一款专业家庭关系计算工具，旨在帮助用户快速准确地计算复杂的亲戚称谓关系。</p>
+                <br>
+                <p><strong>主要功能特点：</strong></p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>支持复杂多层级亲戚关系计算</li>
+                    <li>涵盖血缘关系和姻亲关系</li>
+                    <li>提供详细的关系路径显示</li>
+                    <li>常用关系快速查询功能</li>
+                    <li>实时计算，即时显示结果</li>
+                    <li>响应式设计，支持移动设备</li>
+                    <li>完全免费，无需注册使用</li>
+                </ul>
+                <br>
+                <p><strong>适用场景：</strong></p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>春节拜年时确认正确称谓</li>
+                    <li>家庭聚会介绍亲戚关系</li>
+                    <li>婚礼现场亲戚称谓确认</li>
+                    <li>家谱整理和族谱编制</li>
+                    <li>教育孩子认识家庭关系</li>
+                    <li>社交场合避免称谓尴尬</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 技术支持 -->
+        <div class="support-links">
+            <h3>技术支持和问题反馈</h3>
+            <p>如果您在使用过程中遇到问题或有改进建议，欢迎通过以下方式联系我们：</p>
+            <p><a href="https://t.zsxq.com/17wTksRxX" target="_blank">点击这里获取技术支持和问题反馈</a></p>
+        </div>
+    </main>
+
+    <!-- 页脚将通过JavaScript组件自动生成 -->
+
+    <!-- 导航栏组件 -->
+    <script src="../components/navbar.js"></script>
+    <!-- 页脚组件 -->
+    <script src="../components/footer.js"></script>
+
+    <script>
+        // 亲戚关系数据结构
+        const relationData = {
+            father: { name: '父亲', gender: 'male' },
+            mother: { name: '母亲', gender: 'female' },
+            son: { name: '儿子', gender: 'male' },
+            daughter: { name: '女儿', gender: 'female' },
+            brother: { name: '兄弟', gender: 'male' },
+            sister: { name: '姐妹', gender: 'female' },
+            husband: { name: '丈夫', gender: 'male' },
+            wife: { name: '妻子', gender: 'female' },
+            grandfather_father: { name: '爷爷', gender: 'male' },
+            grandmother_father: { name: '奶奶', gender: 'female' },
+            grandfather_mother: { name: '外公', gender: 'male' },
+            grandmother_mother: { name: '外婆', gender: 'female' }
+        };
+
+        // 关系路径数组
+        let relationPath = [];
+        let simpleRelationPath = [];
+        let isAdvancedMode = false;
+        
+        // 简化版关系选项
+        const simpleRelations = [
+            { id: 'father', name: '爸爸', category: 'parent' },
+            { id: 'mother', name: '妈妈', category: 'parent' },
+            { id: 'son', name: '儿子', category: 'child' },
+            { id: 'daughter', name: '女儿', category: 'child' },
+            { id: 'brother', name: '兄弟', category: 'sibling' },
+            { id: 'sister', name: '姐妹', category: 'sibling' },
+            { id: 'husband', name: '老公', category: 'spouse' },
+            { id: 'wife', name: '老婆', category: 'spouse' },
+            { id: 'grandfather_father', name: '爷爷', category: 'grandparent' },
+            { id: 'grandmother_father', name: '奶奶', category: 'grandparent' },
+            { id: 'grandfather_mother', name: '外公', category: 'grandparent' },
+            { id: 'grandmother_mother', name: '外婆', category: 'grandparent' }
+        ];
+
+        // 常用关系预设
+        const quickRelations = [
+            { path: ['father'], result: '父亲' },
+            { path: ['mother'], result: '母亲' },
+            { path: ['father', 'father'], result: '爷爷' },
+            { path: ['father', 'mother'], result: '奶奶' },
+            { path: ['mother', 'father'], result: '外公' },
+            { path: ['mother', 'mother'], result: '外婆' },
+            { path: ['father', 'brother'], result: '伯伯/叔叔' },
+            { path: ['father', 'sister'], result: '姑姑' },
+            { path: ['mother', 'brother'], result: '舅舅' },
+            { path: ['mother', 'sister'], result: '姨妈' },
+            { path: ['father', 'brother', 'son'], result: '堂哥/堂弟' },
+            { path: ['father', 'brother', 'daughter'], result: '堂姐/堂妹' },
+            { path: ['father', 'sister', 'son'], result: '表哥/表弟' },
+            { path: ['father', 'sister', 'daughter'], result: '表姐/表妹' },
+            { path: ['mother', 'brother', 'son'], result: '表哥/表弟' },
+            { path: ['mother', 'brother', 'daughter'], result: '表姐/表妹' },
+            { path: ['wife', 'father'], result: '岳父' },
+            { path: ['wife', 'mother'], result: '岳母' },
+            { path: ['husband', 'father'], result: '公公' },
+            { path: ['husband', 'mother'], result: '婆婆' }
+        ];
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initSimpleRelations();
+            initQuickRelations();
+        });
+        
+        // 初始化简化版关系按钮
+        function initSimpleRelations() {
+            const buttonsContainer = document.getElementById('relationButtons');
+            buttonsContainer.innerHTML = '';
+            
+            simpleRelations.forEach(relation => {
+                const button = document.createElement('button');
+                button.className = 'relation-btn';
+                button.textContent = relation.name;
+                button.onclick = () => selectSimpleRelation(relation.id, relation.name);
+                buttonsContainer.appendChild(button);
+            });
+        }
+        
+        // 选择简化版关系
+        function selectSimpleRelation(relationId, relationName) {
+            // 清除之前的选择
+            document.querySelectorAll('.relation-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 激活当前选择
+            event.target.classList.add('active');
+            
+            // 添加到路径
+            simpleRelationPath.push({ id: relationId, name: relationName });
+            
+            // 更新路径显示
+            updateSimplePath();
+            
+            // 计算结果
+            calculateSimpleResult();
+            
+            // 显示下一步选项或结果
+            showNextOptions(relationId);
+        }
+        
+        // 更新简化版路径显示
+        function updateSimplePath() {
+            const pathContainer = document.getElementById('currentPath');
+            const pathContent = document.getElementById('pathContent');
+            
+            if (simpleRelationPath.length === 0) {
+                pathContainer.style.display = 'none';
+                return;
+            }
+            
+            pathContainer.style.display = 'block';
+            const pathText = simpleRelationPath.map(r => r.name).join(' → ');
+            pathContent.textContent = pathText;
+        }
+        
+        // 清空简化版路径
+        function clearSimplePath() {
+            simpleRelationPath = [];
+            updateSimplePath();
+            
+            // 重置按钮状态
+            document.querySelectorAll('.relation-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 重置结果显示
+            const resultTitle = document.getElementById('simpleResultTitle');
+            const resultSubtitle = document.getElementById('simpleResultSubtitle');
+            resultTitle.textContent = '选择关系开始查询';
+            resultSubtitle.textContent = '点击上方按钮选择您与亲戚的关系';
+            
+            // 重新初始化按钮
+            initSimpleRelations();
+        }
+        
+        // 显示下一步选项
+        function showNextOptions(currentRelation) {
+            const buttonsContainer = document.getElementById('relationButtons');
+            
+            // 根据当前关系显示相关的下一步选项
+            const nextOptions = getNextOptions(currentRelation);
+            
+            if (nextOptions.length > 0) {
+                // 添加分隔线
+                const separator = document.createElement('div');
+                separator.style.gridColumn = '1 / -1';
+                separator.style.textAlign = 'center';
+                separator.style.margin = '1rem 0';
+                separator.style.color = 'var(--gray)';
+                separator.innerHTML = '<small>继续选择关系（可选）</small>';
+                buttonsContainer.appendChild(separator);
+                
+                // 添加下一步选项
+                nextOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'relation-btn';
+                    button.textContent = option.name;
+                    button.onclick = () => selectSimpleRelation(option.id, option.name);
+                    buttonsContainer.appendChild(button);
+                });
+            }
+        }
+        
+        // 获取下一步选项
+        function getNextOptions(currentRelation) {
+            const options = {
+                'father': [
+                    { id: 'father', name: '的爸爸' },
+                    { id: 'mother', name: '的妈妈' },
+                    { id: 'brother', name: '的兄弟' },
+                    { id: 'sister', name: '的姐妹' }
+                ],
+                'mother': [
+                    { id: 'father', name: '的爸爸' },
+                    { id: 'mother', name: '的妈妈' },
+                    { id: 'brother', name: '的兄弟' },
+                    { id: 'sister', name: '的姐妹' }
+                ],
+                'brother': [
+                    { id: 'son', name: '的儿子' },
+                    { id: 'daughter', name: '的女儿' },
+                    { id: 'wife', name: '的老婆' }
+                ],
+                'sister': [
+                    { id: 'son', name: '的儿子' },
+                    { id: 'daughter', name: '的女儿' },
+                    { id: 'husband', name: '的老公' }
+                ],
+                'wife': [
+                    { id: 'father', name: '的爸爸' },
+                    { id: 'mother', name: '的妈妈' },
+                    { id: 'brother', name: '的兄弟' },
+                    { id: 'sister', name: '的姐妹' }
+                ],
+                'husband': [
+                    { id: 'father', name: '的爸爸' },
+                    { id: 'mother', name: '的妈妈' },
+                    { id: 'brother', name: '的兄弟' },
+                    { id: 'sister', name: '的姐妹' }
+                ]
+            };
+            
+            return options[currentRelation] || [];
+        }
+        
+        // 计算简化版结果
+        function calculateSimpleResult() {
+            if (simpleRelationPath.length === 0) {
+                return;
+            }
+            
+            const pathIds = simpleRelationPath.map(r => r.id);
+            const result = getRelationResult(pathIds);
+            
+            const resultTitle = document.getElementById('simpleResultTitle');
+            const resultSubtitle = document.getElementById('simpleResultSubtitle');
+            
+            resultTitle.textContent = result.title;
+            resultSubtitle.textContent = result.description;
+        }
+        
+        // 切换高级模式
+        function toggleAdvancedMode() {
+            const advancedMode = document.getElementById('advancedMode');
+            const toggleBtn = document.getElementById('modeToggleBtn');
+            
+            isAdvancedMode = !isAdvancedMode;
+            
+            if (isAdvancedMode) {
+                advancedMode.style.display = 'block';
+                toggleBtn.innerHTML = '<i class="fas fa-magic"></i> 简单模式';
+            } else {
+                advancedMode.style.display = 'none';
+                toggleBtn.innerHTML = '<i class="fas fa-cog"></i> 高级模式';
+            }
+        }
+
+        // 初始化快速关系
+        function initQuickRelations() {
+            const quickGrid = document.getElementById('quickGrid');
+            quickGrid.innerHTML = '';
+            
+            quickRelations.forEach(relation => {
+                const item = document.createElement('div');
+                item.className = 'quick-item';
+                item.onclick = () => setQuickRelation(relation.path);
+                
+                const pathText = relation.path.map(r => relationData[r]?.name || r).join(' → ');
+                
+                item.innerHTML = `
+                    <div class="quick-relation">${pathText}</div>
+                    <div class="quick-result">${relation.result}</div>
+                `;
+                
+                quickGrid.appendChild(item);
+            });
+        }
+
+        // 添加关系
+        function addRelation() {
+            const select = document.getElementById('relationSelect');
+            const selectedValue = select.value;
+            
+            if (!selectedValue) {
+                alert('请先选择一个关系');
+                return;
+            }
+            
+            relationPath.push(selectedValue);
+            updateRelationPath();
+            calculateResult();
+            
+            // 重置选择
+            select.value = '';
+        }
+
+        // 更新关系路径显示
+        function updateRelationPath() {
+            const pathContainer = document.getElementById('relationPath');
+            
+            if (relationPath.length === 0) {
+                pathContainer.innerHTML = '<div style="color: var(--gray); text-align: center; padding: 2rem;">请选择关系来构建路径</div>';
+                return;
+            }
+            
+            pathContainer.innerHTML = '';
+            
+            relationPath.forEach((relation, index) => {
+                const item = document.createElement('div');
+                item.className = 'path-item';
+                
+                const relationName = relationData[relation]?.name || relation;
+                
+                item.innerHTML = `
+                    <span>${relationName}</span>
+                    <button onclick="removeRelation(${index})" style="background: none; border: none; color: var(--danger); cursor: pointer; padding: 0.25rem;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                
+                if (index < relationPath.length - 1) {
+                    item.innerHTML += '<span class="path-arrow">→</span>';
+                }
+                
+                pathContainer.appendChild(item);
+            });
+        }
+
+        // 移除关系
+        function removeRelation(index) {
+            relationPath.splice(index, 1);
+            updateRelationPath();
+            calculateResult();
+        }
+
+        // 清空路径
+        function clearPath() {
+            relationPath = [];
+            updateRelationPath();
+            
+            const resultDisplay = document.getElementById('resultDisplay');
+            const resultDescription = document.getElementById('resultDescription');
+            
+            resultDisplay.textContent = '请构建关系路径';
+            resultDescription.textContent = '添加关系后将自动计算称谓';
+        }
+
+        // 设置快速关系
+        function setQuickRelation(path) {
+            relationPath = [...path];
+            updateRelationPath();
+            calculateResult();
+        }
+
+        // 计算结果
+        function calculateResult() {
+            if (relationPath.length === 0) {
+                return;
+            }
+            
+            const result = getRelationResult(relationPath);
+            
+            const resultDisplay = document.getElementById('resultDisplay');
+            const resultDescription = document.getElementById('resultDescription');
+            
+            resultDisplay.textContent = result.title;
+            resultDescription.textContent = result.description;
+        }
+
+        // 获取关系结果
+        function getRelationResult(path) {
+            const pathString = path.join('-');
+            
+            // 关系映射表
+            const relationMap = {
+                'father': { title: '父亲', description: '您的父亲' },
+                'mother': { title: '母亲', description: '您的母亲' },
+                'son': { title: '儿子', description: '您的儿子' },
+                'daughter': { title: '女儿', description: '您的女儿' },
+                'brother': { title: '兄弟', description: '您的哥哥或弟弟' },
+                'sister': { title: '姐妹', description: '您的姐姐或妹妹' },
+                'husband': { title: '丈夫', description: '您的丈夫' },
+                'wife': { title: '妻子', description: '您的妻子' },
+                
+                // 祖父母辈
+                'father-father': { title: '爷爷', description: '父亲的父亲' },
+                'father-mother': { title: '奶奶', description: '父亲的母亲' },
+                'mother-father': { title: '外公', description: '母亲的父亲' },
+                'mother-mother': { title: '外婆', description: '母亲的母亲' },
+                
+                // 父系叔伯姑
+                'father-brother': { title: '伯伯/叔叔', description: '父亲的兄弟（年长为伯伯，年幼为叔叔）' },
+                'father-sister': { title: '姑姑', description: '父亲的姐妹' },
+                
+                // 母系舅姨
+                'mother-brother': { title: '舅舅', description: '母亲的兄弟' },
+                'mother-sister': { title: '姨妈/阿姨', description: '母亲的姐妹' },
+                
+                // 堂兄弟姐妹
+                'father-brother-son': { title: '堂哥/堂弟', description: '父亲兄弟的儿子（年长为堂哥，年幼为堂弟）' },
+                'father-brother-daughter': { title: '堂姐/堂妹', description: '父亲兄弟的女儿（年长为堂姐，年幼为堂妹）' },
+                
+                // 表兄弟姐妹（父系）
+                'father-sister-son': { title: '表哥/表弟', description: '父亲姐妹的儿子（年长为表哥，年幼为表弟）' },
+                'father-sister-daughter': { title: '表姐/表妹', description: '父亲姐妹的女儿（年长为表姐，年幼为表妹）' },
+                
+                // 表兄弟姐妹（母系）
+                'mother-brother-son': { title: '表哥/表弟', description: '母亲兄弟的儿子（年长为表哥，年幼为表弟）' },
+                'mother-brother-daughter': { title: '表姐/表妹', description: '母亲兄弟的女儿（年长为表姐，年幼为表妹）' },
+                'mother-sister-son': { title: '表哥/表弟', description: '母亲姐妹的儿子（年长为表哥，年幼为表弟）' },
+                'mother-sister-daughter': { title: '表姐/表妹', description: '母亲姐妹的女儿（年长为表姐，年幼为表妹）' },
+                
+                // 姻亲关系
+                'wife-father': { title: '岳父', description: '妻子的父亲' },
+                'wife-mother': { title: '岳母', description: '妻子的母亲' },
+                'husband-father': { title: '公公', description: '丈夫的父亲' },
+                'husband-mother': { title: '婆婆', description: '丈夫的母亲' },
+                'wife-brother': { title: '内兄/内弟', description: '妻子的兄弟（年长为内兄，年幼为内弟）' },
+                'wife-sister': { title: '姨姐/姨妹', description: '妻子的姐妹' },
+                'husband-brother': { title: '大伯/小叔', description: '丈夫的兄弟' },
+                'husband-sister': { title: '姑姐/姑妹', description: '丈夫的姐妹' },
+                
+                // 孙辈
+                'son-son': { title: '孙子', description: '儿子的儿子' },
+                'son-daughter': { title: '孙女', description: '儿子的女儿' },
+                'daughter-son': { title: '外孙', description: '女儿的儿子' },
+                'daughter-daughter': { title: '外孙女', description: '女儿的女儿' },
+                
+                // 侄甥辈
+                'brother-son': { title: '侄子', description: '兄弟的儿子' },
+                'brother-daughter': { title: '侄女', description: '兄弟的女儿' },
+                'sister-son': { title: '外甥', description: '姐妹的儿子' },
+                'sister-daughter': { title: '外甥女', description: '姐妹的女儿' }
+            };
+            
+            const result = relationMap[pathString];
+            
+            if (result) {
+                return result;
+            } else {
+                // 复杂关系的通用处理
+                const pathNames = path.map(r => relationData[r]?.name || r);
+                return {
+                    title: '复杂关系',
+                    description: `关系路径：${pathNames.join(' → ')}，这是一个较为复杂的亲戚关系，建议咨询家中长辈确认具体称谓。`
+                };
+            }
+        }
+    </script>
+</body>
+</html>

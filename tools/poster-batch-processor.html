@@ -89,36 +89,121 @@
             font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
         }
 
-        /* 导航栏样式由组件提供 *//* 响应式设计 */
-         @media (max-width: 768px) {
-             .content-wrapper {
-                 grid-template-columns: 1fr;
-                 gap: 16px;
-             }
-             
-             .main-content {
-                 padding: 16px;
-             
-            flex: 1;}
-             
-             .card {
-                 padding: 20px;
-             }
-             
-             .tool-/* 导航栏样式由组件提供 */
-             
-             .tool-header h1 {
-                 font-size: 2rem;
-             }
-             
-             .upload-area {
-                 padding: 24px 16px;
-             }
-             
-             .size-presets {
-                 grid-template-columns: repeat(2, 1fr);
-             }
-         }
+        /* 导航栏样式由组件提供 */
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-header h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tool-header p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 0;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            background: #fafafa;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .upload-area.dragover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-text {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .upload-hint {
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+            
+            .size-presets {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
 
         .preview-container {
             display: grid;
@@ -337,14 +422,82 @@
             text-decoration: underline;
         }
 
+        .usage-guide {
+            margin-bottom: 2rem;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card-header i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .card-header h3 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 1.3rem;
+        }
+        
+        .guide-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            font-weight: 600;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .step-desc {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .content-wrapper {
+            display: contents;
+        }
+        
+        .left-section {
+            display: contents;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            
-            flex: 1;}
-            
-            .tool-header h1 {
-                font-size: 2rem;
+            .guide-steps {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .settings-grid {

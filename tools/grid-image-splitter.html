@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九宫格切图工具 - 小路工具箱</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="免费在线九宫格切图工具，一键将图片分割成九宫格，支持JPG、PNG等格式，适合社交媒体发布，简单易用的界面设计">
+    <meta name="keywords" content="九宫格切图,图片分割工具,九宫格生成器,朋友圈九宫格,社交媒体工具,照片九宫格,在线图片处理,免费切图工具">
+    <meta name="author" content="小路工具箱">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.xiaolu.page/tools/grid-image-splitter.html">
+    <meta property="og:title" content="九宫格切图工具 - 小路工具箱">
+    <meta property="og:description" content="免费在线九宫格切图工具，一键将图片分割成九宫格，支持JPG、PNG等格式，适合社交媒体发布，简单易用的界面设计">
+    <meta property="og:image" content="https://tools.xiaolu.page/images/grid-image-splitter-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.xiaolu.page/tools/grid-image-splitter.html">
+    <meta property="twitter:title" content="九宫格切图工具 - 小路工具箱">
+    <meta property="twitter:description" content="免费在线九宫格切图工具，一键将图片分割成九宫格，支持JPG、PNG等格式，适合社交媒体发布，简单易用的界面设计">
+    <meta property="twitter:image" content="https://tools.xiaolu.page/images/grid-image-splitter-preview.jpg">
+    
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "九宫格切图工具",
+        "description": "免费在线九宫格切图工具，一键将图片分割成九宫格，支持JPG、PNG等格式，适合社交媒体发布，简单易用的界面设计",
+        "url": "https://tools.xiaolu.page/tools/grid-image-splitter.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "一键分割九宫格",
+            "支持多种图片格式",
+            "实时预览效果",
+            "批量下载切图",
+            "无需注册登录",
+            "完全免费使用"
+        ]
+    }
+    </script>
+    
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --white: #ffffff;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        /* 导航栏样式由组件提供 */
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .tool-features {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .feature-tag {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .main-content {
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--primary);
+            border-radius: 1rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--light);
+            margin-bottom: 2rem;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--accent);
+            background: #f0f7ff;
+        }
+        
+        .upload-area.dragover {
+            border-color: var(--success);
+            background: #e8f5e9;
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .upload-text {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .upload-hint {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-tips {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .preview-container {
+            display: none;
+            margin-top: 2rem;
+        }
+        
+        .preview-container.active {
+            display: block;
+        }
+        
+        .grid-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 4px;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .grid-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 0.25rem;
+            position: relative;
+        }
+        
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: var(--secondary);
+            transform: translateY(-1px);
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: var(--white);
+        }
+        
+        .btn-success:hover:not(:disabled) {
+            background: #218838;
+            transform: translateY(-1px);
+        }
+        
+        .info-section {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .info-section h3 {
+            color: var(--dark);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .info-section p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .info-section strong {
+            color: var(--dark);
+        }
+        
+        .support-section {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 1rem;
+        }
+        
+        .support-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .support-link:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .tool-header {
+                padding: 1.5rem 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .tool-header p {
+                font-size: 1rem;
+            }
+            
+            .feature-tag {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .main-content {
+                padding: 1.5rem;
+            }
+            
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏将通过JavaScript组件自动生成 -->
+    
+    <div class="container">
+        <div class="tool-header">
+            <h1>九宫格切图工具</h1>
+            <p>一键将图片分割成九宫格，完美适配社交媒体发布，支持多种图片格式，简单易用</p>
+            
+            <div class="tool-features">
+                <span class="feature-tag">✨ 一键分割</span>
+                <span class="feature-tag">🚀 批量下载</span>
+                <span class="feature-tag">🎯 智能裁剪</span>
+                <span class="feature-tag">📱 移动友好</span>
+            </div>
+        </div>
+
+        <!-- 主要内容 -->
+        <div class="main-content">
+            <!-- 上传区域 -->
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📸</div>
+                <div class="upload-text">拖拽图片到此处或点击选择文件</div>
+                <div class="upload-hint">支持 JPG、PNG、GIF、BMP、WEBP 等格式</div>
+                <div class="upload-tips">
+                    <div class="tip-item">💡 建议使用清晰的方形图片</div>
+                    <div class="tip-item">📏 推荐分辨率：1080x1080 或以上</div>
+                    <div class="tip-item">📦 文件大小：不超过 10MB</div>
+                </div>
+                <input type="file" id="fileInput" class="file-input" accept="image/*">
+            </div>
+            
+            <!-- 预览区域 -->
+            <div class="preview-container" id="previewContainer">
+                <div class="grid-preview" id="gridPreview"></div>
+                
+                <!-- 控制按钮 -->
+                <div class="controls">
+                    <button id="splitBtn" class="btn btn-primary" disabled>
+                        <i class="fas fa-cut"></i> 生成九宫格
+                    </button>
+                    <button id="downloadBtn" class="btn btn-success" disabled>
+                        <i class="fas fa-download"></i> 下载全部
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 使用说明 -->
+        <div class="info-section">
+            <h2>📖 使用说明</h2>
+            
+            <h3>使用步骤</h3>
+            <p><strong>1. 上传图片</strong> → 点击上传区域或拖拽图片，支持多种图片格式</p>
+            <p><strong>2. 预览效果</strong> → 上传后自动显示九宫格预览效果</p>
+            <p><strong>3. 下载切图</strong> → 点击下载按钮，获取所有九宫格图片</p>
+            
+            <h3>使用场景</h3>
+            <p><strong>📱 社交媒体</strong> - 朋友圈、微博等九宫格发布 | <strong>🎨 作品展示</strong> - 摄影、设计作品陈列</p>
+            <p><strong>🏢 品牌营销</strong> - 产品展示、活动宣传 | <strong>💝 个人相册</strong> - 旅行照片、生活记录</p>
+            
+            <h3>使用技巧</h3>
+            <p>选择分辨率较高的方形图片效果最佳，图片会自动调整为正方形并等分为九宫格。所有处理在浏览器本地完成，保护隐私安全。</p>
+        </div>
+
+        <!-- 常见问题 -->
+        <div class="info-section">
+            <h2>❓ 常见问题</h2>
+            
+            <h3>Q: 支持哪些图片格式？</h3>
+            <p>A: 支持 JPG、PNG、GIF、BMP、WEBP 等常见图片格式，推荐使用 PNG 或 JPG 格式以获得最佳效果。</p>
+            
+            <h3>Q: 图片大小有限制吗？</h3>
+            <p>A: 建议上传的图片文件大小不超过 10MB，分辨率建议 1080x1080 像素或以上，以确保切割后的图片清晰度。</p>
+            
+            <h3>Q: 非正方形图片如何处理？</h3>
+            <p>A: 工具会自动将图片裁剪为正方形，保持图片中心区域，然后再进行九宫格分割。</p>
+            
+            <h3>Q: 如何保存九宫格图片？</h3>
+            <p>A: 点击"下载全部"按钮，系统会自动将9张切割好的图片打包下载，按照顺序命名便于发布使用。</p>
+            
+            <h3>Q: 图片会上传到服务器吗？</h3>
+            <p>A: 不会。所有图片处理都在您的浏览器本地完成，不会上传到服务器，确保您的图片隐私安全。</p>
+        </div>
+        
+        <!-- 工具优势 -->
+        <div class="info-section">
+            <h2>🌟 工具优势</h2>
+            <p><strong>⚡ 快速处理</strong> - 一键生成九宫格，智能裁剪处理 | <strong>🎨 原图输出</strong> - 保持原图分辨率，画质无损</p>
+            <p><strong>🔧 简单易用</strong> - 无需复杂操作，新手也能轻松上手 | <strong>🌐 随时使用</strong> - 浏览器直接访问，无需下载安装</p>
+            <p><strong>🔒 安全可靠</strong> - 本地处理保护隐私，无需担心泄露 | <strong>💝 免费开放</strong> - 所有功能免费使用，无隐藏收费</p>
+        </div>
+
+        <!-- 工具特色 -->
+        <div class="info-section">
+            <h2>🎯 工具特色</h2>
+            <p><strong>🎨 智能切割</strong> - 自动识别图片尺寸，智能裁剪并精确分割成九宫格，保持画面比例完美呈现</p>
+            <p><strong>📱 便捷发布</strong> - 自动按顺序编号，一键打包下载九宫格图片，完美适配各大社交平台的发布需求</p>
+            <p><strong>💫 原创设计</strong> - 简洁直观的界面设计，拖拽上传、一键生成，让创作者专注于内容本身</p>
+            <p><strong>🛡️ 隐私保护</strong> - 纯浏览器本地处理技术，无需担心隐私泄露，让您放心使用不留后顾之忧</p>
+        </div>
+
+        <!-- 技术支持 -->
+        <div class="support-section">
+            <p>技术支持和问题反馈：<a href="https://t.zsxq.com/17wTksRxX" class="support-link" target="_blank">点击这里</a></p>
+        </div>
+
+        <!-- 版权信息 -->
+        <div class="copyright">
+            <p>@2025 小路工具箱</p>
+        </div>
+    </div>
+
+    <!-- 页脚将通过JavaScript组件自动生成 -->
+
+    <script>
+        // DOM 元素
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const previewContainer = document.getElementById('previewContainer');
+        const gridPreview = document.getElementById('gridPreview');
+        const splitBtn = document.getElementById('splitBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        
+        let originalImage = null;
+        let gridImages = [];
+        
+        // 上传区域点击事件
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        // 文件选择事件
+        fileInput.addEventListener('change', handleFileSelect);
+        
+        // 拖拽事件
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                handleFile(file);
+            }
+        });
+        
+        // 处理选择的文件
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        }
+        
+        // 处理图片文件
+        function handleFile(file) {
+            const reader = new FileReader();
+            
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    originalImage = img;
+                    createGridPreview();
+                    splitBtn.disabled = false;
+                };
+                img.src = e.target.result;
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        // 创建九宫格预览
+        function createGridPreview() {
+            const size = Math.min(originalImage.width, originalImage.height);
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // 设置画布大小为正方形
+            canvas.width = size;
+            canvas.height = size;
+            
+            // 计算裁剪位置，保持居中
+            const offsetX = (originalImage.width - size) / 2;
+            const offsetY = (originalImage.height - size) / 2;
+            
+            // 绘制裁剪后的图片
+            ctx.drawImage(originalImage, offsetX, offsetY, size, size, 0, 0, size, size);
+            
+            // 清空预览区域
+            gridPreview.innerHTML = '';
+            gridImages = [];
+            
+            // 计算每个格子的大小
+            const gridSize = size / 3;
+            
+            // 创建九宫格
+            for (let i = 0; i < 9; i++) {
+                const x = (i % 3) * gridSize;
+                const y = Math.floor(i / 3) * gridSize;
+                
+                // 创建单个格子的画布
+                const gridCanvas = document.createElement('canvas');
+                gridCanvas.width = gridSize;
+                gridCanvas.height = gridSize;
+                const gridCtx = gridCanvas.getContext('2d');
+                
+                // 绘制格子内的图片部分
+                gridCtx.drawImage(canvas, x, y, gridSize, gridSize, 0, 0, gridSize, gridSize);
+                
+                // 创建预览元素
+                const gridItem = document.createElement('div');
+                gridItem.className = 'grid-item';
+                
+                const img = document.createElement('img');
+                img.src = gridCanvas.toDataURL('image/png');
+                gridItem.appendChild(img);
+                
+                gridPreview.appendChild(gridItem);
+                gridImages.push(gridCanvas.toDataURL('image/png'));
+            }
+            
+            // 显示预览区域
+            previewContainer.classList.add('active');
+            downloadBtn.disabled = false;
+        }
+        
+        // 下载九宫格图片
+        downloadBtn.addEventListener('click', () => {
+            gridImages.forEach((dataUrl, index) => {
+                const link = document.createElement('a');
+                link.download = `grid_${index + 1}.png`;
+                link.href = dataUrl;
+                link.click();
+            });
+        });
+        
+        // 生成九宫格
+        splitBtn.addEventListener('click', () => {
+            createGridPreview();
+        });
+    </script>
+</body>
+</html>

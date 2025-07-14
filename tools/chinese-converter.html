@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>简体繁体字转换工具 | 在线中文字体转换器 - 小路工具箱</title>
+    <meta name="title" content="简体繁体字转换工具 | 在线中文字体转换器 - 小路工具箱">
+    <meta name="description" content="免费在线简体繁体字转换工具，支持简体转繁体、繁体转简体，智能识别文本类型，批量转换，实时预览。适用于港澳台地区文档处理、学术研究、文化交流等场景。">
+    <meta name="keywords" content="简体繁体转换,繁体字转换器,简体字转换,中文转换工具,繁简转换,港澳台繁体,传统繁体,在线转换器,文字转换,中文工具">
+    <meta name="author" content="小路工具箱">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tools.xiaolu.com/tools/chinese-converter.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.xiaolu.com/tools/chinese-converter.html">
+    <meta property="og:title" content="简体繁体字转换工具 | 在线中文字体转换器 - 小路工具箱">
+    <meta property="og:description" content="免费在线简体繁体字转换工具，支持简体转繁体、繁体转简体，智能识别文本类型，批量转换，实时预览。">
+    <meta property="og:image" content="https://tools.xiaolu.com/images/chinese-converter-og.png">
+    <meta property="og:site_name" content="小路工具箱">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.xiaolu.com/tools/chinese-converter.html">
+    <meta property="twitter:title" content="简体繁体字转换工具 | 在线中文字体转换器">
+    <meta property="twitter:description" content="免费在线简体繁体字转换工具，支持简体转繁体、繁体转简体，智能识别文本类型，批量转换，实时预览。">
+    <meta property="twitter:image" content="https://tools.xiaolu.com/images/chinese-converter-twitter.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "简体繁体字转换工具",
+      "description": "免费在线简体繁体字转换工具，支持简体转繁体、繁体转简体",
+      "url": "https://tools.xiaolu.com/tools/chinese-converter.html",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "简体转繁体",
+        "繁体转简体",
+        "智能文本识别",
+        "批量文本转换",
+        "实时预览",
+        "一键复制",
+        "文件上传转换",
+        "无需注册",
+        "隐私保护"
+      ]
+    }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --warning: #ffb703;
+            --danger: #e63946;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Microsoft YaHei', '微软雅黑';
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 导航栏样式由组件提供 */
+        
+        /* 主要内容区域 */
+        main {
+            flex: 1;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* 工具介绍样式 */
+        .tool-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .tool-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .tool-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .tool-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* 工具主体样式 */
+        .tool-body {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .promotion-text h2 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .promotion-text p {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .tool-header p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tool-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .converter-layout {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+        
+        .input-section, .output-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .char-count {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .text-area {
+            width: 100%;
+            min-height: 300px;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+        
+        .text-area:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .text-area.output {
+            background-color: #f8f9fa;
+            cursor: text;
+        }
+        
+        .converter-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .convert-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+        
+        .convert-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(67, 97, 238, 0.3);
+        }
+        
+        .convert-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .swap-btn {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.8rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .swap-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: rotate(180deg);
+        }
+        
+        .mode-selector {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 0.25rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .mode-option {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .mode-option.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: var(--dark);
+            border: 1px solid #dee2e6;
+        }
+        
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #3ba8c7;
+            transform: translateY(-1px);
+        }
+        
+        .file-upload {
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .file-upload input {
+            display: none;
+        }
+        
+        .usage-guide {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .guide-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .guide-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .faq-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .faq-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 1rem 0;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .faq-answer {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .tool-info {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .info-content {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .support-links {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .support-links h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .support-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .support-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 工具详细介绍样式 */
+        .tool-details {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-details h2 {
+            color: var(--dark);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .advantage-item {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+            transition: var(--transition);
+        }
+        
+        .advantage-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .advantage-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .advantage-item h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .advantage-item p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .scenarios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .scenario-item {
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary);
+            background: #f8f9fa;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .scenario-item h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .scenario-item p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* 技术支持样式 */
+        .support-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .support-section h2 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .support-section p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+        
+        .support-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .support-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .support-link:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            text-decoration: none;
+        }
+        
+        .support-icon {
+            font-size: 1.1rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .converter-layout {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .converter-controls {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .tool-header p {
+                font-size: 1rem;
+            }
+            
+            .action-buttons {
+                justify-content: center;
+            }
+            
+            .guide-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            /* 工具介绍响应式样式 */
+            .tool-title {
+                font-size: 2rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 1rem;
+            }
+            
+            .tool-tags {
+                justify-content: center;
+            }
+            
+            .tag {
+                font-size: 0.8rem;
+                padding: 4px 8px;
+            }
+            
+            /* 工具主体响应式样式 */
+            .promotion-text h2 {
+                font-size: 1.5rem;
+            }
+            
+            .promotion-text p {
+                font-size: 0.9rem;
+            }
+            
+            /* 工具详情响应式样式 */
+            .tool-details h2 {
+                font-size: 1.5rem;
+            }
+            
+            .advantages-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .advantage-item h3 {
+                font-size: 1.1rem;
+            }
+            
+            .advantage-item p {
+                font-size: 0.9rem;
+            }
+            
+            .scenarios {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .scenario-item h3 {
+                font-size: 1.1rem;
+            }
+            
+            .scenario-item p {
+                font-size: 0.9rem;
+            }
+            
+            /* 技术支持响应式样式 */
+            .support-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .support-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .support-link {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tool-title {
+                font-size: 1.8rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .promotion-text h2 {
+                font-size: 1.3rem;
+            }
+            
+            .tool-details h2,
+            .support-section h2 {
+                font-size: 1.3rem;
+            }
+            
+            .advantage-icon {
+                font-size: 2rem;
+            }
+        }
+    </style>
+
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+</head>
+<body>
+    <!-- 导航栏将通过JavaScript组件自动生成 -->
+    
+    <!-- 主要内容 -->
+    <main>
+        <!-- 工具介绍 -->
+        <div class="tool-intro">
+            <h1 class="tool-title">🈶 智能简繁转换工具</h1>
+            <p class="tool-subtitle">专业的简体繁体字转换器，智能识别文本类型，支持双向转换，为港澳台地区交流提供便利</p>
+            <div class="tool-tags">
+                <span class="tag">智能识别</span>
+                <span class="tag">双向转换</span>
+                <span class="tag">批量处理</span>
+                <span class="tag">文件上传</span>
+                <span class="tag">隐私安全</span>
+            </div>
+        </div>
+
+        <!-- 工具主体 -->
+        <div class="tool-body">
+            <div class="promotion-text">
+                <h2>🌟 为什么选择我们的简繁转换工具？</h2>
+                <p>在全球化时代，简体字和繁体字的转换需求日益增长。我们的智能转换工具采用先进的中文处理算法，不仅支持准确的简繁互转，还能智能识别文本类型，自动选择最佳转换方案。无论是商务文档、学术论文还是日常交流，都能为您提供专业、可靠的转换服务。</p>
+            </div>
+        </div>
+        
+        <div class="tool-container">
+            <div class="mode-selector">
+                <div class="mode-option active" data-mode="auto">智能识别</div>
+                <div class="mode-option" data-mode="s2t">简体转繁体</div>
+                <div class="mode-option" data-mode="t2s">繁体转简体</div>
+            </div>
+            
+            <div class="converter-layout">
+                <div class="input-section">
+                    <div class="section-header">
+                        <span class="section-title">输入文本</span>
+                        <span class="char-count">字符数: <span id="inputCount">0</span></span>
+                    </div>
+                    <textarea class="text-area" id="inputText" placeholder="请输入需要转换的中文文本..."></textarea>
+                    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-upload"></i>
+                        <span>点击上传文本文件</span>
+                        <input type="file" id="fileInput" accept=".txt,.doc,.docx" onchange="handleFileUpload(event)">
+                    </div>
+                </div>
+                
+                <div class="converter-controls">
+                    <button class="convert-btn" id="convertBtn" onclick="convertText()">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>转换</span>
+                    </button>
+                    <button class="swap-btn" onclick="swapText()" title="交换输入输出">
+                        <i class="fas fa-arrows-alt-v"></i>
+                    </button>
+                </div>
+                
+                <div class="output-section">
+                    <div class="section-header">
+                        <span class="section-title">转换结果</span>
+                        <span class="char-count">字符数: <span id="outputCount">0</span></span>
+                    </div>
+                    <textarea class="text-area output" id="outputText" placeholder="转换结果将显示在这里..." readonly></textarea>
+                    <div class="action-buttons">
+                        <button class="btn btn-success" onclick="copyResult()">
+                            <i class="far fa-copy"></i>
+                            复制结果
+                        </button>
+                        <button class="btn btn-secondary" onclick="downloadResult()">
+                            <i class="fas fa-download"></i>
+                            下载文件
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearAll()">
+                            <i class="fas fa-trash"></i>
+                            清空
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 使用指南 -->
+        <div class="usage-guide">
+            <h2 class="guide-title">
+                <i class="fas fa-book"></i>
+                使用指南
+            </h2>
+            <div class="guide-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>选择转换模式</h4>
+                        <p>选择智能识别、简体转繁体或繁体转简体模式</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>输入文本</h4>
+                        <p>在左侧文本框输入需要转换的中文文本，或上传文本文件</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>执行转换</h4>
+                        <p>点击转换按钮，系统将自动处理并显示转换结果</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>获取结果</h4>
+                        <p>复制转换结果或下载为文本文件保存到本地</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 工具详细介绍 -->
+        <div class="tool-details">
+            <h2>🎯 工具优势</h2>
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="advantage-icon">🧠</div>
+                    <h3>智能识别</h3>
+                    <p>采用先进的中文处理算法，自动识别简体和繁体字，智能选择最佳转换方案</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">🔄</div>
+                    <h3>双向转换</h3>
+                    <p>支持简体转繁体、繁体转简体双向转换，满足不同地区用户的使用需求</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">📁</div>
+                    <h3>批量处理</h3>
+                    <p>支持大量文本的批量转换，提高工作效率，节省时间成本</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">🔒</div>
+                    <h3>隐私安全</h3>
+                    <p>本地处理，不上传任何数据到服务器，确保您的文本内容安全私密</p>
+                </div>
+            </div>
+
+            <h2>🌟 应用场景</h2>
+            <div class="scenarios">
+                <div class="scenario-item">
+                    <h3>🏢 商务交流</h3>
+                    <p>处理港澳台地区的商务文档、合同协议，确保文字表达的准确性和专业性</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>📚 学术研究</h3>
+                    <p>转换学术论文、研究资料，便于不同地区学者之间的学术交流与合作</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>🌐 网站本地化</h3>
+                    <p>网站内容的简繁体适配，为不同地区用户提供本地化的阅读体验</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>📖 文学翻译</h3>
+                    <p>古典文学、现代文学作品的简繁体转换，保持文学作品的原有韵味</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>💼 移民文档</h3>
+                    <p>处理移民、留学相关文档，满足不同地区官方机构的文字要求</p>
+                </div>
+                <div class="scenario-item">
+                    <h3>📱 软件开发</h3>
+                    <p>应用程序的多语言支持，为简体和繁体中文用户提供一致的用户体验</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技术支持 -->
+        <div class="support-section">
+            <h2>🛠️ 技术支持</h2>
+            <p>如果您在使用过程中遇到任何问题，或有功能建议，欢迎联系我们：</p>
+            <div class="support-links">
+                <a href="mailto:support@xiaolu.com" class="support-link">
+                    <i class="fas fa-envelope support-icon"></i>
+                    邮箱支持
+                </a>
+                <a href="https://github.com/xiaolu/tools" class="support-link">
+                    <i class="fab fa-github support-icon"></i>
+                    GitHub
+                </a>
+                <a href="https://xiaolu.com/feedback" class="support-link">
+                    <i class="fas fa-comment support-icon"></i>
+                    意见反馈
+                </a>
+            </div>
+        </div>
+        
+        <!-- 常见问题 -->
+        <div class="faq-section">
+            <h2 class="faq-title">
+                <i class="fas fa-question-circle"></i>
+                常见问题
+            </h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    什么是简体字和繁体字？
+                </div>
+                <div class="faq-answer">
+                    简体字是中华人民共和国官方使用的汉字形式，繁体字是传统的汉字形式，主要在港澳台地区使用。两者在字形结构上有所不同，但表达的意思相同。
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    智能识别模式如何工作？
+                </div>
+                <div class="faq-answer">
+                    智能识别模式会自动检测输入文本的字体类型（简体或繁体），然后自动选择合适的转换方向。如果检测到简体字较多，则转换为繁体字，反之亦然。
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    转换是否完全准确？
+                </div>
+                <div class="faq-answer">
+                    本工具基于标准的简繁字对照表进行转换，对于常用汉字的转换准确率很高。但某些专业术语或地区性用词可能需要人工校对。
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    支持哪些文件格式？
+                </div>
+                <div class="faq-answer">
+                    目前支持上传TXT纯文本文件。上传后文件内容会自动填入输入框，转换完成后可以下载为TXT格式。
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    文本长度有限制吗？
+                </div>
+                <div class="faq-answer">
+                    为了保证转换速度和用户体验，建议单次转换的文本长度不超过10000个字符。如需处理更长的文本，建议分段转换。
+                </div>
+            </div>
+        </div>
+        
+        <!-- 工具详细介绍 -->
+        <div class="tool-info">
+            <h2 class="info-title">@2025工具详细介绍</h2>
+            <div class="info-content">
+                <p>简体繁体字转换工具是小路工具箱提供的一款专业中文字体转换工具，旨在帮助用户在不同的中文字体系统之间进行快速、准确的转换。</p>
+                <br>
+                <p><strong>主要功能特点：</strong></p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>智能识别文本类型，自动选择转换方向</li>
+                    <li>支持简体转繁体、繁体转简体双向转换</li>
+                    <li>基于标准字符对照表，确保转换准确性</li>
+                    <li>支持文本文件上传和结果下载</li>
+                    <li>实时字符计数，方便用户掌握文本长度</li>
+                    <li>响应式设计，支持各种设备访问</li>
+                    <li>完全免费，无需注册，保护用户隐私</li>
+                </ul>
+                <br>
+                <p><strong>适用场景：</strong></p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>港澳台地区文档处理和本地化</li>
+                    <li>学术研究和文献资料整理</li>
+                    <li>跨地区商务文件转换</li>
+                    <li>文化交流和教育资料准备</li>
+                    <li>网站内容国际化处理</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 技术支持 -->
+        <div class="support-links">
+            <h3>技术支持和问题反馈</h3>
+            <p>如果您在使用过程中遇到问题或有改进建议，欢迎通过以下方式联系我们：</p>
+            <p><a href="https://t.zsxq.com/17wTksRxX" target="_blank">点击这里获取技术支持和问题反馈</a></p>
+        </div>
+    </main>
+
+    <!-- 页脚将通过JavaScript组件自动生成 -->
+
+    <script>
+        // 简繁转换字典（部分常用字符）
+        const s2tMap = {
+            '一': '一', '二': '二', '三': '三', '四': '四', '五': '五', '六': '六', '七': '七', '八': '八', '九': '九', '十': '十',
+            '个': '個', '人': '人', '大': '大', '小': '小', '中': '中', '国': '國', '的': '的', '了': '了', '在': '在', '有': '有',
+            '我': '我', '你': '你', '他': '他', '她': '她', '它': '它', '们': '們', '这': '這', '那': '那', '里': '裡', '时': '時',
+            '会': '會', '能': '能', '说': '說', '话': '話', '来': '來', '去': '去', '看': '看', '听': '聽', '做': '做', '给': '給',
+            '对': '對', '从': '從', '到': '到', '为': '為', '和': '和', '与': '與', '或': '或', '但': '但', '如': '如', '果': '果',
+            '因': '因', '所': '所', '以': '以', '就': '就', '是': '是', '不': '不', '没': '沒', '很': '很', '太': '太', '非': '非',
+            '常': '常', '也': '也', '都': '都', '还': '還', '再': '再', '又': '又', '已': '已', '经': '經', '过': '過', '要': '要',
+            '想': '想', '知': '知', '道': '道', '得': '得', '可': '可', '应': '應', '该': '該', '让': '讓', '使': '使', '被': '被',
+            '把': '把', '将': '將', '向': '向', '往': '往', '于': '於', '关': '關', '开': '開', '关': '關', '始': '始', '结': '結',
+            '束': '束', '完': '完', '成': '成', '进': '進', '出': '出', '上': '上', '下': '下', '前': '前', '后': '後', '左': '左',
+            '右': '右', '东': '東', '西': '西', '南': '南', '北': '北', '内': '內', '外': '外', '间': '間', '边': '邊', '旁': '旁',
+            '近': '近', '远': '遠', '高': '高', '低': '低', '长': '長', '短': '短', '宽': '寬', '窄': '窄', '厚': '厚', '薄': '薄',
+            '新': '新', '旧': '舊', '好': '好', '坏': '壞', '美': '美', '丑': '醜', '快': '快', '慢': '慢', '早': '早', '晚': '晚',
+            '多': '多', '少': '少', '全': '全', '半': '半', '空': '空', '满': '滿', '真': '真', '假': '假', '正': '正', '错': '錯',
+            '对': '對', '错': '錯', '同': '同', '异': '異', '像': '像', '样': '樣', '种': '種', '类': '類', '些': '些', '每': '每',
+            '各': '各', '另': '另', '别': '別', '其': '其', '某': '某', '任': '任', '何': '何', '谁': '誰', '什': '什', '么': '麼',
+            '哪': '哪', '怎': '怎', '为': '為', '什': '什', '么': '麼', '时': '時', '候': '候', '地': '地', '方': '方', '处': '處',
+            '年': '年', '月': '月', '日': '日', '天': '天', '周': '週', '星': '星', '期': '期', '小': '小', '时': '時', '分': '分',
+            '秒': '秒', '今': '今', '明': '明', '昨': '昨', '前': '前', '后': '後', '现': '現', '将': '將', '曾': '曾', '正': '正',
+            '刚': '剛', '马': '馬', '立': '立', '即': '即', '然': '然', '后': '後', '接': '接', '着': '著', '继': '繼', '续': '續',
+            '停': '停', '止': '止', '暂': '暫', '停': '停', '休': '休', '息': '息', '睡': '睡', '觉': '覺', '醒': '醒', '起': '起',
+            '床': '床', '坐': '坐', '站': '站', '走': '走', '跑': '跑', '跳': '跳', '飞': '飛', '游': '游', '泳': '泳', '开': '開',
+            '车': '車', '骑': '騎', '自': '自', '行': '行', '车': '車', '坐': '坐', '船': '船', '飞': '飛', '机': '機', '火': '火',
+            '车': '車', '公': '公', '交': '交', '车': '車', '地': '地', '铁': '鐵', '出': '出', '租': '租', '车': '車', '步': '步',
+            '行': '行', '电': '電', '话': '話', '手': '手', '机': '機', '电': '電', '脑': '腦', '网': '網', '络': '絡', '互': '互',
+            '联': '聯', '网': '網', '电': '電', '子': '子', '邮': '郵', '件': '件', '信': '信', '息': '息', '消': '消', '息': '息',
+            '新': '新', '闻': '聞', '报': '報', '纸': '紙', '杂': '雜', '志': '志', '书': '書', '本': '本', '文': '文', '章': '章',
+            '字': '字', '词': '詞', '句': '句', '段': '段', '页': '頁', '面': '面', '内': '內', '容': '容', '题': '題', '目': '目',
+            '标': '標', '题': '題', '主': '主', '题': '題', '问': '問', '题': '題', '答': '答', '案': '案', '解': '解', '决': '決',
+            '办': '辦', '法': '法', '方': '方', '式': '式', '方': '方', '法': '法', '途': '途', '径': '徑', '道': '道', '路': '路',
+            '街': '街', '道': '道', '马': '馬', '路': '路', '公': '公', '路': '路', '高': '高', '速': '速', '公': '公', '路': '路',
+            '桥': '橋', '隧': '隧', '道': '道', '建': '建', '筑': '築', '房': '房', '子': '子', '家': '家', '住': '住', '宅': '宅',
+            '公': '公', '寓': '寓', '别': '別', '墅': '墅', '办': '辦', '公': '公', '室': '室', '商': '商', '店': '店', '超': '超',
+            '市': '市', '银': '銀', '行': '行', '医': '醫', '院': '院', '学': '學', '校': '校', '图': '圖', '书': '書', '馆': '館',
+            '博': '博', '物': '物', '馆': '館', '公': '公', '园': '園', '动': '動', '物': '物', '园': '園', '游': '游', '乐': '樂',
+            '场': '場', '电': '電', '影': '影', '院': '院', '剧': '劇', '院': '院', '音': '音', '乐': '樂', '厅': '廳', '体': '體',
+            '育': '育', '馆': '館', '健': '健', '身': '身', '房': '房', '游': '游', '泳': '泳', '池': '池', '餐': '餐', '厅': '廳',
+            '饭': '飯', '店': '店', '酒': '酒', '店': '店', '宾': '賓', '馆': '館', '旅': '旅', '馆': '館', '机': '機', '场': '場',
+            '火': '火', '车': '車', '站': '站', '汽': '汽', '车': '車', '站': '站', '地': '地', '铁': '鐵', '站': '站', '码': '碼',
+            '头': '頭', '港': '港', '口': '口', '工': '工', '作': '作', '职': '職', '业': '業', '事': '事', '业': '業', '公': '公',
+            '司': '司', '企': '企', '业': '業', '单': '單', '位': '位', '部': '部', '门': '門', '科': '科', '室': '室', '组': '組',
+            '织': '織', '团': '團', '队': '隊', '成': '成', '员': '員', '同': '同', '事': '事', '同': '同', '学': '學', '朋': '朋',
+            '友': '友', '老': '老', '师': '師', '学': '學', '生': '生', '家': '家', '长': '長', '父': '父', '母': '母', '爸': '爸',
+            '妈': '媽', '儿': '兒', '子': '子', '女': '女', '儿': '兒', '哥': '哥', '哥': '哥', '姐': '姐', '姐': '姐', '弟': '弟',
+            '弟': '弟', '妹': '妹', '妹': '妹', '爷': '爺', '爷': '爺', '奶': '奶', '奶': '奶', '外': '外', '公': '公', '外': '外',
+            '婆': '婆', '叔': '叔', '叔': '叔', '阿': '阿', '姨': '姨', '舅': '舅', '舅': '舅', '姑': '姑', '姑': '姑', '表': '表',
+            '哥': '哥', '表': '表', '姐': '姐', '表': '表', '弟': '弟', '表': '表', '妹': '妹', '堂': '堂', '哥': '哥', '堂': '堂',
+            '姐': '姐', '堂': '堂', '弟': '弟', '堂': '堂', '妹': '妹', '丈': '丈', '夫': '夫', '妻': '妻', '子': '子', '老': '老',
+            '公': '公', '老': '老', '婆': '婆', '男': '男', '朋': '朋', '友': '友', '女': '女', '朋': '朋', '友': '友', '恋': '戀',
+            '人': '人', '爱': '愛', '人': '人', '情': '情', '人': '人', '夫': '夫', '妻': '妻', '夫': '夫', '妇': '婦', '情': '情',
+            '侣': '侶', '伴': '伴', '侣': '侶', '配': '配', '偶': '偶', '单': '單', '身': '身', '结': '結', '婚': '婚', '离': '離',
+            '婚': '婚', '订': '訂', '婚': '婚', '求': '求', '婚': '婚', '蜜': '蜜', '月': '月', '新': '新', '婚': '婚', '婚': '婚',
+            '礼': '禮', '婚': '婚', '纱': '紗', '钻': '鑽', '戒': '戒', '戒': '戒', '指': '指', '项': '項', '链': '鏈', '耳': '耳',
+            '环': '環', '手': '手', '镯': '鐲', '手': '手', '表': '表', '眼': '眼', '镜': '鏡', '帽': '帽', '子': '子', '围': '圍',
+            '巾': '巾', '手': '手', '套': '套', '袜': '襪', '子': '子', '鞋': '鞋', '子': '子', '衣': '衣', '服': '服', '裤': '褲',
+            '子': '子', '裙': '裙', '子': '子', '外': '外', '套': '套', '大': '大', '衣': '衣', '毛': '毛', '衣': '衣', '衬': '襯',
+            '衫': '衫', 'T': 'T', '恤': '恤', '背': '背', '心': '心', '内': '內', '衣': '衣', '内': '內', '裤': '褲', '睡': '睡',
+            '衣': '衣', '泳': '泳', '衣': '衣', '运': '運', '动': '動', '服': '服', '校': '校', '服': '服', '工': '工', '作': '作',
+            '服': '服', '制': '制', '服': '服', '礼': '禮', '服': '服', '晚': '晚', '礼': '禮', '服': '服', '婚': '婚', '纱': '紗',
+            '颜': '顏', '色': '色', '红': '紅', '橙': '橙', '黄': '黃', '绿': '綠', '青': '青', '蓝': '藍', '紫': '紫', '粉': '粉',
+            '红': '紅', '黑': '黑', '白': '白', '灰': '灰', '棕': '棕', '金': '金', '银': '銀', '彩': '彩', '色': '色', '透': '透',
+            '明': '明', '亮': '亮', '暗': '暗', '浅': '淺', '深': '深', '淡': '淡', '浓': '濃', '鲜': '鮮', '艳': '豔', '素': '素',
+            '雅': '雅', '朴': '樸', '素': '素', '华': '華', '丽': '麗', '美': '美', '丽': '麗', '漂': '漂', '亮': '亮', '好': '好',
+            '看': '看', '难': '難', '看': '看', '可': '可', '爱': '愛', '帅': '帥', '气': '氣', '酷': '酷', '时': '時', '尚': '尚',
+            '流': '流', '行': '行', '经': '經', '典': '典', '传': '傳', '统': '統', '现': '現', '代': '代', '古': '古', '典': '典',
+            '复': '復', '古': '古', '怀': '懷', '旧': '舊', '创': '創', '新': '新', '独': '獨', '特': '特', '个': '個', '性': '性',
+            '风': '風', '格': '格', '款': '款', '式': '式', '设': '設', '计': '計', '品': '品', '牌': '牌', '质': '質', '量': '量',
+            '价': '價', '格': '格', '便': '便', '宜': '宜', '昂': '昂', '贵': '貴', '免': '免', '费': '費', '收': '收', '费': '費',
+            '打': '打', '折': '折', '优': '優', '惠': '惠', '促': '促', '销': '銷', '特': '特', '价': '價', '限': '限', '时': '時',
+            '抢': '搶', '购': '購', '秒': '秒', '杀': '殺', '团': '團', '购': '購', '预': '預', '订': '訂', '现': '現', '货': '貨',
+            '库': '庫', '存': '存', '断': '斷', '货': '貨', '缺': '缺', '货': '貨', '补': '補', '货': '貨', '到': '到', '货': '貨',
+            '发': '發', '货': '貨', '配': '配', '送': '送', '快': '快', '递': '遞', '物': '物', '流': '流', '运': '運', '输': '輸',
+            '邮': '郵', '寄': '寄', '包': '包', '邮': '郵', '货': '貨', '到': '到', '付': '付', '款': '款', '在': '在', '线': '線',
+            '支': '支', '付': '付', '现': '現', '金': '金', '信': '信', '用': '用', '卡': '卡', '借': '借', '记': '記', '卡': '卡',
+            '储': '儲', '蓄': '蓄', '卡': '卡', '会': '會', '员': '員', '卡': '卡', '积': '積', '分': '分', '卡': '卡', '优': '優',
+            '惠': '惠', '券': '券', '代': '代', '金': '金', '券': '券', '礼': '禮', '品': '品', '券': '券', '购': '購', '物': '物',
+            '券': '券', '折': '折', '扣': '扣', '券': '券', '满': '滿', '减': '減', '券': '券', '返': '返', '现': '現', '券': '券',
+            '红': '紅', '包': '包', '奖': '獎', '金': '金', '奖': '獎', '品': '品', '奖': '獎', '励': '勵', '福': '福', '利': '利',
+            '待': '待', '遇': '遇', '薪': '薪', '水': '水', '工': '工', '资': '資', '收': '收', '入': '入', '报': '報', '酬': '酬',
+            '费': '費', '用': '用', '成': '成', '本': '本', '预': '預', '算': '算', '开': '開', '支': '支', '花': '花', '费': '費',
+            '消': '消', '费': '費', '购': '購', '买': '買', '采': '採', '购': '購', '选': '選', '择': '擇', '挑': '挑', '选': '選',
+            '决': '決', '定': '定', '考': '考', '虑': '慮', '比': '比', '较': '較', '对': '對', '比': '比', '评': '評', '价': '價',
+            '评': '評', '估': '估', '测': '測', '试': '試', '检': '檢', '查': '查', '检': '檢', '验': '驗', '审': '審', '核': '核',
+            '确': '確', '认': '認', '批': '批', '准': '準', '同': '同', '意': '意', '拒': '拒', '绝': '絕', '接': '接', '受': '受',
+            '拒': '拒', '收': '收', '签': '簽', '收': '收', '验': '驗', '收': '收', '退': '退', '货': '貨', '换': '換', '货': '貨',
+            '维': '維', '修': '修', '保': '保', '养': '養', '清': '清', '洁': '潔', '清': '清', '洗': '洗', '打': '打', '扫': '掃',
+            '整': '整', '理': '理', '收': '收', '拾': '拾', '布': '布', '置': '置', '装': '裝', '修': '修', '装': '裝', '饰': '飾',
+            '设': '設', '计': '計', '规': '規', '划': '劃', '安': '安', '排': '排', '计': '計', '划': '劃', '准': '準', '备': '備',
+            '筹': '籌', '备': '備', '组': '組', '织': '織', '安': '安', '排': '排', '调': '調', '整': '整', '改': '改', '变': '變',
+            '变': '變', '化': '化', '改': '改', '革': '革', '改': '改', '进': '進', '提': '提', '高': '高', '增': '增', '加': '加',
+            '减': '減', '少': '少', '降': '降', '低': '低', '保': '保', '持': '持', '维': '維', '持': '持', '继': '繼', '续': '續',
+            '坚': '堅', '持': '持', '放': '放', '弃': '棄', '停': '停', '止': '止', '结': '結', '束': '束', '完': '完', '成': '成',
+            '实': '實', '现': '現', '达': '達', '到': '到', '获': '獲', '得': '得', '取': '取', '得': '得', '赢': '贏', '得': '得',
+            '失': '失', '去': '去', '失': '失', '败': '敗', '成': '成', '功': '功', '胜': '勝', '利': '利', '成': '成', '就': '就',
+            '成': '成', '果': '果', '结': '結', '果': '果', '效': '效', '果': '果', '作': '作', '用': '用', '影': '影', '响': '響',
+            '意': '意', '义': '義', '价': '價', '值': '值', '重': '重', '要': '要', '关': '關', '键': '鍵', '核': '核', '心': '心',
+            '主': '主', '要': '要', '次': '次', '要': '要', '一': '一', '般': '般', '普': '普', '通': '通', '平': '平', '常': '常',
+            '正': '正', '常': '常', '异': '異', '常': '常', '特': '特', '殊': '殊', '特': '特', '别': '別', '独': '獨', '特': '特',
+            '罕': '罕', '见': '見', '稀': '稀', '有': '有', '珍': '珍', '贵': '貴', '宝': '寶', '贵': '貴', '昂': '昂', '贵': '貴',
+            '便': '便', '宜': '宜', '实': '實', '惠': '惠', '经': '經', '济': '濟', '节': '節', '约': '約', '省': '省', '钱': '錢',
+            '赚': '賺', '钱': '錢', '挣': '掙', '钱': '錢', '花': '花', '钱': '錢', '费': '費', '钱': '錢', '浪': '浪', '费': '費',
+            '节': '節', '省': '省', '储': '儲', '蓄': '蓄', '存': '存', '钱': '錢', '投': '投', '资': '資', '理': '理', '财': '財',
+            '赚': '賺', '取': '取', '盈': '盈', '利': '利', '亏': '虧', '损': '損', '风': '風', '险': '險', '安': '安', '全': '全',
+            '保': '保', '险': '險', '担': '擔', '保': '保', '保': '保', '证': '證', '确': '確', '保': '保', '保': '保', '障': '障',
+            '保': '保', '护': '護', '维': '維', '护': '護', '守': '守', '护': '護', '照': '照', '顾': '顧', '关': '關', '心': '心',
+            '关': '關', '注': '注', '注': '注', '意': '意', '小': '小', '心': '心', '当': '當', '心': '心', '留': '留', '心': '心',
+            '专': '專', '心': '心', '用': '用', '心': '心', '细': '細', '心': '心', '耐': '耐', '心': '心', '信': '信', '心': '心',
+            '决': '決', '心': '心', '恒': '恆', '心': '心', '爱': '愛', '心': '心', '善': '善', '心': '心', '好': '好', '心': '心',
+            '坏': '壞', '心': '心', '黑': '黑', '心': '心', '良': '良', '心': '心', 'conscience': 'conscience', '道': '道', '德': '德', '品': '品', '德': '德',
+            '品': '品', '格': '格', '人': '人', '格': '格', '性': '性', '格': '格', '脾': '脾', '气': '氣', '情': '情', '绪': '緒',
+            '心': '心', '情': '情', '感': '感', '情': '情', '情': '情', '感': '感', '爱': '愛', '情': '情', '友': '友', '情': '情',
+            '亲': '親', '情': '情', '感': '感', '动': '動', '感': '感', '激': '激', '感': '感', '谢': '謝', '感': '感', '恩': '恩',
+            '报': '報', '恩': '恩', '恩': '恩', '情': '情', '人': '人', '情': '情', '世': '世', '情': '情', '热': '熱', '情': '情',
+            '冷': '冷', '漠': '漠', '无': '無', '情': '情', '有': '有', '情': '情', '深': '深', '情': '情', '真': '真', '情': '情',
+            '假': '假', '情': '情', '表': '表', '情': '情', '神': '神', '情': '情', '表': '表', '现': '現', '表': '表', '达': '達',
+            '表': '表', '示': '示', '显': '顯', '示': '示', '展': '展', '示': '示', '演': '演', '示': '示', '证': '證', '明': '明',
+            '说': '說', '明': '明', '解': '解', '释': '釋', '解': '解', '答': '答', '回': '回', '答': '答', '答': '答', '复': '復',
+            '回': '回', '复': '復', '反': '反', '应': '應', '反': '反', '馈': '饋', '反': '反', '映': '映', '反': '反', '思': '思',
+            '思': '思', '考': '考', '考': '考', '虑': '慮', '思': '思', '想': '想', '想': '想', '法': '法', '主': '主', '意': '意',
+            '意': '意', '见': '見', '建': '建', '议': '議', '提': '提', '议': '議', '建': '建', '议': '議', '劝': '勸', '告': '告',
+            '忠': '忠', '告': '告', '警': '警', '告': '告', '提': '提', '醒': '醒', '提': '提', '示': '示', '暗': '暗', '示': '示',
+            '指': '指', '示': '示'
+        };
+        
+        // 创建繁体转简体映射
+        const t2sMap = {};
+        for (const [s, t] of Object.entries(s2tMap)) {
+            t2sMap[t] = s;
+        }
+        
+        let currentMode = 'auto';
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCharCount();
+            bindEvents();
+        });
+        
+        function bindEvents() {
+            const inputText = document.getElementById('inputText');
+            const modeOptions = document.querySelectorAll('.mode-option');
+            
+            inputText.addEventListener('input', updateCharCount);
+            
+            modeOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    modeOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    currentMode = this.dataset.mode;
+                    updateConvertButton();
+                });
+            });
+        }
+        
+        function updateCharCount() {
+            const inputText = document.getElementById('inputText').value;
+            const outputText = document.getElementById('outputText').value;
+            
+            document.getElementById('inputCount').textContent = inputText.length;
+            document.getElementById('outputCount').textContent = outputText.length;
+            
+            updateConvertButton();
+        }
+        
+        function updateConvertButton() {
+            const inputText = document.getElementById('inputText').value;
+            const convertBtn = document.getElementById('convertBtn');
+            
+            if (inputText.trim().length === 0) {
+                convertBtn.disabled = true;
+                convertBtn.innerHTML = '<i class="fas fa-exchange-alt"></i><span>转换</span>';
+            } else {
+                convertBtn.disabled = false;
+                if (currentMode === 'auto') {
+                    const detectedType = detectTextType(inputText);
+                    if (detectedType === 'simplified') {
+                        convertBtn.innerHTML = '<i class="fas fa-arrow-right"></i><span>转为繁体</span>';
+                    } else {
+                        convertBtn.innerHTML = '<i class="fas fa-arrow-left"></i><span>转为简体</span>';
+                    }
+                } else if (currentMode === 's2t') {
+                    convertBtn.innerHTML = '<i class="fas fa-arrow-right"></i><span>简转繁</span>';
+                } else {
+                    convertBtn.innerHTML = '<i class="fas fa-arrow-left"></i><span>繁转简</span>';
+                }
+            }
+        }
+        
+        function detectTextType(text) {
+            let simplifiedCount = 0;
+            let traditionalCount = 0;
+            
+            for (const char of text) {
+                if (s2tMap[char] && s2tMap[char] !== char) {
+                    simplifiedCount++;
+                } else if (t2sMap[char] && t2sMap[char] !== char) {
+                    traditionalCount++;
+                }
+            }
+            
+            return simplifiedCount >= traditionalCount ? 'simplified' : 'traditional';
+        }
+        
+        function convertText() {
+            const inputText = document.getElementById('inputText').value;
+            const outputTextArea = document.getElementById('outputText');
+            
+            if (!inputText.trim()) {
+                alert('请输入需要转换的文本');
+                return;
+            }
+            
+            let result = '';
+            
+            if (currentMode === 'auto') {
+                const detectedType = detectTextType(inputText);
+                if (detectedType === 'simplified') {
+                    result = convertS2T(inputText);
+                } else {
+                    result = convertT2S(inputText);
+                }
+            } else if (currentMode === 's2t') {
+                result = convertS2T(inputText);
+            } else {
+                result = convertT2S(inputText);
+            }
+            
+            outputTextArea.value = result;
+            updateCharCount();
+        }
+        
+        function convertS2T(text) {
+            return text.split('').map(char => s2tMap[char] || char).join('');
+        }
+        
+        function convertT2S(text) {
+            return text.split('').map(char => t2sMap[char] || char).join('');
+        }
+        
+        function swapText() {
+            const inputText = document.getElementById('inputText');
+            const outputText = document.getElementById('outputText');
+            
+            const temp = inputText.value;
+            inputText.value = outputText.value;
+            outputText.value = temp;
+            
+            updateCharCount();
+        }
+        
+        function copyResult() {
+            const outputText = document.getElementById('outputText');
+            
+            if (!outputText.value.trim()) {
+                alert('没有可复制的内容');
+                return;
+            }
+            
+            outputText.select();
+            document.execCommand('copy');
+            
+            // 显示复制成功提示
+            const btn = event.target.closest('.btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i>已复制';
+            btn.style.background = '#28a745';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+            }, 2000);
+        }
+        
+        function downloadResult() {
+            const outputText = document.getElementById('outputText').value;
+            
+            if (!outputText.trim()) {
+                alert('没有可下载的内容');
+                return;
+            }
+            
+            const blob = new Blob([outputText], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '转换结果.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        function clearAll() {
+            if (confirm('确定要清空所有内容吗？')) {
+                document.getElementById('inputText').value = '';
+                document.getElementById('outputText').value = '';
+                updateCharCount();
+            }
+        }
+        
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (file.type !== 'text/plain' && !file.name.endsWith('.txt')) {
+                alert('仅支持TXT文本文件');
+                return;
+            }
+            
+            if (file.size > 1024 * 1024) { // 1MB限制
+                alert('文件大小不能超过1MB');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('inputText').value = e.target.result;
+                updateCharCount();
+            };
+            reader.readAsText(file, 'UTF-8');
+        }
+    </script>
+</body>
+</html>'示

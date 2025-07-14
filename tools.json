@@ -1,5 +1,25 @@
 [
   {
+    "id": "grid-image-splitter",
+    "name": "九宫格切图工具",
+    "shortDesc": "一键分割图片为九宫格",
+    "icon": "fas fa-th",
+    "description": "一键将图片分割成九宫格，完美适配社交媒体发布，支持多种图片格式，智能裁剪处理，简单易用的在线工具",
+    "tags": ["九宫格", "图片分割", "社交媒体", "朋友圈", "图片处理"],
+    "categories": ["image-processing", "social-media-tools"],
+    "url": "tools/grid-image-splitter.html"
+  },
+  {
+    "id": "unit-converter",
+    "name": "多功能单位换算器",
+    "shortDesc": "支持12种单位类型换算",
+    "icon": "fas fa-exchange-alt",
+    "description": "支持12种单位类型换算，包括温度、重量、面积、体积、长度、压力、功率、角度、电容、时间、速度、二进制，工程计算必备工具",
+    "tags": ["单位换算", "单位转换", "度量衡", "工程计算", "进制转换"],
+    "categories": ["calculator-tools", "utility-tools"],
+    "url": "tools/unit-converter.html"
+  },
+  {
     "id": "content-converter",
     "name": "内容转换器",
     "shortDesc": "将各种格式内容转为Markdown博客",
@@ -8,6 +28,26 @@
     "tags": ["Markdown", "博客"],
     "categories": ["document-processing", "content-creation"],
     "url": "tools/content-converter.html"
+  },
+  {
+    "id": "relative-calculator",
+    "name": "亲戚关系计算器",
+    "shortDesc": "智能亲戚称谓查询工具",
+    "icon": "fas fa-users",
+    "description": "支持复杂多层级亲戚关系计算，涵盖血缘关系和姻亲关系，提供详细称谓查询功能，帮助用户快速确定正确的亲戚称呼。",
+    "tags": ["亲戚关系", "称谓查询", "家庭关系", "春节拜年"],
+    "categories": ["calculator-tools", "utility-tools"],
+    "url": "tools/relative-calculator.html"
+  },
+  {
+    "id": "chinese-converter",
+    "name": "简体繁体字转换工具",
+    "shortDesc": "简体繁体字智能双向转换",
+    "icon": "fas fa-language",
+    "description": "专业的简体繁体字转换工具，支持智能识别文本类型、双向转换、文件上传下载，适用于港澳台地区文档处理、学术研究、文化交流等场景。",
+    "tags": ["简体字", "繁体字", "文字转换", "港澳台", "文档处理"],
+    "categories": ["encoding-conversion", "utility-tools"],
+    "url": "tools/chinese-converter.html"
   },
   {
     "id": "base64-encoder",
@@ -198,5 +238,15 @@
     "tags": ["图片压缩", "在线压缩", "批量压缩", "JPG压缩", "PNG压缩", "WebP压缩", "图片优化"],
     "categories": ["image-processing"],
     "url": "tools/image-compressor.html"
+  },
+  {
+    "id": "id-location-query",
+    "name": "身份证前四位户籍查询工具",
+    "shortDesc": "快速查询户籍所在地信息",
+    "icon": "fas fa-id-card",
+    "description": "专业的身份证前四位户籍查询工具，输入身份证前四位数字，快速查询户籍所在地信息，支持全国各省市县区查询，完全免费使用。",
+    "tags": ["身份证查询", "户籍查询", "身份证前四位", "户籍所在地", "身份证归属地", "行政区划代码"],
+    "categories": ["utility-tools"],
+    "url": "tools/id-location-query.html"
   }
 ]
