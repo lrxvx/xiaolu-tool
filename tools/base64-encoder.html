@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary SEO Meta Tags -->
@@ -647,6 +651,17 @@
         
         // FAQ交互功能
         document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航栏和页脚组件
+            const navbar = new NavbarComponent();
+            const navbarStyles = document.createElement('style');
+            navbarStyles.textContent = NavbarComponent.getStyles();
+            document.head.appendChild(navbarStyles);
+
+            const footer = new FooterComponent();
+            const footerStyles = document.createElement('style');
+            footerStyles.textContent = FooterComponent.getStyles();
+            document.head.appendChild(footerStyles);
+
             const faqItems = document.querySelectorAll('.faq-item');
             
             faqItems.forEach(item => {

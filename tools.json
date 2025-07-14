@@ -1,5 +1,15 @@
 [
   {
+    "id": "file-compressor",
+    "name": "在线文件压缩器",
+    "shortDesc": "支持PDF、图片、视频等多种格式压缩",
+    "icon": "fas fa-file-archive",
+    "description": "专业的在线文件压缩工具，支持PDF文档、图片、视频等多种格式，批量压缩处理，智能压缩算法保持质量，完全免费使用。",
+    "tags": ["文件压缩", "PDF压缩", "图片压缩", "视频压缩", "批量压缩", "在线压缩"],
+    "categories": ["utility-tools", "document-processing", "image-processing"],
+    "url": "tools/file-compressor.html"
+  },
+  {
     "id": "emoji-symbols",
     "name": "Emoji符号大全",
     "shortDesc": "Unicode 15.1标准表情符号",

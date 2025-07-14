@@ -1,0 +1,17 @@
+{
+  "name": "xiaolu-tool",
+  "version": "1.0.0",
+  "description": "小路工具箱 - 为内容创作者提供的在线工具集合",
+  "scripts": {
+    "inject-components": "node scripts/inject-components.js",
+    "build": "npm run inject-components"
+  },
+  "keywords": [
+    "tools",
+    "utilities",
+    "content creation",
+    "online tools"
+  ],
+  "author": "小路",
+  "license": "MIT"
+}

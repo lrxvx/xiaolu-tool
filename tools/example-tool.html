@@ -2,6 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>示例工具</title>
     <style>
@@ -32,5 +36,20 @@
         <p>您可以在这里添加您的工具内容。这个工具是纯HTML/JS/CSS实现的，不需要后端支持。</p>
         <p>它将直接加载到主页的指定区域。</p>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航栏和页脚组件
+            const navbar = new NavbarComponent();
+            const navbarStyles = document.createElement('style');
+            navbarStyles.textContent = NavbarComponent.getStyles();
+            document.head.appendChild(navbarStyles);
+
+            const footer = new FooterComponent();
+            const footerStyles = document.createElement('style');
+            footerStyles.textContent = FooterComponent.getStyles();
+            document.head.appendChild(footerStyles);
+});
+    </script>
 </body>
 </html>

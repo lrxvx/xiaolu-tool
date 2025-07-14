@@ -33,18 +33,30 @@
 xiaolu-tool/
 ├── index.html          # 主页面
 ├── tools.json          # 工具配置文件
+├── components/         # 共享组件目录
+│   ├── navbar.js       # 导航栏组件
+│   └── footer.js       # 页脚组件
 ├── tools/              # 工具页面目录
+│   ├── template.html   # 工具页面模板
 │   ├── image-to-pdf.html
 │   ├── base64-encoder.html
 │   └── ...
+├── scripts/           # 构建脚本目录
+│   └── inject-components.js  # 组件注入脚本
 ├── README.md           # 项目说明
 └── readme.txt          # 更新日志
 ```
 
 ## 🔧 使用方法
 
-1. 直接打开 `index.html` 文件
-2. 或者启动本地服务器：
+### 开发环境设置
+
+1. 安装依赖：
+   ```bash
+   npm install
+   ```
+
+2. 启动本地服务器：
    ```bash
    # 使用Python
    python -m http.server 8080
@@ -52,7 +64,27 @@ xiaolu-tool/
    # 使用Node.js
    npx http-server -p 8080
    ```
+
 3. 在浏览器中访问对应地址
+
+### 创建新工具
+
+1. 复制 `tools/template.html` 作为新工具的起点
+2. 修改文件名、标题、描述等信息
+3. 添加工具特定的功能代码
+4. 运行构建脚本注入组件：
+   ```bash
+   npm run build
+   ```
+
+### 组件系统
+
+项目使用了统一的导航栏和页脚组件，确保所有工具页面具有一致的外观和体验：
+
+- **导航栏组件**：提供统一的顶部导航、菜单和品牌展示
+- **页脚组件**：提供统一的底部信息、链接和版权声明
+
+组件会通过构建脚本自动注入到所有工具页面中，无需手动添加。如果需要更新组件，修改后运行 `npm run build` 即可将更改应用到所有页面。
 
 ## 📝 更新日志
 

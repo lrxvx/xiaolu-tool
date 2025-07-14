@@ -2,6 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF水印处理工具 - 在线PDF加水印去水印 | 小路工具箱</title>
     <meta name="description" content="免费在线PDF水印处理工具，支持PDF加水印、去水印，可自定义水印文字、字体大小、颜色、位置和旋转角度，批量处理多个PDF文件，保护文档版权。">
@@ -830,6 +834,17 @@
         
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航栏和页脚组件
+            const navbar = new NavbarComponent();
+            const navbarStyles = document.createElement('style');
+            navbarStyles.textContent = NavbarComponent.getStyles();
+            document.head.appendChild(navbarStyles);
+
+            const footer = new FooterComponent();
+            const footerStyles = document.createElement('style');
+            footerStyles.textContent = FooterComponent.getStyles();
+            document.head.appendChild(footerStyles);
+
             initializeEventListeners();
             updateWatermarkPreview();
         });

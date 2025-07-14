@@ -2,7 +2,20 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    <script>
+        // 动态写入导航栏和页脚样式
+        document.write(`<style>${NavbarComponent.getStyles()}</style>`);
+        document.write(`<style>${FooterComponent.getStyles()}</style>`);
+    </script>
     
     <!-- Primary SEO Meta Tags -->
     <title>亲戚关系计算器 | 在线亲戚称谓查询工具 - 小路工具箱</title>
@@ -148,6 +161,34 @@
             color: var(--gray);
             font-size: 1rem;
         }
+
+        .dialect-selector {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .dialect-selector label {
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .dialect-selector select {
+            padding: 0.5rem;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            background-color: white;
+            color: var(--dark);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dialect-selector select:hover {
+            border-color: var(--primary);
+        }
         
         .simple-input-section {
             margin-bottom: 2rem;
@@ -217,6 +258,44 @@
         .path-text {
             font-weight: 600;
             color: var(--dark);
+        }
+
+        .path-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: var(--light);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--gray);
+        }
+
+        .relation-name {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .cancel-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 0.25rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .cancel-btn:hover {
+            color: var(--danger);
+            background: rgba(230, 57, 70, 0.1);
+        }
+
+        .path-arrow {
+            color: var(--gray);
+            font-weight: 500;
         }
         
         .path-content {
@@ -680,6 +759,15 @@
                 <div class="calculator-header">
                     <h3><i class="fas fa-magic"></i> 快速查询亲戚称谓</h3>
                     <p>选择您与亲戚的关系，立即获得正确称呼</p>
+                    <div class="dialect-selector">
+                        <label for="dialectSelect">方言版本：</label>
+                        <select id="dialectSelect" onchange="changeDialect(this.value)">
+                            <option value="standard">普通话</option>
+                            <option value="minnan">闽南话</option>
+                            <option value="cantonese">粤语</option>
+                            <option value="hakka">客家话</option>
+                        </select>
+                    </div>
                 </div>
                 
                 <div class="simple-input-section">
@@ -912,25 +1000,91 @@
     <!-- 页脚将通过JavaScript组件自动生成 -->
 
     <!-- 导航栏组件 -->
-    <script src="../components/navbar.js"></script>
-    <!-- 页脚组件 -->
-    <script src="../components/footer.js"></script>
-
     <script>
         // 亲戚关系数据结构
         const relationData = {
-            father: { name: '父亲', gender: 'male' },
-            mother: { name: '母亲', gender: 'female' },
-            son: { name: '儿子', gender: 'male' },
-            daughter: { name: '女儿', gender: 'female' },
-            brother: { name: '兄弟', gender: 'male' },
-            sister: { name: '姐妹', gender: 'female' },
-            husband: { name: '丈夫', gender: 'male' },
-            wife: { name: '妻子', gender: 'female' },
-            grandfather_father: { name: '爷爷', gender: 'male' },
-            grandmother_father: { name: '奶奶', gender: 'female' },
-            grandfather_mother: { name: '外公', gender: 'male' },
-            grandmother_mother: { name: '外婆', gender: 'female' }
+            // 直系亲属
+            father: { name: '父亲', gender: 'male', level: 1, generation: 1 },
+            mother: { name: '母亲', gender: 'female', level: 1, generation: 1 },
+            son: { name: '儿子', gender: 'male', level: 1, generation: -1 },
+            daughter: { name: '女儿', gender: 'female', level: 1, generation: -1 },
+            grandson: { name: '孙子', gender: 'male', level: 2, generation: -2 },
+            granddaughter: { name: '孙女', gender: 'female', level: 2, generation: -2 },
+            great_grandson: { name: '曾孙', gender: 'male', level: 3, generation: -3 },
+            great_granddaughter: { name: '曾孙女', gender: 'female', level: 3, generation: -3 },
+
+            // 祖辈
+            grandfather_father: { name: '爷爷', gender: 'male', level: 2, generation: 2 },
+            grandmother_father: { name: '奶奶', gender: 'female', level: 2, generation: 2 },
+            grandfather_mother: { name: '外公', gender: 'male', level: 2, generation: 2 },
+            grandmother_mother: { name: '外婆', gender: 'female', level: 2, generation: 2 },
+            great_grandfather_father: { name: '曾祖父', gender: 'male', level: 3, generation: 3 },
+            great_grandmother_father: { name: '曾祖母', gender: 'female', level: 3, generation: 3 },
+            great_grandfather_mother: { name: '外曾祖父', gender: 'male', level: 3, generation: 3 },
+            great_grandmother_mother: { name: '外曾祖母', gender: 'female', level: 3, generation: 3 },
+
+            // 兄弟姐妹
+            brother: { name: '兄弟', gender: 'male', level: 0, generation: 0 },
+            sister: { name: '姐妹', gender: 'female', level: 0, generation: 0 },
+            brother_older: { name: '哥哥', gender: 'male', level: 0, generation: 0, age: 'older' },
+            brother_younger: { name: '弟弟', gender: 'male', level: 0, generation: 0, age: 'younger' },
+            sister_older: { name: '姐姐', gender: 'female', level: 0, generation: 0, age: 'older' },
+            sister_younger: { name: '妹妹', gender: 'female', level: 0, generation: 0, age: 'younger' },
+
+            // 夫妻
+            husband: { name: '丈夫', gender: 'male', level: 0, generation: 0 },
+            wife: { name: '妻子', gender: 'female', level: 0, generation: 0 },
+
+            // 姻亲
+            father_in_law: { name: '岳父', gender: 'male', level: 1, generation: 1, type: 'in_law' },
+            mother_in_law: { name: '岳母', gender: 'female', level: 1, generation: 1, type: 'in_law' },
+            brother_in_law: { name: '姐夫/妹夫', gender: 'male', level: 0, generation: 0, type: 'in_law' },
+            sister_in_law: { name: '嫂子/弟媳', gender: 'female', level: 0, generation: 0, type: 'in_law' },
+
+            // 表亲
+            cousin_male: { name: '表哥/表弟', gender: 'male', level: 0, generation: 0, type: 'cousin' },
+            cousin_female: { name: '表姐/表妹', gender: 'female', level: 0, generation: 0, type: 'cousin' },
+            uncle_paternal: { name: '伯父/叔父', gender: 'male', level: 1, generation: 1, type: 'paternal' },
+            aunt_paternal: { name: '伯母/婶婶', gender: 'female', level: 1, generation: 1, type: 'paternal' },
+            uncle_maternal: { name: '舅舅', gender: 'male', level: 1, generation: 1, type: 'maternal' },
+            aunt_maternal: { name: '姨妈', gender: 'female', level: 1, generation: 1, type: 'maternal' },
+
+            // 方言版本
+            dialects: {
+                // 闽南话
+                minnan: {
+                    father: '阿爸',
+                    mother: '阿妈',
+                    grandfather_father: '阿公',
+                    grandmother_father: '阿嬷',
+                    brother_older: '阿兄',
+                    sister_older: '阿姐',
+                    wife: '某',
+                    husband: '翁'
+                },
+                // 粤语
+                cantonese: {
+                    father: '爸爸',
+                    mother: '妈咪',
+                    grandfather_father: '爷爷',
+                    grandmother_father: '嫲嫲',
+                    brother_older: '哥哥',
+                    sister_older: '姐姐',
+                    wife: '老婆',
+                    husband: '老公'
+                },
+                // 客家话
+                hakka: {
+                    father: '阿爸',
+                    mother: '阿姆',
+                    grandfather_father: '阿公',
+                    grandmother_father: '阿婆',
+                    brother_older: '阿哥',
+                    sister_older: '阿姐',
+                    wife: '妻子',
+                    husband: '丈夫'
+                }
+            }
         };
 
         // 关系路径数组
@@ -940,19 +1094,61 @@
         
         // 简化版关系选项
         const simpleRelations = [
+            // 直系长辈
             { id: 'father', name: '爸爸', category: 'parent' },
             { id: 'mother', name: '妈妈', category: 'parent' },
-            { id: 'son', name: '儿子', category: 'child' },
-            { id: 'daughter', name: '女儿', category: 'child' },
-            { id: 'brother', name: '兄弟', category: 'sibling' },
-            { id: 'sister', name: '姐妹', category: 'sibling' },
-            { id: 'husband', name: '老公', category: 'spouse' },
-            { id: 'wife', name: '老婆', category: 'spouse' },
             { id: 'grandfather_father', name: '爷爷', category: 'grandparent' },
             { id: 'grandmother_father', name: '奶奶', category: 'grandparent' },
             { id: 'grandfather_mother', name: '外公', category: 'grandparent' },
-            { id: 'grandmother_mother', name: '外婆', category: 'grandparent' }
+            { id: 'grandmother_mother', name: '外婆', category: 'grandparent' },
+            { id: 'great_grandfather_father', name: '曾祖父', category: 'great_grandparent' },
+            { id: 'great_grandmother_father', name: '曾祖母', category: 'great_grandparent' },
+            { id: 'great_grandfather_mother', name: '外曾祖父', category: 'great_grandparent' },
+            { id: 'great_grandmother_mother', name: '外曾祖母', category: 'great_grandparent' },
+
+            // 直系晚辈
+            { id: 'son', name: '儿子', category: 'child' },
+            { id: 'daughter', name: '女儿', category: 'child' },
+            { id: 'grandson', name: '孙子', category: 'grandchild' },
+            { id: 'granddaughter', name: '孙女', category: 'grandchild' },
+            { id: 'great_grandson', name: '曾孙', category: 'great_grandchild' },
+            { id: 'great_granddaughter', name: '曾孙女', category: 'great_grandchild' },
+
+            // 兄弟姐妹
+            { id: 'brother_older', name: '哥哥', category: 'sibling' },
+            { id: 'brother_younger', name: '弟弟', category: 'sibling' },
+            { id: 'sister_older', name: '姐姐', category: 'sibling' },
+            { id: 'sister_younger', name: '妹妹', category: 'sibling' },
+
+            // 配偶
+            { id: 'husband', name: '老公', category: 'spouse' },
+            { id: 'wife', name: '老婆', category: 'spouse' },
+
+            // 姻亲
+            { id: 'father_in_law', name: '岳父', category: 'in_law' },
+            { id: 'mother_in_law', name: '岳母', category: 'in_law' },
+            { id: 'brother_in_law', name: '姐夫/妹夫', category: 'in_law' },
+            { id: 'sister_in_law', name: '嫂子/弟媳', category: 'in_law' },
+
+            // 表亲
+            { id: 'cousin_male', name: '表哥/表弟', category: 'cousin' },
+            { id: 'cousin_female', name: '表姐/表妹', category: 'cousin' },
+            { id: 'uncle_paternal', name: '伯父/叔父', category: 'uncle_aunt' },
+            { id: 'aunt_paternal', name: '伯母/婶婶', category: 'uncle_aunt' },
+            { id: 'uncle_maternal', name: '舅舅', category: 'uncle_aunt' },
+            { id: 'aunt_maternal', name: '姨妈', category: 'uncle_aunt' }
         ];
+
+        // 方言版本选择
+        const dialects = [
+            { id: 'standard', name: '普通话' },
+            { id: 'minnan', name: '闽南话' },
+            { id: 'cantonese', name: '粤语' },
+            { id: 'hakka', name: '客家话' }
+        ];
+
+        // 当前选择的方言
+        let currentDialect = 'standard';
 
         // 常用关系预设
         const quickRelations = [
@@ -980,20 +1176,68 @@
 
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航栏和页脚组件
+            const navbar = new NavbarComponent();
+            const navbarStyles = document.createElement('style');
+            navbarStyles.textContent = NavbarComponent.getStyles();
+            document.head.appendChild(navbarStyles);
+
+            const footer = new FooterComponent();
+            const footerStyles = document.createElement('style');
+            footerStyles.textContent = FooterComponent.getStyles();
+            document.head.appendChild(footerStyles);
+
+            // 初始化导航栏和页脚组件
+            new NavbarComponent();
+            new FooterComponent();
+            
             initSimpleRelations();
             initQuickRelations();
+            initDialectSelector();
         });
+
+        // 初始化方言选择器
+        function initDialectSelector() {
+            const dialectSelect = document.getElementById('dialectSelect');
+            dialectSelect.value = currentDialect;
+        }
+
+        // 切换方言版本
+        function changeDialect(dialect) {
+            currentDialect = dialect;
+            // 更新按钮文本
+            updateRelationButtons();
+            // 重新计算当前结果
+            calculateSimpleResult();
+        }
+
+        // 获取方言版本的称谓
+        function getDialectName(relationId) {
+            const relation = relationData[relationId];
+            if (!relation) return null;
+
+            if (currentDialect === 'standard' || !relationData.dialects[currentDialect]) {
+                return relation.name;
+            }
+            return relationData.dialects[currentDialect][relationId] || relation.name;
+        }
         
         // 初始化简化版关系按钮
         function initSimpleRelations() {
+            updateRelationButtons();
+        }
+
+        // 更新关系按钮
+        function updateRelationButtons() {
             const buttonsContainer = document.getElementById('relationButtons');
             buttonsContainer.innerHTML = '';
             
             simpleRelations.forEach(relation => {
                 const button = document.createElement('button');
                 button.className = 'relation-btn';
-                button.textContent = relation.name;
-                button.onclick = () => selectSimpleRelation(relation.id, relation.name);
+                const displayName = getDialectName(relation.id) || relation.name;
+                button.textContent = displayName;
+                button.onclick = () => selectSimpleRelation(relation.id, displayName);
                 buttonsContainer.appendChild(button);
             });
         }
@@ -1032,8 +1276,37 @@
             }
             
             pathContainer.style.display = 'block';
-            const pathText = simpleRelationPath.map(r => r.name).join(' → ');
-            pathContent.textContent = pathText;
+            pathContent.innerHTML = simpleRelationPath.map((r, index) => {
+                const relationSpan = document.createElement('span');
+                relationSpan.className = 'path-item';
+                relationSpan.innerHTML = `
+                    <span class="relation-name">${r.name}</span>
+                    <button class="cancel-btn" onclick="cancelRelation(${index})" title="取消这个选择">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                return relationSpan.outerHTML;
+            }).join(' <span class="path-arrow">→</span> ');
+        }
+
+        // 取消选择某个关系
+        function cancelRelation(index) {
+            // 移除该关系及其后续关系
+            simpleRelationPath = simpleRelationPath.slice(0, index);
+            
+            // 更新路径显示
+            updateSimplePath();
+            
+            // 重新计算结果
+            calculateSimpleResult();
+            
+            // 重置按钮状态
+            document.querySelectorAll('.relation-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 重新初始化按钮
+            updateRelationButtons();
         }
         
         // 清空简化版路径
@@ -1126,6 +1399,37 @@
             return options[currentRelation] || [];
         }
         
+        // 切换方言版本
+        function changeDialect(dialect) {
+            currentDialect = dialect;
+            // 更新按钮文本
+            updateRelationButtons();
+            // 重新计算当前结果
+            calculateSimpleResult();
+        }
+
+        // 获取方言版本的称谓
+        function getDialectName(relationId) {
+            if (currentDialect === 'standard' || !relationData.dialects[currentDialect]) {
+                return relationData[relationId]?.name;
+            }
+            return relationData.dialects[currentDialect][relationId] || relationData[relationId]?.name;
+        }
+
+        // 更新关系按钮
+        function updateRelationButtons() {
+            const buttonsContainer = document.getElementById('relationButtons');
+            buttonsContainer.innerHTML = '';
+            
+            simpleRelations.forEach(relation => {
+                const button = document.createElement('button');
+                button.className = 'relation-btn';
+                button.textContent = getDialectName(relation.id) || relation.name;
+                button.onclick = () => selectSimpleRelation(relation.id, button.textContent);
+                buttonsContainer.appendChild(button);
+            });
+        }
+
         // 计算简化版结果
         function calculateSimpleResult() {
             if (simpleRelationPath.length === 0) {
@@ -1138,7 +1442,12 @@
             const resultTitle = document.getElementById('simpleResultTitle');
             const resultSubtitle = document.getElementById('simpleResultSubtitle');
             
-            resultTitle.textContent = result.title;
+            // 使用方言版本的称谓
+            if (currentDialect !== 'standard' && relationData.dialects[currentDialect] && relationData.dialects[currentDialect][result.id]) {
+                resultTitle.textContent = relationData.dialects[currentDialect][result.id];
+            } else {
+                resultTitle.textContent = result.title;
+            }
             resultSubtitle.textContent = result.description;
         }
         
@@ -1168,11 +1477,14 @@
                 item.className = 'quick-item';
                 item.onclick = () => setQuickRelation(relation.path);
                 
-                const pathText = relation.path.map(r => relationData[r]?.name || r).join(' → ');
+                const pathText = relation.path.map(r => getDialectName(r) || relationData[r]?.name || r).join(' → ');
+                const resultText = currentDialect !== 'standard' && relationData.dialects[currentDialect] && relationData.dialects[currentDialect][relation.path[relation.path.length - 1]]
+                    ? relationData.dialects[currentDialect][relation.path[relation.path.length - 1]]
+                    : relation.result;
                 
                 item.innerHTML = `
                     <div class="quick-relation">${pathText}</div>
-                    <div class="quick-result">${relation.result}</div>
+                    <div class="quick-result">${resultText}</div>
                 `;
                 
                 quickGrid.appendChild(item);

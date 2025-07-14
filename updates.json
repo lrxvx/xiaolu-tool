@@ -1,5 +1,13 @@
 [
     {
+        "id": "file-compressor",
+        "title": "在线文件压缩器",
+        "description": "支持PDF文档、图片、视频等多种格式，批量压缩处理，智能压缩算法保持质量，完全免费的在线文件压缩工具",
+        "date": "2025-07-15",
+        "type": "新增工具",
+        "relatedTools": ["image-compressor", "pdf-converter"]
+    },
+    {
         "id": "emoji-symbols",
         "title": "Emoji符号大全工具",
         "description": "支持Unicode 15.1标准的3,782个独立表情符号，兼容iOS、Android、Windows等全平台，一键复制粘贴，科学分类系统，让社交沟通更生动有趣",

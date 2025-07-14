@@ -2,6 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary SEO Meta Tags -->
@@ -511,8 +515,8 @@
                 <div class="converter-layout">
                     <div class="input-group">
                         <label class="input-label">输入温度值</label>
-                        <input type="number" class="input-field" id="temp-input" placeholder="请输入温度值" step="any">
-                        <select class="unit-select" id="temp-from">
+                        <input type="number" class="input-field" id="temperature-input" placeholder="请输入温度值" step="any">
+                        <select class="unit-select" id="temperature-from">
                             <option value="celsius">摄氏度 (°C)</option>
                             <option value="fahrenheit">华氏度 (°F)</option>
                             <option value="kelvin">开尔文 (K)</option>
@@ -520,14 +524,14 @@
                         </select>
                     </div>
                     <div class="swap-controls">
-                        <button class="swap-btn" onclick="swapUnits('temp')">
+                        <button class="swap-btn" onclick="swapUnits('temperature')">
                             <i class="fas fa-exchange-alt"></i>
                         </button>
                     </div>
                     <div class="input-group">
                         <label class="input-label">转换结果</label>
-                        <div class="result-display" id="temp-result">请输入温度值</div>
-                        <select class="unit-select" id="temp-to">
+                        <div class="result-display" id="temperature-result">请输入温度值</div>
+                        <select class="unit-select" id="temperature-to">
                             <option value="fahrenheit">华氏度 (°F)</option>
                             <option value="celsius">摄氏度 (°C)</option>
                             <option value="kelvin">开尔文 (K)</option>
@@ -538,10 +542,10 @@
                 <div class="quick-conversions">
                     <div class="quick-title">常用温度换算</div>
                     <div class="quick-grid">
-                        <div class="quick-item" onclick="setQuickValue('temp', 0, 'celsius')">0°C = 32°F (冰点)</div>
-                        <div class="quick-item" onclick="setQuickValue('temp', 100, 'celsius')">100°C = 212°F (沸点)</div>
-                        <div class="quick-item" onclick="setQuickValue('temp', 37, 'celsius')">37°C = 98.6°F (体温)</div>
-                        <div class="quick-item" onclick="setQuickValue('temp', 25, 'celsius')">25°C = 77°F (室温)</div>
+                        <div class="quick-item" onclick="setQuickValue('temperature', 0, 'celsius')">0°C = 32°F (冰点)</div>
+                        <div class="quick-item" onclick="setQuickValue('temperature', 100, 'celsius')">100°C = 212°F (沸点)</div>
+                        <div class="quick-item" onclick="setQuickValue('temperature', 37, 'celsius')">37°C = 98.6°F (体温)</div>
+                        <div class="quick-item" onclick="setQuickValue('temperature', 25, 'celsius')">25°C = 77°F (室温)</div>
                     </div>
                 </div>
             </div>
@@ -1262,6 +1266,17 @@
 
         // 页面初始化
         document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航栏和页脚组件
+            const navbar = new NavbarComponent();
+            const navbarStyles = document.createElement('style');
+            navbarStyles.textContent = NavbarComponent.getStyles();
+            document.head.appendChild(navbarStyles);
+
+            const footer = new FooterComponent();
+            const footerStyles = document.createElement('style');
+            footerStyles.textContent = FooterComponent.getStyles();
+            document.head.appendChild(footerStyles);
+
             // 导入导航栏和页脚组件
             loadComponents();
             
@@ -1335,9 +1350,18 @@
         // 执行单位换算
         function performConversion(category) {
             const input = document.getElementById(`${category}-input`);
-            const fromUnit = document.getElementById(`${category}-from`).value;
-            const toUnit = document.getElementById(`${category}-to`).value;
+            const fromSelect = document.getElementById(`${category}-from`);
+            const toSelect = document.getElementById(`${category}-to`);
             const resultDiv = document.getElementById(`${category}-result`);
+            
+            // 检查必要的元素是否存在
+            if (!input || !fromSelect || !toSelect || !resultDiv) {
+                console.error(`找不到${category}类别的必要元素`);
+                return;
+            }
+            
+            const fromUnit = fromSelect.value;
+            const toUnit = toSelect.value;
 
             const inputValue = input.value.trim();
             

@@ -55,6 +55,25 @@
     <script src="../components/navbar.js"></script>
     <script src="../components/footer.js"></script>
     
+    <script>
+    // 在页面加载完成后初始化组件
+    document.addEventListener('DOMContentLoaded', () => {
+        // 初始化导航栏
+        const navbar = new NavbarComponent();
+        // 添加导航栏样式
+        const navbarStyles = document.createElement('style');
+        navbarStyles.textContent = NavbarComponent.getStyles();
+        document.head.appendChild(navbarStyles);
+
+        // 初始化页脚
+        const footer = new FooterComponent();
+        // 添加页脚样式
+        const footerStyles = document.createElement('style');
+        footerStyles.textContent = FooterComponent.getStyles();
+        document.head.appendChild(footerStyles);
+    });
+    </script>
+    
     <style>
         * {
             margin: 0;

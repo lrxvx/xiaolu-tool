@@ -242,10 +242,4 @@ class FooterComponent {
 // 导出组件（如果使用模块系统）
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = FooterComponent;
- }
-}
-
-// 导出组件（如果使用模块系统）
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = FooterComponent;
 }
