@@ -239,17 +239,10 @@ class FooterComponent {
     }
 }
 
-// 自动初始化页脚
-if (typeof window !== 'undefined') {
-    document.addEventListener('DOMContentLoaded', () => {
-        // 添加页脚样式
-        const style = document.createElement('style');
-        style.textContent = FooterComponent.getStyles();
-        document.head.appendChild(style);
-        
-        // 初始化页脚
-        new FooterComponent();
-    });
+// 导出组件（如果使用模块系统）
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = FooterComponent;
+ }
 }
 
 // 导出组件（如果使用模块系统）

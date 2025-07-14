@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>在线Emoji符号大全 - 海量表情符号免费复制使用 | 小路工具箱</title>
+    <meta name="title" content="在线Emoji符号大全 - 海量表情符号免费复制使用 | 小路工具箱">
+    <meta name="description" content="免费在线Emoji表情符号工具，支持Unicode 15.1标准的3,782个独立表情，兼容iOS、Android、Windows等全平台。一键复制粘贴，让社交沟通更有趣！">
+    <meta name="keywords" content="emoji, 表情符号, emoji大全, emoji复制, emoji表情包, unicode emoji, 社交表情, 聊天表情, 免费emoji, emoji工具">
+    <meta name="author" content="小路工具箱">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tools.xiaolu.com/tools/emoji-symbols.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.xiaolu.com/tools/emoji-symbols.html">
+    <meta property="og:title" content="在线Emoji符号大全 - 海量表情符号免费复制使用">
+    <meta property="og:description" content="免费在线Emoji表情符号工具，支持Unicode 15.1标准的3,782个独立表情，兼容iOS、Android、Windows等全平台。一键复制粘贴，让社交沟通更有趣！">
+    <meta property="og:image" content="https://tools.xiaolu.com/images/emoji-symbols-preview.png">
+    <meta property="og:site_name" content="小路工具箱">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.xiaolu.com/tools/emoji-symbols.html">
+    <meta property="twitter:title" content="在线Emoji符号大全 - 让表情符号触手可及">
+    <meta property="twitter:description" content="支持Unicode 15.1标准的3,782个独立表情，兼容全平台，一键复制使用。让你的社交沟通更生动有趣！">
+    <meta property="twitter:image" content="https://tools.xiaolu.com/images/emoji-symbols-preview.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "在线Emoji符号大全",
+        "url": "https://tools.xiaolu.com/tools/emoji-symbols.html",
+        "description": "免费在线Emoji表情符号工具，支持Unicode 15.1标准，兼容全平台。一键复制粘贴，让社交沟通更有趣！",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "All",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "支持Unicode 15.1标准",
+            "3,782个独立表情符号",
+            "全平台兼容支持",
+            "一键复制使用",
+            "分类清晰直观",
+            "完全免费"
+        ]
+    }
+    </script>
+     
+     <!-- 导航栏和页脚组件 -->
+     <script src="../components/navbar.js"></script>
+     <script src="../components/footer.js"></script>
+     
+     <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 复制提示样式 -->
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-header h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-header p {
+            color: var(--gray);
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        
+        .category-tab {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .category-tab i {
+            color: var(--primary);
+        }
+        
+        .category-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .category-tab.active i {
+            color: white;
+        }
+        
+        .emoji-categories {
+            margin-bottom: 2rem;
+        }
+        
+        .emoji-category {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        
+        .emoji-category:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .category-header i {
+            margin-right: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .emoji-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 0.5rem;
+        }
+        
+        .emoji-item {
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+        
+        .emoji-item:hover {
+            background-color: var(--light);
+        }
+        
+        .copy-tooltip {
+            position: fixed;
+            background: var(--dark);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .guide-section,
+        .features-section,
+        .faq-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .guide-section h2,
+        .features-section h2,
+        .faq-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .feature-item i {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .faq-item h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem auto;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .emoji-category {
+                padding: 1rem;
+            }
+            
+            .emoji-grid {
+                grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+            }
+        }
+    </style>
+
+    <!-- 复制成功提示 -->
+    <div id="copyTooltip" class="copy-tooltip">已复制到剪贴板</div>
+</head>
+<body>
+    <div class="container">
+        <div class="tool-header">
+            <h1>在线Emoji符号大全</h1>
+            <p>支持Unicode 15.1标准的3,782个独立表情符号，兼容iOS、Android、Windows等全平台。一键复制粘贴，让社交沟通更生动有趣！</p>
+        </div>
+        
+        <div class="category-tabs" id="categoryTabs">
+            <div class="category-tab active" data-category="smileys-emotion">
+                <i class="far fa-smile"></i>
+                <span>表情与情感</span>
+            </div>
+            <div class="category-tab" data-category="people-body">
+                <i class="far fa-user"></i>
+                <span>人物与身体</span>
+            </div>
+            <div class="category-tab" data-category="animals-nature">
+                <i class="fas fa-leaf"></i>
+                <span>动物与自然</span>
+            </div>
+            <div class="category-tab" data-category="food-drink">
+                <i class="fas fa-utensils"></i>
+                <span>食物与饮品</span>
+            </div>
+            <div class="category-tab" data-category="travel-places">
+                <i class="fas fa-plane"></i>
+                <span>旅行与地点</span>
+            </div>
+            <div class="category-tab" data-category="activities">
+                <i class="fas fa-futbol"></i>
+                <span>活动与运动</span>
+            </div>
+        </div>
+        
+        <div class="emoji-categories">
+            <div class="emoji-category">
+                <div class="emoji-grid" id="currentEmojiGrid"></div>
+            </div>
+        </div>
+        
+        <div class="guide-section">
+            <h2>使用指南</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-mouse-pointer"></i>
+                    <div>
+                        <h3>简单点击</h3>
+                        <p>点击任意表情符号即可自动复制到剪贴板</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-paste"></i>
+                    <div>
+                        <h3>随处粘贴</h3>
+                        <p>支持微信、QQ、微博等社交平台，以及办公软件</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div>
+                        <h3>全平台兼容</h3>
+                        <p>完美支持iOS、Android、Windows等主流平台</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features-section">
+            <h2>为什么选择我们的Emoji工具？</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-sync"></i>
+                    <div>
+                        <h3>实时更新</h3>
+                        <p>支持最新Unicode 15.1标准，收录全部3,782个表情符号</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-th"></i>
+                    <div>
+                        <h3>分类清晰</h3>
+                        <p>科学的分类系统，快速找到需要的表情</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bolt"></i>
+                    <div>
+                        <h3>极速复制</h3>
+                        <p>一键复制功能，提升使用效率</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-globe"></i>
+                    <div>
+                        <h3>广泛兼容</h3>
+                        <p>确保在各种平台上正确显示</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq-section">
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>Q：为什么有些表情在不同设备上显示不一样？</h3>
+                <p>A：这是因为不同设备和平台使用的emoji字体不同。我们的工具确保提供标准Unicode编码，但具体显示效果取决于设备的系统版本和支持情况。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q：复制的emoji可以在任何地方使用吗？</h3>
+                <p>A：理论上可以在所有支持Unicode的应用中使用。但部分旧版本应用可能对新表情的支持有限，建议在使用前先测试。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q：如何快速找到想要的表情？</h3>
+                <p>A：我们按照情感、人物、动物等类别进行了清晰的分类，您可以直接在相应分类中浏览。未来我们还将添加搜索功能，让查找更便捷。</p>
+            </div>
+        </div>
+        
+
+    </div>
+    
+    <script>
+        // Emoji数据
+        const emojiData = {
+            'smileys-emotion': ['😀', '😃', '😄', '😁', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙', '😚', '😋', '😛', '😝', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🥸', '🤩', '🥳', '😏', '😒', '😞', '😔', '😟', '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢', '😭', '😤', '😠', '😡', '🤬', '🤯', '😳', '🥵', '🥶', '😱', '😨', '😰', '😥', '😓', '🫣', '🤗', '🫡', '🤔', '🫢', '🤭', '🤫', '🤥', '😶', '😶‍🌫️', '😐', '😑', '😬', '🫨', '🫠', '🙄', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤', '😪', '😵', '😵‍💫', '🫥', '🤐', '🥴', '🤢', '🤮', '🤧', '😷', '🤒', '🤕', '🤑', '🤠', '😈', '👿', '👹', '👺', '🤡', '💩', '👻', '💀', '☠️', '👽', '👾', '🤖', '🎃', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾'],
+            'people-body': ['🫶', '🤲', '👐', '🙌', '👏', '🤝', '👍', '👎', '👊', '✊', '🤛', '🤜', '🤞', '✌️', '🫰', '🤟', '🤘', '👌', '🤌', '🤏', '🫳', '🫴', '👈', '👉', '👆', '👇', '☝️', '✋', '🤚', '🖐️', '🖖', '👋', '🤙', '🫲', '🫱', '💪', '🦾', '🖕', '✍️', '🙏', '🫵', '🦶', '🦵', '🦿', '💄', '💋', '👄', '🫦', '🦷', '👅', '👂', '🦻', '👃', '👣', '👁️', '👀', '🫀', '🫁', '🧠'],
+            'animals-nature': ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐻‍❄️', '🐨', '🐯', '🦁', '🐮', '🐷', '🐽', '🐸', '🐵', '🙈', '🙉', '🙊', '🐒', '🐔', '🐧', '🐦', '🐤', '🐣', '🐥', '🦆', '🦅', '🦉', '🦇', '🐺', '🐗', '🐴', '🦄', '🐝', '🪱', '🐛', '🦋', '🐌', '🐞', '🐜', '🪰', '🪲', '🪳', '🦟', '🦗', '🕷️', '🕸️', '🦂', '🦐', '🦞', '🦀', '🪼', '🪽', '🦑', '🦪', '🦙', '🦒', '🦘', '🦥', '🦦', '🦫', '🦈', '🐋', '🐊', '🐅', '🐆', '🦓', '🦍', '🦧', '🦣', '🐘', '🦛', '🦏', '🐪', '🐫', '🦒', '🦘', '🦬', '🐃', '🐂', '🐄', '🐎', '🐖', '🐏', '🐑', '🦙', '🐐', '🦌', '🐕', '🐩', '🦮', '🐕‍🦺', '🐈', '🐈‍⬛', '🪿', '🐓', '🦃', '🦤', '🦚', '🦜', '🦢', '🦩', '🕊️', '🐇', '🦝', '🦨', '🦡', '🦫', '🦦', '🦥', '🐁', '🐀', '🐿️', '🦔', '🐾', '🐉', '🐲', '🌵', '🎄', '🌲', '🌳', '🌴', '🪵', '🌱', '🌿', '☘️', '🍀', '🎍', '🪴', '🎋', '🍃', '🍂', '🍁', '🍄', '🐚', '🪸', '🌾', '💐', '🌷', '🌹', '🥀', '🌺', '🌸', '🌼', '🌻', '🌞', '🌝', '🌛', '🌜', '🌚', '🌕', '🌖', '🌗', '🌘', '🌑', '🌒', '🌓', '🌔', '🌙', '🌎', '🌍', '🌏', '🪐', '💫', '⭐', '🌟', '✨', '⚡', '☄️', '💥', '🔥', '🌪️', '🌈', '☀️', '🌤️', '⛅', '🌥️', '☁️', '🌦️', '🌧️', '⛈️', '🌩️', '🌨️', '❄️', '☃️', '⛄', '🌬️', '💨', '💧', '💦', '🫧', '☔', '☂️', '🌊', '🌫️'],
+            'food-drink': ['🍏', '🍎', '🍐', '🍊', '🍋', '🍌', '🍉', '🍇', '🍓', '🫐', '🍈', '🍒', '🍑', '🥭', '🍍', '🥥', '🥝', '🍅', '🍆', '🥑', '🥦', '🥬', '🥒', '🌶️', '🫑', '🌽', '🥕', '🫒', '🧄', '🧅', '🥔', '🍠', '🥐', '🥯', '🍞', '🥖', '🥨', '🧀', '🥚', '🍳', '🧈', '🥞', '🧇', '🥓', '🥩', '🍗', '🍖', '🦴', '🌭', '🍔', '🍟', '🍕', '🫓', '🥪', '🥙', '🧆', '🌮', '🌯', '🫔', '🥗', '🥘', '🫕', '🥫', '🍝', '🍜', '🍲', '🍛', '🍣', '🍱', '🥟', '🦪', '🍤', '🍙', '🍚', '🍘', '🍥', '🥠', '🥮', '🍢', '🍡', '🍧', '🍨', '🍦', '🥧', '🧁', '🍰', '🎂', '🍮', '🍭', '🍬', '🍫', '🍿', '🍩', '🍪', '🌰', '🥜', '🫘', '🍯', '🥛', '🍼', '🫖', '☕️', '🍵', '🧃', '🥤', '🧋', '🍶', '🍺', '🍻', '🥂', '🍷', '🥃', '🍸', '🍹', '🧉', '🍾', '🧊', '🥄', '🍴', '🍽️', '🥣', '🥡', '🥢', '🧂'],
+            'travel-places': ['🚗', '🚕', '🚙', '🚌', '🚎', '🏎️', '🚓', '🚑', '🚒', '🚐', '🛻', '🚚', '🚛', '🚜', '🛵', '🏍️', '🛺', '🚲', '🛴', '🚨', '🚔', '🚍', '🚘', '🚖', '🛞', '🚡', '🚠', '🚟', '🚃', '🚋', '🚞', '🚝', '🚄', '🚅', '🚈', '🚂', '🚆', '🚇', '🚊', '🚉', '✈️', '🛫', '🛬', '🛩️', '💺', '🛰️', '🚀', '🛸', '🚁', '🛶', '⛵', '🚤', '🛥️', '🛳️', '⛴️', '🚢', '⚓', '🪝', '⛽', '🚧', '🚦', '🚥', '🚏', '🗺️', '🗿', '🗽', '🗼', '🏰', '🏯', '🏟️', '🎡', '🎢', '🎠', '⛲', '⛱️', '🏖️', '🏝️', '🏜️', '🌋', '⛰️', '🏔️', '🗻', '🏕️', '⛺', '🏠', '🏡', '🏘️', '🏚️', '🏗️', '🏢', '🏬', '🏣', '🏤', '🏥', '🏦', '🏨', '🏪', '🏫', '🏩', '💒', '🏛️', '⛪', '🕌', '🕍', '🛕', '🕋', '⛩️', '🛤️', '🛣️', '🗾', '🎑', '🏞️', '🌅', '🌄', '🌠', '🎇', '🎆', '🌇', '🌆', '🏙️', '🌃', '🌌', '🌉', '🌁'],
+            'activities': ['⚽', '🏀', '🏈', '⚾', '🥎', '🎾', '🏐', '🏉', '🥏', '🎱', '🪀', '🏓', '🏸', '🏒', '🏑', '🥍', '🏏', '🪃', '🥅', '⛳', '🪁', '🏹', '🎣', '🤿', '🥊', '🥋', '🎽', '🛹', '🛼', '🛷', '⛸️', '🥌', '🎿', '⛷️', '🏂', '🪂', '🏋️', '🏋️‍♂️', '🏋️‍♀️', '🤼', '🤼‍♂️', '🤼‍♀️', '🤸', '🤸‍♂️', '🤸‍♀️', '⛹️', '⛹️‍♂️', '⛹️‍♀️', '🤺', '🤾', '🤾‍♂️', '🤾‍♀️', '🏌️', '🏌️‍♂️', '🏌️‍♀️', '🏇', '🧘', '🧘‍♂️', '🧘‍♀️', '🏄', '🏄‍♂️', '🏄‍♀️', '🏊', '🏊‍♂️', '🏊‍♀️', '🤽', '🤽‍♂️', '🤽‍♀️', '🚣', '🚣‍♂️', '🚣‍♀️', '🧗', '🧗‍♂️', '🧗‍♀️', '🚵', '🚵‍♂️', '🚵‍♀️', '🚴', '🚴‍♂️', '🚴‍♀️', '🏆', '🥇', '🥈', '🥉', '🏅', '🎖️', '🏵️', '🎗️', '🎫', '🎟️', '🎪', '🤹', '🤹‍♂️', '🤹‍♀️', '🎭', '🩰', '🎨', '🎬', '🎤', '🎧', '🎼', '🎹', '🥁', '🪘', '🎷', '🎺', '🪗', '🎸', '🪕', '🎻', '🎲', '♟️', '🎯', '🎳', '🎮', '🎰', '🧩']
+        };
+
+        // 复制Emoji到剪贴板
+        function copyEmoji(emoji) {
+            navigator.clipboard.writeText(emoji).then(() => {
+                showCopyTooltip(event);
+            }).catch(err => {
+                console.error('复制失败:', err);
+            });
+        }
+
+        // 显示复制成功提示
+        function showCopyTooltip(event) {
+            const tooltip = document.getElementById('copyTooltip');
+            tooltip.style.opacity = '1';
+            tooltip.style.left = (event.pageX + 10) + 'px';
+            tooltip.style.top = (event.pageY + 10) + 'px';
+            
+            setTimeout(() => {
+                tooltip.style.opacity = '0';
+            }, 1500);
+        }
+
+        // 显示指定分类的表情
+        function showCategory(category) {
+            const grid = document.getElementById('currentEmojiGrid');
+            grid.innerHTML = ''; // 清空当前网格
+            
+            if (emojiData[category]) {
+                emojiData[category].forEach(emoji => {
+                    const item = document.createElement('div');
+                    item.className = 'emoji-item';
+                    item.textContent = emoji;
+                    item.addEventListener('click', () => copyEmoji(emoji));
+                    grid.appendChild(item);
+                });
+            }
+            
+            // 更新分类标签的激活状态
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                if (tab.dataset.category === category) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+        }
+        
+        // 初始化Emoji网格和分类切换
+        function initEmojiGrids() {
+            // 初始化显示第一个分类
+            showCategory('smileys-emotion');
+            
+            // 添加分类切换事件监听
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const category = tab.dataset.category;
+                    showCategory(category);
+                });
+            });
+        }
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 禁用腾讯统计相关请求
+            const originalFetch = window.fetch;
+            window.fetch = function(url, options) {
+                if (url.includes('beacon.qq.com') || url.includes('h.trace.qq.com')) {
+                    return Promise.resolve(new Response());
+                }
+                return originalFetch.apply(this, arguments);
+            };
+
+            // 初始化Emoji网格
+            initEmojiGrids();
+        });
+    </script>
+</body>
+</html>

@@ -1,5 +1,15 @@
 [
   {
+    "id": "emoji-symbols",
+    "name": "Emoji符号大全",
+    "shortDesc": "Unicode 15.1标准表情符号",
+    "icon": "fas fa-smile",
+    "description": "支持Unicode 15.1标准的3,782个独立表情符号，兼容iOS、Android、Windows等全平台。一键复制粘贴，让社交沟通更生动有趣！",
+    "tags": ["emoji", "表情符号", "表情包", "社交工具", "复制粘贴"],
+    "categories": ["utility-tools", "social-media-tools"],
+    "url": "tools/emoji-symbols.html"
+  },
+  {
     "id": "grid-image-splitter",
     "name": "九宫格切图工具",
     "shortDesc": "一键分割图片为九宫格",

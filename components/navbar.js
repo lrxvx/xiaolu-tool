@@ -188,25 +188,12 @@ class NavbarComponent {
     }
 }
 
-// 自动初始化导航栏
-if (typeof window !== 'undefined') {
-    document.addEventListener('DOMContentLoaded', () => {
-        // 添加Font Awesome图标库
-        if (!document.querySelector('link[href*="font-awesome"]')) {
-            const fontAwesome = document.createElement('link');
-            fontAwesome.rel = 'stylesheet';
-            fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
-            document.head.appendChild(fontAwesome);
-        }
-        
-        // 添加导航栏样式
-        const style = document.createElement('style');
-        style.textContent = NavbarComponent.getStyles();
-        document.head.appendChild(style);
-        
-        // 初始化导航栏
-        new NavbarComponent();
-    });
+// 添加Font Awesome图标库
+if (typeof window !== 'undefined' && !document.querySelector('link[href*="font-awesome"]')) {
+    const fontAwesome = document.createElement('link');
+    fontAwesome.rel = 'stylesheet';
+    fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+    document.head.appendChild(fontAwesome);
 }
 
 // 导出组件（如果使用模块系统）

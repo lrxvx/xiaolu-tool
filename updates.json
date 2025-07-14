@@ -1,5 +1,13 @@
 [
     {
+        "id": "emoji-symbols",
+        "title": "Emoji符号大全工具",
+        "description": "支持Unicode 15.1标准的3,782个独立表情符号，兼容iOS、Android、Windows等全平台，一键复制粘贴，科学分类系统，让社交沟通更生动有趣",
+        "date": "2025-07-14",
+        "type": "新增工具",
+        "relatedTools": ["content-converter", "chinese-converter"]
+    },
+    {
         "id": "grid-image-splitter",
         "title": "九宫格切图工具",
         "description": "一键将图片分割成九宫格，完美适配社交媒体发布，支持多种图片格式，智能裁剪处理，简单易用的在线工具",
