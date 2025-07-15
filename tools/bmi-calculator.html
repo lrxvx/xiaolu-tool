@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线BMI计算器 - 体重指数、体脂率计算工具 | 小路工具箱</title>
+    <meta name="description" content="免费在线BMI计算器，提供体重指数(BMI)、体脂率、基础代谢率等多项健康指标计算。科学评估身体状况，助您掌握健康数据。">
+    <meta name="keywords" content="BMI计算器,体重指数计算,体脂率计算,基础代谢率,健康指标计算,在线计算工具,健康管理">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.example.com/bmi-calculator.html">
+    <meta property="og:title" content="在线BMI计算器 - 体重指数、体脂率计算工具">
+    <meta property="og:description" content="免费在线BMI计算器，提供体重指数(BMI)、体脂率、基础代谢率等多项健康指标计算。科学评估身体状况，助您掌握健康数据。">
+    <meta property="og:image" content="https://tools.example.com/images/bmi-calculator.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.example.com/bmi-calculator.html">
+    <meta property="twitter:title" content="在线BMI计算器 - 体重指数、体脂率计算工具">
+    <meta property="twitter:description" content="免费在线BMI计算器，提供体重指数(BMI)、体脂率、基础代谢率等多项健康指标计算。科学评估身体状况，助您掌握健康数据。">
+    <meta property="twitter:image" content="https://tools.example.com/images/bmi-calculator.jpg">
+
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "在线BMI计算器",
+        "description": "免费在线BMI计算器，提供体重指数(BMI)、体脂率、基础代谢率等多项健康指标计算。科学评估身体状况，助您掌握健康数据。",
+        "url": "https://tools.example.com/bmi-calculator.html",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "All",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        }
+    }
+    </script>
+
+    <!-- Styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <style>
+        .calculator-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .result-card {
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .result-status {
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+        .status-normal { color: #198754; }
+        .status-warning { color: #ffc107; }
+        .status-danger { color: #dc3545; }
+        .guide-section {
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .faq-item {
+            margin-bottom: 15px;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #0d6efd;
+            margin-bottom: 5px;
+        }
+    </style>
+
+    <!-- Components -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">在线BMI计算器</h1>
+        <p class="lead text-center mb-5">专业的健康指标计算工具，帮助您科学评估身体状况，掌握健康数据</p>
+
+        <!-- 计算器功能区 -->
+        <div class="calculator-section">
+            <form id="healthForm" class="mb-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="gender" class="form-label">性别</label>
+                        <select class="form-select" id="gender" required>
+                            <option value="male">男性</option>
+                            <option value="female">女性</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="age" class="form-label">年龄（岁）</label>
+                        <input type="number" class="form-control" id="age" min="1" max="120" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="height" class="form-label">身高（厘米）</label>
+                        <input type="number" class="form-control" id="height" min="50" max="250" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="weight" class="form-label">体重（公斤）</label>
+                        <input type="number" class="form-control" id="weight" min="20" max="300" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="waist" class="form-label">腰围（厘米）</label>
+                        <input type="number" class="form-control" id="waist" min="40" max="200">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="activity" class="form-label">日常活动量</label>
+                        <select class="form-select" id="activity">
+                            <option value="1.2">久坐不动</option>
+                            <option value="1.375">轻度活动</option>
+                            <option value="1.55">中度活动</option>
+                            <option value="1.725">重度活动</option>
+                            <option value="1.9">极重度活动</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">计算健康指标</button>
+            </form>
+
+            <!-- 计算结果展示 -->
+            <div id="results" style="display: none;">
+                <h3 class="mb-4">计算结果</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="result-card">
+                            <h4>BMI指数</h4>
+                            <div class="result-value" id="bmiValue"></div>
+                            <div class="result-status" id="bmiStatus"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="result-card">
+                            <h4>体脂率</h4>
+                            <div class="result-value" id="bodyFatValue"></div>
+                            <div class="result-status" id="bodyFatStatus"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="result-card">
+                            <h4>基础代谢率</h4>
+                            <div class="result-value" id="bmrValue"></div>
+                            <div class="result-status">每日基础消耗的热量</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="result-card">
+                            <h4>每日所需热量</h4>
+                            <div class="result-value" id="tdeeValue"></div>
+                            <div class="result-status">维持体重所需的热量</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 使用指南 -->
+        <div class="guide-section mb-5">
+            <h2>使用指南</h2>
+            <ol>
+                <li>选择您的性别</li>
+                <li>输入年龄（1-120岁）</li>
+                <li>输入身高（厘米）</li>
+                <li>输入体重（公斤）</li>
+                <li>输入腰围（可选，用于计算体脂率）</li>
+                <li>选择日常活动量级别</li>
+                <li>点击"计算健康指标"按钮获取结果</li>
+            </ol>
+        </div>
+
+        <!-- 详细介绍 -->
+        <div class="guide-section mb-5">
+            <h2>关于健康指标计算器</h2>
+            <p>我们的健康指标计算器是一个全面的健康评估工具，可以帮助您了解自己的身体状况。通过计算BMI、体脂率、基础代谢率等多个重要指标，为您提供科学的健康数据参考。</p>
+            
+            <h3>核心功能</h3>
+            <ul>
+                <li>BMI（身体质量指数）计算</li>
+                <li>体脂率估算</li>
+                <li>基础代谢率（BMR）计算</li>
+                <li>每日能量消耗（TDEE）计算</li>
+                <li>健康状况评估和建议</li>
+            </ul>
+
+            <h3>为什么选择我们的工具</h3>
+            <ul>
+                <li>精确计算：采用国际标准计算公式</li>
+                <li>全面评估：提供多个健康指标</li>
+                <li>即时结果：快速获取计算结果</li>
+                <li>免费使用：无需注册，随时可用</li>
+                <li>隐私保护：所有计算在本地完成，不收集个人数据</li>
+            </ul>
+
+            <h3>适用场景</h3>
+            <ul>
+                <li>个人健康管理</li>
+                <li>减重计划制定</li>
+                <li>健身目标设定</li>
+                <li>营养膳食规划</li>
+                <li>健康状况监测</li>
+            </ul>
+        </div>
+
+        <!-- 常见问题 -->
+        <div class="guide-section mb-5">
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <div class="faq-question">Q: BMI指数是什么？</div>
+                <div class="faq-answer">A: BMI（Body Mass Index）是身体质量指数的简称，是用体重公斤数除以身高米数平方得出的数字，用于衡量人体胖瘦程度。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q: 如何判断BMI指数的标准范围？</div>
+                <div class="faq-answer">A: 对于亚洲成年人，BMI小于18.5为偏瘦，18.5-23.9为正常范围，24-27.9为超重，28及以上为肥胖。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q: 体脂率是如何计算的？</div>
+                <div class="faq-answer">A: 我们使用性别、年龄、BMI和腰围等数据，通过科学的计算公式估算体脂率。这是一个估算值，如需更精确的数据，建议使用专业的体脂测量设备。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q: 基础代谢率（BMR）代表什么？</div>
+                <div class="faq-answer">A: BMR是人体在安静状态下维持基本生命活动所需的最低能量消耗，主要受年龄、性别、体重等因素影响。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q: 日常活动量级别如何选择？</div>
+                <div class="faq-answer">A: 久坐不动：整天坐着，很少运动；轻度活动：偶尔运动或轻体力工作；中度活动：每周运动3-5次；重度活动：每天运动或体力工作；极重度活动：运动员级别。</div>
+            </div>
+        </div>
+
+        <!-- 版权信息 -->
+        <div class="text-center mb-3">@2025 专业的在线健康指标计算工具</div>
+        <div class="text-center mb-5">
+            <a href="https://t.zsxq.com/17wTksRxX" target="_blank" class="text-decoration-none">技术支持和问题反馈</a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航栏
+            const navbarStyles = document.createElement('style');
+            navbarStyles.textContent = NavbarComponent.getStyles();
+            document.head.appendChild(navbarStyles);
+            new NavbarComponent();
+
+            // 初始化页脚
+            const footerStyles = document.createElement('style');
+            footerStyles.textContent = FooterComponent.getStyles();
+            document.head.appendChild(footerStyles);
+            new FooterComponent();
+
+            // 表单提交处理
+            const form = document.getElementById('healthForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculateHealth();
+            });
+        });
+
+        // 健康指标计算函数
+        function calculateHealth() {
+            // 获取输入值
+            const gender = document.getElementById('gender').value;
+            const age = parseFloat(document.getElementById('age').value);
+            const height = parseFloat(document.getElementById('height').value) / 100; // 转换为米
+            const weight = parseFloat(document.getElementById('weight').value);
+            const waist = parseFloat(document.getElementById('waist').value);
+            const activity = parseFloat(document.getElementById('activity').value);
+
+            // 计算BMI
+            const bmi = weight / (height * height);
+            const bmiValue = document.getElementById('bmiValue');
+            const bmiStatus = document.getElementById('bmiStatus');
+            bmiValue.textContent = bmi.toFixed(1);
+
+            // BMI状态判断
+            let bmiText = '';
+            let bmiClass = '';
+            if (bmi < 18.5) {
+                bmiText = '偏瘦';
+                bmiClass = 'status-warning';
+            } else if (bmi < 24) {
+                bmiText = '正常';
+                bmiClass = 'status-normal';
+            } else if (bmi < 28) {
+                bmiText = '超重';
+                bmiClass = 'status-warning';
+            } else {
+                bmiText = '肥胖';
+                bmiClass = 'status-danger';
+            }
+            bmiStatus.textContent = bmiText;
+            bmiStatus.className = 'result-status ' + bmiClass;
+
+            // 计算体脂率
+            let bodyFat;
+            if (gender === 'male') {
+                bodyFat = (1.2 * bmi + 0.23 * age - 5.4 - 10.8 * 1) / 100;
+            } else {
+                bodyFat = (1.2 * bmi + 0.23 * age - 5.4) / 100;
+            }
+            const bodyFatValue = document.getElementById('bodyFatValue');
+            const bodyFatStatus = document.getElementById('bodyFatStatus');
+            bodyFatValue.textContent = (bodyFat * 100).toFixed(1) + '%';
+
+            // 体脂率状态判断
+            let bodyFatText = '';
+            let bodyFatClass = '';
+            if (gender === 'male') {
+                if (bodyFat < 0.1) {
+                    bodyFatText = '偏低';
+                    bodyFatClass = 'status-warning';
+                } else if (bodyFat < 0.2) {
+                    bodyFatText = '正常';
+                    bodyFatClass = 'status-normal';
+                } else if (bodyFat < 0.25) {
+                    bodyFatText = '偏高';
+                    bodyFatClass = 'status-warning';
+                } else {
+                    bodyFatText = '肥胖';
+                    bodyFatClass = 'status-danger';
+                }
+            } else {
+                if (bodyFat < 0.2) {
+                    bodyFatText = '偏低';
+                    bodyFatClass = 'status-warning';
+                } else if (bodyFat < 0.3) {
+                    bodyFatText = '正常';
+                    bodyFatClass = 'status-normal';
+                } else if (bodyFat < 0.35) {
+                    bodyFatText = '偏高';
+                    bodyFatClass = 'status-warning';
+                } else {
+                    bodyFatText = '肥胖';
+                    bodyFatClass = 'status-danger';
+                }
+            }
+            bodyFatStatus.textContent = bodyFatText;
+            bodyFatStatus.className = 'result-status ' + bodyFatClass;
+
+            // 计算基础代谢率（BMR）
+            let bmr;
+            if (gender === 'male') {
+                bmr = 10 * weight + 6.25 * (height * 100) - 5 * age + 5;
+            } else {
+                bmr = 10 * weight + 6.25 * (height * 100) - 5 * age - 161;
+            }
+            const bmrValue = document.getElementById('bmrValue');
+            bmrValue.textContent = Math.round(bmr) + ' 千卡';
+
+            // 计算每日所需热量（TDEE）
+            const tdee = bmr * activity;
+            const tdeeValue = document.getElementById('tdeeValue');
+            tdeeValue.textContent = Math.round(tdee) + ' 千卡';
+
+            // 显示结果区域
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

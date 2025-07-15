@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    <script>
+        document.write(`<style>${NavbarComponent.getStyles()}</style>`);
+        document.write(`<style>${FooterComponent.getStyles()}</style>`);
+    </script>
+    
+    <!-- SEO Meta Tags -->
+    <title>节日倒计时 | 全球节日提醒工具 - 小路工具箱</title>
+    <meta name="description" content="免费在线节日倒计时工具，支持全球节日查询，智能提醒节日活动和注意事项。自动识别用户所在地区，支持多语言，让您不错过任何重要节日。">
+    <meta name="keywords" content="节日倒计时,节日提醒,节日查询,假期安排,节日活动,全球节日,春节倒计时,节日计划">
+    <meta name="author" content="小路工具箱">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.xiaolu.com/tools/festival-countdown.html">
+    <meta property="og:title" content="节日倒计时 | 全球节日提醒工具">
+    <meta property="og:description" content="免费在线节日倒计时工具，支持全球节日查询，智能提醒节日活动和注意事项。自动识别用户所在地区，支持多语言。">
+    <meta property="og:image" content="https://tools.xiaolu.com/images/festival-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.xiaolu.com/tools/festival-countdown.html">
+    <meta property="twitter:title" content="节日倒计时 | 全球节日提醒工具">
+    <meta property="twitter:description" content="免费在线节日倒计时工具，支持全球节日查询，智能提醒节日活动和注意事项。自动识别用户所在地区，支持多语言。">
+    <meta property="twitter:image" content="https://tools.xiaolu.com/images/festival-preview.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "节日倒计时",
+        "description": "免费在线节日倒计时工具，支持全球节日查询，智能提醒节日活动和注意事项",
+        "url": "https://tools.xiaolu.com/tools/festival-countdown.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "全球节日倒计时",
+            "节日活动提醒",
+            "多语言支持",
+            "地区自动识别",
+            "节日详情介绍"
+        ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .tool-header p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tool-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .controls select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+
+        .festival-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .details-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 1.2rem;
+            transition: var(--transition);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(67, 97, 238, 0.2);
+        }
+
+        .details-btn:hover {
+            background: var(--secondary);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .festival-details h3 {
+            color: #34495e;
+            font-size: 1.4em;
+            margin: 0 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e74c3c;
+            display: inline-block;
+        }
+
+        .festival-details p {
+            color: #444;
+            line-height: 1.8;
+            margin: 0 0 25px;
+            font-size: 1.1em;
+            text-align: justify;
+        }
+
+        .festival-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .festival-card-inner {
+            padding: 1.8rem;
+            background: linear-gradient(135deg, var(--light) 0%, #ffffff 100%);
+        }
+
+        .festival-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .festival-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .countdown {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 1rem 0;
+        }
+
+        .tips {
+            font-size: 0.95rem;
+            color: var(--gray);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .section {
+            margin: 3rem 0;
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .section p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-item h3 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .support-link {
+            color: var(--primary);
+            text-decoration: none;
+            margin-left: 1rem;
+        }
+
+        .support-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+
+            .controls select {
+                width: 100%;
+            }
+
+            .festival-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏容器 -->
+    <nav id="navbar-container"></nav>
+
+    <!-- 节日详情模态框 -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2 class="modal-title"></h2>
+            </div>
+            <div class="modal-body">
+                <div class="festival-details" id="festivalDetails"></div>
+            </div>
+        </div>
+    </div>
+    
+    <main>
+        <div class="tool-header">
+            <h1>节日倒计时</h1>
+            <p>全球节日提醒工具，让您不错过任何重要节日</p>
+        </div>
+        
+        <div class="tool-container">
+            <div class="controls">
+                <select id="countrySelect">
+                    <option value="CN">中国</option>
+                    <option value="US">United States</option>
+                    <option value="JP">日本</option>
+                    <option value="KR">韩国</option>
+                    <option value="GB">United Kingdom</option>
+                </select>
+                <select id="languageSelect">
+                    <option value="zh">中文</option>
+                    <option value="en">English</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                </select>
+            </div>
+
+            <div class="festival-list" id="festivalList">
+                <!-- 节日卡片将通过JavaScript动态生成 -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>使用指南</h2>
+            <p>1. 选择您所在的国家/地区，系统会自动显示相关节日信息</p>
+            <p>2. 可以切换语言查看不同语言版本的节日介绍</p>
+            <p>3. 点击每个节日卡片查看详细的节日活动建议和注意事项</p>
+        </div>
+
+        <div class="section">
+            <h2>工具特色</h2>
+            <p>• 智能识别用户所在地区，自动展示相关节日</p>
+            <p>• 精确计算节日倒计时，帮助您提前规划</p>
+            <p>• 提供节日活动建议和注意事项</p>
+            <p>• 支持多语言界面，满足不同用户需求</p>
+            <p>• 定期更新节日数据，确保信息准确性</p>
+        </div>
+
+        <div class="section">
+            <h2>应用场景</h2>
+            <p>• 假期出行规划</p>
+            <p>• 节日活动准备</p>
+            <p>• 传统习俗了解</p>
+            <p>• 跨文化交流参考</p>
+        </div>
+
+        <div class="section">
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>Q: 节日日期是如何计算的？</h3>
+                <p>A: 我们根据各国官方发布的节假日信息和传统节日计算方法（如农历）来确定具体日期。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q: 为什么有些节日的日期会变化？</h3>
+                <p>A: 某些节日（如春节、清明节等）是按照农历或其他特定规则计算的，因此每年的公历日期会有所不同。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q: 如何获取最新的节假日安排？</h3>
+                <p>A: 我们会根据各国政府发布的官方节假日安排定期更新数据，建议您经常查看以获取最新信息。</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            ©2025 节日倒计时 - 让您把握每个重要时刻
+            <a href="https://t.zsxq.com/17wTksRxX" class="support-link" target="_blank">技术支持和问题反馈</a>
+        </div>
+    </main>
+    
+    <!-- 页脚容器 -->
+    <footer id="footer-container"></footer>
+
+    <!-- 节日详情弹窗 -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="festival-details" id="festivalDetails"></div>
+        </div>
+    </div>
+    
+    <script>
+        // 节日数据
+        const festivalDetails = {
+            // 中国节日详情
+            'CN-spring': {
+                history: {
+                    zh: '春节是中国最重要的传统节日，起源于商朝年代。传说年兽作恶，人们发现它害怕红色和响声，因此有了贴春联、放鞭炮等习俗。',
+                    en: 'Spring Festival is the most important traditional festival in China, originating from the Shang Dynasty. Legend has it that the monster "Nian" was afraid of red color and loud noises, leading to customs like pasting Spring Festival couplets and setting off firecrackers.',
+                    ja: '春節は中国の最も重要な伝統的な祝日で、商朝時代に起源します。伝説では年獣は赤色と大きな音を恐れたため、春聯を貼ったり爆竹を鳴らしたりする習慣が生まれました。',
+                    ko: '춘절은 중국에서 가장 중요한 전통 명절로, 상나라 시대에 기원합니다. 전설에 따르면 년수라는 괴물이 빨간색과 큰 소리를 무서워해서 춘련을 붙이고 폭죽을 터뜨리는 풍습이 생겼습니다.'
+                },
+                customs: {
+                    zh: '除夕守岁、贴春联、放鞭炮、吃团圆饭、发红包、舞龙舞狮',
+                    en: 'Staying up late on New Year\'s Eve, pasting Spring Festival couplets, setting off firecrackers, having reunion dinner, giving red envelopes, dragon and lion dance',
+                    ja: '大晦日の夜更かし、春聯貼り、爆竹、団らん料理、お年玉、龍獅子舞',
+                    ko: '섣달 그믐날 밤샘, 춘련 붙이기, 폭죽 터뜨리기, 가족 식사, 세뱃돈, 용사자춤'
+                }
+            },
+            // 日本节日详情
+            'JP-shogatsu': {
+                history: {
+                    zh: '日本新年是最重要的传统节日之一，融合了神道教和佛教的元素。在明治时期（1873年）开始采用公历，定于1月1日。',
+                    en: 'Japanese New Year is one of the most important traditional holidays, incorporating elements of both Shinto and Buddhist traditions. The Gregorian calendar date of January 1 was adopted during the Meiji period (1873).',
+                    ja: '日本の正月は最も重要な伝統的な祝日の一つで、神道と仏教の要素を含んでいます。明治時代（1873年）にグレゴリオ暦を採用し、1月1日と定められました。',
+                    ko: '일본의 설날은 가장 중요한 전통 명절 중 하나로, 신도와 불교의 요소를 포함합니다. 메이지 시대(1873년)에 그레고리력을 채택하여 1월 1일로 정해졌습니다.'
+                },
+                customs: {
+                    zh: '初诣参拜、吃御节料理、打年糕、放假三天、给压岁钱',
+                    en: 'First shrine visit, eating osechi ryori, mochi pounding, three-day holiday, giving otoshidama',
+                    ja: '初詣、おせち料理、餅つき、三が日、お年玉',
+                    ko: '첫 참배, 오세치 요리, 떡치기, 3일간의 휴일, 세뱃돈'
+                }
+            },
+            // 韩国节日详情
+            'KR-seollal': {
+                history: {
+                    zh: '韩国春节（设日）是韩国最重要的传统节日，源于农历新年。这一天不仅是新的一年的开始，也是家族团聚的重要时刻。',
+                    en: 'Seollal, Korean New Year, is Korea\'s most important traditional holiday originating from the lunar calendar. It marks both the beginning of a new year and an important time for family reunions.',
+                    ja: '韓国の旧正月（ソルラル）は韓国で最も重要な伝統的な祝日で、旧暦の新年に基づいています。新年の始まりと家族の集いの重要な時期を示します。',
+                    ko: '설날은 한국에서 가장 중요한 전통 명절로, 음력 설을 기원으로 합니다. 새해의 시작과 가족이 모이는 중요한 시기를 의미합니다.'
+                },
+                customs: {
+                    zh: '穿韩服行大礼、吃年糕汤、玩投掷游戏、走亲访友',
+                    en: 'Wearing hanbok for ancestral rites, eating tteokguk, playing yut nori, visiting relatives and friends',
+                    ja: '韓服を着て祖先祭祀、トックク、ユンノリ、親戚訪問',
+                    ko: '한복 입고 차례, 떡국, 윷놀이, 세배'
+                }
+            },
+            'KR-chuseok': {
+                history: {
+                    zh: '中秋节（秋夕）是韩国三大传统节日之一，起源于古代农耕文化，是感谢丰收和祭祀祖先的节日。',
+                    en: 'Chuseok, Korean Thanksgiving Day, is one of Korea\'s three major traditional holidays. It originated from ancient agricultural culture as a harvest festival and a time to honor ancestors.',
+                    ja: '秋夕は韓国の三大伝統的な祝日の一つで、古代の農耕文化に起源を持ち、収穫感謝と先祖供養の日です。',
+                    ko: '추석은 한국의 3대 명절 중 하나로, 고대 농경 문화에서 유래했으며 추수를 감사하고 조상을 기리는 날입니다.'
+                },
+                customs: {
+                    zh: '扫墓祭祖、制作松糕、赏月、民俗游戏',
+                    en: 'Visiting ancestral graves, making songpyeon, moon viewing, traditional games',
+                    ja: '墓参り、ソンピョン作り、月見、民俗遊び',
+                    ko: '성묘, 송편 만들기, 달맞이, 민속놀이'
+                }
+            }
+        };
+
+        const festivals = {
+            CN: [
+                {
+                    name: '春节',
+                    date: '2025-01-25',
+                    detailKey: 'CN-spring',
+                    tips: {
+                        zh: '准备年货、大扫除、贴春联、全家团圆',
+                        en: 'Prepare New Year goods, clean house, paste Spring Festival couplets, family reunion',
+                        ja: 'お正月の準備、大掃除、春聯貼り、家族団らん',
+                        ko: '설날 준비, 대청소, 춘련 붙이기, 가족 모임'
+                    }
+                },
+                {
+                    name: '元宵节',
+                    date: '2025-02-08',
+                    tips: {
+                        zh: '赏花灯、吃汤圆、猜灯谜',
+                        en: 'Watch lanterns, eat tangyuan, solve lantern riddles'
+                    }
+                },
+                {
+                    name: '清明节',
+                    date: '2025-04-04',
+                    tips: {
+                        zh: '扫墓祭祖、踏青郊游',
+                        en: 'Visit ancestors\' tombs, spring outing'
+                    }
+                },
+                {
+                    name: '劳动节',
+                    date: '2025-05-01',
+                    tips: {
+                        zh: '出游休闲、参加各类活动',
+                        en: 'Travel and leisure, participate in various activities'
+                    }
+                },
+                {
+                    name: '端午节',
+                    date: '2025-06-02',
+                    tips: {
+                        zh: '包粽子、赛龙舟、佩戴香囊',
+                        en: 'Make zongzi, dragon boat racing, wear sachets'
+                    }
+                },
+                {
+                    name: '中秋节',
+                    date: '2025-09-12',
+                    tips: {
+                        zh: '赏月、吃月饼、家人团聚',
+                        en: 'Moon viewing, eat mooncakes, family reunion'
+                    }
+                },
+                {
+                    name: '国庆节',
+                    date: '2025-10-01',
+                    tips: {
+                        zh: '观看升旗、旅游出行、参加庆祝活动',
+                        en: 'Watch flag raising, travel, participate in celebrations'
+                    }
+                }
+            ],
+            JP: [
+                {
+                    name: '元旦',
+                    date: '2025-01-01',
+                    detailKey: 'JP-shogatsu',
+                    tips: {
+                        zh: '参拜神社、吃年节料理、发新年贺卡',
+                        en: 'Visit shrines, eat New Year dishes, send New Year cards',
+                        ja: '初詣、おせち料理、年賀状',
+                        ko: '신사 참배, 설날 요리, 연하장 보내기'
+                    }
+                },
+                {
+                    name: '成人の日',
+                    date: '2025-01-13',
+                    tips: {
+                        zh: '成人礼仪式、穿和服、庆祝活动',
+                        en: 'Coming of Age ceremony, wear kimono, celebrations',
+                        ja: '成人式、着物、お祝い',
+                        ko: '성인식, 기모노 착용, 축하 행사'
+                    }
+                },
+                {
+                    name: 'こどもの日',
+                    date: '2025-05-05',
+                    tips: {
+                        zh: '悬挂鲤鱼旗、摆放武士人偶、吃柏饼',
+                        en: 'Hang carp streamers, display samurai dolls, eat kashiwa-mochi',
+                        ja: '鯉のぼり、五月人形、柏餅',
+                        ko: '잉어 깃발, 무사 인형, 카시와모치'
+                    }
+                },
+                {
+                    name: 'お盆',
+                    date: '2025-08-13',
+                    tips: {
+                        zh: '祭奠先祖、盂兰盆舞、点灯笼',
+                        en: 'Honor ancestors, Bon dance, light lanterns',
+                        ja: '先祖供養、盆踊り、提灯',
+                        ko: '조상 공양, 봉 춤, 등불'
+                    }
+                }
+            ],
+            KR: [
+                {
+                    name: '설날',
+                    date: '2025-01-25',
+                    detailKey: 'KR-seollal',
+                    tips: {
+                        zh: '穿韩服、拜年、吃年糕汤',
+                        en: 'Wear hanbok, pay New Year visits, eat tteokguk',
+                        ja: '韓服を着る、新年の挨拶、トックク',
+                        ko: '한복 입기, 세배, 떡국 먹기'
+                    }
+                },
+                {
+                    name: '추석',
+                    date: '2025-09-12',
+                    detailKey: 'KR-chuseok',
+                    tips: {
+                        zh: '祭祖、吃松糕、赏月',
+                        en: 'Ancestral rites, eat songpyeon, moon viewing',
+                        ja: '先祖祭り、ソンピョン、月見',
+                        ko: '차례, 송편 먹기, 달맞이'
+                    }
+                },
+                {
+                    name: '한글날',
+                    date: '2025-10-09',
+                    tips: {
+                        zh: '纪念谚文创制、参加文化活动',
+                        en: 'Commemorate Hangul creation, cultural activities',
+                        ja: 'ハングル創制記念、文化活動',
+                        ko: '한글 창제 기념, 문화 행사'
+                    }
+                }
+            ],
+            US: [
+                {
+                    name: 'New Year\'s Day',
+                    date: '2025-01-01',
+                    tips: {
+                        zh: '新年庆祝、制定新年计划',
+                        en: 'New Year celebrations, make resolutions'
+                    }
+                },
+                {
+                    name: 'Independence Day',
+                    date: '2025-07-04',
+                    tips: {
+                        zh: '烟火表演、野餐聚会',
+                        en: 'Fireworks shows, picnics and gatherings'
+                    }
+                },
+                {
+                    name: 'Thanksgiving',
+                    date: '2025-11-27',
+                    tips: {
+                        zh: '感恩节大餐、家人团聚',
+                        en: 'Thanksgiving dinner, family gathering'
+                    }
+                },
+                {
+                    name: 'Christmas',
+                    date: '2025-12-25',
+                    tips: {
+                        zh: '交换礼物、装饰圣诞树、家庭聚会',
+                        en: 'Exchange gifts, decorate Christmas tree, family gathering'
+                    }
+                }
+            ]
+        };
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航栏和页脚组件
+            new NavbarComponent('#navbar-container');
+            new FooterComponent('#footer-container');
+
+            // 立即显示节日列表
+            updateFestivalList();
+
+            // 尝试获取用户IP并设置默认国家
+            fetch('https://api.ipapi.com/api/check?access_key=YOUR_API_KEY')
+                .then(response => response.json())
+                .then(data => {
+                    const userCountry = data.country_code;
+                    if (festivals[userCountry]) {
+                        document.getElementById('countrySelect').value = userCountry;
+                        updateFestivalList();
+                    }
+                })
+                .catch(() => console.log('使用默认国家设置'));
+
+            // 添加事件监听器
+            document.getElementById('countrySelect').addEventListener('change', updateFestivalList);
+            document.getElementById('languageSelect').addEventListener('change', updateFestivalList);
+        });
+
+        // 更新节日列表
+        function updateFestivalList() {
+            // 清空现有列表
+            const festivalList = document.getElementById('festivalList');
+            if (!festivalList) return;
+            festivalList.innerHTML = '';
+            
+            // 获取当前选择的国家和语言
+            const country = document.getElementById('countrySelect').value;
+            const language = document.getElementById('languageSelect').value;
+            
+            // 获取该国家的节日列表并计算天数
+            const countryFestivals = festivals[country] || [];
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            
+            // 处理节日日期并计算剩余天数
+            const processedFestivals = countryFestivals.map(festival => {
+                const festivalDate = new Date(festival.date);
+                let daysLeft = Math.ceil((festivalDate - now) / (1000 * 60 * 60 * 24));
+                
+                // 如果节日已过，计算到明年的天数
+                if (daysLeft < 0) {
+                    const nextYearDate = new Date(festival.date);
+                    nextYearDate.setFullYear(currentYear + 1);
+                    daysLeft = Math.ceil((nextYearDate - now) / (1000 * 60 * 60 * 24));
+                }
+                
+                return { ...festival, daysLeft };
+            });
+            
+            // 处理和排序节日
+            const sortedFestivals = countryFestivals
+                .map(festival => {
+                    const festivalDate = new Date(festival.date);
+                    let daysLeft = Math.ceil((festivalDate - now) / (1000 * 60 * 60 * 24));
+                    
+                    // 如果节日已过，计算到明年的天数
+                    if (daysLeft < 0) {
+                        const nextYearDate = new Date(festival.date);
+                        nextYearDate.setFullYear(currentYear + 1);
+                        daysLeft = Math.ceil((nextYearDate - now) / (1000 * 60 * 60 * 24));
+                    }
+                    
+                    return { ...festival, daysLeft };
+                })
+                .sort((a, b) => a.daysLeft - b.daysLeft)
+                .slice(0, 3);
+            
+            // 创建节日卡片
+            sortedFestivals.forEach(festival => {
+                const card = document.createElement('div');
+                card.className = 'festival-card';
+                card.innerHTML = `
+                    <div class="festival-card-inner">
+                        <div class="festival-name">${festival.name}</div>
+                        <div class="date">${festival.date}</div>
+                        <div class="countdown">${festival.daysLeft} ${{
+                        'zh': '天',
+                        'en': 'days',
+                        'ja': '日',
+                        'ko': '일'
+                    }[language]}</div>
+                    <div class="tips">${festival.tips[language] || festival.tips['en']}</div>
+                    ${festival.detailKey ? `<button class="details-btn" onclick="event.stopPropagation(); showFestivalDetails('${festival.detailKey}', '${language}')">${{
+                        'zh': '查看详情',
+                        'en': 'View Details',
+                        'ja': '詳細を見る',
+                        'ko': '자세히 보기'
+                    }[language]}</button>` : ''}
+                `;
+
+                // 添加卡片点击事件处理
+                if (festival.detailKey) {
+                    card.onclick = () => showFestivalDetails(festival.detailKey, language);
+                }
+                festivalList.appendChild(card);
+            });
+        }
+
+        // 显示节日详情
+        function showFestivalDetails(detailKey, language) {
+            const details = festivalDetails[detailKey];
+            if (!details) return;
+
+            const modal = document.getElementById('detailsModal');
+            const detailsContainer = document.getElementById('festivalDetails');
+
+            // 标题文本映射
+            const titleMap = {
+                'zh': { history: '节日历史', customs: '传统习俗' },
+                'en': { history: 'Festival History', customs: 'Traditional Customs' },
+                'ja': { history: '祝日の歴史', customs: '伝統的な習慣' },
+                'ko': { history: '명절 역사', customs: '전통 풍습' }
+            };
+
+            // 获取当前语言的标题
+            const titles = titleMap[language] || titleMap['en'];
+            
+            // 获取内容
+            const history = details.history[language] || details.history['en'];
+            const customs = details.customs[language] || details.customs['en'];
+
+            // 设置详情内容
+            detailsContainer.innerHTML = `
+                <div class="festival-detail-section">
+                    <h3>${titles.history}</h3>
+                    <p>${history}</p>
+                </div>
+                <div class="festival-detail-section">
+                    <h3>${titles.customs}</h3>
+                    <p>${customs}</p>
+                </div>
+            `;
+
+            // 显示弹窗并禁止背景滚动
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 关闭弹窗
+        function closeModal() {
+            document.getElementById('detailsModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // 点击弹窗外部关闭
+        document.getElementById('detailsModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
+
+        // 自动更新倒计时
+        setInterval(updateFestivalList, 60000); // 每分钟更新一次
+    </script>
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线语言转换工具 - 多语言翻译、拼音转换、方言互译 | 小路工具箱</title>
+    <meta name="description" content="免费在线语言转换工具，支持汉字转拼音、多国语言互译、方言转换。提供准确的翻译结果，适用于学习、交流、商务等场景。">
+    <meta name="keywords" content="语言转换,在线翻译,拼音转换,方言转换,多语言翻译,普通话转方言,方言转普通话,免费翻译工具">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.example.com/language-converter.html">
+    <meta property="og:title" content="在线语言转换工具 - 多语言翻译、拼音转换、方言互译">
+    <meta property="og:description" content="免费在线语言转换工具，支持汉字转拼音、多国语言互译、方言转换。提供准确的翻译结果，适用于学习、交流、商务等场景。">
+    <meta property="og:image" content="https://tools.example.com/images/language-converter.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.example.com/language-converter.html">
+    <meta property="twitter:title" content="在线语言转换工具 - 多语言翻译、拼音转换、方言互译">
+    <meta property="twitter:description" content="免费在线语言转换工具，支持汉字转拼音、多国语言互译、方言转换。提供准确的翻译结果，适用于学习、交流、商务等场景。">
+    <meta property="twitter:image" content="https://tools.example.com/images/language-converter.jpg">
+
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "在线语言转换工具",
+        "description": "免费在线语言转换工具，支持汉字转拼音、多国语言互译、方言转换。提供准确的翻译结果，适用于学习、交流、商务等场景。",
+        "url": "https://tools.example.com/language-converter.html",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "All",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        }
+    }
+    </script>
+
+    <!-- Styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <style>
+        .converter-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: #0d6efd;
+            margin-bottom: 1rem;
+        }
+        .language-pair {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .swap-btn {
+            padding: 5px 10px;
+            border: none;
+            background: none;
+            color: #0d6efd;
+            cursor: pointer;
+        }
+        .result-box {
+            min-height: 100px;
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .dialect-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .dialect-btn {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .dialect-btn:hover {
+            background-color: #e9ecef;
+        }
+        .dialect-btn.active {
+            background-color: #0d6efd;
+            color: white;
+            border-color: #0d6efd;
+        }
+        .pinyin-result {
+            font-size: 1.1em;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <!-- Components -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">在线语言转换工具</h1>
+        <p class="lead text-center mb-5">一站式语言转换解决方案，支持多语言翻译、拼音转换、方言互译，让沟通无障碍</p>
+
+        <!-- 功能选择标签页 -->
+        <ul class="nav nav-tabs mb-4" id="conversionTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="translate-tab" data-bs-toggle="tab" data-bs-target="#translate" type="button" role="tab">多语言翻译</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pinyin-tab" data-bs-toggle="tab" data-bs-target="#pinyin" type="button" role="tab">拼音转换</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="dialect-tab" data-bs-toggle="tab" data-bs-target="#dialect" type="button" role="tab">方言转换</button>
+            </li>
+        </ul>
+
+        <!-- 功能内容区域 -->
+        <div class="tab-content" id="conversionTabContent">
+            <!-- 多语言翻译 -->
+            <div class="tab-pane fade show active" id="translate" role="tabpanel">
+                <div class="converter-section">
+                    <div class="language-pair">
+                        <select class="form-select" id="sourceLanguage">
+                            <option value="zh">中文</option>
+                            <option value="en">英语</option>
+                            <option value="ja">日语</option>
+                            <option value="ko">韩语</option>
+                            <option value="fr">法语</option>
+                            <option value="de">德语</option>
+                            <option value="es">西班牙语</option>
+                            <option value="ru">俄语</option>
+                        </select>
+                        <button class="swap-btn" id="swapLanguages">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                        <select class="form-select" id="targetLanguage">
+                            <option value="en">英语</option>
+                            <option value="zh">中文</option>
+                            <option value="ja">日语</option>
+                            <option value="ko">韩语</option>
+                            <option value="fr">法语</option>
+                            <option value="de">德语</option>
+                            <option value="es">西班牙语</option>
+                            <option value="ru">俄语</option>
+                        </select>
+                    </div>
+                    <textarea class="form-control mb-3" id="sourceText" rows="4" placeholder="请输入要翻译的文本"></textarea>
+                    <button class="btn btn-primary" id="translateBtn">翻译</button>
+                    <div class="result-box mt-3" id="translationResult"></div>
+                </div>
+            </div>
+
+            <!-- 拼音转换 -->
+            <div class="tab-pane fade" id="pinyin" role="tabpanel">
+                <div class="converter-section">
+                    <div class="form-check form-check-inline mb-3">
+                        <input class="form-check-input" type="radio" name="pinyinType" id="pinyinWithTone" value="withTone" checked>
+                        <label class="form-check-label" for="pinyinWithTone">带声调</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-3">
+                        <input class="form-check-input" type="radio" name="pinyinType" id="pinyinWithoutTone" value="withoutTone">
+                        <label class="form-check-label" for="pinyinWithoutTone">不带声调</label>
+                    </div>
+                    <textarea class="form-control mb-3" id="chineseText" rows="4" placeholder="请输入要转换的汉字"></textarea>
+                    <button class="btn btn-primary" id="convertToPinyinBtn">转换为拼音</button>
+                    <div class="result-box mt-3" id="pinyinResult"></div>
+                </div>
+            </div>
+
+            <!-- 方言转换 -->
+            <div class="tab-pane fade" id="dialect" role="tabpanel">
+                <div class="converter-section">
+                    <div class="dialect-grid" id="dialectSelection">
+                        <div class="dialect-btn active">普通话</div>
+                        <div class="dialect-btn">粤语</div>
+                        <div class="dialect-btn">闽南语</div>
+                        <div class="dialect-btn">客家话</div>
+                        <div class="dialect-btn">四川话</div>
+                        <div class="dialect-btn">东北话</div>
+                        <div class="dialect-btn">上海话</div>
+                        <div class="dialect-btn">天津话</div>
+                    </div>
+                    <textarea class="form-control mb-3" id="dialectText" rows="4" placeholder="请输入要转换的文本"></textarea>
+                    <button class="btn btn-primary" id="convertDialectBtn">转换方言</button>
+                    <div class="result-box mt-3" id="dialectResult"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 使用指南 -->
+        <section class="mt-5">
+            <h2>使用指南</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">多语言翻译</h5>
+                            <p class="card-text">1. 选择源语言和目标语言<br>2. 输入需要翻译的文本<br>3. 点击"翻译"按钮获取结果</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">拼音转换</h5>
+                            <p class="card-text">1. 选择是否需要声调<br>2. 输入中文文本<br>3. 点击"转换为拼音"获取结果</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">方言转换</h5>
+                            <p class="card-text">1. 选择目标方言<br>2. 输入标准普通话文本<br>3. 点击"转换方言"获取结果</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 详细介绍 -->
+        <section class="mt-5">
+            <h2>工具详细介绍</h2>
+            <p>小路在线语言转换工具是一个功能强大的多语言处理平台，集成了多语言翻译、拼音转换、方言互译等实用功能。无论是日常交流、学习研究，还是商务往来，都能为您提供专业的语言转换服务。</p>
+            
+            <h3 class="mt-4">核心功能</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <i class="fas fa-language feature-icon"></i>
+                        <h4>多语言翻译</h4>
+                        <p>支持中英日韩法德西俄等多种语言之间的互译，翻译准确度高，适用于各类场景。</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <i class="fas fa-font feature-icon"></i>
+                        <h4>拼音转换</h4>
+                        <p>支持汉字转拼音，可选择带声调或不带声调，帮助您准确掌握汉字读音。</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <i class="fas fa-comments feature-icon"></i>
+                        <h4>方言转换</h4>
+                        <p>支持全国多地方言互译，助力方言保护与传承，促进区域文化交流。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工具优势 -->
+        <section class="mt-5">
+            <h2>为什么选择我们？</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4><i class="fas fa-check-circle text-primary"></i> 准确可靠</h4>
+                    <p>采用先进的AI翻译技术，确保转换结果的准确性和可靠性。</p>
+                    
+                    <h4><i class="fas fa-check-circle text-primary"></i> 便捷高效</h4>
+                    <p>简洁的界面设计，操作直观，快速获取转换结果。</p>
+                </div>
+                <div class="col-md-6">
+                    <h4><i class="fas fa-check-circle text-primary"></i> 功能丰富</h4>
+                    <p>集成多语言翻译、拼音转换、方言互译等多种功能，满足多样化需求。</p>
+                    
+                    <h4><i class="fas fa-check-circle text-primary"></i> 完全免费</h4>
+                    <p>所有功能完全免费，无需注册，即开即用。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 应用场景 -->
+        <section class="mt-5">
+            <h2>应用场景</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">学习教育</h5>
+                            <p class="card-text">帮助学生学习外语、了解方言文化，提高语言能力。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">商务交流</h5>
+                            <p class="card-text">促进国际商务往来，提供准确的多语言翻译服务。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">文化传承</h5>
+                            <p class="card-text">助力方言保护与传承，促进区域文化交流与发展。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">日常交流</h5>
+                            <p class="card-text">满足日常生活中的多语言交流需求。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常见问题 -->
+        <section class="mt-5">
+            <h2>常见问题</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            翻译结果的准确度如何？
+                        </button>
+                    </h3>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            我们采用先进的AI翻译技术，结合多个权威词库，确保翻译结果的准确性。对于专业术语或特定领域的内容，建议结合上下文进行理解。
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            支持哪些方言的转换？
+                        </button>
+                    </h3>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            目前支持粤语、闽南语、客家话、四川话、东北话、上海话、天津话等主要方言的转换。我们会持续增加更多方言支持。
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            如何提高转换效果？
+                        </button>
+                    </h3>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            1. 输入完整的句子而不是单个词语<br>
+                            2. 确保输入文本的语法正确<br>
+                            3. 选择恰当的源语言和目标语言<br>
+                            4. 对于专业术语，建议先查证准确含义
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 版权信息 -->
+        <div class="text-center mt-5 mb-3">
+            <p>@2025 小路工具箱 - 让语言转换更简单</p>
+            <p>
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank" class="text-decoration-none">技术支持</a> |
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank" class="text-decoration-none">问题反馈</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pinyin-pro/dist/index.js"></script>
+    <script>
+        // 初始化组件
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航栏
+            const navbarStyles = document.createElement('style');
+            navbarStyles.textContent = NavbarComponent.getStyles();
+            document.head.appendChild(navbarStyles);
+            new NavbarComponent();
+
+            // 初始化页脚
+            const footerStyles = document.createElement('style');
+            footerStyles.textContent = FooterComponent.getStyles();
+            document.head.appendChild(footerStyles);
+            new FooterComponent();
+
+            // 初始化功能
+            initializeTranslation();
+            initializePinyin();
+            initializeDialect();
+        });
+
+        // 百度翻译API配置
+        const BAIDU_TRANSLATE_API = {
+            url: 'https://fanyi-api.baidu.com/api/trans/vip/translate',
+            appid: '20250709001835738',  // 替换为您的百度翻译API appid
+            key: 'YourSecretKey'  // 替换为您的百度翻译API密钥
+        };
+
+        // 生成百度翻译API签名
+        function generateBaiduSign(text, salt, appid, key) {
+            const str = appid + text + salt + key;
+            return CryptoJS.MD5(str).toString();
+        }
+
+        // 多语言翻译功能
+        function initializeTranslation() {
+            const translateBtn = document.getElementById('translateBtn');
+            const swapBtn = document.getElementById('swapLanguages');
+            const sourceText = document.getElementById('sourceText');
+            const translationResult = document.getElementById('translationResult');
+            const sourceLanguage = document.getElementById('sourceLanguage');
+            const targetLanguage = document.getElementById('targetLanguage');
+
+            translateBtn.addEventListener('click', async function() {
+                if (!sourceText.value.trim()) {
+                    alert('请输入要翻译的文本');
+                    return;
+                }
+
+                translateBtn.disabled = true;
+                translateBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 翻译中...';
+
+                try {
+                    const text = sourceText.value.trim();
+                    const salt = new Date().getTime();
+                    const sign = generateBaiduSign(text, salt, BAIDU_TRANSLATE_API.appid, BAIDU_TRANSLATE_API.key);
+                    
+                    const params = new URLSearchParams({
+                        q: text,
+                        from: sourceLanguage.value,
+                        to: targetLanguage.value,
+                        appid: BAIDU_TRANSLATE_API.appid,
+                        salt: salt,
+                        sign: sign
+                    });
+
+                    const response = await fetch(`${BAIDU_TRANSLATE_API.url}?${params}`);
+                    if (!response.ok) {
+                        throw new Error('翻译服务暂时不可用');
+                    }
+
+                    const data = await response.json();
+                    if (data.error_code) {
+                        throw new Error(`翻译错误：${data.error_msg}`);
+                    }
+
+                    translationResult.textContent = data.trans_result[0].dst;
+                } catch (error) {
+                    translationResult.textContent = '翻译失败：' + error.message;
+                } finally {
+                    translateBtn.disabled = false;
+                    translateBtn.textContent = '翻译';
+                }
+            });
+
+
+            swapBtn.addEventListener('click', function() {
+                const sourceValue = sourceLanguage.value;
+                const targetValue = targetLanguage.value;
+                sourceLanguage.value = targetValue;
+                targetLanguage.value = sourceValue;
+
+                const sourceContent = sourceText.value;
+                const targetContent = translationResult.textContent;
+                sourceText.value = targetContent;
+                translationResult.textContent = sourceContent;
+            });
+        }
+
+        // 拼音转换API配置
+        const PINYIN_API = {
+            url: 'https://api.example.com/pinyin',
+            key: 'YourPinyinApiKey'
+        };
+
+        // 拼音转换功能
+        function initializePinyin() {
+            const convertBtn = document.getElementById('convertToPinyinBtn');
+            const chineseText = document.getElementById('chineseText');
+            const pinyinResult = document.getElementById('pinyinResult');
+            const pinyinWithTone = document.getElementById('pinyinWithTone');
+
+            convertBtn.addEventListener('click', async function() {
+                if (!chineseText.value.trim()) {
+                    alert('请输入要转换的汉字');
+                    return;
+                }
+
+                convertBtn.disabled = true;
+                convertBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 转换中...';
+
+                try {
+                    const text = chineseText.value.trim();
+                    const withTone = pinyinWithTone.checked;
+                    
+                    const response = await fetch(PINYIN_API.url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-API-Key': PINYIN_API.key
+                        },
+                        body: JSON.stringify({
+                            text: text,
+                            tone: withTone
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('拼音转换服务暂时不可用');
+                    }
+
+                    const data = await response.json();
+                    if (data.error) {
+                        throw new Error(`转换错误：${data.error}`);
+                    }
+
+                    pinyinResult.textContent = data.pinyin;
+                } catch (error) {
+                    pinyinResult.textContent = '转换失败：' + error.message;
+                } finally {
+                    convertBtn.disabled = false;
+                    convertBtn.textContent = '转换为拼音';
+                }
+            });
+        }
+
+        // 方言转换API配置
+        const DIALECT_API = {
+            url: 'https://api.example.com/dialect',
+            key: 'YourDialectApiKey'
+        };
+
+        // 方言转换功能
+        function initializeDialect() {
+            const convertBtn = document.getElementById('convertDialectBtn');
+            const dialectText = document.getElementById('dialectText');
+            const dialectResult = document.getElementById('dialectResult');
+            const dialectBtns = document.querySelectorAll('.dialect-btn');
+            let selectedDialect = '普通话';
+
+            dialectBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    dialectBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedDialect = this.textContent;
+                });
+            });
+
+            convertBtn.addEventListener('click', async function() {
+                if (!dialectText.value.trim()) {
+                    alert('请输入要转换的文本');
+                    return;
+                }
+
+                if (selectedDialect === '普通话') {
+                    alert('请选择目标方言');
+                    return;
+                }
+
+                convertBtn.disabled = true;
+                convertBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 转换中...';
+
+                try {
+                    const text = dialectText.value.trim();
+                    
+                    const response = await fetch(DIALECT_API.url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-API-Key': DIALECT_API.key
+                        },
+                        body: JSON.stringify({
+                            text: text,
+                            source: '普通话',
+                            target: selectedDialect
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('方言转换服务暂时不可用');
+                    }
+
+                    const data = await response.json();
+                    if (data.error) {
+                        throw new Error(`转换错误：${data.error}`);
+                    }
+
+                    dialectResult.textContent = data.result;
+                } catch (error) {
+                    dialectResult.textContent = '转换失败：' + error.message;
+                } finally {
+                    convertBtn.disabled = false;
+                    convertBtn.textContent = '转换方言';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

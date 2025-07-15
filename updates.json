@@ -1,5 +1,29 @@
 [
     {
+        "id": "festival-countdown",
+        "title": "节日倒计时工具",
+        "description": "全新上线节日倒计时工具，支持全球节日查询，提供活动建议，多语言支持，智能地区识别，让您不错过任何重要节日。",
+        "date": "2025-07-09",
+        "type": "新增工具",
+        "relatedTools": ["calendar-tools", "reminder-tools"]
+    },
+    {
+        "id": "bmi-calculator",
+        "title": "新增BMI计算器",
+        "description": "新增专业的健康指标计算工具，支持BMI、体脂率、基础代谢率等多项健康指标计算，提供科学的健康状况评估和建议。",
+        "date": "2025-07-09",
+        "type": "new",
+        "relatedTools": ["bmi-calculator"]
+    },
+    {
+        "id": "language-converter",
+        "title": "在线语言转换工具",
+        "description": "支持多语言翻译、拼音转换、方言互译等功能，提供准确的翻译结果，适用于学习、交流、商务等场景",
+        "date": "2025-07-16",
+        "type": "新增工具",
+        "relatedTools": ["chinese-converter"]
+    },
+    {
         "id": "fortune-stick-drawer",
         "title": "在线抽签工具",
         "description": "在线模拟传统抽签体验，支持综合运势、事业运势、姻缘运势、学业运势等多种类型，提供详细解签和指引",

@@ -10,6 +10,16 @@
     "url": "tools/random-password-generator.html"
   },
   {
+    "id": "bmi-calculator",
+    "name": "BMI计算器",
+    "shortDesc": "专业的健康指标计算工具",
+    "icon": "fas fa-weight",
+    "description": "专业的健康指标计算工具，提供BMI、体脂率、基础代谢率等多项健康数据评估",
+    "tags": ["健康", "计算器", "体重", "BMI", "体脂率"],
+    "categories": ["health", "utility-tools"],
+    "url": "tools/bmi-calculator.html"
+  },
+  {
     "id": "fortune-stick-drawer",
     "name": "在线抽签工具",
     "shortDesc": "传统抽签模拟器，寻求生活指引",
@@ -178,6 +188,16 @@
     "tags": ["海报", "图片合并", "批量处理", "设计"],
     "categories": ["image-processing", "design-graphics"],
     "url": "tools/poster-batch-processor.html"
+  },
+  {
+    "id": "festival-countdown",
+    "name": "节日倒计时",
+    "shortDesc": "全球节日提醒工具",
+    "icon": "fas fa-calendar-alt",
+    "description": "免费在线节日倒计时工具，支持全球节日查询，智能提醒节日活动和注意事项。自动识别用户所在地区，支持多语言，让您不错过任何重要节日。",
+    "tags": ["节日", "倒计时", "日历", "假期", "提醒"],
+    "categories": ["utility-tools", "lifestyle"],
+    "url": "tools/festival-countdown.html"
   },
   {
     "id": "image-to-pdf",
