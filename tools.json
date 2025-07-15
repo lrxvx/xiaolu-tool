@@ -1,5 +1,55 @@
 [
   {
+    "id": "menstrual-cycle-calculator",
+    "name": "女性生理周期计算器",
+    "shortDesc": "智能预测经期、排卵期和安全期",
+    "icon": "fas fa-calendar-alt",
+    "description": "免费在线女性生理周期计算器，基于先进算法的智能预测系统，帮助您科学了解身体周期，合理安排生活计划。支持经期、排卵期、安全期精准预测，提供健康建议和生理周期管理。",
+    "tags": ["生理周期", "经期预测", "排卵期", "女性健康", "周期管理"],
+    "categories": ["health", "calculator-tools", "utility-tools"],
+    "url": "tools/menstrual-cycle-calculator.html"
+  },
+  {
+    "id": "loan-prepayment-calculator",
+    "name": "房贷提前还款计算器",
+    "shortDesc": "精准计算提前还款收益",
+    "icon": "fas fa-calculator",
+    "description": "免费在线房贷提前还款计算器，精准计算提前还款可节省的利息，优化还款计划，帮您做出最优的还款决策。支持等额本息、等额本金等多种还款方式。",
+    "tags": ["房贷计算", "提前还款", "利息计算", "还款规划", "理财工具"],
+    "categories": ["calculator-tools", "finance-tools", "utility-tools"],
+    "url": "tools/loan-prepayment-calculator.html"
+  },
+  {
+    "id": "markdown-editor",
+    "name": "Markdown在线编辑器",
+    "shortDesc": "专业的Markdown即时渲染编辑器",
+    "icon": "fas fa-edit",
+    "description": "免费、强大的Markdown在线编辑器，支持即时预览、语法高亮、导出多种格式。适合写作、文档编辑、笔记整理等场景。",
+    "tags": ["Markdown", "编辑器", "写作工具", "文档编辑", "笔记工具"],
+    "categories": ["content-creation", "document-processing", "utility-tools"],
+    "url": "tools/markdown-editor.html"
+  },
+  {
+    "id": "excel-visualizer",
+    "name": "Excel数据可视化工具",
+    "shortDesc": "在线Excel数据可视化分析工具",
+    "icon": "fas fa-chart-bar",
+    "description": "专业的Excel数据可视化工具，支持多种图表类型，一键生成精美数据图表。支持Excel、CSV等格式文件，提供丰富的可视化选项和图表定制功能，让数据分析更直观、更专业。",
+    "tags": ["Excel", "数据可视化", "图表生成", "数据分析", "图表工具"],
+    "categories": ["data-analysis", "utility-tools", "document-processing"],
+    "url": "tools/excel-visualizer.html"
+  },
+  {
+    "id": "fireworks-simulator",
+    "name": "烟花模拟器",
+    "shortDesc": "在线烟花特效模拟工具",
+    "icon": "fas fa-sparkles",
+    "description": "免费在线烟花模拟器，提供逼真的烟花特效，支持自定义烟花效果，适用于节日庆典、活动策划等场景。多平台兼容，操作简单。",
+    "tags": ["烟花", "特效", "模拟器", "节日", "庆典"],
+    "categories": ["entertainment-tools", "design-graphics"],
+    "url": "tools/fireworks-simulator.html"
+  },
+  {
     "id": "random-password-generator",
     "name": "随机密码生成器",
     "shortDesc": "安全可靠的在线密码生成工具",

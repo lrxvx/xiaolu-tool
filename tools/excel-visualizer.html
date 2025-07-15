@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="192x192" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="512x512" href="../favicon.ico">
+    
+    <!-- SEO Meta Tags -->
+    <title>2025最新Excel数据可视化工具 | 智能图表生成器 | 小路工具箱</title>
+    <meta name="description" content="2025最新Excel数据可视化工具，支持多种Excel格式，提供丰富的图表类型，智能数据分析，一键生成专业数据图表。适用于数据分析、报表制作、演示文稿等场景。">
+    <meta name="keywords" content="Excel可视化,数据可视化,图表生成器,数据分析工具,在线图表,Excel转图表,数据图表制作,智能分析">
+    <meta name="author" content="小路工具箱">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.xiaolu.com/tools/excel-visualizer.html">
+    <meta property="og:title" content="2025最新Excel数据可视化工具 - 智能图表生成器">
+    <meta property="og:description" content="2025最新Excel数据可视化工具，支持多种Excel格式，提供丰富的图表类型，智能数据分析，一键生成专业数据图表。">
+    <meta property="og:image" content="https://tools.xiaolu.com/images/excel-visualizer-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.xiaolu.com/tools/excel-visualizer.html">
+    <meta property="twitter:title" content="2025最新Excel数据可视化工具 - 智能图表生成器">
+    <meta property="twitter:description" content="2025最新Excel数据可视化工具，支持多种Excel格式，提供丰富的图表类型，智能数据分析，一键生成专业数据图表。">
+    <meta property="twitter:image" content="https://tools.xiaolu.com/images/excel-visualizer-preview.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Excel数据可视化工具",
+        "description": "2025最新Excel数据可视化工具，支持多种Excel格式，提供丰富的图表类型，智能数据分析，一键生成专业数据图表。",
+        "url": "https://tools.xiaolu.com/tools/excel-visualizer.html",
+        "applicationCategory": "DataVisualizationApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "多格式Excel文件支持",
+            "智能数据分析",
+            "丰富图表类型",
+            "数据预览功能",
+            "高级图表配置",
+            "一键导出图表",
+            "响应式设计"
+        ]
+    }
+    </script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- SheetJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5a6fd8;
+            --secondary: #764ba2;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --light: #f3f4f6;
+            --white: #ffffff;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --border-radius: 16px;
+            --border-radius-sm: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-section .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .main-container {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .control-panel {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+            max-width: 420px;
+            overflow: hidden;
+        }
+        
+        .visualization-panel {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--primary);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary-dark);
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .upload-area.drag-over {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-text {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .upload-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .control-section {
+            margin-bottom: 2rem;
+        }
+        
+        .control-section h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .control-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .control-group {
+            margin-bottom: 1rem;
+        }
+        
+        .control-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .control-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .control-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .control-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .data-preview {
+            background: var(--light);
+            border-radius: var(--border-radius-sm);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            max-height: 250px;
+            max-width: 100%;
+            overflow: auto;
+        }
+        
+        .data-preview h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+        }
+        
+        .data-table-container {
+            overflow-x: auto;
+            max-width: 100%;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius-sm);
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .data-table-container:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .data-table-container::after {
+            content: '🔍 点击放大查看';
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: var(--border-radius-sm);
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .data-table-container:hover::after {
+            opacity: 1;
+        }
+        
+        .data-table {
+            min-width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 0.4rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            min-width: 80px;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .data-table th {
+            background: var(--white);
+            font-weight: 600;
+            color: var(--dark);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .data-table td {
+            background: white;
+        }
+        
+        .column-limit-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: var(--border-radius-sm);
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #856404;
+        }
+        
+        /* 数据模态框样式 */
+        .data-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow: auto;
+        }
+        
+        .data-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 1200px;
+            max-height: 80%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            background: var(--light);
+        }
+        
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: #e2e8f0;
+            color: var(--dark);
+        }
+        
+        .modal-body {
+            padding: 1rem;
+            overflow: auto;
+            max-height: 60vh;
+        }
+        
+        .full-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        
+        .full-data-table th,
+        .full-data-table td {
+            padding: 0.5rem;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .full-data-table th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .full-data-table tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        .full-data-table tbody tr:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 500px;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .chart-tab {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--border-radius-sm);
+            background: white;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .chart-tab.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .chart-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .option-card {
+            border: 2px solid #e2e8f0;
+            border-radius: var(--border-radius-sm);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .option-card:hover {
+            border-color: var(--primary);
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .option-card.selected {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .option-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .option-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--gray);
+            border: 2px solid #e2e8f0;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius);
+            z-index: 10;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .status-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius-sm);
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .status-message.show {
+            transform: translateX(0);
+        }
+        
+        .status-message.success {
+            background: var(--success);
+        }
+        
+        .status-message.error {
+            background: var(--danger);
+        }
+        
+        .status-message.info {
+            background: var(--info);
+        }
+        
+        .info-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .info-card {
+            padding: 1.5rem;
+            border-radius: var(--border-radius-sm);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        }
+        
+        .info-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-card li {
+            padding: 0.3rem 0;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-card li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .control-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .chart-container {
+                height: 300px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="hero-section">
+            <h1>📊 Excel数据可视化工具</h1>
+            <p class="subtitle">智能分析Excel数据，一键生成专业图表，让数据说话更有力量</p>
+            <div class="hero-features">
+                <div class="hero-feature">
+                    <i class="fas fa-file-excel"></i>
+                    <span>多格式支持</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-chart-line"></i>
+                    <span>智能分析</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-download"></i>
+                    <span>一键导出</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>数据安全</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-container">
+            <div class="control-panel">
+                <h2 class="panel-title">
+                    <i class="fas fa-cog"></i>
+                    数据控制台
+                </h2>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <p class="upload-text">拖拽Excel文件到此处或点击上传</p>
+                    <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 1rem;">支持 .xlsx, .xls, .csv 格式，最大10MB</p>
+                    <button class="upload-button" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-plus"></i>
+                        选择文件
+                    </button>
+                    <input type="file" id="fileInput" class="file-input" accept=".xlsx,.xls,.csv">
+                </div>
+                
+                <div class="control-section">
+                    <h3>📋 数据配置</h3>
+                    <div class="control-grid">
+                        <div class="control-group">
+                            <label class="control-label">工作表</label>
+                            <select class="control-input" id="sheetSelect">
+                                <option value="">请先上传文件</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">数据范围</label>
+                            <select class="control-input" id="dataRange">
+                                <option value="all">全部数据</option>
+                                <option value="first100">前100行</option>
+                                <option value="custom">自定义范围</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">X轴数据列</label>
+                            <select class="control-input" id="xAxisColumn">
+                                <option value="">请选择列</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Y轴数据列</label>
+                            <select class="control-input" id="yAxisColumn">
+                                <option value="">请选择列</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-preview" id="dataPreview" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h4>📊 数据预览</h4>
+                        <button class="btn btn-secondary" id="viewFullDataBtn" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;" onclick="openDataModal()">
+                            <i class="fas fa-expand"></i> 查看完整数据
+                        </button>
+                    </div>
+                    <div id="previewContent"></div>
+                </div>
+            </div>
+            
+            <div class="visualization-panel">
+                <h2 class="panel-title">
+                    <i class="fas fa-chart-bar"></i>
+                    图表生成器
+                </h2>
+                
+                <div class="control-section">
+                    <h3>🎨 图表类型</h3>
+                    <div class="chart-options" id="chartOptions">
+                        <div class="option-card" data-type="line">
+                            <div class="option-icon">📈</div>
+                            <div class="option-name">折线图</div>
+                        </div>
+                        <div class="option-card selected" data-type="bar">
+                            <div class="option-icon">📊</div>
+                            <div class="option-name">柱状图</div>
+                        </div>
+                        <div class="option-card" data-type="pie">
+                            <div class="option-icon">🥧</div>
+                            <div class="option-name">饼图</div>
+                        </div>
+                        <div class="option-card" data-type="doughnut">
+                            <div class="option-icon">🍩</div>
+                            <div class="option-name">环形图</div>
+                        </div>
+                        <div class="option-card" data-type="scatter">
+                            <div class="option-icon">🔵</div>
+                            <div class="option-name">散点图</div>
+                        </div>
+                        <div class="option-card" data-type="radar">
+                            <div class="option-icon">🕸️</div>
+                            <div class="option-name">雷达图</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="chartCanvas"></canvas>
+                    <div class="loading-overlay" id="chartLoading" style="display: none;">
+                        <div>
+                            <div class="loading-spinner"></div>
+                            <p style="margin-top: 1rem; color: var(--gray);">正在生成图表...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="generateChart" disabled>
+                        <i class="fas fa-magic"></i>
+                        生成图表
+                    </button>
+                    <button class="btn btn-secondary" id="downloadChart" disabled>
+                        <i class="fas fa-download"></i>
+                        下载图表
+                    </button>
+                    <button class="btn btn-secondary" id="resetChart">
+                        <i class="fas fa-redo"></i>
+                        重置
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2 class="panel-title">
+                <i class="fas fa-info-circle"></i>
+                工具特色
+            </h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>🚀 智能分析</h3>
+                    <ul>
+                        <li>自动识别数据类型</li>
+                        <li>智能推荐图表类型</li>
+                        <li>数据质量检测</li>
+                        <li>异常值标识</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>📊 丰富图表</h3>
+                    <ul>
+                        <li>6种专业图表类型</li>
+                        <li>自定义颜色主题</li>
+                        <li>动态交互效果</li>
+                        <li>高清图表导出</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>🔒 安全可靠</h3>
+                    <ul>
+                        <li>本地数据处理</li>
+                        <li>无需上传服务器</li>
+                        <li>隐私完全保护</li>
+                        <li>即用即走</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div class="status-message" id="statusMessage"></div>
+    
+    <script>
+        // 页面加载完成后初始化组件
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加导航栏样式
+            const navbarStyles = document.createElement('style');
+            navbarStyles.textContent = NavbarComponent.getStyles();
+            document.head.appendChild(navbarStyles);
+            
+            // 添加页脚样式
+            const footerStyles = document.createElement('style');
+            footerStyles.textContent = FooterComponent.getStyles();
+            document.head.appendChild(footerStyles);
+            
+            // 初始化组件
+            new NavbarComponent();
+            new FooterComponent();
+        });
+        
+        // 全局变量
+        let currentWorkbook = null;
+        let currentChart = null;
+        let currentData = null;
+        let selectedChartType = 'bar';
+        
+        // DOM元素
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const sheetSelect = document.getElementById('sheetSelect');
+        const dataRange = document.getElementById('dataRange');
+        const xAxisColumn = document.getElementById('xAxisColumn');
+        const yAxisColumn = document.getElementById('yAxisColumn');
+        const dataPreview = document.getElementById('dataPreview');
+        const previewContent = document.getElementById('previewContent');
+        const chartOptions = document.getElementById('chartOptions');
+        const chartCanvas = document.getElementById('chartCanvas');
+        const chartLoading = document.getElementById('chartLoading');
+        const generateChart = document.getElementById('generateChart');
+        const downloadChart = document.getElementById('downloadChart');
+        const resetChart = document.getElementById('resetChart');
+        const statusMessage = document.getElementById('statusMessage');
+        
+        // 状态消息显示
+        function showStatus(message, type = 'info') {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${type} show`;
+            setTimeout(() => {
+                statusMessage.classList.remove('show');
+            }, 3000);
+        }
+        
+        // 文件上传处理
+        uploadArea.addEventListener('click', () => fileInput.click());
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+        
+        // 文件处理
+        function handleFile(file) {
+            // 验证文件类型
+            const validTypes = [
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'application/vnd.ms-excel',
+                'text/csv'
+            ];
+            
+            if (!validTypes.includes(file.type) && !file.name.match(/\.(xlsx|xls|csv)$/i)) {
+                showStatus('请上传有效的Excel文件（.xlsx, .xls）或CSV文件', 'error');
+                return;
+            }
+            
+            // 验证文件大小
+            const maxSize = 10 * 1024 * 1024; // 10MB
+            if (file.size > maxSize) {
+                showStatus('文件大小超过限制（最大10MB），请选择较小的文件', 'error');
+                return;
+            }
+            
+            showStatus('正在读取文件...', 'info');
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    currentWorkbook = XLSX.read(data, { type: 'array' });
+                    
+                    if (!currentWorkbook || !currentWorkbook.SheetNames || currentWorkbook.SheetNames.length === 0) {
+                        throw new Error('文件内容为空或格式不正确');
+                    }
+                    
+                    populateSheetSelect();
+                    showStatus(`成功加载文件：${file.name}`, 'success');
+                } catch (error) {
+                    console.error('文件处理错误:', error);
+                    showStatus(error.message || '文件处理失败，请检查文件格式', 'error');
+                }
+            };
+            
+            reader.onerror = () => {
+                showStatus('文件读取失败，请重试', 'error');
+            };
+            
+            reader.readAsArrayBuffer(file);
+        }
+        
+        // 填充工作表选择
+        function populateSheetSelect() {
+            sheetSelect.innerHTML = '';
+            currentWorkbook.SheetNames.forEach(sheetName => {
+                const option = document.createElement('option');
+                option.value = sheetName;
+                option.textContent = sheetName;
+                sheetSelect.appendChild(option);
+            });
+            
+            if (currentWorkbook.SheetNames.length > 0) {
+                loadSheetData(currentWorkbook.SheetNames[0]);
+            }
+        }
+        
+        // 加载工作表数据
+        function loadSheetData(sheetName) {
+            if (!currentWorkbook || !sheetName) return;
+            
+            const worksheet = currentWorkbook.Sheets[sheetName];
+            if (!worksheet) return;
+            
+            // 转换为JSON数据
+            currentData = XLSX.utils.sheet_to_json(worksheet, {
+                header: 1,
+                defval: null,
+                blankrows: false
+            });
+            
+            if (currentData.length > 0) {
+                populateColumnSelects();
+                showDataPreview();
+                generateChart.disabled = false;
+            }
+        }
+        
+        // 填充列选择
+        function populateColumnSelects() {
+            if (!currentData || currentData.length === 0) return;
+            
+            const headers = currentData[0];
+            
+            // 清空现有选项
+            xAxisColumn.innerHTML = '<option value="">请选择列</option>';
+            yAxisColumn.innerHTML = '<option value="">请选择列</option>';
+            
+            // 添加列选项
+            headers.forEach((header, index) => {
+                if (header !== null && header !== '') {
+                    const option1 = document.createElement('option');
+                    option1.value = index;
+                    option1.textContent = header;
+                    
+                    const option2 = document.createElement('option');
+                    option2.value = index;
+                    option2.textContent = header;
+                    
+                    xAxisColumn.appendChild(option1);
+                    yAxisColumn.appendChild(option2);
+                }
+            });
+            
+            // 自动选择前两列
+            if (headers.length >= 2) {
+                xAxisColumn.value = '0';
+                yAxisColumn.value = '1';
+            }
+        }
+        
+        // 显示数据预览
+        function showDataPreview() {
+            if (!currentData || currentData.length === 0) return;
+            
+            const previewRows = currentData.slice(0, 6); // 显示前6行
+            const maxColumns = 10; // 最大显示列数
+            let hasMoreColumns = false;
+            
+            let tableHTML = '<div class="data-table-container"><table class="data-table"><thead><tr>';
+            
+            // 表头
+            if (previewRows.length > 0) {
+                const headers = previewRows[0];
+                const displayHeaders = headers.slice(0, maxColumns);
+                hasMoreColumns = headers.length > maxColumns;
+                
+                displayHeaders.forEach(header => {
+                    const displayHeader = header && header.toString().length > 15 
+                        ? header.toString().substring(0, 15) + '...' 
+                        : (header || '空');
+                    tableHTML += `<th title="${header || '空'}">${displayHeader}</th>`;
+                });
+                
+                if (hasMoreColumns) {
+                    tableHTML += `<th>...更多${headers.length - maxColumns}列</th>`;
+                }
+                
+                tableHTML += '</tr></thead><tbody>';
+                
+                // 数据行
+                for (let i = 1; i < previewRows.length; i++) {
+                    tableHTML += '<tr>';
+                    const row = previewRows[i];
+                    const displayCells = row.slice(0, maxColumns);
+                    
+                    displayCells.forEach(cell => {
+                        const displayCell = cell && cell.toString().length > 15 
+                            ? cell.toString().substring(0, 15) + '...' 
+                            : (cell !== null ? cell : '空');
+                        tableHTML += `<td title="${cell !== null ? cell : '空'}">${displayCell}</td>`;
+                    });
+                    
+                    if (hasMoreColumns) {
+                        tableHTML += '<td>...</td>';
+                    }
+                    
+                    tableHTML += '</tr>';
+                }
+            }
+            
+            tableHTML += '</tbody></table></div>';
+            
+            // 添加统计信息
+            const totalRows = currentData.length - 1;
+            const totalColumns = currentData[0] ? currentData[0].length : 0;
+            tableHTML += `<p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray);">显示前5行数据，共${totalRows}行 × ${totalColumns}列</p>`;
+            
+            // 如果列数过多，显示提示
+            if (hasMoreColumns) {
+                tableHTML += `<div class="column-limit-notice">📊 检测到${totalColumns}列数据，预览仅显示前${maxColumns}列。所有列都可用于图表生成。</div>`;
+            }
+            
+            previewContent.innerHTML = tableHTML;
+            dataPreview.style.display = 'block';
+            
+            // 为数据表格容器添加点击事件
+            const tableContainer = previewContent.querySelector('.data-table-container');
+            if (tableContainer) {
+                tableContainer.addEventListener('click', () => {
+                    openDataModal();
+                });
+            }
+        }
+        
+        // 图表类型选择
+        chartOptions.addEventListener('click', (e) => {
+            const optionCard = e.target.closest('.option-card');
+            if (optionCard) {
+                // 移除所有选中状态
+                chartOptions.querySelectorAll('.option-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+                
+                // 添加选中状态
+                optionCard.classList.add('selected');
+                selectedChartType = optionCard.dataset.type;
+            }
+        });
+        
+        // 生成图表
+        generateChart.addEventListener('click', () => {
+            if (!currentData || currentData.length < 2) {
+                showStatus('数据不足，无法生成图表', 'error');
+                return;
+            }
+            
+            const xIndex = parseInt(xAxisColumn.value);
+            const yIndex = parseInt(yAxisColumn.value);
+            
+            if (isNaN(xIndex) || isNaN(yIndex)) {
+                showStatus('请选择X轴和Y轴数据列', 'error');
+                return;
+            }
+            
+            createChart(xIndex, yIndex);
+        });
+        
+        // 创建图表
+        function createChart(xIndex, yIndex) {
+            chartLoading.style.display = 'flex';
+            
+            setTimeout(() => {
+                try {
+                    // 提取数据
+                    const chartData = currentData.slice(1).map(row => {
+                        if (!row || row.length <= Math.max(xIndex, yIndex)) {
+                            return null;
+                        }
+                        
+                        const xValue = row[xIndex];
+                        const yValue = parseFloat(row[yIndex]);
+                        
+                        return {
+                            x: xValue !== null ? String(xValue) : null,
+                            y: !isNaN(yValue) ? yValue : null
+                        };
+                    }).filter(item => item !== null && item.x !== null && item.y !== null);
+                    
+                    if (chartData.length === 0) {
+                        throw new Error('没有有效的数据可以生成图表');
+                    }
+                    
+                    // 销毁现有图表
+                    if (currentChart) {
+                        currentChart.destroy();
+                    }
+                    
+                    // 颜色方案
+                    const colors = [
+                        'rgba(102, 126, 234, 0.8)',
+                        'rgba(118, 75, 162, 0.8)',
+                        'rgba(16, 185, 129, 0.8)',
+                        'rgba(245, 158, 11, 0.8)',
+                        'rgba(239, 68, 68, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(139, 92, 246, 0.8)',
+                        'rgba(236, 72, 153, 0.8)'
+                    ];
+                    
+                    const borderColors = colors.map(color => color.replace('0.8', '1'));
+                    
+                    // 创建图表
+                    const ctx = chartCanvas.getContext('2d');
+                    currentChart = new Chart(ctx, {
+                        type: selectedChartType,
+                        data: {
+                            labels: chartData.map(item => item.x),
+                            datasets: [{
+                                label: currentData[0][yIndex] || '数据',
+                                data: chartData.map(item => item.y),
+                                backgroundColor: selectedChartType === 'line' ? colors[0] : colors,
+                                borderColor: selectedChartType === 'line' ? borderColors[0] : borderColors,
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: selectedChartType === 'line' ? false : undefined,
+                                pointRadius: selectedChartType === 'line' ? 4 : undefined,
+                                pointHoverRadius: selectedChartType === 'line' ? 6 : undefined
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                    labels: {
+                                        font: {
+                                            size: 14,
+                                            family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+                                        },
+                                        padding: 20
+                                    }
+                                },
+                                tooltip: {
+                                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                    titleFont: { size: 14 },
+                                    bodyFont: { size: 13 },
+                                    padding: 12,
+                                    cornerRadius: 8
+                                }
+                            },
+                            scales: selectedChartType === 'pie' || selectedChartType === 'doughnut' ? {} : {
+                                y: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        color: 'rgba(0, 0, 0, 0.1)'
+                                    },
+                                    ticks: {
+                                        font: { size: 12 }
+                                    }
+                                },
+                                x: {
+                                    grid: {
+                                        display: false
+                                    },
+                                    ticks: {
+                                        font: { size: 12 },
+                                        maxRotation: 45
+                                    }
+                                }
+                            },
+                            animation: {
+                                duration: 1000,
+                                easing: 'easeInOutQuart'
+                            }
+                        }
+                    });
+                    
+                    chartLoading.style.display = 'none';
+                    downloadChart.disabled = false;
+                    showStatus('图表生成成功！', 'success');
+                    
+                } catch (error) {
+                    console.error('图表生成错误:', error);
+                    showStatus(error.message || '图表生成失败', 'error');
+                    chartLoading.style.display = 'none';
+                }
+            }, 500);
+        }
+        
+        // 下载图表
+        downloadChart.addEventListener('click', () => {
+            if (!currentChart) {
+                showStatus('请先生成图表', 'error');
+                return;
+            }
+            
+            const canvas = chartCanvas;
+            const dataUrl = canvas.toDataURL('image/png', 1.0);
+            const link = document.createElement('a');
+            
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+            const fileName = `chart-${selectedChartType}-${timestamp}.png`;
+            
+            link.download = fileName;
+            link.href = dataUrl;
+            link.click();
+            
+            showStatus('图表下载成功！', 'success');
+        });
+        
+        // 重置
+        resetChart.addEventListener('click', () => {
+            if (currentChart) {
+                currentChart.destroy();
+                currentChart = null;
+            }
+            
+            currentWorkbook = null;
+            currentData = null;
+            
+            sheetSelect.innerHTML = '<option value="">请先上传文件</option>';
+            xAxisColumn.innerHTML = '<option value="">请选择列</option>';
+            yAxisColumn.innerHTML = '<option value="">请选择列</option>';
+            
+            dataPreview.style.display = 'none';
+            generateChart.disabled = true;
+            downloadChart.disabled = true;
+            
+            // 重置图表类型选择
+            chartOptions.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            chartOptions.querySelector('[data-type="bar"]').classList.add('selected');
+            selectedChartType = 'bar';
+            
+            showStatus('已重置所有设置', 'info');
+        });
+        
+        // 监听工作表变化
+        sheetSelect.addEventListener('change', (e) => {
+            if (currentWorkbook && e.target.value) {
+                loadSheetData(e.target.value);
+            }
+        });
+        
+        // 监听列选择变化
+        xAxisColumn.addEventListener('change', updateChartIfReady);
+        yAxisColumn.addEventListener('change', updateChartIfReady);
+        
+        function updateChartIfReady() {
+            if (currentChart && xAxisColumn.value && yAxisColumn.value) {
+                const xIndex = parseInt(xAxisColumn.value);
+                const yIndex = parseInt(yAxisColumn.value);
+                createChart(xIndex, yIndex);
+            }
+        }
+        
+        // 数据模态框功能
+        function openDataModal() {
+            if (!currentData || currentData.length === 0) {
+                showStatus('没有数据可以显示', 'error');
+                return;
+            }
+            
+            const modal = document.getElementById('dataModal');
+            const modalBody = document.getElementById('modalTableBody');
+            const modalTableHead = document.getElementById('modalTableHead');
+            
+            // 清空现有内容
+            modalTableHead.innerHTML = '';
+            modalBody.innerHTML = '';
+            
+            // 生成表头
+            const headers = currentData[0];
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header || '空';
+                th.title = header || '空';
+                modalTableHead.appendChild(th);
+            });
+            
+            // 生成数据行（限制显示前1000行以避免性能问题）
+            const maxRows = Math.min(currentData.length - 1, 1000);
+            for (let i = 1; i <= maxRows; i++) {
+                const tr = document.createElement('tr');
+                const row = currentData[i];
+                
+                headers.forEach((_, colIndex) => {
+                    const td = document.createElement('td');
+                    const cellValue = row && row[colIndex] !== undefined ? row[colIndex] : '空';
+                    td.textContent = cellValue;
+                    td.title = cellValue;
+                    tr.appendChild(td);
+                });
+                
+                modalBody.appendChild(tr);
+            }
+            
+            // 更新统计信息
+            const totalRows = currentData.length - 1;
+            const totalColumns = headers.length;
+            document.getElementById('dataStats').textContent = 
+                `显示 ${Math.min(maxRows, totalRows)} / ${totalRows} 行 × ${totalColumns} 列`;
+            
+            if (totalRows > 1000) {
+                document.getElementById('dataStats').textContent += ' (为提高性能，仅显示前1000行)';
+            }
+            
+            modal.classList.add('show');
+        }
+        
+        function closeDataModal() {
+            document.getElementById('dataModal').classList.remove('show');
+        }
+        
+        // 点击模态框外部关闭
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('dataModal');
+            if (e.target === modal) {
+                closeDataModal();
+            }
+        });
+        
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeDataModal();
+            }
+        });
+    </script>
+    
+    <!-- 数据模态框 -->
+    <div class="data-modal" id="dataModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-table"></i>
+                    完整数据预览
+                </div>
+                <button class="modal-close" onclick="closeDataModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 1rem; font-size: 0.9rem; color: var(--gray);" id="dataStats">
+                    数据统计信息
+                </div>
+                <table class="full-data-table">
+                    <thead>
+                        <tr id="modalTableHead">
+                            <!-- 动态生成表头 -->
+                        </tr>
+                    </thead>
+                    <tbody id="modalTableBody">
+                        <!-- 动态生成数据行 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" type="image/svg+xml" href="../images/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="../images/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="../images/icon-512x512.png">
+    <link rel="manifest" href="../site.webmanifest">
+    
+    <script>
+        document.write(`<style>${NavbarComponent.getStyles()}</style>`);
+        document.write(`<style>${FooterComponent.getStyles()}</style>`);
+    </script>
+    
+    <title>女性生理周期计算器 | 智能预测经期、排卵期和安全期 | 小路工具箱</title>
+    <meta name="description" content="免费在线女性生理周期计算器，基于先进算法的智能预测系统，帮助您科学了解身体周期，合理安排生活计划。支持经期、排卵期、安全期精准预测，提供健康建议和生理周期管理。">
+    <meta name="keywords" content="生理周期计算器,月经期计算,排卵期预测,安全期计算,女性健康工具,经期跟踪,备孕计算器,避孕计划,小路工具箱">
+    <meta name="author" content="小路工具箱">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.xiaolu.com/tools/menstrual-cycle-calculator.html">
+    <meta property="og:title" content="女性生理周期计算器 - 智能预测经期、排卵期和安全期">
+    <meta property="og:description" content="免费在线女性生理周期计算器，基于先进算法的智能预测系统，帮助您科学了解身体周期，合理安排生活计划。">
+    <meta property="og:image" content="https://tools.xiaolu.com/images/tool-preview.jpg">
+    
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.xiaolu.com/tools/menstrual-cycle-calculator.html">
+    <meta property="twitter:title" content="女性生理周期计算器 - 智能预测经期、排卵期和安全期">
+    <meta property="twitter:description" content="免费在线女性生理周期计算器，基于先进算法的智能预测系统，帮助您科学了解身体周期，合理安排生活计划。">
+    <meta property="twitter:image" content="https://tools.xiaolu.com/images/tool-preview.jpg">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "女性生理周期计算器",
+        "description": "免费在线女性生理周期计算器，基于先进算法的智能预测系统，帮助您科学了解身体周期，合理安排生活计划。",
+        "url": "https://tools.xiaolu.com/tools/menstrual-cycle-calculator.html",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "经期智能预测",
+            "排卵期计算",
+            "安全期提示",
+            "健康建议",
+            "周期管理"
+        ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary: #ff69b4;
+            --secondary: #ff1493;
+            --accent: #ff69b4;
+            --dark: #333;
+            --gray: #666;
+            --light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe4ef 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .tool-header p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tool-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .input-group input {
+            padding: 0.8rem;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .calendar-view {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+        }
+
+        .timeline {
+            margin: 2rem 0;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .phase-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+        }
+
+        .phase-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .health-tips {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .health-tips h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .tips-list li:before {
+            content: '💗';
+            position: absolute;
+            left: 0;
+        }
+
+        .disclaimer {
+            background: #fff5f7;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 300px;
+            margin: 2rem auto;
+            display: block;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .results {
+            display: none;
+            margin-top: 2rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 日历视图样式 */
+        .calendar-view {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calendar-view::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            pointer-events: none;
+        }
+
+        .calendar-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .month-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .month-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .month-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .month-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+            text-align: center;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .cycle-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .cycle-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .cycle-item:hover {
+            transform: scale(1.02);
+        }
+
+        .cycle-item.period {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .cycle-item.ovulation {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .cycle-item.safe {
+            background: linear-gradient(135deg, #a8e6cf, #88d8a3);
+            color: #2d5a3d;
+        }
+
+        .cycle-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.8rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        /* 时间轴样式 */
+        .timeline {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .timeline-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .timeline-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .timeline-container {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9ff;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.3rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-date {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .timeline-date strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .date-highlight {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+
+        .footer-info {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            margin-top: 2rem;
+        }
+
+        .footer-info a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* 动画效果 */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .timeline-item {
+            animation: slideInLeft 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .cycle-icon {
+            animation: pulse 2s infinite;
+        }
+
+        /* 响应式设计优化 */
+        @media (max-width: 768px) {
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+
+            .tool-header p {
+                font-size: 1rem;
+            }
+
+            .tool-container {
+                padding: 1.5rem;
+            }
+
+            .calendar-view {
+                padding: 1.5rem;
+            }
+
+            .calendar-title {
+                font-size: 1.5rem;
+            }
+
+            .month-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .month-card {
+                padding: 1rem;
+            }
+
+            .timeline {
+                padding: 1.5rem;
+            }
+
+            .timeline-title {
+                font-size: 1.5rem;
+            }
+
+            .timeline-container {
+                padding-left: 1.5rem;
+            }
+
+            .timeline-item {
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .timeline-item:hover {
+                transform: translateX(5px);
+            }
+
+            .date-highlight {
+                display: block;
+                margin: 0.3rem 0;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .calendar-view {
+                padding: 1rem;
+            }
+
+            .timeline {
+                padding: 1rem;
+            }
+
+            .cycle-item {
+                padding: 0.6rem;
+                font-size: 0.85rem;
+            }
+
+            .timeline-date {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="tool-header">
+            <h1>女性生理周期计算器</h1>
+            <p>基于先进算法的智能预测系统，助您了解身体周期，科学安排生活计划</p>
+        </div>
+        
+        <div class="tool-container">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="last-period">上次月经开始日期</label>
+                    <input type="date" id="last-period" required>
+                </div>
+                <div class="input-group">
+                    <label for="cycle-length">平均周期长度（天）</label>
+                    <input type="number" id="cycle-length" value="28" min="21" max="35" required>
+                </div>
+                <div class="input-group">
+                    <label for="period-length">月经持续天数</label>
+                    <input type="number" id="period-length" value="5" min="3" max="7" required>
+                </div>
+            </div>
+
+            <button class="calculate-btn" onclick="calculateCycle()">开始计算</button>
+
+            <div class="results" id="results">
+                <div class="calendar-view" id="calendar-view">
+                    <!-- 日历视图将通过JavaScript动态生成 -->
+                </div>
+
+                <div class="timeline" id="timeline">
+                    <!-- 时间轴将通过JavaScript动态生成 -->
+                </div>
+
+                <div class="phase-card">
+                    <h3>月经期</h3>
+                    <p>基于周期天数推算，通常持续3-7天。这期间要注意个人卫生，适当休息。</p>
+                </div>
+
+                <div class="phase-card">
+                    <h3>排卵期</h3>
+                    <p>下次月经前14天±3天。这期间体温会轻微升高0.3-0.5°C，是最容易受孕的时期。</p>
+                </div>
+
+                <div class="phase-card">
+                    <h3>安全期</h3>
+                    <p>排卵日前后的其他时间。但请注意，任何时期都存在一定怀孕概率，建议采取适当避孕措施。</p>
+                </div>
+            </div>
+
+            <div class="health-tips">
+                <h2>健康小贴士</h2>
+                <ul class="tips-list">
+                    <li>保持规律作息，避免熬夜，有助于维持周期稳定</li>
+                    <li>经期注意保暖，避免剧烈运动和游泳</li>
+                    <li>多食用富含铁质的食物，补充流失的营养</li>
+                    <li>保持心情愉悦，压力可能会影响月经周期</li>
+                    <li>定期记录周期变化，异常及时就医</li>
+                </ul>
+            </div>
+
+            <div class="disclaimer">
+                <h3>重要声明</h3>
+                <p>本工具预测基于统计学模型，个体差异可能导致偏差，不可替代医疗诊断。如有异常症状（如持续异常出血），请及时就医。安全期避孕失败率约24%，备孕夫妻6个月受孕概率约60%。</p>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <p>@2025 智能女性生理周期计算与管理工具</p>
+            <p><a href="https://t.zsxq.com/17wTksRxX" target="_blank">技术支持和问题反馈</a></p>
+        </div>
+    </main>
+    
+    <script>
+        // 初始化导航栏和页脚组件
+        document.addEventListener('DOMContentLoaded', function() {
+            new NavbarComponent();
+            new FooterComponent();
+        });
+
+        function calculateCycle() {
+            const lastPeriod = new Date(document.getElementById('last-period').value);
+            const cycleLength = parseInt(document.getElementById('cycle-length').value);
+            const periodLength = parseInt(document.getElementById('period-length').value);
+
+            if (!lastPeriod || isNaN(cycleLength) || isNaN(periodLength)) {
+                alert('请填写完整的信息');
+                return;
+            }
+
+            // 显示结果区域
+            document.getElementById('results').classList.add('active');
+
+            // 计算未来6个周期
+            const cycles = [];
+            for (let i = 0; i < 6; i++) {
+                const periodStart = new Date(lastPeriod);
+                periodStart.setDate(periodStart.getDate() + (cycleLength * i));
+                
+                const periodEnd = new Date(periodStart);
+                periodEnd.setDate(periodEnd.getDate() + periodLength - 1);
+                
+                const ovulationDate = new Date(periodStart);
+                ovulationDate.setDate(ovulationDate.getDate() + cycleLength - 14);
+                
+                cycles.push({
+                    periodStart,
+                    periodEnd,
+                    ovulationDate
+                });
+            }
+
+            // 更新日历视图
+            updateCalendarView(cycles);
+
+            // 更新时间轴
+            updateTimeline(cycles);
+        }
+
+        function updateCalendarView(cycles) {
+            const calendarView = document.getElementById('calendar-view');
+            calendarView.innerHTML = `
+                <div class="calendar-title">📅 生理周期日历视图</div>
+                <div class="month-grid" id="month-grid"></div>
+            `;
+
+            const monthGrid = document.getElementById('month-grid');
+            const months = {};
+            
+            cycles.forEach(cycle => {
+                const month = cycle.periodStart.toLocaleString('zh-CN', { month: 'long', year: 'numeric' });
+                if (!months[month]) {
+                    months[month] = [];
+                }
+                months[month].push(cycle);
+            });
+
+            Object.entries(months).forEach(([month, monthlyCycles]) => {
+                const monthCard = document.createElement('div');
+                monthCard.className = 'month-card';
+                
+                let cycleInfoHTML = '';
+                monthlyCycles.forEach(cycle => {
+                    const periodStart = cycle.periodStart.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
+                    const periodEnd = cycle.periodEnd.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
+                    const ovulationDate = cycle.ovulationDate.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
+                    
+                    cycleInfoHTML += `
+                        <div class="cycle-item period">
+                            <div class="cycle-icon">🩸</div>
+                            <div>月经期：${periodStart} - ${periodEnd}</div>
+                        </div>
+                        <div class="cycle-item ovulation">
+                            <div class="cycle-icon">🥚</div>
+                            <div>排卵日：${ovulationDate}</div>
+                        </div>
+                        <div class="cycle-item safe">
+                            <div class="cycle-icon">🛡️</div>
+                            <div>安全期：其他时间</div>
+                        </div>
+                    `;
+                });
+                
+                monthCard.innerHTML = `
+                    <div class="month-header">${month}</div>
+                    <div class="cycle-info">
+                        ${cycleInfoHTML}
+                    </div>
+                `;
+                
+                monthGrid.appendChild(monthCard);
+            });
+        }
+
+        function updateTimeline(cycles) {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = `
+                <div class="timeline-title">⏰ 生理周期时间轴</div>
+                <div class="timeline-container" id="timeline-container"></div>
+            `;
+
+            const timelineContainer = document.getElementById('timeline-container');
+
+            cycles.forEach((cycle, index) => {
+                const periodStartDate = cycle.periodStart.toLocaleDateString('zh-CN');
+                const periodEndDate = cycle.periodEnd.toLocaleDateString('zh-CN');
+                const ovulationDate = cycle.ovulationDate.toLocaleDateString('zh-CN');
+                
+                // 计算距离今天的天数
+                const today = new Date();
+                const daysUntilPeriod = Math.ceil((cycle.periodStart - today) / (1000 * 60 * 60 * 24));
+                const daysUntilOvulation = Math.ceil((cycle.ovulationDate - today) / (1000 * 60 * 60 * 24));
+                
+                let statusText = '';
+                if (daysUntilPeriod > 0) {
+                    statusText = `还有 ${daysUntilPeriod} 天`;
+                } else if (daysUntilPeriod >= -7) {
+                    statusText = '进行中';
+                } else {
+                    statusText = '已结束';
+                }
+
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+                timelineItem.style.animationDelay = `${index * 0.1}s`;
+                timelineItem.innerHTML = `
+                    <div class="timeline-date">
+                        <div style="margin-bottom: 0.8rem;">
+                            <strong>第 ${index + 1} 个周期</strong>
+                            <span class="date-highlight">${statusText}</span>
+                        </div>
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>🩸 月经期：</strong>${periodStartDate} - ${periodEndDate}
+                        </div>
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>🥚 排卵日：</strong>${ovulationDate}
+                            ${daysUntilOvulation > 0 ? `<span class="date-highlight">还有 ${daysUntilOvulation} 天</span>` : ''}
+                        </div>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
+                            💡 ${getHealthTip(index)}
+                        </div>
+                    </div>
+                `;
+                timelineContainer.appendChild(timelineItem);
+            });
+        }
+        
+        function getHealthTip(cycleIndex) {
+            const tips = [
+                '记录基础体温有助于更准确预测排卵期',
+                '经期前适当减少盐分摄入，缓解水肿',
+                '排卵期可能出现轻微腹痛，属正常现象',
+                '保持规律运动有助于缓解经期不适',
+                '充足睡眠对维持激素平衡很重要',
+                '经期避免剧烈运动，选择轻柔的瑜伽'
+            ];
+            return tips[cycleIndex % tips.length];
+        }
+    </script>
+</body>
+</html>

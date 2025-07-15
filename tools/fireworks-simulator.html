@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>烟花模拟器 - 在线烟花特效模拟工具</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="免费在线烟花模拟器，提供逼真的烟花特效，支持自定义烟花效果，适用于节日庆典、活动策划等场景。多平台兼容，操作简单。">
+    <meta name="keywords" content="烟花模拟器,烟花特效,在线烟花,节日庆典,活动策划,特效制作">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="烟花模拟器 - 在线烟花特效模拟工具">
+    <meta property="og:description" content="免费在线烟花模拟器，提供逼真的烟花特效，支持自定义烟花效果。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.xiaolu.com/fireworks-simulator.html">
+    <meta property="og:image" content="../images/fireworks-preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="烟花模拟器 - 在线烟花特效模拟工具">
+    <meta name="twitter:description" content="免费在线烟花模拟器，提供逼真的烟花特效，支持自定义烟花效果。">
+    <meta name="twitter:image" content="../images/fireworks-preview.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebApplication",
+        "name": "烟花模拟器",
+        "description": "免费在线烟花模拟器，提供逼真的烟花特效，支持自定义烟花效果。",
+        "url": "https://tools.xiaolu.com/fireworks-simulator.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "All",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <!-- Components -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    
+    <style id="component-styles"></style>
+    <script>
+        // 添加组件样式
+        document.getElementById('component-styles').textContent = 
+            NavbarComponent.getStyles() + '\n' + 
+            FooterComponent.getStyles();
+    </script>
+
+    <style>
+        /* 重置样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --background: #000000;
+            --text: #ffffff;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --error: #e63946;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            flex: 1;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .description {
+            font-size: 1.2rem;
+            color: var(--text);
+            opacity: 0.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .canvas-container {
+            width: 100%;
+            height: 60vh;
+            position: relative;
+            background: var(--background);
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #fireworksCanvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            padding: 0 1rem;
+        }
+
+        .control-group {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            min-width: 220px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .control-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+            font-weight: 600;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .control-item {
+            margin: 0.5rem 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.3rem;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+            margin: 1rem 0;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            background: rgba(67, 97, 238, 0.2);
+            border: 1px solid rgba(67, 97, 238, 0.3);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        select:hover, select:focus {
+            background: rgba(67, 97, 238, 0.3);
+            border-color: rgba(67, 97, 238, 0.5);
+            box-shadow: 0 0 15px rgba(67, 97, 238, 0.2);
+        }
+
+        select option {
+            background: #1a1a1a;
+            color: var(--text);
+            padding: 10px;
+        }
+
+        button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            background: var(--accent);
+            color: var(--text);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72, 149, 239, 0.3);
+        }
+
+        .section {
+            margin: 4rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .section-content {
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .feature-item {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-item::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+        }
+
+        .faq-item {
+            margin: 1rem 0;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .footer-info {
+            text-align: center;
+            padding: 1rem 0;
+            color: var(--text);
+            opacity: 0.7;
+        }
+
+        .support-link {
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .support-link:hover {
+            color: var(--success);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+                padding: 0 1rem;
+            }
+
+            .description {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .canvas-container {
+                height: 50vh;
+                margin: 1rem 0;
+            }
+
+            .control-group {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .controls {
+                margin: 1rem 0;
+                gap: 0.8rem;
+            }
+
+            .section {
+                margin: 2rem 0;
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.8rem;
+            }
+
+            .canvas-container {
+                height: 40vh;
+            }
+
+            .control-group {
+                padding: 1rem;
+            }
+
+            .control-title {
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div id="navbar-container"></div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title">烟花模拟器</h1>
+            <p class="description">体验逼真的烟花特效，创造属于你的绚丽夜空。适用于节日庆典、活动策划等场景的在线烟花模拟工具。</p>
+        </header>
+
+        <div class="canvas-container">
+            <canvas id="fireworksCanvas"></canvas>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <h3 class="control-title">烟花类型</h3>
+                <div class="control-item">
+                    <select id="fireworkType">
+                        <option value="normal">标准烟花</option>
+                        <option value="circle">圆形烟花</option>
+                        <option value="heart">心形烟花</option>
+                        <option value="star">星形烟花</option>
+                        <option value="spiral">螺旋烟花</option>
+                        <option value="double">双层烟花</option>
+                        <option value="chrysanthemum">菊花烟花</option>
+                        <option value="willow">柳树烟花</option>
+                        <option value="rainbow">彩虹烟花</option>
+                        <option value="crossette">交叉烟花</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3 class="control-title">粒子设置</h3>
+                <div class="control-item">
+                    <label>粒子数量</label>
+                    <input type="range" id="particleCount" min="50" max="200" value="100">
+                </div>
+                <div class="control-item">
+                    <label>粒子大小</label>
+                    <input type="range" id="particleSize" min="1" max="5" value="2" step="0.5">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3 class="control-title">效果设置</h3>
+                <div class="control-item">
+                    <label>扩散速度</label>
+                    <input type="range" id="explosionSpeed" min="1" max="10" value="5">
+                </div>
+                <div class="control-item">
+                    <label>持续时间</label>
+                    <input type="range" id="duration" min="1" max="5" value="2" step="0.5">
+                </div>
+                <div class="control-item">
+                    <label>拖尾效果</label>
+                    <input type="range" id="trail" min="0" max="1" value="0.1" step="0.1">
+                </div>
+                <div class="control-item">
+                    <label>重力效果</label>
+                    <input type="range" id="gravity" min="0" max="0.2" value="0.1" step="0.02">
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h3 class="control-title">颜色设置</h3>
+                <div class="control-item">
+                    <label>颜色主题</label>
+                    <select id="colorTheme">
+                        <option value="rainbow">彩虹色系</option>
+                        <option value="warm">暖色系</option>
+                        <option value="cool">冷色系</option>
+                        <option value="gold">金色系</option>
+                        <option value="silver">银色系</option>
+                    </select>
+                </div>
+                <div class="control-item">
+                    <label>颜色饱和度</label>
+                    <input type="range" id="saturation" min="50" max="100" value="100">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3 class="control-title">保存效果</h3>
+                <div class="control-item">
+                    <button id="saveImage" onclick="saveCanvasAsImage()">保存当前效果</button>
+                </div>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">使用指南</h2>
+            <div class="section-content">
+                <p>1. 选择烟花类型：从下拉菜单中选择想要的烟花形状。</p>
+                <p>2. 调整参数：使用滑块调整粒子数量、大小、扩散速度等参数。</p>
+                <p>3. 点击画布：在黑色画布上任意位置点击，即可看到绚丽的烟花效果。</p>
+                <p>4. 自由创作：尝试不同的参数组合，创造独特的烟花效果。</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">工具特点</h2>
+            <div class="section-content">
+                <ul class="feature-list">
+                    <li class="feature-item">多种烟花类型，满足不同场景需求</li>
+                    <li class="feature-item">高度可自定义的参数设置</li>
+                    <li class="feature-item">流畅的动画效果和逼真的物理模拟</li>
+                    <li class="feature-item">跨平台兼容，支持各种设备访问</li>
+                    <li class="feature-item">无需安装，即开即用的在线体验</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">应用场景</h2>
+            <div class="section-content">
+                <p>✨ 节日庆典：新年、春节、国庆等重大节日的线上庆祝活动</p>
+                <p>✨ 活动策划：商业活动、开业庆典的效果预览</p>
+                <p>✨ 教育演示：物理课程中的粒子运动演示</p>
+                <p>✨ 创意设计：多媒体作品的特效制作</p>
+                <p>✨ 个人娱乐：放松减压，享受烟花绽放的美感</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">常见问题</h2>
+            <div class="section-content">
+                <div class="faq-item">
+                    <p class="faq-question">Q: 为什么选择在线烟花模拟器？</p>
+                    <p>A: 环保、安全、可重复使用，且效果可调节，比实物烟花更具灵活性和经济性。</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-question">Q: 支持哪些设备使用？</p>
+                    <p>A: 支持电脑、平板、手机等所有主流设备，采用响应式设计确保最佳体验。</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-question">Q: 如何获得最佳效果？</p>
+                    <p>A: 建议在较大屏幕设备上使用，并调整参数找到最适合的效果组合。</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <div id="footer-container"></div>
+    <div class="footer-info">
+        <p>@2025 烟花模拟器 - 创造属于你的绚丽夜空</p>
+        <p>技术支持和问题反馈：<a href="https://t.zsxq.com/17wTksRxX" class="support-link" target="_blank">联系我们</a></p>
+    </div>
+
+    <script>
+        // 初始化画布
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // 设置画布尺寸
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+
+        // 监听窗口大小变化
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // 烟花粒子类
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.size = parseFloat(document.getElementById('particleSize').value);
+                this.speedX = 0;
+                this.speedY = 0;
+                this.gravity = parseFloat(document.getElementById('gravity').value);
+                this.life = 1;
+                this.decay = 0.02;
+                this.trail = parseFloat(document.getElementById('trail').value);
+                this.saturation = document.getElementById('saturation').value;
+            }
+
+            update() {
+                this.speedY += this.gravity;
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life -= this.decay;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.life;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // 烟花类
+        class Firework {
+            constructor(x, y) {
+                this.particles = [];
+                this.x = x;
+                this.y = y;
+                this.colorThemes = {
+                    rainbow: ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#8f00ff'],
+                    warm: ['#ff0000', '#ff4000', '#ff8000', '#ffbf00', '#ffff00'],
+                    cool: ['#00ffff', '#00bfff', '#0080ff', '#0040ff', '#0000ff'],
+                    gold: ['#ffd700', '#ffc000', '#ffa500', '#ff8c00', '#ff7300'],
+                    silver: ['#ffffff', '#e6e6e6', '#cccccc', '#b3b3b3', '#999999']
+                };
+                const colorTheme = document.getElementById('colorTheme').value;
+                this.colors = this.colorThemes[colorTheme];
+                this.createParticles();
+            }
+
+            createParticles() {
+                const type = document.getElementById('fireworkType').value;
+                const count = parseInt(document.getElementById('particleCount').value);
+                const speed = parseFloat(document.getElementById('explosionSpeed').value);
+
+                for (let i = 0; i < count; i++) {
+                    const particle = new Particle(
+                        this.x,
+                        this.y,
+                        this.colors[Math.floor(Math.random() * this.colors.length)]
+                    );
+
+                    let angle;
+                    switch (type) {
+                        case 'circle':
+                            angle = (Math.PI * 2 * i) / count;
+                            break;
+                        case 'heart':
+                            angle = (Math.PI * 2 * i) / count;
+                            const r = Math.sin(angle) * Math.sqrt(Math.abs(Math.cos(angle)));
+                            particle.speedX = r * Math.cos(angle) * speed;
+                            particle.speedY = r * Math.sin(angle) * speed;
+                            break;
+                        case 'star':
+                            angle = (Math.PI * 2 * i) / count;
+                            const r2 = Math.cos(angle * 2.5) * 0.5 + 0.5;
+                            particle.speedX = r2 * Math.cos(angle) * speed;
+                            particle.speedY = r2 * Math.sin(angle) * speed;
+                            break;
+                        case 'spiral':
+                            angle = (Math.PI * 2 * i) / count;
+                            const spiral = angle * 3;
+                            particle.speedX = (Math.cos(spiral) * speed) * (1 + Math.cos(angle));
+                            particle.speedY = (Math.sin(spiral) * speed) * (1 + Math.sin(angle));
+                            break;
+                        case 'double':
+                            angle = (Math.PI * 2 * i) / count;
+                            const inner = 0.5, outer = 1.0;
+                            particle.speedX = (i % 2 ? inner : outer) * Math.cos(angle) * speed;
+                            particle.speedY = (i % 2 ? inner : outer) * Math.sin(angle) * speed;
+                            break;
+                        case 'chrysanthemum':
+                            angle = (Math.PI * 2 * i) / count;
+                            const layers = 3;
+                            const layer = Math.floor(i / (count / layers));
+                            const r3 = 0.5 + (layer / layers) * 0.5;
+                            particle.speedX = r3 * Math.cos(angle) * speed;
+                            particle.speedY = r3 * Math.sin(angle) * speed;
+                            break;
+                        case 'willow':
+                            angle = (Math.PI * i) / count;
+                            particle.speedX = Math.cos(angle) * speed * 0.3;
+                            particle.speedY = Math.sin(angle) * speed * 0.8;
+                            particle.gravity = 0.05;
+                            break;
+                        case 'rainbow':
+                            angle = (Math.PI * 2 * i) / count;
+                            particle.speedX = Math.cos(angle) * speed;
+                            particle.speedY = Math.sin(angle) * speed;
+                            particle.color = this.colors[i % this.colors.length];
+                            break;
+                        case 'crossette':
+                            if (i < count / 4) {
+                                angle = (Math.PI * 2 * i) / (count / 4);
+                                particle.speedX = Math.cos(angle) * speed;
+                                particle.speedY = Math.sin(angle) * speed;
+                            } else {
+                                const subIndex = i - count / 4;
+                                const direction = Math.floor(subIndex / (count / 16));
+                                angle = (Math.PI / 4) * direction;
+                                particle.speedX = Math.cos(angle) * speed * 1.5;
+                                particle.speedY = Math.sin(angle) * speed * 1.5;
+                            }
+                            break;
+                        default:
+                            angle = Math.random() * Math.PI * 2;
+                            particle.speedX = Math.cos(angle) * speed * (0.5 + Math.random());
+                            particle.speedY = Math.sin(angle) * speed * (0.5 + Math.random());
+                    }
+
+                    if (type === 'circle') {
+                        particle.speedX = Math.cos(angle) * speed;
+                        particle.speedY = Math.sin(angle) * speed;
+                    }
+
+                    this.particles.push(particle);
+                }
+            }
+
+            update() {
+                for (let i = this.particles.length - 1; i >= 0; i--) {
+                    const particle = this.particles[i];
+                    particle.update();
+
+                    if (particle.life <= 0) {
+                        this.particles.splice(i, 1);
+                    }
+                }
+            }
+
+            draw() {
+                this.particles.forEach(particle => particle.draw());
+            }
+
+            isDead() {
+                return this.particles.length === 0;
+            }
+        }
+
+        // 管理烟花
+        const fireworks = [];
+
+        // 动画循环
+        function animate() {
+            const trail = document.getElementById('trail').value;
+            ctx.fillStyle = `rgba(0, 0, 0, ${1 - trail})`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = fireworks.length - 1; i >= 0; i--) {
+                const firework = fireworks[i];
+                firework.update();
+                firework.draw();
+
+                if (firework.isDead()) {
+                    fireworks.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // 保存画布为图片
+        function saveCanvasAsImage() {
+            const link = document.createElement('a');
+            link.download = '烟花效果.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        // 点击创建烟花
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            fireworks.push(new Firework(x, y));
+        });
+
+        // 启动动画
+        animate();
+
+        // 初始化导航栏和页脚
+        document.addEventListener('DOMContentLoaded', function() {
+            new NavbarComponent();
+            new FooterComponent();
+        });
+    </script>
+</body>
+</html>

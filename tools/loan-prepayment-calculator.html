@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="192x192" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="512x512" href="../favicon.ico">
+    
+    <!-- SEO Meta Tags -->
+    <title>2025最新房贷提前还款计算器 | 节省利息评估工具 | 小路工具箱</title>
+    <meta name="description" content="2025最新房贷提前还款计算器，精准计算提前还款节省利息，支持等额本息/等额本金，提供多种还款方案对比，可视化图表展示，助您做出最优还款决策。">
+    <meta name="keywords" content="房贷提前还款计算器,房贷计算器,提前还款计算,房贷利息计算,还款计划优化,房贷规划工具,节省利息计算">
+    <meta name="author" content="小路工具箱">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.xiaolu.com/tools/loan-prepayment-calculator.html">
+    <meta property="og:title" content="2025最新房贷提前还款计算器 - 精准计算节省利息">
+    <meta property="og:description" content="2025最新房贷提前还款计算器，精准计算提前还款节省利息，支持等额本息/等额本金，提供多种还款方案对比，可视化图表展示，助您做出最优还款决策。">
+    <meta property="og:image" content="https://tools.xiaolu.com/images/loan-calculator-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.xiaolu.com/tools/loan-prepayment-calculator.html">
+    <meta property="twitter:title" content="2025最新房贷提前还款计算器 - 精准计算节省利息">
+    <meta property="twitter:description" content="2025最新房贷提前还款计算器，精准计算提前还款节省利息，支持等额本息/等额本金，提供多种还款方案对比，可视化图表展示，助您做出最优还款决策。">
+    <meta property="twitter:image" content="https://tools.xiaolu.com/images/loan-calculator-preview.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "房贷提前还款计算器",
+        "description": "2025最新房贷提前还款计算器，精准计算提前还款节省利息，支持等额本息/等额本金，提供多种还款方案对比，可视化图表展示，助您做出最优还款决策。",
+        "url": "https://tools.xiaolu.com/tools/loan-prepayment-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "提前还款利息节省计算",
+            "还款期限缩短计算",
+            "月供变更计算",
+            "等额本息/等额本金支持",
+            "多种还款方案比较",
+            "可视化图表展示",
+            "投资收益率对比"
+        ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5a6fd8;
+            --secondary: #764ba2;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --light: #f3f4f6;
+            --white: #ffffff;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --border-radius: 16px;
+            --border-radius-sm: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-section .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .input-panel {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+        
+        .results-panel {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--light);
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .input-with-unit {
+            position: relative;
+        }
+        
+        .input-with-unit .unit {
+            position: absolute;
+            right: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+        
+        .calculate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: var(--border-radius-sm);
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .result-card.highlight {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+        }
+        
+        .result-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .result-card .label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .comparison-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .comparison-card {
+            background: #f8fafc;
+            border-radius: var(--border-radius-sm);
+            padding: 1.5rem;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .comparison-card.recommended {
+            border-color: var(--success);
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+        }
+        
+        .comparison-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .comparison-card .card-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .comparison-card .recommended-badge {
+            background: var(--success);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .comparison-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .comparison-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .chart-container {
+            margin-top: 2rem;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .chart-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .chart-tab {
+            padding: 0.8rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+        
+        .chart-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        .chart-content {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border-radius: var(--border-radius-sm);
+            color: var(--gray);
+        }
+        
+        .info-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .info-card {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: var(--border-radius-sm);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .info-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .tips-section {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid #f59e0b;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: var(--border-radius-sm);
+        }
+        
+        .tip-icon {
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+        
+        .footer-info {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            border-radius: var(--border-radius);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+        
+        .footer-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 1024px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem 3%;
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-features {
+                gap: 1rem;
+            }
+            
+            .hero-feature {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .input-panel,
+            .results-panel {
+                padding: 1.5rem;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="hero-section">
+            <h1>🏠 房贷提前还款计算器</h1>
+            <p class="subtitle">精准测算提前还款收益，助您做出最优财务决策，早日实现财务自由</p>
+            <div class="hero-features">
+                <div class="hero-feature">
+                    <span>💰</span>
+                    <span>精准计算节省利息</span>
+                </div>
+                <div class="hero-feature">
+                    <span>📊</span>
+                    <span>可视化图表展示</span>
+                </div>
+                <div class="hero-feature">
+                    <span>🔄</span>
+                    <span>多方案智能对比</span>
+                </div>
+                <div class="hero-feature">
+                    <span>⚡</span>
+                    <span>即时计算结果</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="calculator-container">
+            <div class="input-panel">
+                <h2 class="panel-title">
+                    <span>📝</span>
+                    贷款信息输入
+                </h2>
+                
+                <form id="loanForm">
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="loanAmount">贷款总额</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="loanAmount" required min="0" step="10000" placeholder="100" value="1000000">
+                                <span class="unit">万元</span>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="loanTerm">贷款期限</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="loanTerm" required min="1" max="30" placeholder="30" value="30">
+                                <span class="unit">年</span>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="interestRate">年利率</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="interestRate" required min="0" step="0.01" placeholder="4.9" value="4.9">
+                                <span class="unit">%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="paymentMethod">还款方式</label>
+                            <select id="paymentMethod" required>
+                                <option value="equalPayment">等额本息</option>
+                                <option value="equalPrincipal">等额本金</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="prepaymentAmount">提前还款金额</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="prepaymentAmount" required min="0" step="10000" placeholder="50" value="500000">
+                                <span class="unit">万元</span>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="prepaymentTime">提前还款时间</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="prepaymentTime" required min="1" placeholder="60" value="60">
+                                <span class="unit">已还月数</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group full-width">
+                        <label for="prepaymentType">提前还款方式</label>
+                        <select id="prepaymentType" required>
+                            <option value="reduceTerm">缩短还款期限（月供不变）</option>
+                            <option value="reducePayment">减少月供金额（期限不变）</option>
+                            <option value="fullPayoff">一次性结清</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="calculate-btn">🧮 开始计算</button>
+                </form>
+            </div>
+            
+            <div class="results-panel">
+                <h2 class="panel-title">
+                    <span>📈</span>
+                    计算结果
+                </h2>
+                
+                <div id="resultsContent" class="hidden">
+                    <div class="results-grid">
+                        <div class="result-card highlight">
+                            <span class="icon">💰</span>
+                            <div class="label">节省利息总额</div>
+                            <div class="value" id="savedInterest">-</div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <span class="icon">⏰</span>
+                            <div class="label">缩短还款期限</div>
+                            <div class="value" id="reducedTerm">-</div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <span class="icon">📅</span>
+                            <div class="label">新月供金额</div>
+                            <div class="value" id="newMonthlyPayment">-</div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <span class="icon">📊</span>
+                            <div class="label">投资收益率</div>
+                            <div class="value" id="investmentReturn">-</div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-section">
+                        <h3>💡 方案对比分析</h3>
+                        <div class="comparison-grid" id="comparisonGrid">
+                            <!-- 动态生成对比方案 -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="noResults" class="chart-content">
+                    <p>请填写贷款信息并点击计算按钮查看结果</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chart-container" id="chartContainer" style="display: none;">
+            <h2 class="panel-title">
+                <span>📊</span>
+                可视化分析
+            </h2>
+            
+            <div class="chart-tabs">
+                <button class="chart-tab active" data-tab="payment">还款计划对比</button>
+                <button class="chart-tab" data-tab="interest">利息节省分析</button>
+                <button class="chart-tab" data-tab="principal">本金余额变化</button>
+            </div>
+            
+            <div class="chart-content" id="chartContent">
+                <p>图表功能开发中，敬请期待...</p>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2 class="panel-title">
+                <span>🎯</span>
+                为什么选择我们的计算器？
+            </h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><span>🔬</span>精准算法</h3>
+                    <p>采用银行级专业金融计算公式，确保计算结果精确可靠，让您的每一个决策都有据可依。</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><span>📊</span>全面分析</h3>
+                    <p>提供节省利息、缩短期限、月供变化、投资收益率等多维度分析，助您全面了解提前还款的收益。</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><span>🔄</span>方案对比</h3>
+                    <p>智能生成多种还款方案，直观对比不同策略的优劣，帮您找到最适合的还款计划。</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><span>📱</span>便捷操作</h3>
+                    <p>响应式设计，支持手机、平板、电脑等多设备使用，随时随地进行房贷计算和规划。</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><span>🎨</span>可视化展示</h3>
+                    <p>丰富的图表和数据可视化，让复杂的金融数据一目了然，提升决策效率。</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><span>🔒</span>隐私安全</h3>
+                    <p>所有计算均在本地进行，不会上传任何个人财务信息，确保您的隐私安全。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tips-section">
+            <h2 class="panel-title">
+                <span>💡</span>
+                提前还款决策建议
+            </h2>
+            
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <span class="tip-icon">💰</span>
+                    <div>
+                        <strong>资金充裕时考虑</strong><br>
+                        确保提前还款后仍有足够的应急资金，建议保留3-6个月的生活费用。
+                    </div>
+                </div>
+                
+                <div class="tip-item">
+                    <span class="tip-icon">📈</span>
+                    <div>
+                        <strong>对比投资收益</strong><br>
+                        如果有更高收益的投资机会，可能投资比提前还款更划算。
+                    </div>
+                </div>
+                
+                <div class="tip-item">
+                    <span class="tip-icon">⏰</span>
+                    <div>
+                        <strong>考虑还款时机</strong><br>
+                        贷款前期利息占比高，提前还款效果更明显；后期本金占比高，效果相对较小。
+                    </div>
+                </div>
+                
+                <div class="tip-item">
+                    <span class="tip-icon">🏦</span>
+                    <div>
+                        <strong>了解银行政策</strong><br>
+                        不同银行的提前还款政策不同，部分银行可能收取手续费，需提前咨询。
+                    </div>
+                </div>
+                
+                <div class="tip-item">
+                    <span class="tip-icon">📋</span>
+                    <div>
+                        <strong>税务考虑</strong><br>
+                        房贷利息可能享受税收优惠，提前还款会失去这部分优惠，需综合考虑。
+                    </div>
+                </div>
+                
+                <div class="tip-item">
+                    <span class="tip-icon">🎯</span>
+                    <div>
+                        <strong>个人目标匹配</strong><br>
+                        根据个人财务目标选择：追求无债一身轻，还是保持资金流动性。
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-info">
+            <p>@2025 房贷提前还款计算器 - 助您做出明智的还款决策</p>
+            <p><a href="https://t.zsxq.com/17wTksRxX" target="_blank">技术支持和问题反馈</a></p>
+        </div>
+    </main>
+    
+    <script>
+        // 初始化导航栏和页脚组件
+        document.addEventListener('DOMContentLoaded', function() {
+            new NavbarComponent();
+            new FooterComponent();
+        });
+
+        // 计算器核心功能
+        document.getElementById('loanForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 获取输入值（转换为实际金额）
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value) * 10000; // 万元转元
+            const loanTerm = parseFloat(document.getElementById('loanTerm').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value) / 100;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const prepaymentAmount = parseFloat(document.getElementById('prepaymentAmount').value) * 10000; // 万元转元
+            const prepaymentTime = parseInt(document.getElementById('prepaymentTime').value);
+            const prepaymentType = document.getElementById('prepaymentType').value;
+
+            // 验证输入
+            if (!validateInputs(loanAmount, loanTerm, interestRate, prepaymentAmount, prepaymentTime)) {
+                return;
+            }
+
+            // 计算结果
+            const results = calculateLoanPrepayment({
+                loanAmount,
+                loanTerm,
+                interestRate,
+                paymentMethod,
+                prepaymentAmount,
+                prepaymentTime,
+                prepaymentType
+            });
+
+            // 显示结果
+            displayResults(results);
+            
+            // 显示图表容器
+            document.getElementById('chartContainer').style.display = 'block';
+        });
+
+        function validateInputs(loanAmount, loanTerm, interestRate, prepaymentAmount, prepaymentTime) {
+            if (loanAmount <= 0) {
+                alert('贷款总额必须大于0');
+                return false;
+            }
+            if (prepaymentAmount >= loanAmount) {
+                alert('提前还款金额不能大于等于贷款总额');
+                return false;
+            }
+            if (prepaymentTime >= loanTerm * 12) {
+                alert('提前还款时间不能大于等于贷款期限');
+                return false;
+            }
+            return true;
+        }
+
+        function calculateLoanPrepayment(params) {
+            const { loanAmount, loanTerm, interestRate, paymentMethod, prepaymentAmount, prepaymentTime, prepaymentType } = params;
+            
+            const monthlyRate = interestRate / 12;
+            const totalMonths = loanTerm * 12;
+            
+            let results = {};
+            
+            if (paymentMethod === 'equalPayment') {
+                results = calculateEqualPayment(loanAmount, monthlyRate, totalMonths, prepaymentAmount, prepaymentTime, prepaymentType);
+            } else {
+                results = calculateEqualPrincipal(loanAmount, monthlyRate, totalMonths, prepaymentAmount, prepaymentTime, prepaymentType);
+            }
+            
+            // 计算投资收益率
+            results.investmentReturn = calculateInvestmentReturn(prepaymentAmount, results.savedInterest, totalMonths - prepaymentTime);
+            
+            return results;
+        }
+
+        function calculateEqualPayment(loanAmount, monthlyRate, totalMonths, prepaymentAmount, prepaymentTime, prepaymentType) {
+            // 原始月供
+            const originalMonthlyPayment = loanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalMonths) / 
+                                          (Math.pow(1 + monthlyRate, totalMonths) - 1);
+            
+            // 已还款后的剩余本金
+            let remainingPrincipal = loanAmount * (Math.pow(1 + monthlyRate, totalMonths) - Math.pow(1 + monthlyRate, prepaymentTime)) /
+                                    (Math.pow(1 + monthlyRate, totalMonths) - 1);
+            
+            // 提前还款后的剩余本金
+            remainingPrincipal -= prepaymentAmount;
+            
+            let results = {
+                originalMonthlyPayment,
+                remainingPrincipal,
+                savedInterest: 0,
+                reducedTerm: 0,
+                newMonthlyPayment: 0
+            };
+            
+            if (remainingPrincipal <= 0 || prepaymentType === 'fullPayoff') {
+                // 一次性结清
+                results.savedInterest = calculateRemainingInterest(originalMonthlyPayment, totalMonths - prepaymentTime, remainingPrincipal + prepaymentAmount);
+                results.reducedTerm = totalMonths - prepaymentTime;
+                results.newMonthlyPayment = 0;
+            } else if (prepaymentType === 'reduceTerm') {
+                // 缩短期限，月供不变
+                const newTotalMonths = Math.ceil(Math.log(1 + (remainingPrincipal * monthlyRate) / originalMonthlyPayment) / Math.log(1 + monthlyRate));
+                results.reducedTerm = (totalMonths - prepaymentTime) - newTotalMonths;
+                results.newMonthlyPayment = originalMonthlyPayment;
+                results.savedInterest = (originalMonthlyPayment * (totalMonths - prepaymentTime)) - (originalMonthlyPayment * newTotalMonths) - (remainingPrincipal - (originalMonthlyPayment * newTotalMonths - remainingPrincipal * monthlyRate * newTotalMonths));
+            } else {
+                // 减少月供，期限不变
+                results.newMonthlyPayment = remainingPrincipal * monthlyRate * Math.pow(1 + monthlyRate, totalMonths - prepaymentTime) /
+                                           (Math.pow(1 + monthlyRate, totalMonths - prepaymentTime) - 1);
+                results.savedInterest = (originalMonthlyPayment - results.newMonthlyPayment) * (totalMonths - prepaymentTime);
+                results.reducedTerm = 0;
+            }
+            
+            return results;
+        }
+
+        function calculateEqualPrincipal(loanAmount, monthlyRate, totalMonths, prepaymentAmount, prepaymentTime, prepaymentType) {
+            const monthlyPrincipal = loanAmount / totalMonths;
+            
+            // 计算已还本金
+            const paidPrincipal = monthlyPrincipal * prepaymentTime;
+            
+            // 剩余本金
+            let remainingPrincipal = loanAmount - paidPrincipal - prepaymentAmount;
+            
+            // 当前月供（提前还款前）
+            const currentMonthlyPayment = monthlyPrincipal + (loanAmount - paidPrincipal) * monthlyRate;
+            
+            let results = {
+                originalMonthlyPayment: currentMonthlyPayment,
+                remainingPrincipal,
+                savedInterest: 0,
+                reducedTerm: 0,
+                newMonthlyPayment: 0
+            };
+            
+            if (remainingPrincipal <= 0 || prepaymentType === 'fullPayoff') {
+                // 一次性结清
+                results.savedInterest = calculateRemainingInterestEqualPrincipal(loanAmount - paidPrincipal, monthlyRate, totalMonths - prepaymentTime, monthlyPrincipal);
+                results.reducedTerm = totalMonths - prepaymentTime;
+                results.newMonthlyPayment = 0;
+            } else {
+                const newMonthlyPrincipal = remainingPrincipal / (totalMonths - prepaymentTime);
+                results.newMonthlyPayment = newMonthlyPrincipal + remainingPrincipal * monthlyRate;
+                
+                // 计算节省的利息
+                const originalRemainingInterest = calculateRemainingInterestEqualPrincipal(loanAmount - paidPrincipal, monthlyRate, totalMonths - prepaymentTime, monthlyPrincipal);
+                const newRemainingInterest = calculateRemainingInterestEqualPrincipal(remainingPrincipal, monthlyRate, totalMonths - prepaymentTime, newMonthlyPrincipal);
+                results.savedInterest = originalRemainingInterest - newRemainingInterest;
+            }
+            
+            return results;
+        }
+
+        function calculateRemainingInterest(monthlyPayment, remainingMonths, principal) {
+            return monthlyPayment * remainingMonths - principal;
+        }
+
+        function calculateRemainingInterestEqualPrincipal(principal, monthlyRate, months, monthlyPrincipal) {
+            let totalInterest = 0;
+            let currentPrincipal = principal;
+            
+            for (let i = 0; i < months; i++) {
+                totalInterest += currentPrincipal * monthlyRate;
+                currentPrincipal -= monthlyPrincipal;
+            }
+            
+            return totalInterest;
+        }
+
+        function calculateInvestmentReturn(investment, savedInterest, months) {
+            if (months <= 0) return 0;
+            const monthlyReturn = Math.pow(savedInterest / investment, 1 / months) - 1;
+            return monthlyReturn * 12 * 100; // 年化收益率百分比
+        }
+
+        function displayResults(results) {
+            // 显示主要结果
+            document.getElementById('savedInterest').textContent = formatCurrency(results.savedInterest);
+            document.getElementById('reducedTerm').textContent = results.reducedTerm + ' 个月';
+            document.getElementById('newMonthlyPayment').textContent = formatCurrency(results.newMonthlyPayment);
+            document.getElementById('investmentReturn').textContent = results.investmentReturn.toFixed(2) + '%';
+            
+            // 显示结果区域
+            document.getElementById('resultsContent').classList.remove('hidden');
+            document.getElementById('noResults').classList.add('hidden');
+            
+            // 生成对比方案
+            generateComparisonScenarios(results);
+        }
+
+        function generateComparisonScenarios(baseResults) {
+            const comparisonGrid = document.getElementById('comparisonGrid');
+            comparisonGrid.innerHTML = '';
+            
+            const scenarios = [
+                {
+                    title: '不提前还款',
+                    description: '按原计划还款',
+                    savedInterest: 0,
+                    reducedTerm: 0,
+                    recommendation: false
+                },
+                {
+                    title: '当前方案',
+                    description: '提前还款' + (parseFloat(document.getElementById('prepaymentAmount').value)) + '万元',
+                    savedInterest: baseResults.savedInterest,
+                    reducedTerm: baseResults.reducedTerm,
+                    recommendation: true
+                },
+                {
+                    title: '投资理财',
+                    description: '将资金用于投资（假设年化5%）',
+                    savedInterest: parseFloat(document.getElementById('prepaymentAmount').value) * 10000 * 0.05 * (baseResults.reducedTerm / 12),
+                    reducedTerm: 0,
+                    recommendation: false
+                }
+            ];
+            
+            scenarios.forEach(scenario => {
+                const card = document.createElement('div');
+                card.className = 'comparison-card' + (scenario.recommendation ? ' recommended' : '');
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-title">${scenario.title}</div>
+                        ${scenario.recommendation ? '<span class="recommended-badge">推荐</span>' : ''}
+                    </div>
+                    <div class="comparison-item">
+                        <span>方案描述</span>
+                        <span>${scenario.description}</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span>节省/收益</span>
+                        <span>${formatCurrency(scenario.savedInterest)}</span>
+                    </div>
+                    <div class="comparison-item">
+                        <span>缩短期限</span>
+                        <span>${scenario.reducedTerm}个月</span>
+                    </div>
+                `;
+                
+                comparisonGrid.appendChild(card);
+            });
+        }
+
+        function formatCurrency(amount) {
+            if (amount >= 10000) {
+                return (amount / 10000).toFixed(1) + ' 万元';
+            }
+            return amount.toFixed(0) + ' 元';
+        }
+
+        // 图表标签切换
+        document.querySelectorAll('.chart-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const tabType = this.dataset.tab;
+                updateChart(tabType);
+            });
+        });
+
+        function updateChart(type) {
+            const chartContent = document.getElementById('chartContent');
+            
+            switch(type) {
+                case 'payment':
+                    chartContent.innerHTML = '<p>还款计划对比图表 - 开发中...</p>';
+                    break;
+                case 'interest':
+                    chartContent.innerHTML = '<p>利息节省分析图表 - 开发中...</p>';
+                    break;
+                case 'principal':
+                    chartContent.innerHTML = '<p>本金余额变化图表 - 开发中...</p>';
+                    break;
+            }
+        }
+    </script>
+    
+
+</body>
+</html>

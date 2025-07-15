@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/svg+xml" href="../images/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="../images/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="../images/icon-512x512.png">
+    <link rel="manifest" href="../site.webmanifest">
+    
+    <!-- 导航栏和页脚组件样式 -->
+    <script>
+        document.write(`<style>${NavbarComponent.getStyles()}</style>`);
+        document.write(`<style>${FooterComponent.getStyles()}</style>`);
+    </script>
+    
+    <!-- SEO Meta Tags -->
+    <title>Markdown在线编辑器 | 小路工具箱</title>
+    <meta name="description" content="免费、强大的Markdown在线编辑器，支持即时预览、语法高亮、导出多种格式。适合写作、文档编辑、笔记整理等场景。">
+    <meta name="keywords" content="Markdown编辑器,在线编辑器,实时预览,文档编辑器,写作工具,笔记工具,小路工具箱">
+    <meta name="author" content="小路工具箱">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.xiaolu.com/tools/markdown-editor.html">
+    <meta property="og:title" content="Markdown在线编辑器 - 专业的写作与文档编辑工具">
+    <meta property="og:description" content="免费、强大的Markdown在线编辑器，支持即时预览、语法高亮、导出多种格式。适合写作、文档编辑、笔记整理等场景。">
+    <meta property="og:image" content="https://tools.xiaolu.com/images/markdown-editor-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tools.xiaolu.com/tools/markdown-editor.html">
+    <meta property="twitter:title" content="Markdown在线编辑器 - 专业的写作与文档编辑工具">
+    <meta property="twitter:description" content="免费、强大的Markdown在线编辑器，支持即时预览、语法高亮、导出多种格式。适合写作、文档编辑、笔记整理等场景。">
+    <meta property="twitter:image" content="https://tools.xiaolu.com/images/markdown-editor-preview.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Markdown在线编辑器",
+        "description": "免费、强大的Markdown在线编辑器，支持即时预览、语法高亮、导出多种格式。适合写作、文档编辑、笔记整理等场景。",
+        "url": "https://tools.xiaolu.com/tools/markdown-editor.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "即时预览",
+            "语法高亮",
+            "多格式导出",
+            "自动保存",
+            "快捷键支持",
+            "主题切换"
+        ]
+    }
+    </script>
+    
+    <!-- Markdown编辑器依赖 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.2/lib/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.2/theme/monokai.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.2/theme/github.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.1.0/github-markdown.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.min.css">
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --dark: #1a202c;
+            --gray: #6c757d;
+            --light: #f8f9fa;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .tool-header p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            min-height: 500px;
+        }
+
+        .editor-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            background: var(--light);
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toolbar-button:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .toolbar-button i {
+            font-size: 1rem;
+        }
+
+        .CodeMirror {
+            height: 100%;
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 16px;
+        }
+
+        .preview-section {
+            border-left: 1px solid #eee;
+            padding-left: 1rem;
+        }
+
+        .markdown-body {
+            padding: 1rem;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .features-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: var(--light);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .usage-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .faq-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-item h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-item p {
+            color: var(--gray);
+            padding-left: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .editor-container {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-section {
+                border-left: none;
+                border-top: 1px solid #eee;
+                padding-left: 0;
+                padding-top: 1rem;
+                margin-top: 1rem;
+            }
+
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+
+            .tool-header p {
+                font-size: 1rem;
+            }
+        }
+
+        .copyright-text {
+            text-align: center;
+            color: var(--gray);
+            margin: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        .support-link {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .support-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="tool-header">
+            <h1>Markdown在线编辑器</h1>
+            <p>专业的Markdown编辑器，支持即时预览、语法高亮、快捷键、自动保存等功能，让写作更轻松、高效。</p>
+        </div>
+        
+        <div class="editor-container">
+            <div class="editor-section">
+                <div class="editor-toolbar">
+                    <button class="toolbar-button" id="boldBtn" title="加粗 (Ctrl+B)">
+                        <i class="fas fa-bold"></i>
+                    </button>
+                    <button class="toolbar-button" id="italicBtn" title="斜体 (Ctrl+I)">
+                        <i class="fas fa-italic"></i>
+                    </button>
+                    <button class="toolbar-button" id="linkBtn" title="链接 (Ctrl+K)">
+                        <i class="fas fa-link"></i>
+                    </button>
+                    <button class="toolbar-button" id="imageBtn" title="图片">
+                        <i class="fas fa-image"></i>
+                    </button>
+                    <button class="toolbar-button" id="listBtn" title="无序列表">
+                        <i class="fas fa-list-ul"></i>
+                    </button>
+                    <button class="toolbar-button" id="numberedListBtn" title="有序列表">
+                        <i class="fas fa-list-ol"></i>
+                    </button>
+                    <button class="toolbar-button" id="quoteBtn" title="引用">
+                        <i class="fas fa-quote-right"></i>
+                    </button>
+                    <button class="toolbar-button" id="codeBtn" title="代码块">
+                        <i class="fas fa-code"></i>
+                    </button>
+                    <button class="toolbar-button" id="exportBtn" title="导出">
+                        <i class="fas fa-download"></i> 导出
+                    </button>
+                </div>
+                <textarea id="editor"></textarea>
+            </div>
+            <div class="preview-section">
+                <div class="markdown-body" id="preview"></div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>核心功能</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-eye"></i>
+                    <h3>即时预览</h3>
+                    <p>实时渲染Markdown内容，所见即所得，让写作更直观。</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-code"></i>
+                    <h3>语法高亮</h3>
+                    <p>支持代码块语法高亮，多种主题可选，提升代码可读性。</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-download"></i>
+                    <h3>多格式导出</h3>
+                    <p>支持导出为HTML、PDF、纯文本等多种格式。</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-save"></i>
+                    <h3>自动保存</h3>
+                    <p>自动保存编辑内容，防止意外丢失。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-section">
+            <h2>使用指南</h2>
+            <p>1. 在左侧编辑区域输入Markdown文本</p>
+            <p>2. 右侧实时显示渲染后的效果</p>
+            <p>3. 使用工具栏按钮快速插入常用的Markdown语法</p>
+            <p>4. 支持快捷键操作，提高编辑效率</p>
+            <p>5. 点击导出按钮，选择需要的格式进行导出</p>
+        </div>
+
+        <div class="faq-section">
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3><i class="fas fa-question-circle"></i> 什么是Markdown？</h3>
+                <p>Markdown是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成有效的HTML文档。</p>
+            </div>
+            <div class="faq-item">
+                <h3><i class="fas fa-question-circle"></i> 为什么选择Markdown？</h3>
+                <p>Markdown语法简单直观，学习成本低，非常适合用于写文档、记笔记、写博客等场景。同时，它的纯文本特性让版本控制变得更容易。</p>
+            </div>
+            <div class="faq-item">
+                <h3><i class="fas fa-question-circle"></i> 支持哪些快捷键？</h3>
+                <p>支持常用的编辑快捷键，如Ctrl+B（加粗）、Ctrl+I（斜体）、Ctrl+K（插入链接）等。将鼠标悬停在工具栏按钮上可查看对应的快捷键。</p>
+            </div>
+        </div>
+
+        <p class="copyright-text">
+            @2025 专业的Markdown在线编辑器，让写作更轻松、高效。<br>
+            <a href="https://t.zsxq.com/17wTksRxX" target="_blank" class="support-link">技术支持和问题反馈</a>
+        </p>
+    </main>
+    
+    <!-- 编辑器依赖 -->
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.2/lib/codemirror.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.2/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.0.12/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.3/dist/purify.min.js"></script>
+    
+    <script>
+        // 初始化导航栏和页脚组件
+        document.addEventListener('DOMContentLoaded', function() {
+            new NavbarComponent();
+            new FooterComponent();
+
+            // 初始化编辑器
+            const editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+                mode: 'markdown',
+                theme: 'github',
+                lineNumbers: true,
+                lineWrapping: true,
+                autofocus: true,
+                extraKeys: {
+                    'Ctrl-B': function(cm) { insertMarkdown(cm, '**', '**'); },
+                    'Ctrl-I': function(cm) { insertMarkdown(cm, '*', '*'); },
+                    'Ctrl-K': insertLink
+                }
+            });
+
+            // 配置marked选项
+            marked.setOptions({
+                highlight: function(code, lang) {
+                    if (lang && hljs.getLanguage(lang)) {
+                        return hljs.highlight(code, { language: lang }).value;
+                    }
+                    return hljs.highlightAuto(code).value;
+                },
+                breaks: true
+            });
+
+            // 实时预览
+            editor.on('change', function() {
+                const content = editor.getValue();
+                const html = marked(content);
+                document.getElementById('preview').innerHTML = DOMPurify.sanitize(html);
+                // 自动保存
+                localStorage.setItem('markdown-content', content);
+            });
+
+            // 恢复上次编辑的内容
+            const savedContent = localStorage.getItem('markdown-content');
+            if (savedContent) {
+                editor.setValue(savedContent);
+            }
+
+            // 工具栏按钮事件
+            document.getElementById('boldBtn').onclick = () => insertMarkdown(editor, '**', '**');
+            document.getElementById('italicBtn').onclick = () => insertMarkdown(editor, '*', '*');
+            document.getElementById('linkBtn').onclick = () => insertLink(editor);
+            document.getElementById('imageBtn').onclick = () => insertMarkdown(editor, '![图片描述](', ')');
+            document.getElementById('listBtn').onclick = () => insertMarkdown(editor, '- ', '');
+            document.getElementById('numberedListBtn').onclick = () => insertMarkdown(editor, '1. ', '');
+            document.getElementById('quoteBtn').onclick = () => insertMarkdown(editor, '> ', '');
+            document.getElementById('codeBtn').onclick = () => insertMarkdown(editor, '```\n', '\n```');
+
+            // 导出功能
+            document.getElementById('exportBtn').onclick = function() {
+                const content = editor.getValue();
+                const blob = new Blob([content], { type: 'text/markdown' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'document.md';
+                a.click();
+                URL.revokeObjectURL(url);
+            };
+        });
+
+        // 插入Markdown语法
+        function insertMarkdown(cm, start, end) {
+            if (cm.somethingSelected()) {
+                const selection = cm.getSelection();
+                cm.replaceSelection(start + selection + end);
+            } else {
+                const pos = cm.getCursor();
+                cm.replaceRange(start + end, pos);
+                cm.setCursor(pos.line, pos.ch + start.length);
+            }
+            cm.focus();
+        }
+
+        // 插入链接
+        function insertLink(cm) {
+            const selection = cm.getSelection();
+            const text = selection || '链接文字';
+            const url = prompt('请输入链接地址:', 'https://');
+            if (url) {
+                cm.replaceSelection(`[${text}](${url})`);
+            }
+            cm.focus();
+        }
+    </script>
+</body>
+</html>
