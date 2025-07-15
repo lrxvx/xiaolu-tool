@@ -1,5 +1,21 @@
 [
     {
+        "id": "fortune-stick-drawer",
+        "title": "在线抽签工具",
+        "description": "在线模拟传统抽签体验，支持综合运势、事业运势、姻缘运势、学业运势等多种类型，提供详细解签和指引",
+        "date": "2025-07-16",
+        "type": "新增工具",
+        "relatedTools": ["chinese-converter"]
+    },
+    {
+        "id": "random-password-generator",
+        "title": "随机密码生成器",
+        "description": "支持自定义密码长度和规则，提供密码强度评估，内置常见密码模板，安全可靠的在线密码生成工具",
+        "date": "2025-07-16",
+        "type": "新增工具",
+        "relatedTools": ["file-encryptor"]
+    },
+    {
         "id": "file-compressor",
         "title": "在线文件压缩器",
         "description": "支持PDF文档、图片、视频等多种格式，批量压缩处理，智能压缩算法保持质量，完全免费的在线文件压缩工具",

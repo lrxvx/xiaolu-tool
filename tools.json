@@ -1,5 +1,25 @@
 [
   {
+    "id": "random-password-generator",
+    "name": "随机密码生成器",
+    "shortDesc": "安全可靠的在线密码生成工具",
+    "icon": "fas fa-key",
+    "description": "支持自定义密码长度和规则，提供密码强度评估，内置常见密码模板，安全可靠的在线密码生成工具。",
+    "tags": ["密码生成", "密码工具", "安全工具", "随机密码"],
+    "categories": ["security-privacy", "utility-tools"],
+    "url": "tools/random-password-generator.html"
+  },
+  {
+    "id": "fortune-stick-drawer",
+    "name": "在线抽签工具",
+    "shortDesc": "传统抽签模拟器，寻求生活指引",
+    "icon": "fas fa-scroll",
+    "description": "在线模拟传统抽签体验，内置多种签文类型，提供详细解签和指引，让传统文化在数字时代焕发新生。",
+    "tags": ["抽签", "求签", "运势", "传统文化", "指引"],
+    "categories": ["utility-tools", "entertainment-tools"],
+    "url": "tools/fortune-stick-drawer.html"
+  },
+  {
     "id": "file-compressor",
     "name": "在线文件压缩器",
     "shortDesc": "支持PDF、图片、视频等多种格式压缩",

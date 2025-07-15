@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线抽签工具 - 传统抽签模拟器，寻求生活指引 | 小路工具箱</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="在线模拟传统抽签体验，内置多种签文类型，提供详细解签和指引，让传统文化在数字时代焕发新生。支持事业、姻缘、学业等多种抽签类型，完全免费使用。">
+    <meta name="keywords" content="抽签,求签,运势,传统文化,指引,占卜,算命,事业运,姻缘运,学业运">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="在线抽签工具 - 传统抽签模拟器">
+    <meta property="og:description" content="在线模拟传统抽签体验，内置多种签文类型，提供详细解签和指引，让传统文化在数字时代焕发新生。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.example.com/fortune-stick-drawer.html">
+    <meta property="og:image" content="https://tools.example.com/images/fortune-stick-drawer.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="在线抽签工具 - 传统抽签模拟器">
+    <meta name="twitter:description" content="在线模拟传统抽签体验，内置多种签文类型，提供详细解签和指引，让传统文化在数字时代焕发新生。">
+    <meta name="twitter:image" content="https://tools.example.com/images/fortune-stick-drawer.jpg">
+    
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "在线抽签工具",
+        "description": "在线模拟传统抽签体验，内置多种签文类型，提供详细解签和指引，让传统文化在数字时代焕发新生。",
+        "url": "https://tools.example.com/fortune-stick-drawer.html",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "All",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        }
+    }
+    </script>
+
+    <!-- Styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Components -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+
+    <style>
+        .fortune-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .fortune-type-selector {
+            margin-bottom: 2rem;
+        }
+        .fortune-stick {
+            width: 200px;
+            height: 200px;
+            margin: 2rem auto;
+            background: url('../images/fortune-stick.svg') no-repeat center;
+            background-size: contain;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .fortune-stick:hover {
+            transform: scale(1.1);
+        }
+        .fortune-stick.shaking {
+            animation: shake 0.5s infinite;
+        }
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+        .fortune-result {
+            display: none;
+            margin-top: 2rem;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .fortune-number {
+            font-size: 2rem;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+        }
+        .fortune-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .fortune-explanation {
+            color: #666;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 工具内容 -->
+    <div class="container fortune-container">
+        <h1 class="text-center mb-4">在线抽签工具</h1>
+        <p class="lead text-center mb-5">传统抽签模拟器，寻求生活指引，让传统文化在数字时代焕发新生</p>
+        <!-- 农历日期显示 -->
+        <div class="text-center mb-3">
+            <span id="lunarDate" class="text-muted"></span>
+        </div>
+
+        <!-- 抽签类型选择 -->
+        <div class="fortune-type-selector text-center">
+            <h3 class="mb-3">请选择抽签类型</h3>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-primary" data-type="general">综合运势</button>
+                <button type="button" class="btn btn-outline-primary" data-type="career">事业运势</button>
+                <button type="button" class="btn btn-outline-primary" data-type="love">姻缘运势</button>
+                <button type="button" class="btn btn-outline-primary" data-type="study">学业运势</button>
+            </div>
+        </div>
+
+        <!-- 抽签动画 -->
+        <div class="fortune-stick" id="fortuneStick"></div>
+        <p class="text-center">点击竹筒开始抽签</p>
+
+        <!-- 抽签结果 -->
+        <div class="fortune-result" id="fortuneResult">
+            <div class="text-center">
+                <div class="fortune-number">第 <span id="stickNumber">88</span> 签</div>
+                <div class="fortune-level mb-3">【<span id="fortuneLevel">上上签</span>】</div>
+                <div class="fortune-content" id="fortuneContent"></div>
+                <div class="fortune-explanation" id="fortuneExplanation"></div>
+                <div class="mt-3">
+                    <button id="shareButton" class="btn btn-outline-primary btn-sm me-2">
+                        <i class="fas fa-share-alt"></i> 分享
+                    </button>
+                    <button id="favoriteButton" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-heart"></i> 收藏
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 历史记录和收藏 -->
+        <div class="row mt-5">
+            <!-- 历史记录 -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">抽签历史</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="historyList" class="list-group list-group-flush">
+                            <!-- 历史记录将通过JavaScript动态添加 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 收藏列表 -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">我的收藏</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="favoritesList" class="list-group list-group-flush">
+                            <!-- 收藏列表将通过JavaScript动态添加 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 使用指南 -->
+        <section class="mt-5">
+            <h2>使用指南</h2>
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item">选择您想要了解的运势类型（综合、事业、姻缘、学业）</li>
+                <li class="list-group-item">点击竹筒，系统将随机抽取一支签</li>
+                <li class="list-group-item">查看签文内容和解签说明，获取指引</li>
+                <li class="list-group-item">建议在心平气和的状态下抽签，每日限抽一次</li>
+            </ol>
+        </section>
+
+        <!-- 详细介绍 -->
+        <section class="mt-5">
+            <h2>关于抽签</h2>
+            <p>抽签是中国传统文化中求取神灵指引的一种方式，通过抽取竹签来获得对未来的预示和建议。在现代社会，抽签不仅是一种传统文化的传承，更是一种自我对话和心灵沟通的方式。</p>
+            <p>我们的在线抽签工具融合传统文化精髓，采用现代技术手段，为用户提供便捷的抽签体验。每支签文都经过精心编写，包含吉凶预示和详细解释，帮助用户获得指引和启发。</p>
+        </section>
+
+        <!-- 工具优势 -->
+        <section class="mt-5">
+            <h2>为什么选择我们的抽签工具</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4><i class="fas fa-check-circle text-success"></i> 传统文化传承</h4>
+                    <p>精选传统签文，融合现代解释，让传统文化焕发新生</p>
+                </div>
+                <div class="col-md-6">
+                    <h4><i class="fas fa-check-circle text-success"></i> 多场景适用</h4>
+                    <p>提供综合、事业、姻缘、学业等多种类型签文</p>
+                </div>
+                <div class="col-md-6">
+                    <h4><i class="fas fa-check-circle text-success"></i> 详细解签</h4>
+                    <p>每支签文都配有详细解释和建议，帮助理解和应用</p>
+                </div>
+                <div class="col-md-6">
+                    <h4><i class="fas fa-check-circle text-success"></i> 便捷使用</h4>
+                    <p>随时随地可用，操作简单，完全免费</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 应用场景 -->
+        <section class="mt-5">
+            <h2>应用场景</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">人生抉择</h5>
+                            <p class="card-text">在面临重要决定时寻求指引</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">事业规划</h5>
+                            <p class="card-text">了解职业发展方向和机遇</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">感情困惑</h5>
+                            <p class="card-text">探索感情问题的解决之道</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">学业指导</h5>
+                            <p class="card-text">获取学习方向的建议</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常见问题 -->
+        <section class="mt-5">
+            <h2>常见问题</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            抽签结果准确吗？
+                        </button>
+                    </h3>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            抽签是一种传统文化形式，主要用于提供参考和启发。结果的解读更重要的是结合自身实际情况，理性对待。
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            一天可以抽几次签？
+                        </button>
+                    </h3>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            传统上建议每日抽签不超过一次，保持虔诚和专注的心态。过度抽签可能影响判断。
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            抽到不好的签怎么办？
+                        </button>
+                    </h3>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            签文是一种提示和建议，重要的是从中吸取经验教训，调整心态和行动方向，化解可能的不利因素。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 版权信息 -->
+    <div class="container text-center mt-5 mb-3">
+        <p>@2025 在线抽签工具 - 传统抽签模拟器，寻求生活指引</p>
+        <p><a href="https://t.zsxq.com/17wTksRxX" target="_blank">技术支持和问题反馈</a></p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+        import FortuneData from '../js/fortune-data.js';
+
+        // 初始化组件
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航栏和页脚
+            initComponents();
+            // 初始化抽签功能
+            initFortune();
+            // 初始化本地存储
+            initLocalStorage();
+            // 显示农历日期
+            showLunarDate();
+            // 显示历史记录和收藏
+            showHistory();
+            showFavorites();
+        });
+
+        // 初始化组件
+        function initComponents() {
+            const navbarStyles = document.createElement('style');
+            navbarStyles.textContent = NavbarComponent.getStyles();
+            document.head.appendChild(navbarStyles);
+            new NavbarComponent();
+
+            const footerStyles = document.createElement('style');
+            footerStyles.textContent = FooterComponent.getStyles();
+            document.head.appendChild(footerStyles);
+            new FooterComponent();
+        }
+
+        // 初始化抽签功能
+        function initFortune() {
+            let currentType = 'general';
+            const dailyLimit = 1;
+            const fortuneHistory = JSON.parse(localStorage.getItem('fortuneHistory') || '[]');
+
+            // 选择抽签类型
+            document.querySelectorAll('.btn-group .btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    currentType = this.dataset.type;
+                    document.querySelectorAll('.btn-group .btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById('fortuneResult').style.display = 'none';
+                });
+            });
+
+            // 抽签动画和结果显示
+            document.getElementById('fortuneStick').addEventListener('click', async function() {
+                // 检查抽签次数限制
+                if (!checkDailyLimit(dailyLimit)) {
+                    alert('今日抽签次数已达上限，请明天再来！');
+                    return;
+                }
+
+                const stick = this;
+                const result = document.getElementById('fortuneResult');
+                
+                // 添加摇动动画
+                stick.classList.add('shaking');
+                result.style.display = 'none';
+                
+                // 随机选择签文
+                setTimeout(() => {
+                    stick.classList.remove('shaking');
+                    const fortune = getRandomFortune(currentType);
+                    
+                    // 显示结果
+                    showFortuneResult(fortune);
+                    // 保存抽签历史
+                    saveFortuneHistory(fortune, currentType);
+                    
+                    result.style.display = 'block';
+                }, 1000);
+            });
+
+            // 分享按钮事件
+            document.getElementById('shareButton').addEventListener('click', function() {
+                shareFortuneResult();
+            });
+
+            // 收藏按钮事件
+            document.getElementById('favoriteButton').addEventListener('click', function() {
+                toggleFavorite();
+            });
+        }
+
+        // 初始化本地存储
+        function initLocalStorage() {
+            if (!localStorage.getItem('fortuneHistory')) {
+                localStorage.setItem('fortuneHistory', '[]');
+            }
+            if (!localStorage.getItem('fortuneFavorites')) {
+                localStorage.setItem('fortuneFavorites', '[]');
+            }
+        }
+
+        // 显示农历日期
+        function showLunarDate() {
+            const date = new Date();
+            const lunarDate = solarToLunar(date);
+            document.getElementById('lunarDate').textContent = 
+                `农历${lunarDate.monthStr}月${lunarDate.dayStr}`;
+        }
+
+        // 农历日期转换函数
+        function solarToLunar(date) {
+            const lunarInfo = [0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,
+                0x04ae0,0x0a5b6,0x0a4d0,0x0d250,0x1d255,0x0b540,0x0d6a0,0x0ada2,0x095b0,0x14977,
+                0x04970,0x0a4b0,0x0b4b5,0x06a50,0x06d40,0x1ab54,0x02b60,0x09570,0x052f2,0x04970,
+                0x06566,0x0d4a0,0x0ea50,0x06e95,0x05ad0,0x02b60,0x186e3,0x092e0,0x1c8d7,0x0c950,
+                0x0d4a0,0x1d8a6,0x0b550,0x056a0,0x1a5b4,0x025d0,0x092d0,0x0d2b2,0x0a950,0x0b557];
+            
+            const animals = ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'];
+            const months = ['正','二','三','四','五','六','七','八','九','十','冬','腊'];
+            const days = ['初一','初二','初三','初四','初五','初六','初七','初八','初九','初十',
+                       '十一','十二','十三','十四','十五','十六','十七','十八','十九','二十',
+                       '廿一','廿二','廿三','廿四','廿五','廿六','廿七','廿八','廿九','三十'];
+            
+            const year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            let day = date.getDate();
+            
+            // 计算距离1900年1月31日的天数
+            let offset = (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(1900, 0, 31)) / 86400000;
+            
+            let temp = 0, i;
+            for(i = 1900; i < 2050 && offset > 0; i++) {
+                temp = getLunarYearDays(i);
+                offset -= temp;
+            }
+            if(offset < 0) {
+                offset += temp;
+                i--;
+            }
+            
+            // 计算农历月份和日期
+            let isLeap = false, leap = 0;
+            let lunarMonth = 1, lunarDay = 1;
+            let temp2 = getLunarYearInfo(i - 1900);
+            let monthDays = [];
+            
+            for(let j = 0; j < 12; j++) {
+                monthDays[j] = (temp2 & (0x10000 >> j)) ? 30 : 29;
+            }
+            
+            for(let j = 0; j < 12; j++) {
+                if(offset < monthDays[j]) {
+                    lunarMonth = j + 1;
+                    lunarDay = offset + 1;
+                    break;
+                }
+                offset -= monthDays[j];
+            }
+            
+            function getLunarYearInfo(year) {
+                return lunarInfo[year];
+            }
+            
+            function getLunarYearDays(year) {
+                let sum = 348;
+                let info = getLunarYearInfo(year - 1900);
+                for(let i = 0x8000; i > 0x8; i >>= 1) {
+                    sum += (info & i) ? 1 : 0;
+                }
+                return sum + getLeapMonthDays(year);
+            }
+            
+            function getLeapMonthDays(year) {
+                if(getLeapMonth(year)) {
+                    return (getLunarYearInfo(year - 1900) & 0x10000) ? 30 : 29;
+                }
+                return 0;
+            }
+            
+            function getLeapMonth(year) {
+                return getLunarYearInfo(year - 1900) & 0xf;
+            }
+            
+            return {
+                year: i,
+                month: lunarMonth,
+                day: lunarDay,
+                monthStr: months[lunarMonth - 1],
+                dayStr: days[lunarDay - 1],
+                animal: animals[(i - 4) % 12]
+            };
+        }
+
+        // 检查每日抽签次数限制
+        function checkDailyLimit(limit) {
+            const today = new Date().toLocaleDateString();
+            const history = JSON.parse(localStorage.getItem('fortuneHistory') || '[]');
+            const todayCount = history.filter(h => 
+                new Date(h.timestamp).toLocaleDateString() === today
+            ).length;
+            return todayCount < limit;
+        }
+
+        // 获取随机签文
+        function getRandomFortune(type) {
+            const fortunes = FortuneData[type];
+            return fortunes[Math.floor(Math.random() * fortunes.length)];
+        }
+
+        // 显示抽签结果
+        function showFortuneResult(fortune) {
+            document.getElementById('stickNumber').textContent = fortune.number;
+            document.getElementById('fortuneLevel').textContent = fortune.level;
+            document.getElementById('fortuneContent').textContent = fortune.content;
+            document.getElementById('fortuneExplanation').textContent = fortune.explanation;
+        }
+
+        // 保存抽签历史
+        function saveFortuneHistory(fortune, type) {
+            const history = JSON.parse(localStorage.getItem('fortuneHistory') || '[]');
+            const newFortune = {
+                ...fortune,
+                type,
+                timestamp: new Date().toISOString()
+            };
+            history.push(newFortune);
+            // 只保留最近30条记录
+            if (history.length > 30) {
+                history.shift();
+            }
+            localStorage.setItem('fortuneHistory', JSON.stringify(history));
+            // 更新历史记录显示
+            showHistory();
+        }
+
+        // 分享抽签结果
+        function shareFortuneResult() {
+            const fortune = {
+                number: document.getElementById('stickNumber').textContent,
+                level: document.getElementById('fortuneLevel').textContent,
+                content: document.getElementById('fortuneContent').textContent,
+                explanation: document.getElementById('fortuneExplanation').textContent
+            };
+
+            const shareText = `
+                在线抽签结果分享：
+                第${fortune.number}签 【${fortune.level}】
+                签文：${fortune.content}
+                解释：${fortune.explanation}
+            `.trim();
+
+            if (navigator.share) {
+                navigator.share({
+                    title: '在线抽签结果',
+                    text: shareText,
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                // 复制到剪贴板
+                const textarea = document.createElement('textarea');
+                textarea.value = shareText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('抽签结果已复制到剪贴板！');
+            }
+        }
+
+        // 切换收藏状态
+        function toggleFavorite() {
+            const fortune = {
+                number: document.getElementById('stickNumber').textContent,
+                level: document.getElementById('fortuneLevel').textContent,
+                content: document.getElementById('fortuneContent').textContent,
+                explanation: document.getElementById('fortuneExplanation').textContent,
+                timestamp: new Date().toISOString()
+            };
+
+            const favorites = JSON.parse(localStorage.getItem('fortuneFavorites') || '[]');
+            const index = favorites.findIndex(f => f.content === fortune.content);
+
+            if (index === -1) {
+                favorites.push(fortune);
+                document.getElementById('favoriteButton').classList.add('active');
+                alert('已添加到收藏！');
+            } else {
+                favorites.splice(index, 1);
+                document.getElementById('favoriteButton').classList.remove('active');
+                alert('已取消收藏！');
+            }
+
+            localStorage.setItem('fortuneFavorites', JSON.stringify(favorites));
+            // 更新收藏列表显示
+            showFavorites();
+        }
+
+        // 显示历史记录
+        function showHistory() {
+            const history = JSON.parse(localStorage.getItem('fortuneHistory') || '[]');
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = '';
+
+            history.reverse().forEach(fortune => {
+                const date = new Date(fortune.timestamp);
+                const item = document.createElement('div');
+                item.className = 'list-group-item';
+                item.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">${fortune.level} - ${fortune.content}</h6>
+                            <small class="text-muted">${date.toLocaleString()}</small>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">${getTypeText(fortune.type)}</span>
+                    </div>
+                `;
+                historyList.appendChild(item);
+            });
+
+            if (history.length === 0) {
+                historyList.innerHTML = '<div class="list-group-item text-center text-muted">暂无历史记录</div>';
+            }
+        }
+
+        // 显示收藏列表
+        function showFavorites() {
+            const favorites = JSON.parse(localStorage.getItem('fortuneFavorites') || '[]');
+            const favoritesList = document.getElementById('favoritesList');
+            favoritesList.innerHTML = '';
+
+            favorites.reverse().forEach(fortune => {
+                const date = new Date(fortune.timestamp);
+                const item = document.createElement('div');
+                item.className = 'list-group-item';
+                item.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">${fortune.level} - ${fortune.content}</h6>
+                            <small class="text-muted">${date.toLocaleString()}</small>
+                        </div>
+                        <button class="btn btn-outline-danger btn-sm" onclick="removeFavorite('${fortune.content}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                favoritesList.appendChild(item);
+            });
+
+            if (favorites.length === 0) {
+                favoritesList.innerHTML = '<div class="list-group-item text-center text-muted">暂无收藏</div>';
+            }
+        }
+
+        // 获取运势类型文本
+        function getTypeText(type) {
+            const typeMap = {
+                general: '综合运势',
+                career: '事业运势',
+                love: '姻缘运势',
+                study: '学业运势'
+            };
+            return typeMap[type] || type;
+        }
+
+        // 删除收藏
+        window.removeFavorite = function(content) {
+            const favorites = JSON.parse(localStorage.getItem('fortuneFavorites') || '[]');
+            const index = favorites.findIndex(f => f.content === content);
+            if (index !== -1) {
+                favorites.splice(index, 1);
+                localStorage.setItem('fortuneFavorites', JSON.stringify(favorites));
+                showFavorites();
+            }
+        };
+    </script>
+</body>
+</html>
