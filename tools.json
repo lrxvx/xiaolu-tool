@@ -6,7 +6,7 @@
     "icon": "fas fa-code",
     "description": "免费在线JSON处理工具，支持JSON美化格式化、JSON比对差异检测、JSON模板生成。提供乱码解码、排序、BigInt处理、编辑下载等功能。",
     "tags": ["JSON处理", "JSON美化", "JSON比对", "JSON格式化", "数据处理"],
-    "categories": ["encoding-conversion", "utility-tools", "data-analysis"],
+    "categories": ["coding"],
     "url": "tools/json-processor.html"
   },
   {
@@ -16,7 +16,7 @@
     "icon": "fas fa-calendar-alt",
     "description": "免费在线女性生理周期计算器，基于先进算法的智能预测系统，帮助您科学了解身体周期，合理安排生活计划。支持经期、排卵期、安全期精准预测，提供健康建议和生理周期管理。",
     "tags": ["生理周期", "经期预测", "排卵期", "女性健康", "周期管理"],
-    "categories": ["health", "calculator-tools", "utility-tools"],
+    "categories": ["health"],
     "url": "tools/menstrual-cycle-calculator.html"
   },
   {
@@ -26,7 +26,7 @@
     "icon": "fas fa-calculator",
     "description": "免费在线房贷提前还款计算器，精准计算提前还款可节省的利息，优化还款计划，帮您做出最优的还款决策。支持等额本息、等额本金等多种还款方式。",
     "tags": ["房贷计算", "提前还款", "利息计算", "还款规划", "理财工具"],
-    "categories": ["calculator-tools", "finance-tools", "utility-tools"],
+    "categories": ["finance"],
     "url": "tools/loan-prepayment-calculator.html"
   },
   {
@@ -36,7 +36,7 @@
     "icon": "fas fa-edit",
     "description": "免费、强大的Markdown在线编辑器，支持即时预览、语法高亮、导出多种格式。适合写作、文档编辑、笔记整理等场景。",
     "tags": ["Markdown", "编辑器", "写作工具", "文档编辑", "笔记工具"],
-    "categories": ["content-creation", "document-processing", "utility-tools"],
+    "categories": ["social"],
     "url": "tools/markdown-editor.html"
   },
   {
@@ -46,7 +46,7 @@
     "icon": "fas fa-chart-bar",
     "description": "专业的Excel数据可视化工具，支持多种图表类型，一键生成精美数据图表。支持Excel、CSV等格式文件，提供丰富的可视化选项和图表定制功能，让数据分析更直观、更专业。",
     "tags": ["Excel", "数据可视化", "图表生成", "数据分析", "图表工具"],
-    "categories": ["data-analysis", "utility-tools", "document-processing"],
+    "categories": ["utility"],
     "url": "tools/excel-visualizer.html"
   },
   {
@@ -56,7 +56,7 @@
     "icon": "fas fa-sparkles",
     "description": "免费在线烟花模拟器，提供逼真的烟花特效，支持自定义烟花效果，适用于节日庆典、活动策划等场景。多平台兼容，操作简单。",
     "tags": ["烟花", "特效", "模拟器", "节日", "庆典"],
-    "categories": ["entertainment-tools", "design-graphics"],
+    "categories": ["entertainment"],
     "url": "tools/fireworks-simulator.html"
   },
   {
@@ -66,7 +66,7 @@
     "icon": "fas fa-key",
     "description": "支持自定义密码长度和规则，提供密码强度评估，内置常见密码模板，安全可靠的在线密码生成工具。",
     "tags": ["密码生成", "密码工具", "安全工具", "随机密码"],
-    "categories": ["security-privacy", "utility-tools"],
+    "categories": ["security"],
     "url": "tools/random-password-generator.html"
   },
   {
@@ -76,7 +76,7 @@
     "icon": "fas fa-weight",
     "description": "专业的健康指标计算工具，提供BMI、体脂率、基础代谢率等多项健康数据评估",
     "tags": ["健康", "计算器", "体重", "BMI", "体脂率"],
-    "categories": ["health", "utility-tools"],
+    "categories": ["health"],
     "url": "tools/bmi-calculator.html"
   },
   {
@@ -86,7 +86,7 @@
     "icon": "fas fa-scroll",
     "description": "在线模拟传统抽签体验，内置多种签文类型，提供详细解签和指引，让传统文化在数字时代焕发新生。",
     "tags": ["抽签", "求签", "运势", "传统文化", "指引"],
-    "categories": ["utility-tools", "entertainment-tools"],
+    "categories": ["lifestyle"],
     "url": "tools/fortune-stick-drawer.html"
   },
   {
@@ -96,7 +96,7 @@
     "icon": "fas fa-file-archive",
     "description": "专业的在线文件压缩工具，支持PDF文档、图片、视频等多种格式，批量压缩处理，智能压缩算法保持质量，完全免费使用。",
     "tags": ["文件压缩", "PDF压缩", "图片压缩", "视频压缩", "批量压缩", "在线压缩"],
-    "categories": ["utility-tools", "document-processing", "image-processing"],
+    "categories": ["utility"],
     "url": "tools/file-compressor.html"
   },
   {
@@ -106,7 +106,7 @@
     "icon": "fas fa-smile",
     "description": "支持Unicode 15.1标准的3,782个独立表情符号，兼容iOS、Android、Windows等全平台。一键复制粘贴，让社交沟通更生动有趣！",
     "tags": ["emoji", "表情符号", "表情包", "社交工具", "复制粘贴"],
-    "categories": ["utility-tools", "social-media-tools"],
+    "categories": ["utility"],
     "url": "tools/emoji-symbols.html"
   },
   {
@@ -116,7 +116,7 @@
     "icon": "fas fa-th",
     "description": "一键将图片分割成九宫格，完美适配社交媒体发布，支持多种图片格式，智能裁剪处理，简单易用的在线工具",
     "tags": ["九宫格", "图片分割", "社交媒体", "朋友圈", "图片处理"],
-    "categories": ["image-processing", "social-media-tools"],
+    "categories": ["image"],
     "url": "tools/grid-image-splitter.html"
   },
   {
@@ -126,7 +126,7 @@
     "icon": "fas fa-exchange-alt",
     "description": "支持12种单位类型换算，包括温度、重量、面积、体积、长度、压力、功率、角度、电容、时间、速度、二进制，工程计算必备工具",
     "tags": ["单位换算", "单位转换", "度量衡", "工程计算", "进制转换"],
-    "categories": ["calculator-tools", "utility-tools"],
+    "categories": ["utility"],
     "url": "tools/unit-converter.html"
   },
   {
@@ -136,7 +136,7 @@
     "icon": "fas fa-exchange-alt",
     "description": "将飞书文档、PDF文件或公众号文章转换为符合博客风格的Markdown格式，自动生成frontmatter信息。",
     "tags": ["Markdown", "博客"],
-    "categories": ["document-processing", "content-creation"],
+    "categories": ["document"],
     "url": "tools/content-converter.html"
   },
   {
@@ -146,7 +146,7 @@
     "icon": "fas fa-users",
     "description": "支持复杂多层级亲戚关系计算，涵盖血缘关系和姻亲关系，提供详细称谓查询功能，帮助用户快速确定正确的亲戚称呼。",
     "tags": ["亲戚关系", "称谓查询", "家庭关系", "春节拜年"],
-    "categories": ["calculator-tools", "utility-tools"],
+    "categories": ["utility"],
     "url": "tools/relative-calculator.html"
   },
   {
@@ -156,7 +156,7 @@
     "icon": "fas fa-language",
     "description": "专业的简体繁体字转换工具，支持智能识别文本类型、双向转换、文件上传下载，适用于港澳台地区文档处理、学术研究、文化交流等场景。",
     "tags": ["简体字", "繁体字", "文字转换", "港澳台", "文档处理"],
-    "categories": ["encoding-conversion", "utility-tools"],
+    "categories": ["utility"],
     "url": "tools/chinese-converter.html"
   },
   {
@@ -166,7 +166,7 @@
     "icon": "fas fa-code",
     "description": "快速将文本转换为Base64编码，或将Base64编码解码为原始文本，支持中文和特殊字符。",
     "tags": ["编码", "解码"],
-    "categories": ["encoding-conversion"],
+    "categories": ["coding"],
     "url": "tools/base64-encoder.html"
   },
   {
@@ -176,7 +176,7 @@
     "icon": "fas fa-vial",
     "description": "这是一个示例工具，展示了工具的基本结构和样式。您可以基于此模板开发新的工具。",
     "tags": ["示例", "模板"],
-    "categories": ["utility-tools"],
+    "categories": ["utility"],
     "url": "tools/example-tool.html"
   },
   {
@@ -186,7 +186,7 @@
     "icon": "fas fa-image",
     "description": "生成标题+核心观点+对比表格+总结性建议的内容卡片，支持多种背景颜色，可下载为图片。",
     "tags": ["图片", "卡片", "对比"],
-    "categories": ["content-creation", "design-graphics"],
+    "categories": ["design"],
     "url": "tools/content-card-generator.html"
   },
   {
@@ -196,7 +196,7 @@
     "icon": "fas fa-book",
     "description": "输入日记内容，自动生成精美的小红书风格日记卡片，支持多种背景颜色，可下载为图片。",
     "tags": ["小红书", "日记", "卡片"],
-    "categories": ["content-creation", "design-graphics"],
+    "categories": ["design"],
     "url": "tools/xiaohongshu-diary-card.html"
   },
   {
@@ -206,7 +206,7 @@
     "icon": "fas fa-quote-left",
     "description": "输入名言警句或励志语录，生成精美的每日一句卡片，支持多种样式和颜色，可下载为图片。",
     "tags": ["名言", "卡片", "励志"],
-    "categories": ["content-creation", "design-graphics"],
+    "categories": ["design"],
     "url": "tools/daily-quote-card.html"
   },
   {
@@ -216,7 +216,7 @@
     "icon": "fas fa-calculator",
     "description": "输入月薪、工作天数和时长，实时计算每秒钟赚取的金额，让摸鱼更有成就感。支持元、角、分单位切换。",
     "tags": ["计算器", "摸鱼", "薪资"],
-    "categories": ["calculator-tools", "utility-tools"],
+    "categories": ["utility"],
     "url": "tools/idle-calculator.html"
   },
   {
@@ -226,7 +226,7 @@
     "icon": "fas fa-chart-line",
     "description": "根据您的月收入、月支出和当前年龄，计算达到财富自由所需的时间，并提供实时倒计时和进度显示。",
     "tags": ["财富自由", "理财", "计算器"],
-    "categories": ["calculator-tools"],
+    "categories": ["finance"],
     "url": "tools/wealth-freedom-calculator.html"
   },
   {
@@ -236,7 +236,7 @@
     "icon": "fas fa-home",
     "description": "设定购房或购车目标，计算还需多少时间和金钱达成目标，还能换算成奶茶杯数让目标更有趣。",
     "tags": ["买房", "买车", "倒计时", "理财"],
-    "categories": ["calculator-tools"],
+    "categories": ["finance"],
     "url": "tools/house-car-countdown.html"
   },
   {
@@ -246,7 +246,7 @@
     "icon": "fas fa-images",
     "description": "专业的海报批量处理工具，支持背景图与多张图片合并，自动居中适配，支持缩放旋转，一键生成高质量海报。",
     "tags": ["海报", "图片合并", "批量处理", "设计"],
-    "categories": ["image-processing", "design-graphics"],
+    "categories": ["image"],
     "url": "tools/poster-batch-processor.html"
   },
   {
@@ -256,7 +256,7 @@
     "icon": "fas fa-calendar-alt",
     "description": "免费在线节日倒计时工具，支持全球节日查询，智能提醒节日活动和注意事项。自动识别用户所在地区，支持多语言，让您不错过任何重要节日。",
     "tags": ["节日", "倒计时", "日历", "假期", "提醒"],
-    "categories": ["utility-tools", "lifestyle"],
+    "categories": ["lifestyle"],
     "url": "tools/festival-countdown.html"
   },
   {
@@ -266,7 +266,7 @@
     "icon": "fas fa-file-pdf",
     "description": "支持JPG、PNG、GIF、BMP等格式，可拖拽上传多张图片，支持拖拽排序，一键生成PDF文档并下载。",
     "tags": ["PDF", "图片转换", "批量处理", "文档"],
-    "categories": ["image-processing", "document-processing"],
+    "categories": ["image"],
     "url": "tools/image-to-pdf.html"
   },
   {
@@ -276,7 +276,7 @@
     "icon": "fas fa-shield-alt",
     "description": "支持PDF、Word、Excel文件加密，使用军用级AES-256加密算法，支持批量加密，本地处理确保安全。",
     "tags": ["加密", "密码保护", "文档安全", "批量处理"],
-    "categories": ["document-processing", "security-privacy"],
+    "categories": ["document"],
     "url": "tools/file-encryptor.html"
   },
   {
@@ -286,7 +286,7 @@
     "icon": "fas fa-stamp",
     "description": "专业的PDF水印处理工具，支持添加自定义文字水印和移除水印，可调整字体大小、颜色、透明度、旋转角度和位置，支持批量处理。",
     "tags": ["PDF", "水印", "文档保护", "批量处理", "版权保护"],
-    "categories": ["document-processing", "security-privacy"],
+    "categories": ["document"],
     "url": "tools/pdf-watermark.html"
   },
   {
@@ -296,7 +296,7 @@
     "icon": "fas fa-text-width",
     "description": "使用先进OCR技术快速识别图片中的文字内容，支持中英文识别，支持多种图片格式，批量处理，本地处理保护隐私。",
     "tags": ["OCR", "文字识别", "图片处理", "批量处理", "文字提取"],
-    "categories": ["image-processing", "utility-tools"],
+    "categories": ["image"],
     "url": "tools/image-text-extractor.html"
   },
   {
@@ -306,7 +306,7 @@
     "icon": "fas fa-exchange-alt",
     "description": "支持PDF转Word、PDF转Excel、PDF转图片、PDF转长图等多种格式转换，高质量输出，本地处理保护隐私安全。",
     "tags": ["PDF转换", "格式转换", "Word", "Excel", "图片", "文档处理"],
-    "categories": ["document-processing", "encoding-conversion"],
+    "categories": ["document"],
     "url": "tools/pdf-converter.html"
   },
   {
@@ -316,7 +316,7 @@
     "icon": "fas fa-images",
     "description": "支持图片转Word、图片转Excel、图片转PDF、合并长图等多种格式转换，支持JPG、PNG、GIF、BMP、WEBP等格式，本地处理保护隐私。",
     "tags": ["图片转换", "格式转换", "Word", "Excel", "PDF", "长图合并", "图片处理"],
-    "categories": ["image-processing", "encoding-conversion"],
+    "categories": ["image"],
     "url": "tools/image-format-converter.html"
   },
   {
@@ -326,7 +326,7 @@
     "icon": "fas fa-pencil-alt",
     "description": "将动漫图片转换为铅笔线稿，适合儿童涂色使用。支持JPG、PNG等格式，可调整边缘检测强度、线条粗细和对比度，本地处理保护隐私。",
     "tags": ["动漫转线稿", "图片转铅笔画", "线稿生成", "涂色线稿", "图片处理", "儿童涂色"],
-    "categories": ["image-processing", "design-graphics"],
+    "categories": ["image"],
     "url": "tools/anime-to-sketch.html"
   },
   {
@@ -336,7 +336,7 @@
     "icon": "fas fa-eraser",
     "description": "专业的在线图片水印去除工具，支持AI智能检测和手动选择水印区域，一键清除各种水印。支持JPG、PNG、WEBP等多种格式，完全免费使用。",
     "tags": ["水印去除", "图片水印清除", "AI水印检测", "在线水印去除", "图片处理工具", "免费水印清除"],
-    "categories": ["image-processing", "security-privacy"],
+    "categories": ["image"],
     "url": "tools/watermark-remover.html"
   },
   {
@@ -346,7 +346,7 @@
     "icon": "fas fa-globe",
     "description": "专业的全球时差计算工具，实时显示世界各地时间、时区、日出日落时间，支持农历公历对比，完美解决时差问题。",
     "tags": ["时差计算", "世界时间", "时区转换", "日出日落", "农历公历", "全球时间"],
-    "categories": ["calculator-tools", "utility-tools"],
+    "categories": ["utility"],
     "url": "tools/timezone-calculator.html"
   },
   {
@@ -356,7 +356,7 @@
     "icon": "fas fa-compress-alt",
     "description": "专业的在线图片压缩工具，支持批量压缩JPG、PNG、WebP等格式，智能算法保持图片清晰度，自定义压缩率，完全免费使用。",
     "tags": ["图片压缩", "在线压缩", "批量压缩", "JPG压缩", "PNG压缩", "WebP压缩", "图片优化"],
-    "categories": ["image-processing"],
+    "categories": ["image"],
     "url": "tools/image-compressor.html"
   },
   {
@@ -366,7 +366,7 @@
     "icon": "fas fa-dragon",
     "description": "免费在线生肖计算器，支持年份查询生肖、生肖查询年份、年龄计算生肖等功能。提供完整的十二生肖年历表，准确计算生肖属相和年龄信息。",
     "tags": ["生肖计算器", "十二生肖", "生肖查询", "年份生肖", "属相计算", "生肖年历", "年龄计算器", "生肖属相查询"],
-    "categories": ["calculator-tools", "utility-tools"],
+    "categories": ["utility"],
     "url": "tools/zodiac-calculator.html"
   },
   {
@@ -376,7 +376,7 @@
     "icon": "fas fa-id-card",
     "description": "专业的身份证前四位户籍查询工具，输入身份证前四位数字，快速查询户籍所在地信息，支持全国各省市县区查询，完全免费使用。",
     "tags": ["身份证查询", "户籍查询", "身份证前四位", "户籍所在地", "身份证归属地", "行政区划代码"],
-    "categories": ["utility-tools"],
+    "categories": ["utility"],
     "url": "tools/id-location-query.html"
   },
   {
@@ -386,7 +386,7 @@
     "icon": "fas fa-image",
     "description": "专业的图片Base64编码转换工具，支持图片转Base64和Base64转图片双向转换。支持多种输入方式：文件上传、链接输入、拖拽、剪贴板粘贴等，完全免费使用。",
     "tags": ["图片转Base64", "Base64编码", "图片编码", "Base64转图片", "图片处理", "编码转换"],
-    "categories": ["encoding-conversion", "image-processing"],
+    "categories": ["utility"],
     "url": "tools/image-to-base64.html"
   },
   {
@@ -396,7 +396,7 @@
     "icon": "fas fa-code",
     "description": "专业的信息编码转换工具，支持Unicode、UTF-8、UTF-16、URL、Base64、MD5、Hex、Binary等多种格式的编解码转换，一键转换多种格式，完全免费使用。",
     "tags": ["编码转换", "Unicode", "UTF-8", "Base64", "URL编码", "MD5", "Hex", "Binary"],
-    "categories": ["encoding-conversion", "utility-tools"],
+    "categories": ["utility"],
     "url": "tools/encoding-converter.html"
   },
   {
@@ -406,7 +406,7 @@
     "icon": "fas fa-clock",
     "description": "专业的时间戳转换工具，支持时间戳与本地时间双向转换，支持秒/毫秒时间戳，世界时区显示，实时时间更新，完全免费使用。",
     "tags": ["时间戳转换", "时间转换", "Unix时间戳", "世界时区", "时间格式化", "本地时间"],
-    "categories": ["utility-tools", "calculator-tools"],
+    "categories": ["utility"],
     "url": "tools/timestamp-converter.html"
   },
   {
@@ -416,7 +416,7 @@
     "icon": "fas fa-palette",
     "description": "专业的颜色转换工具，支持HEX、RGB、HSL、CMYK等多种颜色格式相互转换，实时颜色预览，调色板选择，随机颜色生成，完全免费使用。",
     "tags": ["颜色转换", "HEX转RGB", "RGB转HEX", "HSL", "CMYK", "调色板", "颜色代码"],
-    "categories": ["utility-tools", "design-graphics"],
+    "categories": ["utility"],
     "url": "tools/color-converter.html"
   },
   {
@@ -426,7 +426,7 @@
     "icon": "fas fa-code",
     "description": "专业的多语言代码美化工具，支持JavaScript、CSS、HTML、XML、SQL、JSON等多种编程语言的代码格式化和美化，提供语法高亮、自动缩进、代码压缩等功能，完全免费使用。",
     "tags": ["代码美化", "代码格式化", "JavaScript", "CSS", "HTML", "XML", "SQL", "JSON", "语法高亮"],
-    "categories": ["utility-tools", "content-creation"],
+    "categories": ["coding"],
     "url": "tools/code-beautifier.html"
   },
   {
@@ -436,7 +436,7 @@
     "icon": "fas fa-plug",
     "description": "专业的在线API接口测试工具，支持GET、POST、HEAD等HTTP请求方式，提供请求头配置、请求体编辑、JSON格式化、响应结果展示等功能，是开发调试的必备工具。",
     "tags": ["API测试", "接口调试", "HTTP请求", "Postman", "JSON格式化", "开发工具"],
-    "categories": ["utility-tools", "content-creation"],
+    "categories": ["coding"],
     "url": "tools/api-tester.html"
   },
   {
@@ -446,7 +446,7 @@
     "icon": "fas fa-search",
     "description": "专业的在线JavaScript正则表达式测试工具，提供常用正则模板，支持实时匹配和高亮显示，正则表达式学习和调试的最佳选择。",
     "tags": ["正则表达式", "正则测试", "JavaScript正则", "正则匹配", "正则高亮", "正则工具", "在线正则", "开发工具", "文本匹配"],
-    "categories": ["utility-tools", "content-creation"],
+    "categories": ["coding"],
     "url": "tools/regex-tester.html"
   }
 ]

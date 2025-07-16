@@ -1197,6 +1197,9 @@
             // 加载最近更新
             loadUpdates();
             
+            // 新的分类管理器会自动初始化
+            console.log('页面加载完成，等待 ToolCategoryManager 自动初始化...');
+            
             // 搜索功能
             document.getElementById('search-input').addEventListener('input', function(e) {
                 const searchTerm = e.target.value.toLowerCase();
@@ -1235,6 +1238,6 @@
             });
         });
     </script>
-    <script src="js/category-manager.js"></script>
+    <script src="js/category-manager.js?v=3.0"></script>
 </body>
 </html>
