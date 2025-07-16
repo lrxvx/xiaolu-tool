@@ -1,5 +1,15 @@
 [
   {
+    "id": "json-processor",
+    "name": "JSON处理工具",
+    "shortDesc": "在线JSON美化、比对、格式化工具",
+    "icon": "fas fa-code",
+    "description": "免费在线JSON处理工具，支持JSON美化格式化、JSON比对差异检测、JSON模板生成。提供乱码解码、排序、BigInt处理、编辑下载等功能。",
+    "tags": ["JSON处理", "JSON美化", "JSON比对", "JSON格式化", "数据处理"],
+    "categories": ["encoding-conversion", "utility-tools", "data-analysis"],
+    "url": "tools/json-processor.html"
+  },
+  {
     "id": "menstrual-cycle-calculator",
     "name": "女性生理周期计算器",
     "shortDesc": "智能预测经期、排卵期和安全期",
@@ -350,6 +360,16 @@
     "url": "tools/image-compressor.html"
   },
   {
+    "id": "zodiac-calculator",
+    "name": "生肖计算器",
+    "shortDesc": "十二生肖年份查询工具",
+    "icon": "fas fa-dragon",
+    "description": "免费在线生肖计算器，支持年份查询生肖、生肖查询年份、年龄计算生肖等功能。提供完整的十二生肖年历表，准确计算生肖属相和年龄信息。",
+    "tags": ["生肖计算器", "十二生肖", "生肖查询", "年份生肖", "属相计算", "生肖年历", "年龄计算器", "生肖属相查询"],
+    "categories": ["calculator-tools", "utility-tools"],
+    "url": "tools/zodiac-calculator.html"
+  },
+  {
     "id": "id-location-query",
     "name": "身份证前四位户籍查询工具",
     "shortDesc": "快速查询户籍所在地信息",
@@ -358,5 +378,75 @@
     "tags": ["身份证查询", "户籍查询", "身份证前四位", "户籍所在地", "身份证归属地", "行政区划代码"],
     "categories": ["utility-tools"],
     "url": "tools/id-location-query.html"
+  },
+  {
+    "id": "image-to-base64",
+    "name": "图片转Base64编码工具",
+    "shortDesc": "图片与Base64编码互转工具",
+    "icon": "fas fa-image",
+    "description": "专业的图片Base64编码转换工具，支持图片转Base64和Base64转图片双向转换。支持多种输入方式：文件上传、链接输入、拖拽、剪贴板粘贴等，完全免费使用。",
+    "tags": ["图片转Base64", "Base64编码", "图片编码", "Base64转图片", "图片处理", "编码转换"],
+    "categories": ["encoding-conversion", "image-processing"],
+    "url": "tools/image-to-base64.html"
+  },
+  {
+    "id": "encoding-converter",
+    "name": "信息编码转换工具",
+    "shortDesc": "多格式信息编解码转换",
+    "icon": "fas fa-code",
+    "description": "专业的信息编码转换工具，支持Unicode、UTF-8、UTF-16、URL、Base64、MD5、Hex、Binary等多种格式的编解码转换，一键转换多种格式，完全免费使用。",
+    "tags": ["编码转换", "Unicode", "UTF-8", "Base64", "URL编码", "MD5", "Hex", "Binary"],
+    "categories": ["encoding-conversion", "utility-tools"],
+    "url": "tools/encoding-converter.html"
+  },
+  {
+    "id": "timestamp-converter",
+    "name": "时间戳转换工具",
+    "shortDesc": "时间戳与本地时间互转",
+    "icon": "fas fa-clock",
+    "description": "专业的时间戳转换工具，支持时间戳与本地时间双向转换，支持秒/毫秒时间戳，世界时区显示，实时时间更新，完全免费使用。",
+    "tags": ["时间戳转换", "时间转换", "Unix时间戳", "世界时区", "时间格式化", "本地时间"],
+    "categories": ["utility-tools", "calculator-tools"],
+    "url": "tools/timestamp-converter.html"
+  },
+  {
+    "id": "color-converter",
+    "name": "颜色转换工具",
+    "shortDesc": "多种颜色格式互转工具",
+    "icon": "fas fa-palette",
+    "description": "专业的颜色转换工具，支持HEX、RGB、HSL、CMYK等多种颜色格式相互转换，实时颜色预览，调色板选择，随机颜色生成，完全免费使用。",
+    "tags": ["颜色转换", "HEX转RGB", "RGB转HEX", "HSL", "CMYK", "调色板", "颜色代码"],
+    "categories": ["utility-tools", "design-graphics"],
+    "url": "tools/color-converter.html"
+  },
+  {
+    "id": "code-beautifier",
+    "name": "代码美化工具",
+    "shortDesc": "多语言代码格式化美化工具",
+    "icon": "fas fa-code",
+    "description": "专业的多语言代码美化工具，支持JavaScript、CSS、HTML、XML、SQL、JSON等多种编程语言的代码格式化和美化，提供语法高亮、自动缩进、代码压缩等功能，完全免费使用。",
+    "tags": ["代码美化", "代码格式化", "JavaScript", "CSS", "HTML", "XML", "SQL", "JSON", "语法高亮"],
+    "categories": ["utility-tools", "content-creation"],
+    "url": "tools/code-beautifier.html"
+  },
+  {
+    "id": "api-tester",
+    "name": "简易版Postman",
+    "shortDesc": "在线API接口测试工具",
+    "icon": "fas fa-plug",
+    "description": "专业的在线API接口测试工具，支持GET、POST、HEAD等HTTP请求方式，提供请求头配置、请求体编辑、JSON格式化、响应结果展示等功能，是开发调试的必备工具。",
+    "tags": ["API测试", "接口调试", "HTTP请求", "Postman", "JSON格式化", "开发工具"],
+    "categories": ["utility-tools", "content-creation"],
+    "url": "tools/api-tester.html"
+  },
+  {
+    "id": "regex-tester",
+    "name": "JS正则表达式工具",
+    "shortDesc": "在线正则表达式测试器",
+    "icon": "fas fa-search",
+    "description": "专业的在线JavaScript正则表达式测试工具，提供常用正则模板，支持实时匹配和高亮显示，正则表达式学习和调试的最佳选择。",
+    "tags": ["正则表达式", "正则测试", "JavaScript正则", "正则匹配", "正则高亮", "正则工具", "在线正则", "开发工具", "文本匹配"],
+    "categories": ["utility-tools", "content-creation"],
+    "url": "tools/regex-tester.html"
   }
 ]

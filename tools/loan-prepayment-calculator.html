@@ -2,10 +2,6 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <!-- 导航栏和页脚组件 -->
-    <script src="../components/navbar.js"></script>
-    <script src="../components/footer.js"></script>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Favicon and Icons -->
@@ -805,11 +801,33 @@
     </main>
     
     <script>
-        // 初始化导航栏和页脚组件
+        // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', function() {
-            new NavbarComponent();
-            new FooterComponent();
+            // 动态加载导航栏和页脚
+            loadComponent('navbar', '../components/navbar.js');
+            loadComponent('footer', '../components/footer.js');
         });
+        
+        // 加载组件
+        function loadComponent(elementId, scriptPath) {
+            const script = document.createElement('script');
+            script.src = scriptPath;
+            script.onload = function() {
+                // 组件加载完成后初始化
+                if (elementId === 'navbar' && typeof NavbarComponent !== 'undefined') {
+                    const navbar = new NavbarComponent();
+                    const navbarStyles = document.createElement('style');
+                    navbarStyles.textContent = NavbarComponent.getStyles();
+                    document.head.appendChild(navbarStyles);
+                } else if (elementId === 'footer' && typeof FooterComponent !== 'undefined') {
+                    const footer = new FooterComponent();
+                    const footerStyles = document.createElement('style');
+                    footerStyles.textContent = FooterComponent.getStyles();
+                    document.head.appendChild(footerStyles);
+                }
+            };
+            document.head.appendChild(script);
+        }
 
         // 计算器核心功能
         document.getElementById('loanForm').addEventListener('submit', function(e) {

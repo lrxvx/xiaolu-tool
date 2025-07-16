@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO优化 -->
+    <title>代码美化工具 - 在线代码格式化 | 支持JavaScript、CSS、HTML、XML、SQL等多语言</title>
+    <meta name="description" content="免费在线代码美化工具，支持JavaScript、CSS、HTML、XML、SQL等多种编程语言的代码格式化和美化。一键整理代码结构，提升代码可读性，开发者必备工具。">
+    <meta name="keywords" content="代码美化,代码格式化,JavaScript美化,CSS格式化,HTML整理,XML格式化,SQL美化,在线工具,代码工具,开发工具">
+    <meta name="author" content="小路工具箱">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tools.example.com/code-beautifier">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="代码美化工具 - 在线代码格式化">
+    <meta property="og:description" content="免费在线代码美化工具，支持多种编程语言的代码格式化和美化">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.example.com/code-beautifier">
+    <meta property="og:image" content="https://tools.example.com/images/code-beautifier-preview.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="代码美化工具 - 在线代码格式化">
+    <meta name="twitter:description" content="免费在线代码美化工具，支持多种编程语言的代码格式化和美化">
+    <meta name="twitter:image" content="https://tools.example.com/images/code-beautifier-preview.jpg">
+    
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "代码美化工具",
+        "description": "免费在线代码美化工具，支持JavaScript、CSS、HTML、XML、SQL等多种编程语言的代码格式化和美化",
+        "url": "https://tools.example.com/code-beautifier",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All",
+        "permissions": "browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4361ee;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .tool-subtitle {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-main {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+        
+        .language-selector {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .language-selector label {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .language-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .language-selector select:focus {
+            outline: none;
+            border-color: #4361ee;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .code-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .code-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .code-section h3 {
+            font-size: 1.1rem;
+            color: #495057;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .code-textarea {
+            width: 100%;
+            height: 400px;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        .code-textarea:focus {
+            outline: none;
+            border-color: #4361ee;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .code-textarea[readonly] {
+            background-color: #f8f9fa;
+            cursor: default;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4361ee, #3f37c9);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .status-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .status-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .info-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .info-section h2 {
+            color: #4361ee;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .info-section h3 {
+            color: #495057;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .info-section p, .info-section li {
+            color: #6c757d;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-section ul {
+            padding-left: 1.5rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #4361ee;
+        }
+        
+        .feature-card h4 {
+            color: #4361ee;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .faq-section {
+            margin-top: 2rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            background: #f8f9fa;
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: #495057;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+        
+        .faq-question.active {
+            background: #4361ee;
+            color: white;
+        }
+        
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .faq-answer.active {
+            padding: 1rem;
+            max-height: 200px;
+        }
+        
+        .faq-answer p {
+            margin: 0;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        
+        .footer-info {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            color: #6c757d;
+        }
+        
+        .footer-info a {
+            color: #4361ee;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .tool-title {
+                font-size: 2rem;
+            }
+            
+            .code-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                justify-content: center;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 工具标题 -->
+        <div class="tool-header">
+            <h1 class="tool-title">
+                <span>🎨</span> 代码美化工具
+            </h1>
+            <p class="tool-subtitle">专业的在线代码格式化工具，支持JavaScript、CSS、HTML、XML、SQL等多种编程语言</p>
+        </div>
+        
+        <!-- 工具功能实现 -->
+        <div class="tool-main">
+            <div class="language-selector">
+                <label for="languageSelect">选择语言：</label>
+                <select id="languageSelect">
+                    <option value="javascript">JavaScript</option>
+                    <option value="css">CSS</option>
+                    <option value="html">HTML</option>
+                    <option value="xml">XML</option>
+                    <option value="sql">SQL</option>
+                    <option value="json">JSON</option>
+                </select>
+            </div>
+            
+            <div class="code-container">
+                <div class="code-section">
+                    <h3>📝 输入代码</h3>
+                    <textarea id="inputCode" class="code-textarea" placeholder="请在此处粘贴您需要美化的代码..."></textarea>
+                </div>
+                <div class="code-section">
+                    <h3>✨ 美化结果</h3>
+                    <textarea id="outputCode" class="code-textarea" readonly placeholder="美化后的代码将在此处显示..."></textarea>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="beautifyCode()">
+                    <span>✨</span> 美化代码
+                </button>
+                <button class="btn btn-success" onclick="copyResult()">
+                    <span>📋</span> 复制结果
+                </button>
+                <button class="btn btn-secondary" onclick="clearAll()">
+                    <span>🗑️</span> 清空内容
+                </button>
+                <button class="btn btn-secondary" onclick="loadExample()">
+                    <span>📄</span> 加载示例
+                </button>
+            </div>
+        </div>
+        
+        <!-- 使用指南 -->
+        <div class="info-section">
+            <h2>📖 使用指南</h2>
+            <ol>
+                <li>选择您要美化的代码语言类型</li>
+                <li>将需要格式化的代码粘贴到左侧输入框中</li>
+                <li>点击"美化代码"按钮进行格式化</li>
+                <li>右侧将显示美化后的代码结果</li>
+                <li>点击"复制结果"可以快速复制格式化后的代码</li>
+            </ol>
+        </div>
+        
+        <!-- 工具详细介绍 -->
+        <div class="info-section">
+            <h2>🔧 工具详细介绍</h2>
+            <p>代码美化工具是一款专业的在线代码格式化工具，旨在帮助开发者快速整理和美化各种编程语言的代码。无论您是前端开发者、后端工程师还是数据库管理员，这款工具都能满足您的代码格式化需求。</p>
+            
+            <h3>🎯 核心功能</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>多语言支持</h4>
+                    <p>支持JavaScript、CSS、HTML、XML、SQL、JSON等主流编程语言的代码美化</p>
+                </div>
+                <div class="feature-card">
+                    <h4>智能格式化</h4>
+                    <p>自动识别代码结构，智能添加缩进、换行和空格，提升代码可读性</p>
+                </div>
+                <div class="feature-card">
+                    <h4>实时处理</h4>
+                    <p>无需等待，点击即可获得格式化结果，提高开发效率</p>
+                </div>
+                <div class="feature-card">
+                    <h4>一键复制</h4>
+                    <p>格式化完成后可一键复制结果，方便快速使用</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 工具优势 -->
+        <div class="info-section">
+            <h2>🌟 为什么选择我们的代码美化工具</h2>
+            <ul>
+                <li><strong>完全免费：</strong>无需注册，无需付费，永久免费使用</li>
+                <li><strong>隐私安全：</strong>所有代码处理均在本地完成，不会上传到服务器</li>
+                <li><strong>多平台兼容：</strong>支持Windows、Mac、Linux等所有操作系统</li>
+                <li><strong>响应式设计：</strong>完美适配桌面端、平板和手机等各种设备</li>
+                <li><strong>专业品质：</strong>采用业界标准的代码格式化算法，确保结果准确</li>
+                <li><strong>持续更新：</strong>定期添加新的编程语言支持，功能不断完善</li>
+            </ul>
+        </div>
+        
+        <!-- 应用场景 -->
+        <div class="info-section">
+            <h2>🎯 应用场景</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>代码审查</h4>
+                    <p>在代码审查前格式化代码，提高代码可读性，便于团队协作</p>
+                </div>
+                <div class="feature-card">
+                    <h4>学习交流</h4>
+                    <p>整理代码格式后分享给同事或在技术论坛发布，提升专业形象</p>
+                </div>
+                <div class="feature-card">
+                    <h4>项目维护</h4>
+                    <p>维护老项目时快速格式化混乱的代码，提高维护效率</p>
+                </div>
+                <div class="feature-card">
+                    <h4>教学演示</h4>
+                    <p>教师和培训师可以用来整理示例代码，提高教学质量</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 常见问题 -->
+        <div class="info-section">
+            <h2>❓ 常见问题</h2>
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>支持哪些编程语言？</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>目前支持JavaScript、CSS、HTML、XML、SQL、JSON等主流编程语言，我们会持续添加更多语言支持。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>代码会被上传到服务器吗？</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>不会。所有代码处理都在您的浏览器本地完成，我们不会收集或存储您的任何代码内容，确保您的代码安全。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>有代码长度限制吗？</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>理论上没有严格限制，但为了保证处理速度和浏览器性能，建议单次处理的代码不超过10MB。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>如何处理语法错误的代码？</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>工具会尽力格式化有语法错误的代码，但可能无法完美处理。建议先修复明显的语法错误再进行美化。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>可以自定义格式化规则吗？</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>当前版本使用标准的格式化规则，未来版本会考虑添加自定义配置选项，如缩进大小、换行风格等。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚信息 -->
+    <div class="footer-info">
+        <p>© 2025 代码美化工具 - 专业的在线代码格式化解决方案</p>
+        <p>技术支持和问题反馈：<a href="https://t.zsxq.com/17wTksRxX" target="_blank">联系我们</a></p>
+    </div>
+    
+    <script>
+        // 代码美化功能实现
+        function beautifyCode() {
+            const inputCode = document.getElementById('inputCode').value.trim();
+            const language = document.getElementById('languageSelect').value;
+            const outputElement = document.getElementById('outputCode');
+            
+            if (!inputCode) {
+                showMessage('请输入需要美化的代码', 'error');
+                return;
+            }
+            
+            try {
+                let beautifiedCode = '';
+                
+                switch (language) {
+                    case 'javascript':
+                        beautifiedCode = beautifyJavaScript(inputCode);
+                        break;
+                    case 'css':
+                        beautifiedCode = beautifyCSS(inputCode);
+                        break;
+                    case 'html':
+                        beautifiedCode = beautifyHTML(inputCode);
+                        break;
+                    case 'xml':
+                        beautifiedCode = beautifyXML(inputCode);
+                        break;
+                    case 'sql':
+                        beautifiedCode = beautifySQL(inputCode);
+                        break;
+                    case 'json':
+                        beautifiedCode = beautifyJSON(inputCode);
+                        break;
+                    default:
+                        beautifiedCode = inputCode;
+                }
+                
+                outputElement.value = beautifiedCode;
+                showMessage('代码美化完成！', 'success');
+            } catch (error) {
+                showMessage('代码美化失败：' + error.message, 'error');
+            }
+        }
+        
+        // JavaScript代码美化
+        function beautifyJavaScript(code) {
+            // 简化的JavaScript美化逻辑
+            let result = code
+                .replace(/;/g, ';\n')
+                .replace(/{/g, '{\n')
+                .replace(/}/g, '\n}\n')
+                .replace(/,/g, ',\n')
+                .replace(/\n\s*\n/g, '\n');
+            
+            return formatIndentation(result);
+        }
+        
+        // CSS代码美化
+        function beautifyCSS(code) {
+            let result = code
+                .replace(/{/g, ' {\n')
+                .replace(/}/g, '\n}\n')
+                .replace(/;/g, ';\n')
+                .replace(/,/g, ',\n')
+                .replace(/\n\s*\n/g, '\n');
+            
+            return formatIndentation(result);
+        }
+        
+        // HTML代码美化
+        function beautifyHTML(code) {
+            let result = code
+                .replace(/></g, '>\n<')
+                .replace(/\n\s*\n/g, '\n');
+            
+            return formatIndentation(result);
+        }
+        
+        // XML代码美化
+        function beautifyXML(code) {
+            let result = code
+                .replace(/></g, '>\n<')
+                .replace(/\n\s*\n/g, '\n');
+            
+            return formatIndentation(result);
+        }
+        
+        // SQL代码美化
+        function beautifySQL(code) {
+            const keywords = ['SELECT', 'FROM', 'WHERE', 'JOIN', 'INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'ORDER BY', 'GROUP BY', 'HAVING', 'INSERT', 'UPDATE', 'DELETE', 'CREATE', 'ALTER', 'DROP'];
+            
+            let result = code.toUpperCase();
+            keywords.forEach(keyword => {
+                const regex = new RegExp('\\b' + keyword + '\\b', 'gi');
+                result = result.replace(regex, '\n' + keyword);
+            });
+            
+            return result.replace(/\n\s*\n/g, '\n').trim();
+        }
+        
+        // JSON代码美化
+        function beautifyJSON(code) {
+            try {
+                const parsed = JSON.parse(code);
+                return JSON.stringify(parsed, null, 2);
+            } catch (error) {
+                throw new Error('无效的JSON格式');
+            }
+        }
+        
+        // 格式化缩进
+        function formatIndentation(code) {
+            const lines = code.split('\n');
+            let indentLevel = 0;
+            const indentSize = 2;
+            
+            return lines.map(line => {
+                const trimmedLine = line.trim();
+                if (!trimmedLine) return '';
+                
+                // 减少缩进
+                if (trimmedLine.includes('}') || trimmedLine.includes('</')) {
+                    indentLevel = Math.max(0, indentLevel - 1);
+                }
+                
+                const indentedLine = ' '.repeat(indentLevel * indentSize) + trimmedLine;
+                
+                // 增加缩进
+                if (trimmedLine.includes('{') || (trimmedLine.includes('<') && !trimmedLine.includes('</'))) {
+                    indentLevel++;
+                }
+                
+                return indentedLine;
+            }).join('\n');
+        }
+        
+        // 复制结果
+        function copyResult() {
+            const outputCode = document.getElementById('outputCode').value;
+            if (!outputCode.trim()) {
+                showMessage('没有可复制的内容', 'error');
+                return;
+            }
+            
+            navigator.clipboard.writeText(outputCode).then(() => {
+                showMessage('代码已复制到剪贴板', 'success');
+            }).catch(() => {
+                // 降级方案
+                const textArea = document.createElement('textarea');
+                textArea.value = outputCode;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showMessage('代码已复制到剪贴板', 'success');
+            });
+        }
+        
+        // 清空所有内容
+        function clearAll() {
+            document.getElementById('inputCode').value = '';
+            document.getElementById('outputCode').value = '';
+            showMessage('内容已清空', 'success');
+        }
+        
+        // 加载示例代码
+        function loadExample() {
+            const language = document.getElementById('languageSelect').value;
+            const examples = {
+                javascript: `function calculateSum(a,b){if(typeof a!=='number'||typeof b!=='number'){throw new Error('参数必须是数字');}return a+b;}const result=calculateSum(10,20);console.log('结果:',result);`,
+                css: `.container{display:flex;justify-content:center;align-items:center;height:100vh;background:linear-gradient(45deg,#ff6b6b,#4ecdc4);}.card{background:white;padding:2rem;border-radius:10px;box-shadow:0 4px 6px rgba(0,0,0,0.1);}`,
+                html: `<div class="container"><header class="header"><h1>欢迎</h1></header><main class="main"><p>这是一个示例</p></main><footer class="footer"><p>版权所有</p></footer></div>`,
+                xml: `<root><user id="1"><name>张三</name><email>zhangsan@example.com</email><age>25</age></user><user id="2"><name>李四</name><email>lisi@example.com</email><age>30</age></user></root>`,
+                sql: `select u.id,u.name,u.email,p.title from users u inner join posts p on u.id=p.user_id where u.status='active' and p.published_at>='2024-01-01' order by p.created_at desc;`,
+                json: `{"users":[{"id":1,"name":"张三","email":"zhangsan@example.com","profile":{"age":25,"city":"北京"}},{"id":2,"name":"李四","email":"lisi@example.com","profile":{"age":30,"city":"上海"}}]}`
+            };
+            
+            document.getElementById('inputCode').value = examples[language] || '';
+            showMessage('示例代码已加载', 'success');
+        }
+        
+        // 显示消息
+        function showMessage(message, type = 'success') {
+            // 移除现有消息
+            const existingMessage = document.querySelector('.status-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // 创建新消息
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `status-message status-${type}`;
+            messageDiv.textContent = message;
+            
+            // 插入到工具主区域顶部
+            const toolMain = document.querySelector('.tool-main');
+            toolMain.insertBefore(messageDiv, toolMain.firstChild);
+            
+            // 3秒后自动移除
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 3000);
+        }
+        
+        // FAQ切换
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const isActive = element.classList.contains('active');
+            
+            // 关闭所有FAQ
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.classList.remove('active');
+                q.nextElementSibling.classList.remove('active');
+            });
+            
+            // 如果当前不是激活状态，则激活
+            if (!isActive) {
+                element.classList.add('active');
+                answer.classList.add('active');
+            }
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 动态加载导航栏和页脚
+            loadComponent('navbar', '../components/navbar.js');
+            loadComponent('footer', '../components/footer.js');
+        });
+        
+        // 加载组件
+        function loadComponent(elementId, scriptPath) {
+            const script = document.createElement('script');
+            script.src = scriptPath;
+            script.onload = function() {
+                // 组件加载完成后初始化
+                if (elementId === 'navbar' && typeof NavbarComponent !== 'undefined') {
+                    const navbar = new NavbarComponent();
+                    const navbarStyles = document.createElement('style');
+                    navbarStyles.textContent = NavbarComponent.getStyles();
+                    document.head.appendChild(navbarStyles);
+                } else if (elementId === 'footer' && typeof FooterComponent !== 'undefined') {
+                    const footer = new FooterComponent();
+                    const footerStyles = document.createElement('style');
+                    footerStyles.textContent = FooterComponent.getStyles();
+                    document.head.appendChild(footerStyles);
+                }
+            };
+            document.head.appendChild(script);
+        }
+    </script>
+</body>
+</html>

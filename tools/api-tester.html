@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO优化 -->
+    <title>简易版Postman - 在线API接口测试工具 | 支持GET/POST/HEAD请求和JSON格式化</title>
+    <meta name="description" content="免费在线API接口测试工具，支持GET、POST、HEAD等HTTP请求方式，自动JSON格式化，开发者调试接口的最佳选择。简单易用的Postman替代方案。">
+    <meta name="keywords" content="API测试,接口测试,Postman,HTTP请求,GET请求,POST请求,JSON格式化,接口调试,在线工具,开发工具">
+    <meta name="author" content="小路工具箱">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tools.example.com/api-tester">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="简易版Postman - 在线API接口测试工具">
+    <meta property="og:description" content="免费在线API接口测试工具，支持多种HTTP请求方式和JSON格式化">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.example.com/api-tester">
+    <meta property="og:image" content="https://tools.example.com/images/api-tester-preview.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="简易版Postman - 在线API接口测试工具">
+    <meta name="twitter:description" content="免费在线API接口测试工具，支持多种HTTP请求方式和JSON格式化">
+    <meta name="twitter:image" content="https://tools.example.com/images/api-tester-preview.jpg">
+    
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "简易版Postman",
+        "description": "免费在线API接口测试工具，支持GET、POST、HEAD等HTTP请求方式，自动JSON格式化",
+        "url": "https://tools.example.com/api-tester",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All",
+        "permissions": "browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4361ee;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .tool-subtitle {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-main {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+        
+        .request-section {
+            margin-bottom: 2rem;
+        }
+        
+        .request-line {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .method-select {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+        
+        .method-select:focus {
+            outline: none;
+            border-color: #4361ee;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .url-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            min-width: 300px;
+        }
+        
+        .url-input:focus {
+            outline: none;
+            border-color: #4361ee;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .send-btn {
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, #4361ee, #3f37c9);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .send-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e9ecef;
+            margin-bottom: 1rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            color: #4361ee;
+            border-bottom-color: #4361ee;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .headers-section, .body-section {
+            margin-bottom: 1rem;
+        }
+        
+        .header-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            align-items: center;
+        }
+        
+        .header-input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .header-input:focus {
+            outline: none;
+            border-color: #4361ee;
+        }
+        
+        .add-header-btn, .remove-header-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .add-header-btn {
+            background: #28a745;
+            color: white;
+        }
+        
+        .remove-header-btn {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .body-textarea {
+            width: 100%;
+            height: 200px;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        .body-textarea:focus {
+            outline: none;
+            border-color: #4361ee;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .response-section {
+            margin-top: 2rem;
+        }
+        
+        .response-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .response-status {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .status-success {
+            color: #28a745;
+        }
+        
+        .status-error {
+            color: #dc3545;
+        }
+        
+        .response-time {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .response-body {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .response-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4361ee;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .info-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .info-section h2 {
+            color: #4361ee;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .info-section h3 {
+            color: #495057;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .info-section p, .info-section li {
+            color: #6c757d;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-section ul {
+            padding-left: 1.5rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #4361ee;
+        }
+        
+        .feature-card h4 {
+            color: #4361ee;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .faq-section {
+            margin-top: 2rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            background: #f8f9fa;
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: #495057;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+        
+        .faq-question.active {
+            background: #4361ee;
+            color: white;
+        }
+        
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .faq-answer.active {
+            padding: 1rem;
+            max-height: 200px;
+        }
+        
+        .faq-answer p {
+            margin: 0;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        
+        .footer-info {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            color: #6c757d;
+        }
+        
+        .footer-info a {
+            color: #4361ee;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .tool-title {
+                font-size: 2rem;
+            }
+            
+            .request-line {
+                flex-direction: column;
+            }
+            
+            .url-input {
+                min-width: 100%;
+            }
+            
+            .header-row {
+                flex-direction: column;
+            }
+            
+            .header-input {
+                width: 100%;
+            }
+            
+            .response-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 工具标题 -->
+        <div class="tool-header">
+            <h1 class="tool-title">
+                <span>☯</span> 简易版Postman
+            </h1>
+            <p class="tool-subtitle">专业的在线API接口测试工具，支持GET、POST、HEAD请求方式，自动JSON格式化</p>
+        </div>
+        
+        <!-- 工具功能实现 -->
+        <div class="tool-main">
+            <!-- 请求配置区域 -->
+            <div class="request-section">
+                <div class="request-line">
+                    <select id="methodSelect" class="method-select">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="HEAD">HEAD</option>
+                        <option value="PUT">PUT</option>
+                        <option value="DELETE">DELETE</option>
+                        <option value="PATCH">PATCH</option>
+                    </select>
+                    <input type="text" id="urlInput" class="url-input" placeholder="请输入API接口地址，例如：https://api.example.com/users" value="https://jsonplaceholder.typicode.com/posts/1">
+                    <button id="sendBtn" class="send-btn" onclick="sendRequest()">
+                        <span>🚀</span> 发送请求
+                    </button>
+                </div>
+                
+                <!-- 请求配置选项卡 -->
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('headers')">请求头</button>
+                    <button class="tab" onclick="switchTab('body')">请求体</button>
+                </div>
+                
+                <!-- 请求头配置 -->
+                <div id="headers-tab" class="tab-content active">
+                    <div class="headers-section">
+                        <div id="headersContainer">
+                            <div class="header-row">
+                                <input type="text" class="header-input" placeholder="Header名称" value="Content-Type">
+                                <input type="text" class="header-input" placeholder="Header值" value="application/json">
+                                <button class="remove-header-btn" onclick="removeHeader(this)">删除</button>
+                            </div>
+                        </div>
+                        <button class="add-header-btn" onclick="addHeader()">+ 添加请求头</button>
+                    </div>
+                </div>
+                
+                <!-- 请求体配置 -->
+                <div id="body-tab" class="tab-content">
+                    <div class="body-section">
+                        <textarea id="requestBody" class="body-textarea" placeholder="请输入请求体内容（JSON格式）...">{\n  \"title\": \"测试标题\",\n  \"body\": \"测试内容\",\n  \"userId\": 1\n}</textarea>
+                        <div style="margin-top: 0.5rem;">
+                            <button class="btn btn-secondary" onclick="formatRequestBody()">格式化JSON</button>
+                            <button class="btn btn-secondary" onclick="clearRequestBody()">清空内容</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 响应区域 -->
+            <div class="response-section" id="responseSection" style="display: none;">
+                <h3>📥 响应结果</h3>
+                <div class="response-header" id="responseHeader">
+                    <div class="response-status" id="responseStatus">等待响应...</div>
+                    <div class="response-time" id="responseTime"></div>
+                </div>
+                <div class="response-body" id="responseBody">暂无响应数据</div>
+                <div class="response-actions">
+                    <button class="btn btn-success" onclick="copyResponse()">📋 复制响应</button>
+                    <button class="btn btn-secondary" onclick="formatResponse()">🎨 格式化JSON</button>
+                    <button class="btn btn-secondary" onclick="clearResponse()">🗑️ 清空响应</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 使用指南 -->
+        <div class="info-section">
+            <h2>📖 使用指南</h2>
+            <ol>
+                <li>选择HTTP请求方法（GET、POST、HEAD等）</li>
+                <li>输入要测试的API接口地址</li>
+                <li>在"请求头"选项卡中配置必要的HTTP头信息</li>
+                <li>在"请求体"选项卡中输入POST/PUT请求的数据（支持JSON格式）</li>
+                <li>点击"发送请求"按钮执行API调用</li>
+                <li>查看响应结果，支持JSON自动格式化和复制功能</li>
+            </ol>
+        </div>
+        
+        <!-- 工具详细介绍 -->
+        <div class="info-section">
+            <h2>🔧 工具详细介绍</h2>
+            <p>简易版Postman是一款专业的在线API接口测试工具，为开发者提供便捷的接口调试解决方案。无需安装任何软件，直接在浏览器中即可完成各种HTTP请求的测试和调试工作。</p>
+            
+            <h3>🎯 核心功能</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>多种请求方法</h4>
+                    <p>支持GET、POST、HEAD、PUT、DELETE、PATCH等常用HTTP请求方法</p>
+                </div>
+                <div class="feature-card">
+                    <h4>自定义请求头</h4>
+                    <p>灵活配置HTTP请求头，支持认证、内容类型等各种头信息</p>
+                </div>
+                <div class="feature-card">
+                    <h4>JSON格式化</h4>
+                    <p>自动识别和格式化JSON响应，提供美观的数据展示</p>
+                </div>
+                <div class="feature-card">
+                    <h4>响应分析</h4>
+                    <p>显示响应状态码、响应时间等关键信息，便于接口性能分析</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 工具优势 -->
+        <div class="info-section">
+            <h2>🌟 为什么选择我们的API测试工具</h2>
+            <ul>
+                <li><strong>无需安装：</strong>基于浏览器的在线工具，随时随地可用</li>
+                <li><strong>简单易用：</strong>直观的界面设计，新手也能快速上手</li>
+                <li><strong>功能完整：</strong>涵盖API测试的核心功能，满足日常开发需求</li>
+                <li><strong>响应快速：</strong>轻量级设计，请求响应速度快</li>
+                <li><strong>数据安全：</strong>所有请求都是直接发送，不经过我们的服务器</li>
+                <li><strong>跨平台兼容：</strong>支持所有现代浏览器和操作系统</li>
+            </ul>
+        </div>
+        
+        <!-- 应用场景 -->
+        <div class="info-section">
+            <h2>🎯 应用场景</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>接口开发调试</h4>
+                    <p>在开发过程中快速测试新开发的API接口，验证功能正确性</p>
+                </div>
+                <div class="feature-card">
+                    <h4>第三方API集成</h4>
+                    <p>集成第三方服务前，先测试其API接口的可用性和响应格式</p>
+                </div>
+                <div class="feature-card">
+                    <h4>接口文档验证</h4>
+                    <p>验证API文档的准确性，确保文档与实际接口行为一致</p>
+                </div>
+                <div class="feature-card">
+                    <h4>问题排查诊断</h4>
+                    <p>当接口出现问题时，快速定位是前端还是后端的问题</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 常见问题 -->
+        <div class="info-section">
+            <h2>❓ 常见问题</h2>
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>支持哪些HTTP请求方法？</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>支持GET、POST、HEAD、PUT、DELETE、PATCH等常用HTTP请求方法，基本涵盖了RESTful API的所有需求。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>如何处理需要认证的API？</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>在"请求头"选项卡中添加Authorization头，例如：Bearer your-token-here，或者添加API Key等认证信息。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>为什么有些请求会失败？</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>可能是由于CORS跨域限制。某些API服务器不允许浏览器直接访问，这是浏览器的安全限制，不是工具问题。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>支持文件上传吗？</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>当前版本主要支持JSON数据的发送，文件上传功能将在后续版本中添加。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>请求数据会被保存吗？</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>不会。所有请求都是直接从您的浏览器发送到目标服务器，我们不会保存任何请求数据或响应内容。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚信息 -->
+    <div class="footer-info">
+        <p>© 2025 简易版Postman - 专业的在线API接口测试解决方案</p>
+        <p>技术支持和问题反馈：<a href="https://t.zsxq.com/17wTksRxX" target="_blank">联系我们</a></p>
+    </div>
+    
+    <script>
+        let requestStartTime = 0;
+        
+        // 发送请求
+        async function sendRequest() {
+            const method = document.getElementById('methodSelect').value;
+            const url = document.getElementById('urlInput').value.trim();
+            const sendBtn = document.getElementById('sendBtn');
+            
+            if (!url) {
+                alert('请输入API接口地址');
+                return;
+            }
+            
+            // 验证URL格式
+            try {
+                new URL(url);
+            } catch (error) {
+                alert('请输入有效的URL地址');
+                return;
+            }
+            
+            // 禁用发送按钮并显示加载状态
+            sendBtn.disabled = true;
+            sendBtn.innerHTML = '<div class="loading"></div> 发送中...';
+            
+            // 收集请求头
+            const headers = {};
+            const headerRows = document.querySelectorAll('#headersContainer .header-row');
+            headerRows.forEach(row => {
+                const inputs = row.querySelectorAll('.header-input');
+                const key = inputs[0].value.trim();
+                const value = inputs[1].value.trim();
+                if (key && value) {
+                    headers[key] = value;
+                }
+            });
+            
+            // 准备请求配置
+            const requestConfig = {
+                method: method,
+                headers: headers
+            };
+            
+            // 如果是POST/PUT/PATCH请求，添加请求体
+            if (['POST', 'PUT', 'PATCH'].includes(method)) {
+                const body = document.getElementById('requestBody').value.trim();
+                if (body) {
+                    requestConfig.body = body;
+                }
+            }
+            
+            requestStartTime = Date.now();
+            
+            try {
+                const response = await fetch(url, requestConfig);
+                const responseTime = Date.now() - requestStartTime;
+                
+                // 显示响应状态
+                const responseSection = document.getElementById('responseSection');
+                const responseStatus = document.getElementById('responseStatus');
+                const responseTimeElement = document.getElementById('responseTime');
+                const responseBody = document.getElementById('responseBody');
+                
+                responseSection.style.display = 'block';
+                
+                // 设置状态信息
+                const statusClass = response.ok ? 'status-success' : 'status-error';
+                responseStatus.className = `response-status ${statusClass}`;
+                responseStatus.textContent = `${response.status} ${response.statusText}`;
+                responseTimeElement.textContent = `响应时间: ${responseTime}ms`;
+                
+                // 获取响应内容
+                const contentType = response.headers.get('content-type');
+                let responseText = '';
+                
+                if (method === 'HEAD') {
+                    // HEAD请求只显示头信息
+                    const headersInfo = [];
+                    response.headers.forEach((value, key) => {
+                        headersInfo.push(`${key}: ${value}`);
+                    });
+                    responseText = headersInfo.join('\n');
+                } else {
+                    responseText = await response.text();
+                }
+                
+                // 尝试格式化JSON
+                if (contentType && contentType.includes('application/json') && responseText) {
+                    try {
+                        const jsonData = JSON.parse(responseText);
+                        responseBody.textContent = JSON.stringify(jsonData, null, 2);
+                    } catch (error) {
+                        responseBody.textContent = responseText;
+                    }
+                } else {
+                    responseBody.textContent = responseText || '(空响应)';
+                }
+                
+            } catch (error) {
+                // 显示错误信息
+                const responseSection = document.getElementById('responseSection');
+                const responseStatus = document.getElementById('responseStatus');
+                const responseTimeElement = document.getElementById('responseTime');
+                const responseBody = document.getElementById('responseBody');
+                
+                responseSection.style.display = 'block';
+                responseStatus.className = 'response-status status-error';
+                responseStatus.textContent = '请求失败';
+                responseTimeElement.textContent = '';
+                responseBody.textContent = `错误信息: ${error.message}\n\n可能的原因：\n1. 网络连接问题\n2. CORS跨域限制\n3. 服务器不可达\n4. URL地址错误`;
+            } finally {
+                // 恢复发送按钮
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = '<span>🚀</span> 发送请求';
+            }
+        }
+        
+        // 切换选项卡
+        function switchTab(tabName) {
+            // 移除所有活动状态
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // 激活当前选项卡
+            event.target.classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+        
+        // 添加请求头
+        function addHeader() {
+            const container = document.getElementById('headersContainer');
+            const headerRow = document.createElement('div');
+            headerRow.className = 'header-row';
+            headerRow.innerHTML = `
+                <input type="text" class="header-input" placeholder="Header名称">
+                <input type="text" class="header-input" placeholder="Header值">
+                <button class="remove-header-btn" onclick="removeHeader(this)">删除</button>
+            `;
+            container.appendChild(headerRow);
+        }
+        
+        // 删除请求头
+        function removeHeader(button) {
+            const headerRows = document.querySelectorAll('#headersContainer .header-row');
+            if (headerRows.length > 1) {
+                button.parentElement.remove();
+            } else {
+                alert('至少需要保留一个请求头');
+            }
+        }
+        
+        // 格式化请求体JSON
+        function formatRequestBody() {
+            const textarea = document.getElementById('requestBody');
+            const content = textarea.value.trim();
+            
+            if (!content) {
+                alert('请求体为空');
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(content);
+                textarea.value = JSON.stringify(parsed, null, 2);
+            } catch (error) {
+                alert('无效的JSON格式: ' + error.message);
+            }
+        }
+        
+        // 清空请求体
+        function clearRequestBody() {
+            document.getElementById('requestBody').value = '';
+        }
+        
+        // 复制响应内容
+        function copyResponse() {
+            const responseBody = document.getElementById('responseBody').textContent;
+            
+            if (!responseBody || responseBody === '暂无响应数据') {
+                alert('没有可复制的响应内容');
+                return;
+            }
+            
+            navigator.clipboard.writeText(responseBody).then(() => {
+                alert('响应内容已复制到剪贴板');
+            }).catch(() => {
+                // 降级方案
+                const textArea = document.createElement('textarea');
+                textArea.value = responseBody;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('响应内容已复制到剪贴板');
+            });
+        }
+        
+        // 格式化响应JSON
+        function formatResponse() {
+            const responseBody = document.getElementById('responseBody');
+            const content = responseBody.textContent;
+            
+            if (!content || content === '暂无响应数据') {
+                alert('没有响应内容可格式化');
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(content);
+                responseBody.textContent = JSON.stringify(parsed, null, 2);
+            } catch (error) {
+                alert('响应内容不是有效的JSON格式');
+            }
+        }
+        
+        // 清空响应
+        function clearResponse() {
+            document.getElementById('responseSection').style.display = 'none';
+            document.getElementById('responseStatus').textContent = '等待响应...';
+            document.getElementById('responseTime').textContent = '';
+            document.getElementById('responseBody').textContent = '暂无响应数据';
+        }
+        
+        // FAQ切换
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const isActive = element.classList.contains('active');
+            
+            // 关闭所有FAQ
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.classList.remove('active');
+                q.nextElementSibling.classList.remove('active');
+            });
+            
+            // 如果当前不是激活状态，则激活
+            if (!isActive) {
+                element.classList.add('active');
+                answer.classList.add('active');
+            }
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 动态加载导航栏和页脚
+            loadComponent('navbar', '../components/navbar.js');
+            loadComponent('footer', '../components/footer.js');
+            
+            // 绑定回车键发送请求
+            document.getElementById('urlInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendRequest();
+                }
+            });
+        });
+        
+        // 加载组件
+        function loadComponent(elementId, scriptPath) {
+            const script = document.createElement('script');
+            script.src = scriptPath;
+            script.onload = function() {
+                // 组件加载完成后初始化
+                if (elementId === 'navbar' && typeof NavbarComponent !== 'undefined') {
+                    const navbar = new NavbarComponent();
+                    const navbarStyles = document.createElement('style');
+                    navbarStyles.textContent = NavbarComponent.getStyles();
+                    document.head.appendChild(navbarStyles);
+                } else if (elementId === 'footer' && typeof FooterComponent !== 'undefined') {
+                    const footer = new FooterComponent();
+                    const footerStyles = document.createElement('style');
+                    footerStyles.textContent = FooterComponent.getStyles();
+                    document.head.appendChild(footerStyles);
+                }
+            };
+            document.head.appendChild(script);
+        }
+    </script>
+</body>
+</html>
