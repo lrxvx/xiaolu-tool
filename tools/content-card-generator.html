@@ -2,10 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- 导航栏和页脚组件 -->
-    <script src="../components/navbar.js"></script>
-    <script src="../components/footer.js"></script>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- Primary SEO Meta Tags -->
@@ -69,11 +65,15 @@
             --accent: #FF8FAB;
             --light: #FFF1F5;
             --dark: #333333;
-            --gray: #999999;
+            --gray: #666666;
+            --light-gray: #f8f9fa;
             --success: #FF8FAB;
-            --shadow: 0 4px 16px rgba(255, 36, 66, 0.15);
-            --transition: all 0.3s ease;
+            --shadow: 0 8px 32px rgba(255, 36, 66, 0.12);
+            --shadow-hover: 0 12px 40px rgba(255, 36, 66, 0.18);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --highlight: #FF2442;
+            --border-radius: 16px;
+            --border-radius-small: 8px;
         }
         
         * {
@@ -84,13 +84,27 @@
         }
         
         body {
-            background: linear-gradient(135deg, #fff5f7 0%, #ffecf1 100%);
+            background: linear-gradient(135deg, #fff5f7 0%, #ffecf1 50%, #fff8fa 100%);
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(255, 36, 66, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 143, 171, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         /* 导航栏样式由组件提供 *//* 工具内容样式 */
@@ -129,19 +143,35 @@
         }
 
         .input-section {
-            background-color: white;
-            border-radius: 10px;
-            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
             box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+        
+        .input-section:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
         }
 
         .preview-section {
-            background-color: white;
-            border-radius: 10px;
-            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
             box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
+            transition: var(--transition);
+        }
+        
+        .preview-section:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
         }
 
         .form-group {
@@ -158,18 +188,28 @@
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 1rem;
+            border: 2px solid rgba(255, 36, 66, 0.1);
+            border-radius: var(--border-radius-small);
             font-size: 1rem;
             transition: var(--transition);
+            background: rgba(255, 255, 255, 0.8);
+            font-family: inherit;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+            box-shadow: 0 0 0 3px rgba(255, 36, 66, 0.1);
+            background: white;
+            transform: translateY(-1px);
+        }
+        
+        .form-group input:hover,
+        .form-group textarea:hover {
+            border-color: rgba(255, 36, 66, 0.2);
+            background: rgba(255, 255, 255, 0.9);
         }
 
         .form-group textarea {
@@ -185,39 +225,84 @@
         }
 
         .color-option {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
+            border: 3px solid transparent;
+            transition: var(--transition);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .color-option::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 50%;
             border: 2px solid transparent;
             transition: var(--transition);
         }
 
         .color-option.active {
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(255, 36, 66, 0.3);
+        }
+        
+        .color-option.active::after {
             border-color: var(--primary);
+        }
+        
+        .color-option:hover {
             transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
         }
 
         .btn {
-            padding: 0.9rem 1.8rem;
-            background-color: var(--primary);
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             border: none;
-            border-radius: 30px;
+            border-radius: 50px;
             cursor: pointer;
             font-size: 1rem;
             font-weight: 600;
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            box-shadow: 0 4px 15px rgba(255, 46, 99, 0.25);
+            gap: 0.8rem;
+            box-shadow: 0 8px 25px rgba(255, 36, 66, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
-            background-color: var(--secondary);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 46, 99, 0.35);
+            box-shadow: 0 12px 35px rgba(255, 36, 66, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(255, 36, 66, 0.3);
         }
 
         .btn-secondary {
@@ -259,23 +344,49 @@
         }
         
         .font-size-btn {
-            padding: 0.3rem 0.6rem;
-            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            border-radius: 20px;
+            background: rgba(255, 36, 66, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(255, 36, 66, 0.2);
+            transition: var(--transition);
+        }
+        
+        .font-size-btn:hover {
+            background: rgba(255, 36, 66, 0.15);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 36, 66, 0.2);
         }
         
         .font-size-btn.active {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(255, 36, 66, 0.3);
+            transform: translateY(-1px);
         }
         
         .font-size-input {
-            width: 45px;
-            padding: 0.3rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 0.75rem;
+            width: 60px;
+            padding: 0.5rem;
+            border: 2px solid rgba(255, 36, 66, 0.1);
+            border-radius: var(--border-radius-small);
+            font-size: 0.85rem;
             text-align: center;
-            margin: 0 0.3rem;
+            margin: 0 0.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+        
+        .font-size-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 36, 66, 0.1);
+            background: white;
+        }
+        
+        .font-size-input:hover {
+            border-color: rgba(255, 36, 66, 0.2);
+            background: rgba(255, 255, 255, 0.9);
         }
         
         .color-picker-container {
@@ -294,11 +405,16 @@
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             background-color: transparent;
             border: none;
             cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .color-picker:hover {
+            transform: scale(1.1);
         }
         
         .color-picker::-webkit-color-swatch-wrapper {
@@ -308,7 +424,7 @@
         .color-picker::-webkit-color-swatch {
             border: none;
             border-radius: 50%;
-            box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 0 2px rgba(255, 36, 66, 0.1);
         }
         
         /* 小红书风格的额外样式 */
@@ -339,19 +455,31 @@
             max-width: 500px;
             min-height: 500px;
             max-height: 80vh;
-            background-color: var(--light);
+            background: linear-gradient(135deg, var(--light) 0%, rgba(255, 255, 255, 0.95) 100%);
             border-radius: 24px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 12px 36px rgba(255, 36, 66, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 20px 60px rgba(255, 36, 66, 0.15), 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
             resize: both;
             border: 1px solid rgba(255, 36, 66, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            z-index: 1;
         }
         
         .content-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 46, 99, 0.18), 0 6px 12px rgba(0, 0, 0, 0.08);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 70px rgba(255, 36, 66, 0.2), 0 12px 25px rgba(0, 0, 0, 0.1);
         }
         
         @media (min-width: 769px) {
@@ -365,24 +493,27 @@
         }
 
         .card-inner {
-            padding: 2.5rem 2rem;
+            padding: 3rem 2.5rem 2.5rem;
             height: 100%;
             display: flex;
             flex-direction: column;
-            background: white;
+            background: rgba(255, 255, 255, 0.98);
             border-radius: 20px;
             margin: 8px;
+            position: relative;
+            z-index: 2;
         }
 
         .card-/* 导航栏样式由组件提供 */
 
         .card-title {
             font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             line-height: 1.4;
             letter-spacing: -0.01em;
             color: var(--dark);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         
         .card-title .highlight {
@@ -390,44 +521,56 @@
             font-weight: 800;
             position: relative;
             display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .card-title .highlight::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -2px;
             left: 0;
-            width: 100%;
-            height: 6px;
-            background-color: rgba(255, 46, 99, 0.2);
-            border-radius: 3px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 2px;
             z-index: -1;
+            opacity: 0.8;
         }
 
         .card-subtitle {
             font-size: 1.2rem;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             line-height: 1.5;
             color: var(--gray);
             font-weight: 500;
+            opacity: 0.9;
         }
 
         .card-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             flex: 1;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
+            box-shadow: 0 4px 20px rgba(255, 36, 66, 0.08);
         }
 
         .card-table td {
-            padding: 1rem;
+            padding: 1.5rem;
             vertical-align: top;
-            border: 1px solid rgba(255, 46, 99, 0.1);
-            line-height: 1.6;
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 46, 99, 0.08);
+            line-height: 1.7;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .card-table td:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-1px);
         }
         
         .card-table td.font-small {
@@ -444,20 +587,38 @@
 
         .card-table tr:first-child td {
             text-align: center;
-            font-weight: bold;
-            background-color: rgba(255, 46, 99, 0.08);
+            font-weight: 600;
+            background: linear-gradient(135deg, rgba(255, 36, 66, 0.1) 0%, rgba(255, 143, 171, 0.1) 100%);
             color: var(--primary);
-            padding: 0.9rem 1rem;
+            padding: 1.2rem 1.5rem;
             border-bottom: 2px solid rgba(255, 46, 99, 0.15);
+            font-size: 1.05em;
         }
 
         .card-footer {
             text-align: center;
             font-size: 1rem;
-            padding-top: 1.2rem;
-            border-top: 1px solid rgba(255, 46, 99, 0.15);
+            padding: 1.5rem 0 0;
+            border-top: 2px solid rgba(255, 46, 99, 0.1);
             color: var(--primary);
-            font-weight: 500;
+            font-weight: 600;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-footer::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 1px;
         }
         
         .card-footer.font-small {
@@ -474,32 +635,42 @@
 
         .card-brand {
             position: absolute;
-            top: 1rem;
-            left: 1rem;
-            font-size: 0.8rem;
-            opacity: 0.7;
-            background-color: rgba(255, 46, 99, 0.1);
+            top: 1.5rem;
+            left: 1.5rem;
+            font-size: 0.75rem;
+            opacity: 0.8;
+            background: linear-gradient(135deg, rgba(255, 36, 66, 0.1) 0%, rgba(255, 143, 171, 0.1) 100%);
             color: var(--primary);
-            padding: 0.3rem 0.6rem;
-            border-radius: 20px;
-            font-weight: 500;
-            letter-spacing: 0.02em;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 36, 66, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: 3;
         }
 
         /* 响应式调整 */
         @media (max-width: 768px) {
-            /* 导航栏样式由组件提供 */
-
-            /* 导航栏样式由组件提供 */
-
             .tool-content {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
+            }
+            
+            .input-section {
+                order: 2;
+            }
+            
+            .preview-section {
+                order: 1;
             }
 
             .content-card {
                 max-width: 100%;
                 min-height: 400px;
+                border-radius: 20px;
+                box-shadow: 0 15px 40px rgba(255, 36, 66, 0.12), 0 6px 15px rgba(0, 0, 0, 0.06);
             }
             
             .tool-container {
@@ -507,28 +678,92 @@
             }
             
             .input-section, .preview-section {
-                padding: 1rem;
+                padding: 1.5rem;
+                border-radius: 20px;
             }
             
             .form-group {
-                margin-bottom: 1rem;
+                margin-bottom: 1.5rem;
             }
             
             .font-size-controls {
                 flex-wrap: wrap;
                 justify-content: flex-start;
+                gap: 0.5rem;
             }
             
             .color-picker-container {
                 flex-wrap: wrap;
+                gap: 0.5rem;
             }
             
             .btn {
-                padding: 0.7rem 1.4rem;
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
             }
             
             .btn-small {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .card-inner {
+                padding: 2rem 1.5rem 1.5rem;
+                margin: 6px;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .card-subtitle {
+                font-size: 1rem;
+                margin-bottom: 1.2rem;
+            }
+            
+            .card-table {
+                margin-bottom: 1.5rem;
+                border-radius: 12px;
+            }
+            
+            .card-table td {
+                padding: 1rem;
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+            
+            .card-table tr:first-child td {
+                padding: 1rem;
+                font-size: 0.95em;
+            }
+            
+            .card-footer {
+                padding: 1.2rem 0 0;
+                font-size: 0.9rem;
+            }
+            
+            .card-brand {
+                top: 1rem;
+                left: 1rem;
+                font-size: 0.7rem;
                 padding: 0.4rem 0.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tool-container {
+                padding: 0.5rem;
+            }
+            
+            .input-section, .preview-section {
+                padding: 1rem;
+                border-radius: 16px;
+            }
+            
+            .content-card {
+                min-height: 350px;
+                border-radius: 16px;
             }
             
             .card-inner {
@@ -536,11 +771,30 @@
             }
             
             .card-title {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
             
             .card-subtitle {
-                font-size: 1rem;
+                font-size: 0.95rem;
+            }
+            
+            .card-table td {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+            
+            .card-footer {
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            
+            .btn-small {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -1027,6 +1281,13 @@
              * 在应用初始化时调用
              */
             function initEventListeners() {
+                // 实时输入更新事件 - 为所有输入框添加实时更新功能
+                const debouncedUpdate = debounce(updateCardContent, 200);
+                Object.values(elements.inputs).forEach(input => {
+                    if (input) {
+                        input.addEventListener('input', debouncedUpdate);
+                    }
+                });
                 // 颜色选择事件 - 处理背景颜色和文本颜色的选择
                 elements.controls.colorOptions.forEach(option => {
                     option.addEventListener('click', () => {

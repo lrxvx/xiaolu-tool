@@ -4,7 +4,13 @@
   "description": "小路工具箱 - 为内容创作者提供的在线工具集合",
   "scripts": {
     "inject-components": "node scripts/inject-components.js",
-    "build": "npm run inject-components"
+    "build": "npm run inject-components",
+    "dev": "python -m http.server 8080",
+    "preview": "npm run build && python -m http.server 8080",
+    "deploy:cloudflare": "npm run build",
+    "deploy:netlify": "npm run build",
+    "test:build": "npm run build && echo 'Build test completed successfully'",
+    "test:deploy": "node scripts/deploy-test.js"
   },
   "keywords": [
     "tools",
@@ -13,5 +19,14 @@
     "online tools"
   ],
   "author": "小路",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.19.0",
+    "npm": ">=10.0.0"
+  },
+  "homepage": "https://tools.xiaolu.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaolu/xiaolu-tool.git"
+  }
 }

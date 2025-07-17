@@ -2,6 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生肖计算器 - 十二生肖年份查询工具 | 小路工具箱</title>
     <meta name="description" content="免费在线生肖计算器，支持年份查询生肖、生肖查询年份、年龄计算生肖等功能。提供完整的十二生肖年历表，准确计算生肖属相和年龄信息。">
@@ -641,6 +645,17 @@
 
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航栏和页脚组件
+            const navbar = new NavbarComponent();
+            const navbarStyles = document.createElement('style');
+            navbarStyles.textContent = NavbarComponent.getStyles();
+            document.head.appendChild(navbarStyles);
+
+            const footer = new FooterComponent();
+            const footerStyles = document.createElement('style');
+            footerStyles.textContent = FooterComponent.getStyles();
+            document.head.appendChild(footerStyles);
+
             initZodiacCalendar();
             
             // 动态加载并初始化导航栏和页脚组件

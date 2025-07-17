@@ -464,11 +464,13 @@ class ToolCategoryManager {
         if (multiSelectBtn) {
             if (this.state.isMultiSelect) {
                 multiSelectBtn.classList.add('active');
-                multiSelectBtn.innerHTML = '<i class="fas fa-check-square"></i> 多选模式';
             } else {
                 multiSelectBtn.classList.remove('active');
-                multiSelectBtn.innerHTML = '<i class="fas fa-square"></i> 单选模式';
             }
+            multiSelectBtn.innerHTML = `
+                <i class="fas fa-layer-group"></i>
+                ${this.state.isMultiSelect ? '多选模式' : '单选模式'}
+            `;
         }
     }
 

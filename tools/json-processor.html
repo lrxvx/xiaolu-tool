@@ -2,6 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <!-- 导航栏和页脚组件 -->
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSON处理工具 - 在线JSON美化、比对、格式化工具 | 小路工具箱</title>
     <meta name="description" content="免费在线JSON处理工具，支持JSON美化格式化、JSON比对差异检测、JSON模板生成。提供乱码解码、排序、BigInt处理、编辑下载等功能。">
@@ -1335,6 +1339,17 @@
 
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航栏和页脚组件
+            const navbar = new NavbarComponent();
+            const navbarStyles = document.createElement('style');
+            navbarStyles.textContent = NavbarComponent.getStyles();
+            document.head.appendChild(navbarStyles);
+
+            const footer = new FooterComponent();
+            const footerStyles = document.createElement('style');
+            footerStyles.textContent = FooterComponent.getStyles();
+            document.head.appendChild(footerStyles);
+
             // 动态加载并初始化导航栏和页脚组件
             const loadComponent = (src) => {
                 return new Promise((resolve, reject) => {
