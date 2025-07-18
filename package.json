@@ -10,7 +10,8 @@
     "deploy:cloudflare": "npm run build",
     "deploy:netlify": "npm run build",
     "test:build": "npm run build && echo 'Build test completed successfully'",
-    "test:deploy": "node scripts/deploy-test.js"
+    "test:deploy": "node scripts/deploy-test.js",
+    "setup:quality": "node scripts/setup-code-quality.js"
   },
   "keywords": [
     "tools",
