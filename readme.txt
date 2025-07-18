@@ -1,5 +1,15 @@
 # 小路工具箱 - 更新日志
 
+## 2025-01-01
+### Cloudflare Web Analytics 集成
+- ✅ 集成 Cloudflare Web Analytics 流量分析
+  * Token: 7ce07c493a0f4d95ad110a2118022829
+  * 已添加到 index.html 主页面
+  * 提供实时访问数据分析和用户行为追踪
+  * 隐私友好，不使用 cookies
+  * 轻量级脚本，不影响网站加载速度
+  * 支持页面浏览量、独立访客、来源分析等功能
+
 ## 2025-07-16
 ### 新增三个开发者工具
 - ✅ 新增代码美化工具 (code-beautifier.html)

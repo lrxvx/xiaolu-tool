@@ -250,11 +250,31 @@ Content-Security-Policy: default-src 'self'; ...
 - 使用安全的 TLS 配置
 
 ## 📈 监控和分析
-
 ### Cloudflare Analytics
+
 - 访问量统计
 - 性能指标
 - 安全事件监控
+
+### Cloudflare Web Analytics（已配置）
+网站已集成 Cloudflare Web Analytics：
+```html
+<!-- Cloudflare Web Analytics -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" 
+        data-cf-beacon='{"token": "7ce07c493a0f4d95ad110a2118022829"}'></script>
+```
+
+**查看分析数据：**
+1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
+2. 选择你的域名
+3. 点击左侧菜单 "Analytics & Logs" > "Web Analytics"
+4. 查看实时访问数据、页面浏览量、访客来源等
+
+**功能特点：**
+- 实时数据分析
+- 隐私友好（不使用 cookies）
+- 轻量级脚本
+- 详细的访客行为分析
 
 ### Netlify Analytics
 - 页面浏览量
