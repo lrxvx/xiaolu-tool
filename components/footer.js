@@ -12,11 +12,7 @@ class FooterComponent {
                     <div class="footer-column">
                         <h3>关于我们</h3>
                         <p>内容创作者工具箱是一个为内容创作者、自媒体运营者和数字营销人员提供高效工具的平台。</p>
-                        <div class="footer-social">
-                            <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                        </div>
+                        
                     </div>
                     
                     <div class="footer-column">

@@ -1,7 +1,7 @@
 {
-  "name": "xiaolu-tool",
+  "name": "creator-toolkit",
   "version": "1.0.0",
-  "description": "小路工具箱 - 为内容创作者提供的在线工具集合",
+  "description": "创作者工具箱 - 专为内容创作者打造的AI驱动在线工具集合",
   "scripts": {
     "inject-components": "node scripts/inject-components.js",
     "build": "npm run inject-components",
@@ -14,20 +14,23 @@
     "setup:quality": "node scripts/setup-code-quality.js"
   },
   "keywords": [
-    "tools",
-    "utilities",
+    "creator tools",
     "content creation",
-    "online tools"
+    "AI tools",
+    "online utilities",
+    "productivity tools",
+    "创作者工具",
+    "内容创作"
   ],
-  "author": "小路",
+  "author": "创作者工具箱团队",
   "license": "MIT",
   "engines": {
     "node": ">=18.19.0",
     "npm": ">=10.0.0"
   },
-  "homepage": "https://tools.xiaolu.com",
+  "homepage": "https://creator-toolkit.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xiaolu/xiaolu-tool.git"
+    "url": "https://github.com/creator-toolkit/creator-toolkit.git"
   }
 }

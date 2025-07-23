@@ -1,8 +1,8 @@
-name = "xiaolu-tool"
+name = "creator-toolkit"
 compatibility_date = "2024-07-15"
 
 [env.production]
-name = "xiaolu-tool"
+name = "creator-toolkit"
 
 # Pages configuration
 pages_build_output_dir = "."

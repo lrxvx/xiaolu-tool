@@ -1,7 +1,7 @@
 {
-  "name": "小路工具站",
-"short_name": "小路工具",
-  "description": "提供实用的在线工具集合",
+  "name": "创作者工具箱",
+"short_name": "创作者工具",
+  "description": "专为内容创作者打造的AI驱动在线工具集合",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
