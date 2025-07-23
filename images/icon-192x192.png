@@ -15,5 +15,5 @@
     <circle cx="0" cy="35" r="4" fill="white" opacity="0.6"/>
     <circle cx="15" cy="35" r="4" fill="white" opacity="0.6"/>
   </g>
-  <text x="96" y="140" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle" font-weight="bold">小鹿工具</text>
+  <text x="96" y="140" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle" font-weight="bold">小路工具</text>
 </svg>

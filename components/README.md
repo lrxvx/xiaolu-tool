@@ -62,7 +62,7 @@ node scripts/update-tools-navbar.js
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>工具名称 | 小鹿工具箱</title>
+    <title>工具名称 | 小路工具箱</title>
     
     <!-- SEO和元数据 -->
     <meta name="description" content="工具描述">

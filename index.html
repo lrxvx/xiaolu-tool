@@ -1614,6 +1614,12 @@
                 // 将工具数据存储到全局变量
                 window.toolsData = tools;
                 renderTools(tools);
+                
+                // 通知工具分类组件更新数据
+                if (window.componentManager && window.componentManager.components.toolCategories) {
+                    window.componentManager.components.toolCategories.tools = tools;
+                    window.componentManager.components.toolCategories.updateToolCounts();
+                }
             } catch (error) {
                 console.error('加载工具数据失败:', error);
                 document.getElementById('tools-container').innerHTML = '<p class="error-message">加载工具数据失败，请刷新页面重试。</p>';
@@ -1863,14 +1869,11 @@
         }
         
         // 全局分页管理器实例
-        let paginationManager;
+        window.paginationManager = new PaginationManager();
         
         // 渲染工具卡片
         function renderTools(tools) {
-            if (!paginationManager) {
-                paginationManager = new PaginationManager();
-            }
-            paginationManager.setTools(tools);
+            window.paginationManager.setTools(tools);
             updateCategoryCounts();
         }
         
@@ -2198,12 +2201,13 @@
             }
             
             init() {
-                // 绑定分类导航点击事件
-                document.querySelectorAll('.category-item').forEach(item => {
-                    item.addEventListener('click', (e) => {
+                // 绑定分类导航点击事件（使用事件委托）
+                document.addEventListener('click', (e) => {
+                    const categoryItem = e.target.closest('.category-item');
+                    if (categoryItem) {
                         e.preventDefault();
-                        this.handleCategoryClick(item);
-                    });
+                        this.handleCategoryClick(categoryItem);
+                    }
                 });
                 
                 // 监听工具分类组件的分类变更事件
@@ -2211,6 +2215,8 @@
                     this.filterToolsByCategory(e.detail.categoryId);
                     this.showToolsListPage();
                 });
+                
+                console.log('PageManager initialized with event delegation');
             }
             
             handleCategoryClick(clickedItem) {
@@ -2349,51 +2355,52 @@
             // 新的分类管理器会自动初始化
             console.log('页面加载完成，等待 ToolCategoryManager 自动初始化...');
             
-            // 增强搜索功能
+            // 增强搜索功能 - 使用事件委托
             let searchTimeout;
-            const searchInput = document.getElementById('search-input');
-            if (searchInput) {
-                searchInput.addEventListener('input', function(e) {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(() => {
-                    const searchTerm = e.target.value.toLowerCase();
-                    
-                    if (!window.toolsData || !window.paginationManager) {
-                        return;
-                    }
-                    
-                    let filteredTools;
-                    
-                    if (searchTerm) {
-                        filteredTools = window.toolsData.filter(tool => {
-                            const title = tool.name.toLowerCase();
-                            const description = tool.description.toLowerCase();
-                            const shortDesc = tool.shortDesc.toLowerCase();
-                            const tags = tool.tags.join(',').toLowerCase();
-                            
-                            return title.includes(searchTerm) || 
-                                   description.includes(searchTerm) || 
-                                   shortDesc.includes(searchTerm) || 
-                                   tags.includes(searchTerm);
-                        });
-                    } else {
-                        filteredTools = window.toolsData;
-                    }
-                    
-                    // 使用分页管理器处理搜索结果
-                    window.paginationManager.filterTools(filteredTools);
-                    
-                    // 显示搜索结果统计
-                    const statsElement = document.querySelector('.filter-stats');
-                    if (searchTerm) {
-                        statsElement.innerHTML = `<p>找到 ${filteredTools.length} 个相关工具</p>`;
-                        statsElement.style.display = 'block';
-                    } else {
-                        statsElement.style.display = 'none';
-                    }
-                }, 300);
-                });
-            }
+            
+            // 使用事件委托监听搜索输入
+            document.addEventListener('input', function(e) {
+                if (e.target && e.target.id === 'search-input') {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(() => {
+                        const searchTerm = e.target.value.toLowerCase();
+                        
+                        if (!window.toolsData || !window.paginationManager) {
+                            return;
+                        }
+                        
+                        let filteredTools;
+                        
+                        if (searchTerm) {
+                            filteredTools = window.toolsData.filter(tool => {
+                                const title = tool.name.toLowerCase();
+                                const description = tool.description.toLowerCase();
+                                const shortDesc = tool.shortDesc.toLowerCase();
+                                const tags = tool.tags.join(',').toLowerCase();
+                                
+                                return title.includes(searchTerm) || 
+                                       description.includes(searchTerm) || 
+                                       shortDesc.includes(searchTerm) || 
+                                       tags.includes(searchTerm);
+                            });
+                        } else {
+                            filteredTools = window.toolsData;
+                        }
+                        
+                        // 使用分页管理器处理搜索结果
+                        window.paginationManager.filterTools(filteredTools);
+                        
+                        // 显示搜索结果统计
+                        const statsElement = document.querySelector('.filter-stats');
+                        if (searchTerm) {
+                            statsElement.innerHTML = `<p>找到 ${filteredTools.length} 个相关工具</p>`;
+                            statsElement.style.display = 'block';
+                        } else {
+                            statsElement.style.display = 'none';
+                        }
+                    }, 300);
+                }
+            });
             
             // 视图切换功能
             const gridViewBtn = document.getElementById('grid-view-btn');
@@ -2513,7 +2520,15 @@
             setTimeout(() => {
                 if (window.ComponentManager) {
                     window.componentManager = new ComponentManager();
-                    window.componentManager.initHomePage();
+                    window.componentManager.initHomePage().then(() => {
+                        console.log('组件管理器初始化完成');
+                        // 确保工具分类组件正确绑定事件
+                        if (window.componentManager.components.toolCategories) {
+                            console.log('工具分类组件已加载');
+                        } else {
+                            console.warn('工具分类组件未正确加载');
+                        }
+                    });
                 } else {
                     console.log('ComponentManager will be loaded after script tag');
                 }

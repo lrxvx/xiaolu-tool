@@ -1,4 +1,4 @@
-# 小鹿工具箱 SEO 全球化优化方案
+# 小路工具箱 SEO 全球化优化方案
 
 ## 项目概述
 
@@ -79,7 +79,7 @@
 - 英文: "Free Online Tools | AI-Powered Utility Suite - No Registration Required"
 
 **工具页面标题模板**:
-- 中文: "[工具名称] - 免费在线[工具类型] | 小鹿工具箱"
+- 中文: "[工具名称] - 免费在线[工具类型] | 小路工具箱"
 - 英文: "[Tool Name] - Free Online [Tool Type] | Xiaolu Tools"
 
 ### 2.2 描述优化

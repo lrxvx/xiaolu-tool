@@ -21,7 +21,19 @@ class ToolCategoriesComponent {
 
     async loadTools() {
         try {
-            const response = await fetch('../tools.json');
+            // 如果全局已有工具数据，直接使用
+            if (window.toolsData) {
+                this.tools = window.toolsData;
+                this.updateToolCounts();
+                return;
+            }
+            
+            // 否则从JSON文件加载
+            const currentPath = window.location.pathname;
+            const isInToolsFolder = currentPath.includes('/tools/');
+            const toolsJsonPath = isInToolsFolder ? '../tools.json' : './tools.json';
+            
+            const response = await fetch(toolsJsonPath);
             this.tools = await response.json();
             // 加载完成后更新分类计数
             this.updateToolCounts();
@@ -176,11 +188,19 @@ class ToolCategoriesComponent {
         } else {
             console.log('PageManager not available, waiting for initialization...');
             // 如果PageManager还没初始化，等待一下再试
-            setTimeout(() => {
+            let retryCount = 0;
+            const maxRetries = 10;
+            const retryInterval = setInterval(() => {
+                retryCount++;
                 if (window.pageManager && typeof window.pageManager.filterToolsByCategory === 'function') {
                     window.pageManager.filterToolsByCategory(categoryId);
+                    clearInterval(retryInterval);
+                    console.log('PageManager found, filtering tools by category:', categoryId);
+                } else if (retryCount >= maxRetries) {
+                    clearInterval(retryInterval);
+                    console.error('PageManager not found after maximum retries');
                 }
-            }, 200);
+            }, 100);
         }
         
         // 发送自定义事件
@@ -198,6 +218,9 @@ class ToolCategoriesComponent {
         const activeItem = document.querySelector(`[data-category="${this.currentCategory}"]`);
         if (activeItem) {
             activeItem.classList.add('active');
+            console.log('Updated active category to:', this.currentCategory);
+        } else {
+            console.warn('Could not find category item for:', this.currentCategory);
         }
     }
 

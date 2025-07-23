@@ -1,6 +1,6 @@
 {
-  "name": "小鹿工具站",
-  "short_name": "小鹿工具",
+  "name": "小路工具站",
+"short_name": "小路工具",
   "description": "提供实用的在线工具集合",
   "start_url": "/",
   "display": "standalone",
