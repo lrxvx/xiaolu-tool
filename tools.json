@@ -440,6 +440,16 @@
     "url": "tools/api-tester.html"
   },
   {
+    "id": "wechat-cover-maker",
+    "name": "公众号封面制作工具",
+    "shortDesc": "在线制作精美公众号封面",
+    "icon": "fas fa-image",
+    "description": "专业的公众号封面在线制作工具，支持自定义文字、颜色、背景图片，提供多种模板和字体选择，一键生成高质量封面图片，完美适配微信公众号尺寸要求。",
+    "tags": ["公众号封面", "封面制作", "微信公众号", "图片设计", "在线设计", "封面设计", "自媒体工具"],
+    "categories": ["design"],
+    "url": "tools/wechat-cover-maker.html"
+  },
+  {
     "id": "regex-tester",
     "name": "JS正则表达式工具",
     "shortDesc": "在线正则表达式测试器",

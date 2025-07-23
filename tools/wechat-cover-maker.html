@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>公众号封面制作工具 - 免费在线设计微信公众号封面 | 创作者工具箱</title>
+    <meta name="title" content="公众号封面制作工具 - 免费在线设计微信公众号封面 | 创作者工具箱">
+    <meta name="description" content="免费在线公众号封面制作工具，支持自定义文字、背景颜色、字体样式。一键生成高质量微信公众号封面图片，完美适配1283×383像素尺寸，提升文章点击率。">
+    <meta name="keywords" content="公众号封面制作,微信公众号封面,封面设计工具,公众号图片制作,微信封面生成器,在线封面设计,公众号头图制作,自媒体封面工具,免费封面制作,公众号素材">
+    <meta name="author" content="创作者工具箱">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://creator-toolkit.com/tools/wechat-cover-maker.html">
+    <meta property="og:title" content="公众号封面制作工具 - 免费在线设计微信公众号封面">
+    <meta property="og:description" content="免费在线公众号封面制作工具，支持自定义文字、背景颜色、字体样式。一键生成高质量微信公众号封面图片。">
+    <meta property="og:image" content="https://creator-toolkit.com/images/wechat-cover-maker-preview.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://creator-toolkit.com/tools/wechat-cover-maker.html">
+    <meta property="twitter:title" content="公众号封面制作工具 - 免费在线设计微信公众号封面">
+    <meta property="twitter:description" content="免费在线公众号封面制作工具，支持自定义文字、背景颜色、字体样式。一键生成高质量微信公众号封面图片。">
+    <meta property="twitter:image" content="https://creator-toolkit.com/images/wechat-cover-maker-preview.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="../images/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="../images/icon-512x512.png">
+    <link rel="manifest" href="../site.webmanifest">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "公众号封面制作工具",
+      "description": "免费在线公众号封面制作工具，支持自定义文字、背景颜色、字体样式。一键生成高质量微信公众号封面图片。",
+      "url": "https://creator-toolkit.com/tools/wechat-cover-maker.html",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "创作者工具箱"
+      }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+        
+        /* 工具标题区域 */
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .tool-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .tool-keywords {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .keyword-tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* 主要内容区域 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        /* 左侧控制面板 */
+        .control-panel {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .panel-section {
+            margin-bottom: 30px;
+        }
+        
+        .panel-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .color-input {
+            width: 60px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .color-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .color-code {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+        
+        .quick-colors {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .quick-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .quick-color:hover {
+            transform: scale(1.1);
+            border-color: var(--primary);
+        }
+        
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        /* 右侧预览区域 */
+        .preview-area {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .preview-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .canvas-container {
+            display: inline-block;
+            border: 2px dashed #dee2e6;
+            border-radius: 12px;
+            padding: 20px;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+        }
+        
+        #coverCanvas {
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .canvas-info {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .download-section {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* 使用指南 */
+        .guide-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .guide-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .guide-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .guide-step {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin: 0 auto 15px;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .step-desc {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* 详细介绍 */
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .info-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .info-content {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .feature-desc {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* FAQ */
+        .faq-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #e9ecef;
+            padding: 20px 0;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .faq-answer {
+            color: var(--gray);
+            line-height: 1.6;
+            display: none;
+        }
+        
+        .faq-answer.show {
+            display: block;
+        }
+        
+        /* 页脚信息 */
+        .tool-footer {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .tool-footer-text {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        .support-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .support-link:hover {
+            text-decoration: underline;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .radio-option input[type="radio"] {
+            margin: 0;
+        }
+        
+        .position-controls {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .control-row {
+            margin-bottom: 12px;
+        }
+        
+        .control-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .control-row label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .range-input {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .range-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+        }
+        
+        .range-input::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: none;
+        }
+        
+        .align-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .align-btn {
+            padding: 8px 12px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #6c757d;
+        }
+        
+        .align-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .align-btn.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .align-btn i {
+            font-size: 14px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .control-panel {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .tool-title {
+                font-size: 2rem;
+            }
+            
+            .tool-header {
+                padding: 30px 20px;
+            }
+            
+            .control-panel,
+            .preview-area,
+            .guide-section,
+            .info-section,
+            .faq-section,
+            .tool-footer {
+                padding: 20px;
+            }
+            
+            .download-section {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏容器 -->
+    <div id="navbar-container"></div>
+    
+    <div class="container">
+        <!-- 工具标题 -->
+        <div class="tool-header">
+            <h1 class="tool-title">公众号封面制作工具</h1>
+            <p class="tool-subtitle">免费在线设计微信公众号封面，支持自定义文字、背景、字体样式</p>
+            <div class="tool-keywords">
+                <span class="keyword-tag">公众号封面</span>
+                <span class="keyword-tag">微信封面</span>
+                <span class="keyword-tag">在线设计</span>
+                <span class="keyword-tag">免费制作</span>
+                <span class="keyword-tag">一键下载</span>
+            </div>
+        </div>
+        
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <!-- 左侧控制面板 -->
+            <div class="control-panel">
+                <!-- 自定义设置 -->
+                <div class="panel-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-cog"></i>
+                        自定义设置
+                    </h3>
+                    
+                    <!-- 选择编辑区域 -->
+                    <div class="form-group">
+                        <label class="form-label">选择编辑区域</label>
+                        <select class="form-input" id="editArea">
+                            <option value="left">左侧文字 (900×383)</option>
+                            <option value="right">右侧背景图 (383×383)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- 背景颜色设置 -->
+                <div class="panel-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-palette"></i>
+                        背景颜色设置
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">左侧背景色</label>
+                        <div class="color-group">
+                            <input type="color" class="color-input" id="leftBgColor" value="#149c86">
+                            <input type="text" class="color-code" id="leftBgColorCode" value="#149c86">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">右侧背景色</label>
+                        <div class="color-group">
+                            <input type="color" class="color-input" id="rightBgColor" value="#149c86">
+                            <input type="text" class="color-code" id="rightBgColorCode" value="#149c86">
+                        </div>
+                    </div>
+                    
+                    <!-- 快速选择颜色 -->
+                    <div class="quick-colors">
+                        <div class="quick-color" style="background: #149c86" data-color="#149c86"></div>
+                        <div class="quick-color" style="background: #000000" data-color="#000000"></div>
+                        <div class="quick-color" style="background: #ffffff" data-color="#ffffff"></div>
+                        <div class="quick-color" style="background: #4361ee" data-color="#4361ee"></div>
+                        <div class="quick-color" style="background: #f72585" data-color="#f72585"></div>
+                        <div class="quick-color" style="background: #ffd60a" data-color="#ffd60a"></div>
+                        <div class="quick-color" style="background: #003566" data-color="#003566"></div>
+                        <div class="quick-color" style="background: #7209b7" data-color="#7209b7"></div>
+                        <div class="quick-color" style="background: #f77f00" data-color="#f77f00"></div>
+                        <div class="quick-color" style="background: #2d6a4f" data-color="#2d6a4f"></div>
+                        <div class="quick-color" style="background: #d62828" data-color="#d62828"></div>
+                        <div class="quick-color" style="background: #6c757d" data-color="#6c757d"></div>
+                    </div>
+                </div>
+                
+                <!-- 背景图片设置 -->
+                <div class="panel-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-image"></i>
+                        背景图片设置
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">背景类型</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="backgroundType" value="color" checked>
+                                <span>纯色背景</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="backgroundType" value="image">
+                                <span>图片背景</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" id="imageUploadGroup" style="display: none;">
+                        <label class="form-label">点击上传左侧背景图片</label>
+                        <input type="file" class="form-input" id="leftBgImage" accept="image/*">
+                        <small style="color: #6c757d; font-size: 0.8rem;">支持 JPG, PNG 格式，可拖动调整位置</small>
+                    </div>
+                    
+                    <div class="form-group" id="imageUploadGroup2" style="display: none;">
+                        <label class="form-label">点击上传右侧背景图片</label>
+                        <input type="file" class="form-input" id="rightBgImage" accept="image/*">
+                        <small style="color: #6c757d; font-size: 0.8rem;">建议尺寸: 900×383像素，可拖动调整位置</small>
+                    </div>
+                    
+                    <div class="form-group" id="imageControlGroup" style="display: none;">
+                        <label class="form-label">图片位置调整</label>
+                        <div class="position-controls">
+                            <div class="control-row">
+                                <label>左侧图片X位置: <span id="leftImageXValue">0</span>px</label>
+                                <input type="range" id="leftImageX" min="-200" max="200" value="0" class="range-input">
+                            </div>
+                            <div class="control-row">
+                                <label>左侧图片Y位置: <span id="leftImageYValue">0</span>px</label>
+                                <input type="range" id="leftImageY" min="-200" max="200" value="0" class="range-input">
+                            </div>
+                            <div class="control-row">
+                                <label>右侧图片X位置: <span id="rightImageXValue">0</span>px</label>
+                                <input type="range" id="rightImageX" min="-200" max="200" value="0" class="range-input">
+                            </div>
+                            <div class="control-row">
+                                <label>右侧图片Y位置: <span id="rightImageYValue">0</span>px</label>
+                                <input type="range" id="rightImageY" min="-200" max="200" value="0" class="range-input">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-secondary" onclick="clearBackgroundImages()">清除背景图片</button>
+                </div>
+                
+                <!-- 左侧文案设置 -->
+                <div class="panel-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-edit"></i>
+                        左侧文案内容
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">主标题</label>
+                        <input type="text" class="form-input" id="mainTitle" value="公众号封面生成器" placeholder="输入主标题">
+                    </div>
+                    
+
+                </div>
+                
+                <!-- 文字样式设置 -->
+                <div class="panel-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-font"></i>
+                        左侧文字样式
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">选择字体</label>
+                        <select class="form-input" id="fontFamily">
+                            <option value="Microsoft YaHei, sans-serif">微软雅黑 (默认)</option>
+                            <option value="SimHei, sans-serif">黑体</option>
+                            <option value="SimSun, serif">宋体</option>
+                            <option value="KaiTi, serif">楷体</option>
+                            <option value="Arial, sans-serif">Arial</option>
+                            <option value="Georgia, serif">Georgia</option>
+                            <option value="Times New Roman, serif">Times New Roman</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">主标题颜色</label>
+                        <div class="color-group">
+                            <input type="color" class="color-input" id="mainTitleColor" value="#ffffff">
+                            <input type="text" class="color-code" id="mainTitleColorCode" value="#ffffff">
+                        </div>
+                    </div>
+                    
+
+                    
+                    <div class="form-group">
+                        <label class="form-label">主标题大小: <span id="mainTitleSizeValue">48</span>px</label>
+                        <input type="range" id="mainTitleSize" min="20" max="80" value="48" class="range-input">
+                    </div>
+                    
+
+                    
+                    <div class="form-group">
+                        <label class="form-label">行间距: <span id="lineHeightValue">1.2</span></label>
+                        <input type="range" id="lineHeight" min="1" max="2" step="0.1" value="1.2" class="range-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">对齐方式</label>
+                        <div class="align-buttons">
+                            <button type="button" class="align-btn active" data-align="center">
+                                <i class="fas fa-align-center"></i>
+                            </button>
+                            <button type="button" class="align-btn" data-align="left">
+                                <i class="fas fa-align-left"></i>
+                            </button>
+                            <button type="button" class="align-btn" data-align="right">
+                                <i class="fas fa-align-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右侧文案设置 -->
+                <div class="panel-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-edit"></i>
+                        右侧文案内容
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">右侧标题</label>
+                        <input type="text" class="form-input" id="rightTitle" value="封面编辑器" placeholder="输入右侧标题">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">右侧标题颜色</label>
+                        <div class="color-group">
+                            <input type="color" class="color-input" id="rightTitleColor" value="#ffffff">
+                            <input type="text" class="color-code" id="rightTitleColorCode" value="#ffffff">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">右侧标题大小: <span id="rightTitleSizeValue">36</span>px</label>
+                        <input type="range" id="rightTitleSize" min="16" max="60" value="36" class="range-input">
+                    </div>
+                </div>
+
+                <!-- 操作按钮 -->
+                <div class="panel-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-tools"></i>
+                        操作
+                    </h3>
+                    
+                    <button class="btn" onclick="resetSettings()">重置设置</button>
+                    <button class="btn" onclick="downloadCover()">应用设置</button>
+                </div>
+            </div>
+            
+            <!-- 右侧预览区域 -->
+            <div class="preview-area">
+                <h3 class="preview-title">
+                    <i class="fas fa-eye"></i>
+                    封面预览 (1283×383像素)
+                </h3>
+                
+                <div class="canvas-container">
+                    <canvas id="coverCanvas" width="1283" height="383"></canvas>
+                    <div class="canvas-info">
+                        总尺寸: 1283×383px | 左: 900×383px | 右: 383×383px
+                    </div>
+                </div>
+                
+                <div class="download-section">
+                    <button class="btn" onclick="downloadCover()">
+                        <i class="fas fa-download"></i>
+                        下载封面
+                    </button>
+                    <button class="btn btn-secondary" onclick="copyToClipboard()">
+                        <i class="fas fa-copy"></i>
+                        复制图片
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 使用指南 -->
+        <div class="guide-section">
+            <h2 class="guide-title">使用指南</h2>
+            <div class="guide-steps">
+                <div class="guide-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">选择编辑区域</div>
+                    <div class="step-desc">选择要编辑的区域：左侧文字区域或右侧背景图区域</div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">设置背景颜色</div>
+                    <div class="step-desc">选择合适的背景颜色，或使用快速颜色选择</div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">上传背景图片</div>
+                    <div class="step-desc">可选择上传自定义背景图片，支持JPG、PNG格式</div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">预览和下载</div>
+                    <div class="step-desc">实时预览效果，满意后一键下载高清封面图片</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 工具详细介绍 -->
+        <div class="info-section">
+            <h2 class="info-title">工具详细介绍</h2>
+            <div class="info-content">
+                <p>公众号封面制作工具是一款专为微信公众号运营者设计的免费在线工具。该工具完美适配微信公众号封面的标准尺寸（1283×383像素），帮助您快速制作出专业、美观的公众号封面图片。</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-magic"></i></div>
+                        <div class="feature-title">智能设计</div>
+                        <div class="feature-desc">基于微信公众号标准尺寸，自动适配最佳显示效果</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                        <div class="feature-title">丰富配色</div>
+                        <div class="feature-desc">提供多种预设颜色方案，支持自定义颜色选择</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-image"></i></div>
+                        <div class="feature-title">图片上传</div>
+                        <div class="feature-desc">支持上传自定义背景图片，打造独特的视觉效果</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-download"></i></div>
+                        <div class="feature-title">一键下载</div>
+                        <div class="feature-desc">制作完成后可直接下载高清图片，无需注册</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 为什么选择我们 -->
+        <div class="info-section">
+            <h2 class="info-title">为什么选择我们的工具？</h2>
+            <div class="info-content">
+                <p><strong>专业标准：</strong>严格按照微信公众号封面标准尺寸设计，确保在各种设备上完美显示。</p>
+                <p><strong>操作简单：</strong>无需专业设计技能，几分钟即可制作出专业级别的封面图片。</p>
+                <p><strong>完全免费：</strong>无需注册登录，无水印，无使用限制，永久免费使用。</p>
+                <p><strong>实时预览：</strong>所见即所得的设计体验，实时查看制作效果。</p>
+                <p><strong>高质量输出：</strong>支持高清图片下载，确保封面图片清晰度。</p>
+            </div>
+        </div>
+        
+        <!-- 核心功能 -->
+        <div class="info-section">
+            <h2 class="info-title">核心功能</h2>
+            <div class="info-content">
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i>标准尺寸适配（1283×383像素）</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i>左右分区设计（900×383 + 383×383）</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i>自定义背景颜色</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i>背景图片上传</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i>实时预览效果</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i>高清图片下载</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--success); margin-right: 10px;"></i>移动端适配</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 应用场景 -->
+        <div class="info-section">
+            <h2 class="info-title">应用场景</h2>
+            <div class="info-content">
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-newspaper"></i></div>
+                        <div class="feature-title">公众号运营</div>
+                        <div class="feature-desc">为微信公众号文章制作吸引眼球的封面图片</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-bullhorn"></i></div>
+                        <div class="feature-title">自媒体创作</div>
+                        <div class="feature-desc">提升文章点击率，增强内容视觉吸引力</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="feature-title">营销推广</div>
+                        <div class="feature-desc">制作营销活动封面，提升品牌形象</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-users"></i></div>
+                        <div class="feature-title">企业宣传</div>
+                        <div class="feature-desc">企业公众号内容配图，专业形象展示</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 常见问题 -->
+        <div class="faq-section">
+            <h2 class="info-title">常见问题</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Q: 制作的封面图片尺寸是多少？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    A: 我们的工具制作的封面图片尺寸为1283×383像素，这是微信公众号封面的标准尺寸，确保在所有设备上都能完美显示。
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Q: 是否需要注册账号才能使用？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    A: 不需要！我们的工具完全免费，无需注册登录，打开网页即可直接使用，制作完成后可直接下载。
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Q: 支持哪些图片格式上传？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    A: 目前支持JPG、PNG格式的图片上传。建议上传高清图片以获得更好的效果。
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Q: 下载的图片有水印吗？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    A: 没有水印！下载的图片是纯净的，可以直接用于公众号发布，无任何使用限制。
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Q: 手机上可以使用这个工具吗？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    A: 可以！我们的工具采用响应式设计，完美适配手机、平板等移动设备，随时随地都能制作封面。
+                </div>
+            </div>
+        </div>
+        
+        <!-- 工具页脚 -->
+        <div class="tool-footer">
+            <p class="tool-footer-text">@2025 公众号封面制作工具 - 专业、免费、高效的微信公众号封面设计工具</p>
+            <p>
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank" class="support-link">
+                    <i class="fas fa-question-circle"></i>
+                    技术支持和问题反馈
+                </a>
+            </p>
+        </div>
+    </div>
+    
+    <!-- 页脚容器 -->
+    <div id="footer-container"></div>
+    
+    <script>
+        // 画布和上下文
+        const canvas = document.getElementById('coverCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 设置画布尺寸
+        canvas.width = 1283;
+        canvas.height = 383;
+        
+        // 全局设置
+         let settings = {
+                leftBgColor: '#149c86',
+                rightBgColor: '#149c86',
+                leftBgImage: null,
+                rightBgImage: null,
+                leftImageX: 0,
+                leftImageY: 0,
+                rightImageX: 0,
+                rightImageY: 0,
+                backgroundType: 'color',
+                mainTitle: '公众号封面生成器',
+                rightTitle: '封面编辑器',
+                fontFamily: 'Microsoft YaHei, sans-serif',
+                mainTitleColor: '#ffffff',
+                rightTitleColor: '#ffffff',
+                mainTitleSize: 48,
+                rightTitleSize: 36,
+                lineHeight: 1.2,
+                textAlign: 'center'
+            };
+        
+        // 初始化画布
+        function initCanvas() {
+            drawCover();
+        }
+        
+        // 绘制封面
+        function drawCover() {
+            // 清空画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制左侧区域 (900x383)
+            if (settings.leftBgImage && settings.backgroundType === 'image') {
+                ctx.drawImage(settings.leftBgImage, settings.leftImageX, settings.leftImageY, 900, 383);
+            } else {
+                ctx.fillStyle = settings.leftBgColor;
+                ctx.fillRect(0, 0, 900, 383);
+            }
+            
+            // 绘制右侧区域 (383x383)
+            if (settings.rightBgImage && settings.backgroundType === 'image') {
+                ctx.drawImage(settings.rightBgImage, 900 + settings.rightImageX, settings.rightImageY, 383, 383);
+            } else {
+                ctx.fillStyle = settings.rightBgColor;
+                ctx.fillRect(900, 0, 383, 383);
+            }
+            
+            // 绘制文案
+            drawText();
+        }
+         
+         // 绘制文案
+         function drawText() {
+             ctx.textBaseline = 'middle';
+             
+             // 绘制左侧主标题
+             ctx.font = `bold ${settings.mainTitleSize}px ${settings.fontFamily}`;
+             ctx.fillStyle = settings.mainTitleColor;
+             ctx.textAlign = settings.textAlign;
+             
+             const leftCenterX = 450; // 左侧区域中心
+             const mainTitleY = 150;
+             ctx.fillText(settings.mainTitle, leftCenterX, mainTitleY);
+             
+
+             
+             // 绘制右侧标题
+             ctx.font = `bold ${settings.rightTitleSize}px ${settings.fontFamily}`;
+             ctx.fillStyle = settings.rightTitleColor;
+             const rightCenterX = 900 + 191.5; // 右侧区域中心
+             const rightTitleY = 191.5; // 右侧区域中心
+             ctx.fillText(settings.rightTitle, rightCenterX, rightTitleY);
+         }
+         
+         // 颜色选择器事件
+        document.getElementById('leftBgColor').addEventListener('change', function(e) {
+            settings.leftBgColor = e.target.value;
+            document.getElementById('leftBgColorCode').value = e.target.value;
+            drawCover();
+        });
+        
+        document.getElementById('rightBgColor').addEventListener('change', function(e) {
+            settings.rightBgColor = e.target.value;
+            document.getElementById('rightBgColorCode').value = e.target.value;
+            drawCover();
+        });
+        
+        // 颜色代码输入框事件
+        document.getElementById('leftBgColorCode').addEventListener('change', function(e) {
+            if (isValidColor(e.target.value)) {
+                settings.leftBgColor = e.target.value;
+                document.getElementById('leftBgColor').value = e.target.value;
+                drawCover();
+            }
+        });
+        
+        document.getElementById('rightBgColorCode').addEventListener('change', function(e) {
+            if (isValidColor(e.target.value)) {
+                settings.rightBgColor = e.target.value;
+                document.getElementById('rightBgColor').value = e.target.value;
+                drawCover();
+            }
+        });
+        
+        // 快速颜色选择
+        document.querySelectorAll('.quick-color').forEach(color => {
+            color.addEventListener('click', function() {
+                const colorValue = this.getAttribute('data-color');
+                const editArea = document.getElementById('editArea').value;
+                
+                if (editArea === 'left') {
+                    settings.leftBgColor = colorValue;
+                    document.getElementById('leftBgColor').value = colorValue;
+                    document.getElementById('leftBgColorCode').value = colorValue;
+                } else {
+                    settings.rightBgColor = colorValue;
+                    document.getElementById('rightBgColor').value = colorValue;
+                    document.getElementById('rightBgColorCode').value = colorValue;
+                }
+                
+                drawCover();
+            });
+        });
+        
+        // 图片上传事件
+        document.getElementById('leftBgImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        settings.leftBgImage = img;
+                        document.getElementById('imageControlGroup').style.display = 'block';
+                        drawCover();
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        document.getElementById('rightBgImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        settings.rightBgImage = img;
+                        document.getElementById('imageControlGroup').style.display = 'block';
+                        drawCover();
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // 验证颜色值
+        function isValidColor(color) {
+            const s = new Option().style;
+            s.color = color;
+            return s.color !== '';
+        }
+        
+        // 重置设置
+        function resetSettings() {
+            settings = {
+                leftBgColor: '#149c86',
+                rightBgColor: '#149c86',
+                leftBgImage: null,
+                rightBgImage: null,
+                leftImageX: 0,
+                leftImageY: 0,
+                rightImageX: 0,
+                rightImageY: 0,
+                backgroundType: 'color',
+                mainTitle: '公众号封面生成器',
+  
+                rightTitle: '封面编辑器',
+                fontFamily: 'Microsoft YaHei, sans-serif',
+                mainTitleColor: '#ffffff',
+  
+                rightTitleColor: '#ffffff',
+                mainTitleSize: 48,
+  
+                rightTitleSize: 36,
+                lineHeight: 1.2,
+                textAlign: 'center'
+            };
+            
+            document.getElementById('leftBgColor').value = '#149c86';
+            document.getElementById('rightBgColor').value = '#149c86';
+            document.getElementById('leftBgColorCode').value = '#149c86';
+            document.getElementById('rightBgColorCode').value = '#149c86';
+            document.getElementById('leftBgImage').value = '';
+            document.getElementById('rightBgImage').value = '';
+            
+            // 重置文案输入框
+            document.getElementById('mainTitle').value = '公众号封面生成器';
+            document.getElementById('rightTitle').value = '封面编辑器';
+            document.getElementById('fontFamily').value = 'Microsoft YaHei, sans-serif';
+            
+            // 重置颜色选择器
+            document.getElementById('mainTitleColor').value = '#ffffff';
+            document.getElementById('mainTitleColorCode').value = '#ffffff';
+            document.getElementById('rightTitleColor').value = '#ffffff';
+            document.getElementById('rightTitleColorCode').value = '#ffffff';
+            
+            // 重置字体大小滑块
+            document.getElementById('mainTitleSize').value = 48;
+            document.getElementById('mainTitleSizeValue').textContent = '48';
+            document.getElementById('rightTitleSize').value = 36;
+            document.getElementById('rightTitleSizeValue').textContent = '36';
+            document.getElementById('lineHeight').value = 1.2;
+            document.getElementById('lineHeightValue').textContent = '1.2';
+            
+            // 重置对齐方式
+            document.querySelectorAll('.align-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.align-btn[data-align="center"]').classList.add('active');
+            
+            // 重置背景类型选择
+            document.querySelector('input[name="backgroundType"][value="color"]').checked = true;
+            document.querySelectorAll('#imageUploadGroup, #imageUploadGroup2, #imageControlGroup').forEach(group => {
+                group.style.display = 'none';
+            });
+            
+            // 重置滑块值
+            ['leftImageX', 'leftImageY', 'rightImageX', 'rightImageY'].forEach(id => {
+                const slider = document.getElementById(id);
+                const valueSpan = document.getElementById(id + 'Value');
+                if (slider && valueSpan) {
+                    slider.value = 0;
+                    valueSpan.textContent = '0';
+                }
+            });
+            
+            drawCover();
+        }
+        
+        // 清除背景图片
+        function clearBackgroundImages() {
+            settings.leftBgImage = null;
+            settings.rightBgImage = null;
+            settings.leftImageX = 0;
+            settings.leftImageY = 0;
+            settings.rightImageX = 0;
+            settings.rightImageY = 0;
+            
+            document.getElementById('leftBgImage').value = '';
+            document.getElementById('rightBgImage').value = '';
+            document.getElementById('imageControlGroup').style.display = 'none';
+            
+            // 重置滑块值
+            ['leftImageX', 'leftImageY', 'rightImageX', 'rightImageY'].forEach(id => {
+                const slider = document.getElementById(id);
+                const valueSpan = document.getElementById(id + 'Value');
+                if (slider && valueSpan) {
+                    slider.value = 0;
+                    valueSpan.textContent = '0';
+                }
+            });
+            
+            drawCover();
+        }
+        
+        // 下载封面
+        function downloadCover() {
+            const link = document.createElement('a');
+            link.download = '公众号封面_' + new Date().getTime() + '.png';
+            link.href = canvas.toDataURL('image/png', 1.0);
+            link.click();
+        }
+        
+        // 复制到剪贴板
+        function copyToClipboard() {
+            canvas.toBlob(function(blob) {
+                const item = new ClipboardItem({ 'image/png': blob });
+                navigator.clipboard.write([item]).then(function() {
+                    alert('封面图片已复制到剪贴板！');
+                }).catch(function(err) {
+                    console.error('复制失败:', err);
+                    alert('复制失败，请使用下载功能。');
+                });
+            });
+        }
+        
+        // FAQ 切换
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.classList.contains('show')) {
+                answer.classList.remove('show');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // 关闭其他FAQ
+                document.querySelectorAll('.faq-answer.show').forEach(item => {
+                    item.classList.remove('show');
+                });
+                document.querySelectorAll('.faq-question i').forEach(item => {
+                    item.style.transform = 'rotate(0deg)';
+                });
+                
+                // 打开当前FAQ
+                answer.classList.add('show');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+        
+        // 背景类型切换
+        document.querySelectorAll('input[name="backgroundType"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                settings.backgroundType = this.value;
+                const imageGroups = document.querySelectorAll('#imageUploadGroup, #imageUploadGroup2, #imageControlGroup');
+                
+                if (this.value === 'image') {
+                    imageGroups.forEach(group => group.style.display = 'block');
+                } else {
+                    imageGroups.forEach(group => group.style.display = 'none');
+                }
+                
+                drawCover();
+            });
+        });
+        
+        // 图片位置控制
+         ['leftImageX', 'leftImageY', 'rightImageX', 'rightImageY'].forEach(id => {
+             const slider = document.getElementById(id);
+             const valueSpan = document.getElementById(id + 'Value');
+             
+             slider.addEventListener('input', function() {
+                 settings[id] = parseInt(this.value);
+                 valueSpan.textContent = this.value;
+                 drawCover();
+             });
+         });
+         
+         // 画布拖动功能
+         let isDragging = false;
+         let dragStartX, dragStartY;
+         let dragTarget = null; // 'left' 或 'right'
+         
+         canvas.addEventListener('mousedown', function(e) {
+             if (settings.backgroundType !== 'image') return;
+             
+             const rect = canvas.getBoundingClientRect();
+             const scaleX = canvas.width / rect.width;
+             const scaleY = canvas.height / rect.height;
+             const x = (e.clientX - rect.left) * scaleX;
+             const y = (e.clientY - rect.top) * scaleY;
+             
+             // 判断点击的是左侧还是右侧区域
+             if (x < 900 && settings.leftBgImage) {
+                 dragTarget = 'left';
+                 isDragging = true;
+                 dragStartX = x - settings.leftImageX;
+                 dragStartY = y - settings.leftImageY;
+             } else if (x >= 900 && settings.rightBgImage) {
+                 dragTarget = 'right';
+                 isDragging = true;
+                 dragStartX = x - (900 + settings.rightImageX);
+                 dragStartY = y - settings.rightImageY;
+             }
+             
+             if (isDragging) {
+                 canvas.style.cursor = 'grabbing';
+                 e.preventDefault();
+             }
+         });
+         
+         canvas.addEventListener('mousemove', function(e) {
+             if (!isDragging) return;
+             
+             const rect = canvas.getBoundingClientRect();
+             const scaleX = canvas.width / rect.width;
+             const scaleY = canvas.height / rect.height;
+             const x = (e.clientX - rect.left) * scaleX;
+             const y = (e.clientY - rect.top) * scaleY;
+             
+             if (dragTarget === 'left') {
+                 settings.leftImageX = Math.max(-200, Math.min(200, x - dragStartX));
+                 settings.leftImageY = Math.max(-200, Math.min(200, y - dragStartY));
+                 document.getElementById('leftImageX').value = settings.leftImageX;
+                 document.getElementById('leftImageY').value = settings.leftImageY;
+                 document.getElementById('leftImageXValue').textContent = settings.leftImageX;
+                 document.getElementById('leftImageYValue').textContent = settings.leftImageY;
+             } else if (dragTarget === 'right') {
+                 settings.rightImageX = Math.max(-200, Math.min(200, x - 900 - dragStartX));
+                 settings.rightImageY = Math.max(-200, Math.min(200, y - dragStartY));
+                 document.getElementById('rightImageX').value = settings.rightImageX;
+                 document.getElementById('rightImageY').value = settings.rightImageY;
+                 document.getElementById('rightImageXValue').textContent = settings.rightImageX;
+                 document.getElementById('rightImageYValue').textContent = settings.rightImageY;
+             }
+             
+             drawCover();
+         });
+         
+         canvas.addEventListener('mouseup', function() {
+             isDragging = false;
+             dragTarget = null;
+             canvas.style.cursor = 'move';
+         });
+         
+         canvas.addEventListener('mouseleave', function() {
+             isDragging = false;
+             dragTarget = null;
+             canvas.style.cursor = 'move';
+         });
+        
+        // 文案编辑事件监听器
+        function setupTextEditListeners() {
+            // 文案内容输入框
+            document.getElementById('mainTitle').addEventListener('input', function(e) {
+                settings.mainTitle = e.target.value;
+                drawCover();
+            });
+            
+
+            
+            document.getElementById('rightTitle').addEventListener('input', function(e) {
+                settings.rightTitle = e.target.value;
+                drawCover();
+            });
+            
+            // 字体选择
+            document.getElementById('fontFamily').addEventListener('change', function(e) {
+                settings.fontFamily = e.target.value;
+                drawCover();
+            });
+            
+            // 文字颜色
+            document.getElementById('mainTitleColor').addEventListener('change', function(e) {
+                settings.mainTitleColor = e.target.value;
+                document.getElementById('mainTitleColorCode').value = e.target.value;
+                drawCover();
+            });
+            
+            document.getElementById('mainTitleColorCode').addEventListener('change', function(e) {
+                if (isValidColor(e.target.value)) {
+                    settings.mainTitleColor = e.target.value;
+                    document.getElementById('mainTitleColor').value = e.target.value;
+                    drawCover();
+                }
+            });
+            
+
+            
+            document.getElementById('rightTitleColor').addEventListener('change', function(e) {
+                settings.rightTitleColor = e.target.value;
+                document.getElementById('rightTitleColorCode').value = e.target.value;
+                drawCover();
+            });
+            
+            document.getElementById('rightTitleColorCode').addEventListener('change', function(e) {
+                if (isValidColor(e.target.value)) {
+                    settings.rightTitleColor = e.target.value;
+                    document.getElementById('rightTitleColor').value = e.target.value;
+                    drawCover();
+                }
+            });
+            
+            // 字体大小滑块
+            document.getElementById('mainTitleSize').addEventListener('input', function(e) {
+                settings.mainTitleSize = parseInt(e.target.value);
+                document.getElementById('mainTitleSizeValue').textContent = e.target.value;
+                drawCover();
+            });
+            
+
+            
+            document.getElementById('rightTitleSize').addEventListener('input', function(e) {
+                settings.rightTitleSize = parseInt(e.target.value);
+                document.getElementById('rightTitleSizeValue').textContent = e.target.value;
+                drawCover();
+            });
+            
+            document.getElementById('lineHeight').addEventListener('input', function(e) {
+                settings.lineHeight = parseFloat(e.target.value);
+                document.getElementById('lineHeightValue').textContent = e.target.value;
+                drawCover();
+            });
+            
+            // 对齐方式按钮
+            document.querySelectorAll('.align-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.align-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    settings.textAlign = this.getAttribute('data-align');
+                    drawCover();
+                });
+            });
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initCanvas();
+            setupTextEditListeners();
+        });
+    </script>
+    
+    <!-- 组件管理器 -->
+    <script src="../components/component-manager.js"></script>
+</body>
+</html>
