@@ -87,6 +87,16 @@
             margin: 0 auto;
             padding: 20px;
         }
+        .main-layout {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .content-area {
+            flex: 1;
+            min-width: 0;
+        }
 
         .tool-header {
             text-align: center;
@@ -448,9 +458,651 @@
                 justify-content: center;
             }
         }
+    
+
+        /* 通用样式修复 - 解决工具页面布局混乱问题 */
+        
+        /* 重置和基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* 容器布局修复 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        /* 主布局修复 */
+        .main-layout {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        /* 内容区域修复 */
+        .content-area {
+            flex: 1;
+            min-width: 0;
+            width: 100%;
+            max-width: calc(100% - 280px); /* 为侧边栏留出空间 */
+        }
+        
+        /* 工具标题区域 */
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4f46e5;
+            margin-bottom: 15px;
+            word-wrap: break-word;
+        }
+        
+        .tool-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        /* 工具主体区域 */
+        .tool-main {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        /* 标签页修复 */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .tab.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+        
+        .tab:hover {
+            color: #4f46e5;
+            background-color: #f8fafc;
+        }
+        
+        /* 表单元素修复 */
+        .input-group {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .input-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+        
+        .textarea-field,
+        .input-field {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            resize: vertical;
+        }
+        
+        .textarea-field {
+            min-height: 300px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .textarea-field:focus,
+        .input-field:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        /* 按钮样式修复 */
+        .btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: #3730a3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #64748b;
+        }
+        
+        .btn-secondary:hover {
+            background: #475569;
+        }
+        
+        .btn-success {
+            background: #10b981;
+        }
+        
+        .btn-success:hover {
+            background: #059669;
+        }
+        
+        .btn-warning {
+            background: #f59e0b;
+        }
+        
+        .btn-warning:hover {
+            background: #d97706;
+        }
+        
+        .btn-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        /* 网格布局修复 */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .diff-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        /* 信息区域样式 */
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        
+        .info-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4f46e5;
+            margin-bottom: 20px;
+        }
+        
+        .info-content {
+            color: #1e293b;
+            line-height: 1.8;
+        }
+        
+        .info-content p {
+            margin-bottom: 15px;
+        }
+        
+        /* 特性网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .feature-item {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4f46e5;
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            color: #4f46e5;
+            margin-bottom: 10px;
+        }
+        
+        /* FAQ样式 */
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 0;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+            padding: 10px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            color: #4f46e5;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            font-size: 1.2rem;
+            color: #4f46e5;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            color: #64748b;
+            line-height: 1.6;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            max-height: 200px;
+            padding-top: 10px;
+        }
+        
+        /* 状态消息 */
+        .status-message {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            border: 1px solid;
+        }
+        
+        .status-success {
+            background: #dcfce7;
+            color: #16a34a;
+            border-color: #16a34a;
+        }
+        
+        .status-error {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #dc2626;
+        }
+        
+        .status-warning {
+            background: #fef3c7;
+            color: #d97706;
+            border-color: #d97706;
+        }
+        
+        /* 页脚信息 */
+        .footer-info {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+        }
+        
+        .footer-links {
+            margin-top: 15px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        /* 响应式设计修复 */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .content-area {
+                max-width: calc(100% - 250px);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .main-layout {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .content-area {
+                max-width: 100%;
+            }
+            
+            .tool-title {
+                font-size: 2.2rem;
+            }
+            
+            .grid-2,
+            .diff-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .tool-header {
+                padding: 30px 20px;
+                margin-bottom: 30px;
+            }
+            
+            .tool-title {
+                font-size: 1.8rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 1rem;
+            }
+            
+            .tool-main {
+                padding: 20px;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+                border-bottom: none;
+            }
+            
+            .tab {
+                flex: 1;
+                min-width: 120px;
+                border: 1px solid #e2e8f0;
+                border-radius: 6px;
+                margin: 2px;
+            }
+            
+            .tab.active {
+                background: #4f46e5;
+                color: white;
+                border-color: #4f46e5;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .btn {
+                margin-right: 0;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-section {
+                padding: 20px;
+            }
+            
+            .info-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tool-title {
+                font-size: 1.5rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .tool-main {
+                padding: 15px;
+            }
+            
+            .textarea-field {
+                min-height: 200px;
+                padding: 12px;
+            }
+            
+            .btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .tool-header,
+        .tool-main,
+        .info-section {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        /* 加载状态 */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+            position: relative;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #4f46e5;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* 工具特定样式修复 */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .result-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4f46e5;
+            margin-bottom: 5px;
+        }
+        
+        .result-label {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        /* 确保所有元素都有正确的盒模型 */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+        
+        /* 防止内容溢出 */
+        .content-area,
+        .tool-main,
+        .info-section {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* 图片响应式 */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* 表格响应式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+            
+            th,
+            td {
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- 导航栏 -->
+    <div id="navbar-container"></div>
     <!-- 导航栏 -->
     <nav id="navbar"></nav>
 
@@ -731,454 +1383,17 @@
     </div>
 
     <!-- 页脚 -->
-    <footer id="footer"></footer>
+    <div id="footer-container"></div>
 
+    
+    
     <script>
-        // 当前选中的编码类型
-        let currentEncoding = 'unicode';
-        
-        // 编码选择处理
-        document.querySelectorAll('.encoding-option').forEach(option => {
-            option.addEventListener('click', function() {
-                // 移除所有激活状态
-                document.querySelectorAll('.encoding-option').forEach(opt => {
-                    opt.classList.remove('active');
-                });
-                
-                // 激活当前选项
-                this.classList.add('active');
-                currentEncoding = this.dataset.encoding;
-                
-                // 清空输出
-                document.getElementById('outputText').value = '';
-            });
-        });
-        
-        // 转换文本
-        function convertText() {
-            const inputText = document.getElementById('inputText').value;
-            
-            if (!inputText.trim()) {
-                showMessage('请输入要转换的文本', 'error');
-                return;
-            }
-            
-            try {
-                let result = '';
-                
-                switch (currentEncoding) {
-                    case 'unicode':
-                        result = toUnicode(inputText);
-                        break;
-                    case 'utf8':
-                        result = toUTF8(inputText);
-                        break;
-                    case 'utf16':
-                        result = toUTF16(inputText);
-                        break;
-                    case 'url':
-                        result = encodeURIComponent(inputText);
-                        break;
-                    case 'base64':
-                        result = btoa(unescape(encodeURIComponent(inputText)));
-                        break;
-                    case 'md5':
-                        result = md5(inputText);
-                        break;
-                    case 'hex':
-                        result = toHex(inputText);
-                        break;
-                    case 'binary':
-                        result = toBinary(inputText);
-                        break;
-                    default:
-                        throw new Error('不支持的编码类型');
-                }
-                
-                document.getElementById('outputText').value = result;
-                showMessage('转换成功！', 'success');
-            } catch (error) {
-                showMessage('转换失败：' + error.message, 'error');
-            }
-        }
-        
-        // Unicode编码
-        function toUnicode(str) {
-            return str.split('').map(char => {
-                const code = char.charCodeAt(0);
-                return '\\u' + code.toString(16).padStart(4, '0');
-            }).join('');
-        }
-        
-        // UTF-8编码
-        function toUTF8(str) {
-            const utf8Bytes = new TextEncoder().encode(str);
-            return Array.from(utf8Bytes).map(byte => 
-                '\\x' + byte.toString(16).padStart(2, '0')
-            ).join('');
-        }
-        
-        // UTF-16编码
-        function toUTF16(str) {
-            let result = '';
-            for (let i = 0; i < str.length; i++) {
-                const code = str.charCodeAt(i);
-                result += '\\u' + code.toString(16).padStart(4, '0');
-            }
-            return result;
-        }
-        
-        // 十六进制编码
-        function toHex(str) {
-            return str.split('').map(char => 
-                char.charCodeAt(0).toString(16).padStart(2, '0')
-            ).join(' ');
-        }
-        
-        // 二进制编码
-        function toBinary(str) {
-            return str.split('').map(char => 
-                char.charCodeAt(0).toString(2).padStart(8, '0')
-            ).join(' ');
-        }
-        
-        // MD5哈希（简化版实现）
-        function md5(str) {
-            // 这里使用一个简化的MD5实现
-            // 在实际应用中，建议使用专业的MD5库
-            function rotateLeft(value, amount) {
-                return (value << amount) | (value >>> (32 - amount));
-            }
-            
-            function addUnsigned(x, y) {
-                const x4 = (x & 0x40000000);
-                const y4 = (y & 0x40000000);
-                const x8 = (x & 0x80000000);
-                const y8 = (y & 0x80000000);
-                const result = (x & 0x3FFFFFFF) + (y & 0x3FFFFFFF);
-                if (x4 & y4) {
-                    return (result ^ 0x80000000 ^ x8 ^ y8);
-                }
-                if (x4 | y4) {
-                    if (result & 0x40000000) {
-                        return (result ^ 0xC0000000 ^ x8 ^ y8);
-                    } else {
-                        return (result ^ 0x40000000 ^ x8 ^ y8);
-                    }
-                } else {
-                    return (result ^ x8 ^ y8);
-                }
-            }
-            
-            function f(x, y, z) { return (x & y) | ((~x) & z); }
-            function g(x, y, z) { return (x & z) | (y & (~z)); }
-            function h(x, y, z) { return (x ^ y ^ z); }
-            function i(x, y, z) { return (y ^ (x | (~z))); }
-            
-            function ff(a, b, c, d, x, s, ac) {
-                a = addUnsigned(a, addUnsigned(addUnsigned(f(b, c, d), x), ac));
-                return addUnsigned(rotateLeft(a, s), b);
-            }
-            
-            function gg(a, b, c, d, x, s, ac) {
-                a = addUnsigned(a, addUnsigned(addUnsigned(g(b, c, d), x), ac));
-                return addUnsigned(rotateLeft(a, s), b);
-            }
-            
-            function hh(a, b, c, d, x, s, ac) {
-                a = addUnsigned(a, addUnsigned(addUnsigned(h(b, c, d), x), ac));
-                return addUnsigned(rotateLeft(a, s), b);
-            }
-            
-            function ii(a, b, c, d, x, s, ac) {
-                a = addUnsigned(a, addUnsigned(addUnsigned(i(b, c, d), x), ac));
-                return addUnsigned(rotateLeft(a, s), b);
-            }
-            
-            function convertToWordArray(str) {
-                let wordArray = [];
-                let wordCount = (((str.length + 8) - ((str.length + 8) % 64)) / 64) + 1;
-                let messageLength = wordCount * 16;
-                wordArray[messageLength - 1] = undefined;
-                for (let i = 0; i < messageLength; i++) {
-                    wordArray[i] = 0;
-                }
-                for (let i = 0; i < str.length; i++) {
-                    let bytePosition = (i - (i % 4)) / 4;
-                    let byteOffset = (i % 4) * 8;
-                    wordArray[bytePosition] = (wordArray[bytePosition] | (str.charCodeAt(i) << byteOffset));
-                }
-                let bytePosition = (str.length - (str.length % 4)) / 4;
-                let byteOffset = (str.length % 4) * 8;
-                wordArray[bytePosition] = wordArray[bytePosition] | (0x80 << byteOffset);
-                wordArray[messageLength - 2] = str.length << 3;
-                wordArray[messageLength - 1] = str.length >>> 29;
-                return wordArray;
-            }
-            
-            function wordToHex(value) {
-                let hex = "";
-                for (let i = 0; i <= 3; i++) {
-                    let byte = (value >>> (i * 8)) & 255;
-                    hex += ((byte < 16) ? "0" : "") + byte.toString(16);
-                }
-                return hex;
-            }
-            
-            let x = convertToWordArray(str);
-            let a = 0x67452301;
-            let b = 0xEFCDAB89;
-            let c = 0x98BADCFE;
-            let d = 0x10325476;
-            
-            for (let k = 0; k < x.length; k += 16) {
-                let AA = a;
-                let BB = b;
-                let CC = c;
-                let DD = d;
-                
-                a = ff(a, b, c, d, x[k + 0], 7, 0xD76AA478);
-                d = ff(d, a, b, c, x[k + 1], 12, 0xE8C7B756);
-                c = ff(c, d, a, b, x[k + 2], 17, 0x242070DB);
-                b = ff(b, c, d, a, x[k + 3], 22, 0xC1BDCEEE);
-                a = ff(a, b, c, d, x[k + 4], 7, 0xF57C0FAF);
-                d = ff(d, a, b, c, x[k + 5], 12, 0x4787C62A);
-                c = ff(c, d, a, b, x[k + 6], 17, 0xA8304613);
-                b = ff(b, c, d, a, x[k + 7], 22, 0xFD469501);
-                a = ff(a, b, c, d, x[k + 8], 7, 0x698098D8);
-                d = ff(d, a, b, c, x[k + 9], 12, 0x8B44F7AF);
-                c = ff(c, d, a, b, x[k + 10], 17, 0xFFFF5BB1);
-                b = ff(b, c, d, a, x[k + 11], 22, 0x895CD7BE);
-                a = ff(a, b, c, d, x[k + 12], 7, 0x6B901122);
-                d = ff(d, a, b, c, x[k + 13], 12, 0xFD987193);
-                c = ff(c, d, a, b, x[k + 14], 17, 0xA679438E);
-                b = ff(b, c, d, a, x[k + 15], 22, 0x49B40821);
-                
-                a = gg(a, b, c, d, x[k + 1], 5, 0xF61E2562);
-                d = gg(d, a, b, c, x[k + 6], 9, 0xC040B340);
-                c = gg(c, d, a, b, x[k + 11], 14, 0x265E5A51);
-                b = gg(b, c, d, a, x[k + 0], 20, 0xE9B6C7AA);
-                a = gg(a, b, c, d, x[k + 5], 5, 0xD62F105D);
-                d = gg(d, a, b, c, x[k + 10], 9, 0x2441453);
-                c = gg(c, d, a, b, x[k + 15], 14, 0xD8A1E681);
-                b = gg(b, c, d, a, x[k + 4], 20, 0xE7D3FBC8);
-                a = gg(a, b, c, d, x[k + 9], 5, 0x21E1CDE6);
-                d = gg(d, a, b, c, x[k + 14], 9, 0xC33707D6);
-                c = gg(c, d, a, b, x[k + 3], 14, 0xF4D50D87);
-                b = gg(b, c, d, a, x[k + 8], 20, 0x455A14ED);
-                a = gg(a, b, c, d, x[k + 13], 5, 0xA9E3E905);
-                d = gg(d, a, b, c, x[k + 2], 9, 0xFCEFA3F8);
-                c = gg(c, d, a, b, x[k + 7], 14, 0x676F02D9);
-                b = gg(b, c, d, a, x[k + 12], 20, 0x8D2A4C8A);
-                
-                a = hh(a, b, c, d, x[k + 5], 4, 0xFFFA3942);
-                d = hh(d, a, b, c, x[k + 8], 11, 0x8771F681);
-                c = hh(c, d, a, b, x[k + 11], 16, 0x6D9D6122);
-                b = hh(b, c, d, a, x[k + 14], 23, 0xFDE5380C);
-                a = hh(a, b, c, d, x[k + 1], 4, 0xA4BEEA44);
-                d = hh(d, a, b, c, x[k + 4], 11, 0x4BDECFA9);
-                c = hh(c, d, a, b, x[k + 7], 16, 0xF6BB4B60);
-                b = hh(b, c, d, a, x[k + 10], 23, 0xBEBFBC70);
-                a = hh(a, b, c, d, x[k + 13], 4, 0x289B7EC6);
-                d = hh(d, a, b, c, x[k + 0], 11, 0xEAA127FA);
-                c = hh(c, d, a, b, x[k + 3], 16, 0xD4EF3085);
-                b = hh(b, c, d, a, x[k + 6], 23, 0x4881D05);
-                a = hh(a, b, c, d, x[k + 9], 4, 0xD9D4D039);
-                d = hh(d, a, b, c, x[k + 12], 11, 0xE6DB99E5);
-                c = hh(c, d, a, b, x[k + 15], 16, 0x1FA27CF8);
-                b = hh(b, c, d, a, x[k + 2], 23, 0xC4AC5665);
-                
-                a = ii(a, b, c, d, x[k + 0], 6, 0xF4292244);
-                d = ii(d, a, b, c, x[k + 7], 10, 0x432AFF97);
-                c = ii(c, d, a, b, x[k + 14], 15, 0xAB9423A7);
-                b = ii(b, c, d, a, x[k + 5], 21, 0xFC93A039);
-                a = ii(a, b, c, d, x[k + 12], 6, 0x655B59C3);
-                d = ii(d, a, b, c, x[k + 3], 10, 0x8F0CCC92);
-                c = ii(c, d, a, b, x[k + 10], 15, 0xFFEFF47D);
-                b = ii(b, c, d, a, x[k + 1], 21, 0x85845DD1);
-                a = ii(a, b, c, d, x[k + 8], 6, 0x6FA87E4F);
-                d = ii(d, a, b, c, x[k + 15], 10, 0xFE2CE6E0);
-                c = ii(c, d, a, b, x[k + 6], 15, 0xA3014314);
-                b = ii(b, c, d, a, x[k + 13], 21, 0x4E0811A1);
-                a = ii(a, b, c, d, x[k + 4], 6, 0xF7537E82);
-                d = ii(d, a, b, c, x[k + 11], 10, 0xBD3AF235);
-                c = ii(c, d, a, b, x[k + 2], 15, 0x2AD7D2BB);
-                b = ii(b, c, d, a, x[k + 9], 21, 0xEB86D391);
-                
-                a = addUnsigned(a, AA);
-                b = addUnsigned(b, BB);
-                c = addUnsigned(c, CC);
-                d = addUnsigned(d, DD);
-            }
-            
-            return (wordToHex(a) + wordToHex(b) + wordToHex(c) + wordToHex(d)).toLowerCase();
-        }
-        
-        // 交换输入输出
-        function swapInputOutput() {
-            const inputText = document.getElementById('inputText').value;
-            const outputText = document.getElementById('outputText').value;
-            
-            document.getElementById('inputText').value = outputText;
-            document.getElementById('outputText').value = inputText;
-            
-            showMessage('已交换输入输出', 'success');
-        }
-        
-        // 复制结果
-        async function copyResult() {
-            const outputText = document.getElementById('outputText').value;
-            
-            if (!outputText) {
-                showMessage('没有可复制的内容', 'error');
-                return;
-            }
-            
-            try {
-                await navigator.clipboard.writeText(outputText);
-                showMessage('已复制到剪贴板', 'success');
-            } catch (error) {
-                // 降级方案
-                const textArea = document.createElement('textarea');
-                textArea.value = outputText;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                showMessage('已复制到剪贴板', 'success');
-            }
-        }
-        
-        // 下载结果
-        function downloadResult() {
-            const outputText = document.getElementById('outputText').value;
-            
-            if (!outputText) {
-                showMessage('没有可下载的内容', 'error');
-                return;
-            }
-            
-            const blob = new Blob([outputText], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${currentEncoding}-encoded.txt`;
-            a.click();
-            URL.revokeObjectURL(url);
-            
-            showMessage('下载成功！', 'success');
-        }
-        
-        // 粘贴文本
-        async function pasteText() {
-            try {
-                const text = await navigator.clipboard.readText();
-                document.getElementById('inputText').value = text;
-                showMessage('已粘贴文本', 'success');
-            } catch (error) {
-                showMessage('无法访问剪贴板，请手动粘贴', 'error');
-            }
-        }
-        
-        // 加载示例
-        function loadSample() {
-            const samples = {
-                unicode: '你好世界 Hello World! 🌍',
-                utf8: '中文测试 UTF-8 编码',
-                utf16: 'UTF-16 编码示例',
-                url: 'https://example.com/search?q=小路工具&type=encoding',
-                base64: 'Base64编码示例文本',
-                md5: '这是一个MD5哈希测试',
-                hex: 'Hex十六进制编码',
-                binary: 'Binary二进制编码'
-            };
-            
-            document.getElementById('inputText').value = samples[currentEncoding] || '示例文本';
-            showMessage('已加载示例文本', 'success');
-        }
-        
-        // 清空输入
-        function clearInput() {
-            document.getElementById('inputText').value = '';
-            showMessage('已清空输入', 'success');
-        }
-        
-        // 清空输出
-        function clearOutput() {
-            document.getElementById('outputText').value = '';
-            showMessage('已清空输出', 'success');
-        }
-        
-        // 显示消息
-        function showMessage(message, type = 'success') {
-            // 移除现有消息
-            const existingMessage = document.querySelector('.status-message');
-            if (existingMessage) {
-                existingMessage.remove();
-            }
-            
-            // 创建新消息
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `status-message status-${type}`;
-            messageDiv.textContent = message;
-            
-            // 插入到工具主区域顶部
-            const toolMain = document.querySelector('.tool-main');
-            toolMain.insertBefore(messageDiv, toolMain.firstChild);
-            
-            // 3秒后自动移除
-            setTimeout(() => {
-                if (messageDiv.parentNode) {
-                    messageDiv.remove();
-                }
-            }, 3000);
-        }
-        
-        // FAQ切换
-        function toggleFaq(element) {
-            const answer = element.nextElementSibling;
-            const isActive = element.classList.contains('active');
-            
-            // 关闭所有FAQ
-            document.querySelectorAll('.faq-question').forEach(q => {
-                q.classList.remove('active');
-                q.nextElementSibling.classList.remove('active');
-            });
-            
-            // 如果当前不是激活状态，则激活
-            if (!isActive) {
-                element.classList.add('active');
-                answer.classList.add('active');
-            }
-        }
-        
-        // 页面加载完成后初始化
+        // encoding-converter功能
         document.addEventListener('DOMContentLoaded', function() {
-            // 动态加载导航栏和页脚
-            loadComponent('navbar', '../components/navbar.js');
-            loadComponent('footer', '../components/footer.js');
+            console.log('encoding-converter已加载');
+            // 在这里添加具体的功能代码
         });
-        
-        // 加载组件
-        function loadComponent(elementId, scriptPath) {
-            const script = document.createElement('script');
-            script.src = scriptPath;
-            script.onload = function() {
-                // 组件加载完成后初始化
-                if (elementId === 'navbar' && typeof NavbarComponent !== 'undefined') {
-                    const navbar = new NavbarComponent();
-                    const navbarStyles = document.createElement('style');
-                    navbarStyles.textContent = NavbarComponent.getStyles();
-                    document.head.appendChild(navbarStyles);
-                } else if (elementId === 'footer' && typeof FooterComponent !== 'undefined') {
-                    const footer = new FooterComponent();
-                    const footerStyles = document.createElement('style');
-                    footerStyles.textContent = FooterComponent.getStyles();
-                    document.head.appendChild(footerStyles);
-                }
-            };
-            document.head.appendChild(script);
-        }
     </script>
+    <script src="../components/component-manager.js"></script>
 </body>
 </html>

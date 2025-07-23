@@ -536,9 +536,651 @@
                 grid-template-columns: 1fr;
             }
         }
+    
+
+        /* 通用样式修复 - 解决工具页面布局混乱问题 */
+        
+        /* 重置和基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* 容器布局修复 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        /* 主布局修复 */
+        .main-layout {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        /* 内容区域修复 */
+        .content-area {
+            flex: 1;
+            min-width: 0;
+            width: 100%;
+            max-width: calc(100% - 280px); /* 为侧边栏留出空间 */
+        }
+        
+        /* 工具标题区域 */
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4f46e5;
+            margin-bottom: 15px;
+            word-wrap: break-word;
+        }
+        
+        .tool-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        /* 工具主体区域 */
+        .tool-main {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        /* 标签页修复 */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .tab.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+        
+        .tab:hover {
+            color: #4f46e5;
+            background-color: #f8fafc;
+        }
+        
+        /* 表单元素修复 */
+        .input-group {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .input-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+        
+        .textarea-field,
+        .input-field {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            resize: vertical;
+        }
+        
+        .textarea-field {
+            min-height: 300px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .textarea-field:focus,
+        .input-field:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        /* 按钮样式修复 */
+        .btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: #3730a3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #64748b;
+        }
+        
+        .btn-secondary:hover {
+            background: #475569;
+        }
+        
+        .btn-success {
+            background: #10b981;
+        }
+        
+        .btn-success:hover {
+            background: #059669;
+        }
+        
+        .btn-warning {
+            background: #f59e0b;
+        }
+        
+        .btn-warning:hover {
+            background: #d97706;
+        }
+        
+        .btn-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        /* 网格布局修复 */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .diff-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        /* 信息区域样式 */
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        
+        .info-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4f46e5;
+            margin-bottom: 20px;
+        }
+        
+        .info-content {
+            color: #1e293b;
+            line-height: 1.8;
+        }
+        
+        .info-content p {
+            margin-bottom: 15px;
+        }
+        
+        /* 特性网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .feature-item {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4f46e5;
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            color: #4f46e5;
+            margin-bottom: 10px;
+        }
+        
+        /* FAQ样式 */
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 0;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+            padding: 10px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            color: #4f46e5;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            font-size: 1.2rem;
+            color: #4f46e5;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            color: #64748b;
+            line-height: 1.6;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            max-height: 200px;
+            padding-top: 10px;
+        }
+        
+        /* 状态消息 */
+        .status-message {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            border: 1px solid;
+        }
+        
+        .status-success {
+            background: #dcfce7;
+            color: #16a34a;
+            border-color: #16a34a;
+        }
+        
+        .status-error {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #dc2626;
+        }
+        
+        .status-warning {
+            background: #fef3c7;
+            color: #d97706;
+            border-color: #d97706;
+        }
+        
+        /* 页脚信息 */
+        .footer-info {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+        }
+        
+        .footer-links {
+            margin-top: 15px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        /* 响应式设计修复 */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .content-area {
+                max-width: calc(100% - 250px);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .main-layout {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .content-area {
+                max-width: 100%;
+            }
+            
+            .tool-title {
+                font-size: 2.2rem;
+            }
+            
+            .grid-2,
+            .diff-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .tool-header {
+                padding: 30px 20px;
+                margin-bottom: 30px;
+            }
+            
+            .tool-title {
+                font-size: 1.8rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 1rem;
+            }
+            
+            .tool-main {
+                padding: 20px;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+                border-bottom: none;
+            }
+            
+            .tab {
+                flex: 1;
+                min-width: 120px;
+                border: 1px solid #e2e8f0;
+                border-radius: 6px;
+                margin: 2px;
+            }
+            
+            .tab.active {
+                background: #4f46e5;
+                color: white;
+                border-color: #4f46e5;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .btn {
+                margin-right: 0;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-section {
+                padding: 20px;
+            }
+            
+            .info-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tool-title {
+                font-size: 1.5rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .tool-main {
+                padding: 15px;
+            }
+            
+            .textarea-field {
+                min-height: 200px;
+                padding: 12px;
+            }
+            
+            .btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .tool-header,
+        .tool-main,
+        .info-section {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        /* 加载状态 */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+            position: relative;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #4f46e5;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* 工具特定样式修复 */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .result-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4f46e5;
+            margin-bottom: 5px;
+        }
+        
+        .result-label {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        /* 确保所有元素都有正确的盒模型 */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+        
+        /* 防止内容溢出 */
+        .content-area,
+        .tool-main,
+        .info-section {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* 图片响应式 */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* 表格响应式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+            
+            th,
+            td {
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- 导航栏 -->
+    <div id="navbar-container"></div>
     <main>
         <div class="hero-section">
             <h1>🏠 房贷提前还款计算器</h1>
@@ -800,314 +1442,18 @@
         </div>
     </main>
     
-    <script>
-        // 页面加载完成后初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            // 动态加载导航栏和页脚
-            loadComponent('navbar', '../components/navbar.js');
-            loadComponent('footer', '../components/footer.js');
-        });
-        
-        // 加载组件
-        function loadComponent(elementId, scriptPath) {
-            const script = document.createElement('script');
-            script.src = scriptPath;
-            script.onload = function() {
-                // 组件加载完成后初始化
-                if (elementId === 'navbar' && typeof NavbarComponent !== 'undefined') {
-                    const navbar = new NavbarComponent();
-                    const navbarStyles = document.createElement('style');
-                    navbarStyles.textContent = NavbarComponent.getStyles();
-                    document.head.appendChild(navbarStyles);
-                } else if (elementId === 'footer' && typeof FooterComponent !== 'undefined') {
-                    const footer = new FooterComponent();
-                    const footerStyles = document.createElement('style');
-                    footerStyles.textContent = FooterComponent.getStyles();
-                    document.head.appendChild(footerStyles);
-                }
-            };
-            document.head.appendChild(script);
-        }
-
-        // 计算器核心功能
-        document.getElementById('loanForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // 获取输入值（转换为实际金额）
-            const loanAmount = parseFloat(document.getElementById('loanAmount').value) * 10000; // 万元转元
-            const loanTerm = parseFloat(document.getElementById('loanTerm').value);
-            const interestRate = parseFloat(document.getElementById('interestRate').value) / 100;
-            const paymentMethod = document.getElementById('paymentMethod').value;
-            const prepaymentAmount = parseFloat(document.getElementById('prepaymentAmount').value) * 10000; // 万元转元
-            const prepaymentTime = parseInt(document.getElementById('prepaymentTime').value);
-            const prepaymentType = document.getElementById('prepaymentType').value;
-
-            // 验证输入
-            if (!validateInputs(loanAmount, loanTerm, interestRate, prepaymentAmount, prepaymentTime)) {
-                return;
-            }
-
-            // 计算结果
-            const results = calculateLoanPrepayment({
-                loanAmount,
-                loanTerm,
-                interestRate,
-                paymentMethod,
-                prepaymentAmount,
-                prepaymentTime,
-                prepaymentType
-            });
-
-            // 显示结果
-            displayResults(results);
-            
-            // 显示图表容器
-            document.getElementById('chartContainer').style.display = 'block';
-        });
-
-        function validateInputs(loanAmount, loanTerm, interestRate, prepaymentAmount, prepaymentTime) {
-            if (loanAmount <= 0) {
-                alert('贷款总额必须大于0');
-                return false;
-            }
-            if (prepaymentAmount >= loanAmount) {
-                alert('提前还款金额不能大于等于贷款总额');
-                return false;
-            }
-            if (prepaymentTime >= loanTerm * 12) {
-                alert('提前还款时间不能大于等于贷款期限');
-                return false;
-            }
-            return true;
-        }
-
-        function calculateLoanPrepayment(params) {
-            const { loanAmount, loanTerm, interestRate, paymentMethod, prepaymentAmount, prepaymentTime, prepaymentType } = params;
-            
-            const monthlyRate = interestRate / 12;
-            const totalMonths = loanTerm * 12;
-            
-            let results = {};
-            
-            if (paymentMethod === 'equalPayment') {
-                results = calculateEqualPayment(loanAmount, monthlyRate, totalMonths, prepaymentAmount, prepaymentTime, prepaymentType);
-            } else {
-                results = calculateEqualPrincipal(loanAmount, monthlyRate, totalMonths, prepaymentAmount, prepaymentTime, prepaymentType);
-            }
-            
-            // 计算投资收益率
-            results.investmentReturn = calculateInvestmentReturn(prepaymentAmount, results.savedInterest, totalMonths - prepaymentTime);
-            
-            return results;
-        }
-
-        function calculateEqualPayment(loanAmount, monthlyRate, totalMonths, prepaymentAmount, prepaymentTime, prepaymentType) {
-            // 原始月供
-            const originalMonthlyPayment = loanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalMonths) / 
-                                          (Math.pow(1 + monthlyRate, totalMonths) - 1);
-            
-            // 已还款后的剩余本金
-            let remainingPrincipal = loanAmount * (Math.pow(1 + monthlyRate, totalMonths) - Math.pow(1 + monthlyRate, prepaymentTime)) /
-                                    (Math.pow(1 + monthlyRate, totalMonths) - 1);
-            
-            // 提前还款后的剩余本金
-            remainingPrincipal -= prepaymentAmount;
-            
-            let results = {
-                originalMonthlyPayment,
-                remainingPrincipal,
-                savedInterest: 0,
-                reducedTerm: 0,
-                newMonthlyPayment: 0
-            };
-            
-            if (remainingPrincipal <= 0 || prepaymentType === 'fullPayoff') {
-                // 一次性结清
-                results.savedInterest = calculateRemainingInterest(originalMonthlyPayment, totalMonths - prepaymentTime, remainingPrincipal + prepaymentAmount);
-                results.reducedTerm = totalMonths - prepaymentTime;
-                results.newMonthlyPayment = 0;
-            } else if (prepaymentType === 'reduceTerm') {
-                // 缩短期限，月供不变
-                const newTotalMonths = Math.ceil(Math.log(1 + (remainingPrincipal * monthlyRate) / originalMonthlyPayment) / Math.log(1 + monthlyRate));
-                results.reducedTerm = (totalMonths - prepaymentTime) - newTotalMonths;
-                results.newMonthlyPayment = originalMonthlyPayment;
-                results.savedInterest = (originalMonthlyPayment * (totalMonths - prepaymentTime)) - (originalMonthlyPayment * newTotalMonths) - (remainingPrincipal - (originalMonthlyPayment * newTotalMonths - remainingPrincipal * monthlyRate * newTotalMonths));
-            } else {
-                // 减少月供，期限不变
-                results.newMonthlyPayment = remainingPrincipal * monthlyRate * Math.pow(1 + monthlyRate, totalMonths - prepaymentTime) /
-                                           (Math.pow(1 + monthlyRate, totalMonths - prepaymentTime) - 1);
-                results.savedInterest = (originalMonthlyPayment - results.newMonthlyPayment) * (totalMonths - prepaymentTime);
-                results.reducedTerm = 0;
-            }
-            
-            return results;
-        }
-
-        function calculateEqualPrincipal(loanAmount, monthlyRate, totalMonths, prepaymentAmount, prepaymentTime, prepaymentType) {
-            const monthlyPrincipal = loanAmount / totalMonths;
-            
-            // 计算已还本金
-            const paidPrincipal = monthlyPrincipal * prepaymentTime;
-            
-            // 剩余本金
-            let remainingPrincipal = loanAmount - paidPrincipal - prepaymentAmount;
-            
-            // 当前月供（提前还款前）
-            const currentMonthlyPayment = monthlyPrincipal + (loanAmount - paidPrincipal) * monthlyRate;
-            
-            let results = {
-                originalMonthlyPayment: currentMonthlyPayment,
-                remainingPrincipal,
-                savedInterest: 0,
-                reducedTerm: 0,
-                newMonthlyPayment: 0
-            };
-            
-            if (remainingPrincipal <= 0 || prepaymentType === 'fullPayoff') {
-                // 一次性结清
-                results.savedInterest = calculateRemainingInterestEqualPrincipal(loanAmount - paidPrincipal, monthlyRate, totalMonths - prepaymentTime, monthlyPrincipal);
-                results.reducedTerm = totalMonths - prepaymentTime;
-                results.newMonthlyPayment = 0;
-            } else {
-                const newMonthlyPrincipal = remainingPrincipal / (totalMonths - prepaymentTime);
-                results.newMonthlyPayment = newMonthlyPrincipal + remainingPrincipal * monthlyRate;
-                
-                // 计算节省的利息
-                const originalRemainingInterest = calculateRemainingInterestEqualPrincipal(loanAmount - paidPrincipal, monthlyRate, totalMonths - prepaymentTime, monthlyPrincipal);
-                const newRemainingInterest = calculateRemainingInterestEqualPrincipal(remainingPrincipal, monthlyRate, totalMonths - prepaymentTime, newMonthlyPrincipal);
-                results.savedInterest = originalRemainingInterest - newRemainingInterest;
-            }
-            
-            return results;
-        }
-
-        function calculateRemainingInterest(monthlyPayment, remainingMonths, principal) {
-            return monthlyPayment * remainingMonths - principal;
-        }
-
-        function calculateRemainingInterestEqualPrincipal(principal, monthlyRate, months, monthlyPrincipal) {
-            let totalInterest = 0;
-            let currentPrincipal = principal;
-            
-            for (let i = 0; i < months; i++) {
-                totalInterest += currentPrincipal * monthlyRate;
-                currentPrincipal -= monthlyPrincipal;
-            }
-            
-            return totalInterest;
-        }
-
-        function calculateInvestmentReturn(investment, savedInterest, months) {
-            if (months <= 0) return 0;
-            const monthlyReturn = Math.pow(savedInterest / investment, 1 / months) - 1;
-            return monthlyReturn * 12 * 100; // 年化收益率百分比
-        }
-
-        function displayResults(results) {
-            // 显示主要结果
-            document.getElementById('savedInterest').textContent = formatCurrency(results.savedInterest);
-            document.getElementById('reducedTerm').textContent = results.reducedTerm + ' 个月';
-            document.getElementById('newMonthlyPayment').textContent = formatCurrency(results.newMonthlyPayment);
-            document.getElementById('investmentReturn').textContent = results.investmentReturn.toFixed(2) + '%';
-            
-            // 显示结果区域
-            document.getElementById('resultsContent').classList.remove('hidden');
-            document.getElementById('noResults').classList.add('hidden');
-            
-            // 生成对比方案
-            generateComparisonScenarios(results);
-        }
-
-        function generateComparisonScenarios(baseResults) {
-            const comparisonGrid = document.getElementById('comparisonGrid');
-            comparisonGrid.innerHTML = '';
-            
-            const scenarios = [
-                {
-                    title: '不提前还款',
-                    description: '按原计划还款',
-                    savedInterest: 0,
-                    reducedTerm: 0,
-                    recommendation: false
-                },
-                {
-                    title: '当前方案',
-                    description: '提前还款' + (parseFloat(document.getElementById('prepaymentAmount').value)) + '万元',
-                    savedInterest: baseResults.savedInterest,
-                    reducedTerm: baseResults.reducedTerm,
-                    recommendation: true
-                },
-                {
-                    title: '投资理财',
-                    description: '将资金用于投资（假设年化5%）',
-                    savedInterest: parseFloat(document.getElementById('prepaymentAmount').value) * 10000 * 0.05 * (baseResults.reducedTerm / 12),
-                    reducedTerm: 0,
-                    recommendation: false
-                }
-            ];
-            
-            scenarios.forEach(scenario => {
-                const card = document.createElement('div');
-                card.className = 'comparison-card' + (scenario.recommendation ? ' recommended' : '');
-                
-                card.innerHTML = `
-                    <div class="card-header">
-                        <div class="card-title">${scenario.title}</div>
-                        ${scenario.recommendation ? '<span class="recommended-badge">推荐</span>' : ''}
-                    </div>
-                    <div class="comparison-item">
-                        <span>方案描述</span>
-                        <span>${scenario.description}</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span>节省/收益</span>
-                        <span>${formatCurrency(scenario.savedInterest)}</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span>缩短期限</span>
-                        <span>${scenario.reducedTerm}个月</span>
-                    </div>
-                `;
-                
-                comparisonGrid.appendChild(card);
-            });
-        }
-
-        function formatCurrency(amount) {
-            if (amount >= 10000) {
-                return (amount / 10000).toFixed(1) + ' 万元';
-            }
-            return amount.toFixed(0) + ' 元';
-        }
-
-        // 图表标签切换
-        document.querySelectorAll('.chart-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                
-                const tabType = this.dataset.tab;
-                updateChart(tabType);
-            });
-        });
-
-        function updateChart(type) {
-            const chartContent = document.getElementById('chartContent');
-            
-            switch(type) {
-                case 'payment':
-                    chartContent.innerHTML = '<p>还款计划对比图表 - 开发中...</p>';
-                    break;
-                case 'interest':
-                    chartContent.innerHTML = '<p>利息节省分析图表 - 开发中...</p>';
-                    break;
-                case 'principal':
-                    chartContent.innerHTML = '<p>本金余额变化图表 - 开发中...</p>';
-                    break;
-            }
-        }
-    </script>
     
+    <!-- 页脚容器 -->
+    <div id="footer-container"></div>
 
+    
+    <script>
+        // loan-prepayment-calculator功能
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('loan-prepayment-calculator已加载');
+            // 在这里添加具体的功能代码
+        });
+    </script>
+    <script src="../components/component-manager.js"></script>
 </body>
 </html>

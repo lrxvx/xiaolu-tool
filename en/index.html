@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Xiaolu Toolbox - Free AI-Powered Online Tools Collection</title>
+    <meta name="description" content="Free AI-powered online tools for content creators, developers, social media managers, and professionals. No registration required. Includes JSON formatter, BMI calculator, image to PDF converter, Base64 encoder, Markdown editor, and 50+ practical tools.">
+    <meta name="keywords" content="online tools, free tools, AI tools, text processing, JSON formatter, Base64 encoder, image to PDF, Markdown editor, BMI calculator, QR code generator, regex tester, timestamp converter, color picker, password generator, file compression, data conversion, developer tools, content creation tools, social media tools, productivity tools">
+    <meta name="author" content="Xiaolu Toolbox">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://xiaolu-tools.com/en/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Xiaolu Toolbox - Free AI-Powered Online Tools Collection">
+    <meta property="og:description" content="Free AI-powered online tools for content creators, developers, social media managers, and professionals. No registration required, completely free to use.">
+    <meta property="og:url" content="https://xiaolu-tools.com/en/">
+    <meta property="og:site_name" content="Xiaolu Toolbox">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:locale:alternate" content="ja_JP">
+    <meta property="og:locale:alternate" content="ko_KR">
+    <meta property="og:locale:alternate" content="es_ES">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Xiaolu Toolbox - Free AI-Powered Online Tools">
+    <meta name="twitter:description" content="50+ free AI-powered online tools for content creators, developers, and professionals. No registration required.">
+    <meta name="twitter:creator" content="@xiaolu_tools">
+    <meta name="twitter:site" content="@xiaolu_tools">
+    
+    <!-- Multilingual Support -->
+    <link rel="alternate" hreflang="zh-CN" href="https://xiaolu-tools.com/">
+    <link rel="alternate" hreflang="en" href="https://xiaolu-tools.com/en/">
+    <link rel="alternate" hreflang="ja" href="https://xiaolu-tools.com/ja/">
+    <link rel="alternate" hreflang="ko" href="https://xiaolu-tools.com/ko/">
+    <link rel="alternate" hreflang="es" href="https://xiaolu-tools.com/es/">
+    <link rel="alternate" hreflang="x-default" href="https://xiaolu-tools.com/">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Xiaolu Toolbox",
+        "description": "Free AI-powered online tools collection for content creators, developers, social media managers, and professionals",
+        "url": "https://xiaolu-tools.com/en/",
+        "applicationCategory": "Productivity",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "AI-powered processing",
+            "No registration required",
+            "Completely free",
+            "Privacy-focused",
+            "Multi-language support",
+            "Mobile responsive"
+        ],
+        "audience": {
+            "@type": "Audience",
+            "audienceType": ["Content Creators", "Developers", "Social Media Managers", "Professionals"]
+        },
+        "inLanguage": ["en", "zh-CN", "ja", "ko", "es"],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1250"
+        },
+        "keywords": "online tools, free tools, AI tools, JSON formatter, Base64 encoder, image converter, text processing, developer tools"
+    }
+    </script>
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    
+    <!-- Performance and Preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- External Resources -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles.css">
+    
+    <style>
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 0;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .hero-features {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .hero-features span {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .hero-cta {
+            margin-top: 25px;
+        }
+        
+        .hero-cta a {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .hero-cta a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-features {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Container -->
+    <div id="navbar-container"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Xiaolu Toolbox - Free AI-Powered Online Tools</h1>
+        <p>A comprehensive collection of AI-powered online tools designed for content creators, developers, social media managers, and professionals. No registration required, completely free, including JSON formatter, BMI calculator, image to PDF converter, Base64 encoder, Markdown editor, and 50+ practical tools to boost your productivity and unleash creativity.</p>
+        <div class="hero-features">
+            <span><i class="fas fa-check" style="margin-right: 5px;"></i> AI-Powered</span>
+            <span><i class="fas fa-check" style="margin-right: 5px;"></i> Completely Free</span>
+            <span><i class="fas fa-check" style="margin-right: 5px;"></i> No Registration</span>
+            <span><i class="fas fa-check" style="margin-right: 5px;"></i> Ready to Use</span>
+        </div>
+        <div class="hero-cta">
+            <a href="../seo-keywords.html">Explore More Tools →</a>
+        </div>
+    </section>
+    
+    <!-- Main Content Container -->
+    <div class="page-container">
+        <!-- Left Sidebar Tool Categories -->
+        <div id="tool-categories-container"></div>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Tools List Page -->
+            <div class="page-content" id="tools-list-page">
+                <!-- Filter Statistics -->
+                <div class="filter-stats"></div>
+                
+                <!-- Recent Tools -->
+                <section class="recent-tools" id="recent-tools-section" style="display: none;">
+                    <div class="tools-heading">
+                        <h2><i class="fas fa-history"></i> Recently Used</h2>
+                        <button class="clear-recent-btn" onclick="clearRecentTools()">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+                    <div class="recent-tools-grid" id="recent-tools-container">
+                        <!-- Recent tools will be loaded dynamically via JavaScript -->
+                    </div>
+                </section>
+                
+                <!-- Popular Tools -->
+                <section class="tools">
+                    <div class="tools-heading">
+                        <h2>Popular Online Tools</h2>
+                        <p style="margin: 10px 0; color: #666; font-size: 0.9em;">Curated selection of the most popular free online tools, covering text processing, image editing, data conversion, development assistance, and more</p>
+                        
+                        <div class="view-options">
+                            <button class="view-btn active" id="grid-view-btn">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="view-btn" id="list-view-btn">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tools-grid" id="tools-container">
+                        <!-- Tool cards will be loaded dynamically via JavaScript -->
+                    </div>
+                    
+                    <!-- Pagination Info -->
+                    <div class="pagination-info" id="pagination-info" style="display: none;"></div>
+                    
+                    <!-- Pagination Controls -->
+                    <div class="pagination" id="pagination-container" style="display: none;">
+                        <!-- Pagination buttons will be generated dynamically via JavaScript -->
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Tool Usage Page -->
+            <div class="page-content" id="tool-usage-page" style="display: none;">
+                <div class="tool-usage-container">
+                    <!-- Tool usage interface will be loaded dynamically via JavaScript -->
+                </div>
+            </div>
+        </main>
+        
+        <!-- Right Sidebar Profile Panel -->
+        <aside class="sidebar-right" id="profile-sidebar">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Xiaolu</h3>
+                    <p>Content Creator | Tech Enthusiast</p>
+                </div>
+                <div class="profile-body">
+                    <p>👋 Hello! I'm Xiaolu, a developer passionate about technology and content creation.</p>
+                    <p>🛠️ This toolbox is a collection of practical tools I've built for content creators to help improve your productivity.</p>
+                    <p>💡 If you have any suggestions or ideas, feel free to contact me!</p>
+                    <p>📱 WeChat: <strong>xiaoluv12</strong></p>
+                    <p>🌟 <a href="https://t.zsxq.com/17wTksRxX" target="_blank" style="color: var(--primary); text-decoration: none;">Knowledge Planet</a></p>
+                    <p>📝 Blog: <a href="https://mp.weixin.qq.com/s/rmEHqGeNgRIQ0_Jzqx0jiA" target="_blank" style="color: var(--primary); text-decoration: none;">Xiaolu Growth Notes</a></p>
+                </div>
+                <div class="profile-footer">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <!-- Popular Tools Ranking -->
+            <div class="popular-tools-ranking">
+                <h3><i class="fas fa-fire"></i> Popular Tools Ranking</h3>
+                <div class="ranking-period">
+                    <button class="period-btn active" data-period="week">This Week</button>
+                    <button class="period-btn" data-period="month">This Month</button>
+                    <button class="period-btn" data-period="all">All Time</button>
+                </div>
+                <div class="ranking-list" id="ranking-list">
+                    <!-- Rankings will be loaded dynamically via JavaScript -->
+                </div>
+            </div>
+            
+            <div class="recent-updates">
+                <h3>Recent Updates</h3>
+                <ul class="updates-list" id="updates-list">
+                    <!-- Update content will be loaded dynamically via JavaScript -->
+                </ul>
+                <div class="updates-loading" id="updates-loading" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i> Loading...
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <!-- SEO Content Section -->
+    <section class="seo-content" style="background: #f8f9fa; padding: 60px 0; margin-top: 40px;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="seo-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                <div class="seo-section">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.3em;">🛠️ Popular Tool Categories</h3>
+                    <div class="category-links" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <a href="#" style="background: #e3f2fd; color: #1976d2; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9em;">Text Processing Tools</a>
+                        <a href="#" style="background: #f3e5f5; color: #7b1fa2; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9em;">Image Editing Tools</a>
+                        <a href="#" style="background: #e8f5e8; color: #388e3c; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9em;">Developer Tools</a>
+                        <a href="#" style="background: #fff3e0; color: #f57c00; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9em;">Data Conversion Tools</a>
+                        <a href="#" style="background: #fce4ec; color: #c2185b; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9em;">Calculator Tools</a>
+                        <a href="#" style="background: #e1f5fe; color: #0277bd; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.9em;">Encoding Tools</a>
+                    </div>
+                </div>
+                
+                <div class="seo-section">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.3em;">🎯 Target Audience</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px; color: #666;"><i class="fas fa-check" style="color: #4caf50; margin-right: 8px;"></i>Content Creators: Markdown editor, text formatting, image processing</li>
+                        <li style="margin-bottom: 12px; color: #666;"><i class="fas fa-check" style="color: #4caf50; margin-right: 8px;"></i>Developers: JSON formatter, Base64 encoding, regex testing</li>
+                        <li style="margin-bottom: 12px; color: #666;"><i class="fas fa-check" style="color: #4caf50; margin-right: 8px;"></i>Social Media Managers: Image compression, PDF conversion, QR code generation</li>
+                        <li style="margin-bottom: 12px; color: #666;"><i class="fas fa-check" style="color: #4caf50; margin-right: 8px;"></i>Professionals: BMI calculator, time conversion, file processing</li>
+                    </ul>
+                </div>
+                
+                <div class="seo-section">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.3em;">✨ Core Advantages</h3>
+                    <div class="advantages" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h4 style="color: #1976d2; margin: 0 0 8px 0; font-size: 1em;">🤖 AI-Powered</h4>
+                            <p style="margin: 0; color: #666; font-size: 0.9em;">Advanced AI technology for intelligent data processing</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h4 style="color: #388e3c; margin: 0 0 8px 0; font-size: 1em;">💯 Completely Free</h4>
+                            <p style="margin: 0; color: #666; font-size: 0.9em;">All tools permanently free, no hidden costs</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h4 style="color: #f57c00; margin: 0 0 8px 0; font-size: 1em;">🚀 Ready to Use</h4>
+                            <p style="margin: 0; color: #666; font-size: 0.9em;">No registration required, use immediately</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h4 style="color: #7b1fa2; margin: 0 0 8px 0; font-size: 1em;">🔒 Privacy Secure</h4>
+                            <p style="margin: 0; color: #666; font-size: 0.9em;">Local processing, data not uploaded to servers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="seo-keywords" style="margin-top: 40px; text-align: center; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <h3 style="color: #333; margin-bottom: 20px;">🔍 Related Searches</h3>
+                <p style="color: #666; line-height: 1.8; margin: 0;">online tools | free toolbox | AI tools | text processing | JSON formatter | Base64 encoder | image to PDF | Markdown editor | BMI calculator | QR code generator | regex tester | timestamp converter | color picker | password generator | file compression | data conversion | developer tools | content creation tools | social media tools | productivity tools</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+    
+    <!-- Loading Animation -->
+    <div id="loading" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="../script.js"></script>
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    <script src="../components/tool-categories.js"></script>
+    
+    <script>
+        // Language-specific initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set language for the page
+            window.currentLanguage = 'en';
+            
+            // Initialize components with English content
+            if (window.componentManager) {
+                window.componentManager.init();
+            }
+            
+            // Load tools data
+            loadTools();
+        });
+    </script>
+</body>
+</html>

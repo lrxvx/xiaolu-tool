@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工具站使用指南 - 小鹿工具箱</title>
+    <meta name="description" content="小鹿工具箱使用指南，帮助您快速上手各种在线工具">
+    <link rel="icon" href="images/icon-192x192.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --text: #2d3748;
+            --gray: #718096;
+            --light-gray: #f7fafc;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .guide-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .guide-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .guide-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .guide-content {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .guide-section {
+            margin-bottom: 3rem;
+        }
+
+        .guide-section h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .guide-section h3 {
+            color: var(--text);
+            font-size: 1.3rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .guide-section p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .guide-section ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .guide-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .feature-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+        }
+
+        .step-item {
+            counter-increment: step-counter;
+            margin-bottom: 1.5rem;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        .step-item::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--primary);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .tip-box {
+            background: #e6fffa;
+            border: 1px solid #81e6d9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .tip-box h4 {
+            color: #234e52;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            margin-bottom: 2rem;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .guide-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .guide-header h1 {
+                font-size: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 导航栏容器 -->
+    <div id="navbar-container"></div>
+
+    <div class="container">
+        <div class="guide-header">
+            <h1><i class="fas fa-book"></i> 工具站使用指南</h1>
+            <p>快速上手小鹿工具箱，提升您的工作效率</p>
+        </div>
+
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            返回首页
+        </a>
+
+        <div class="guide-content">
+            <div class="guide-section">
+                <h2><i class="fas fa-rocket"></i> 快速开始</h2>
+                <p>欢迎使用小鹿工具箱！这是一个集成了多种实用工具的在线平台，旨在帮助您提升工作效率。</p>
+                
+                <div class="step-list">
+                    <div class="step-item">
+                        <h3>浏览工具</h3>
+                        <p>在首页您可以看到所有可用的工具，每个工具都有详细的描述和标签。</p>
+                    </div>
+                    <div class="step-item">
+                        <h3>选择分类</h3>
+                        <p>使用左侧的分类导航快速找到您需要的工具类型。</p>
+                    </div>
+                    <div class="step-item">
+                        <h3>搜索工具</h3>
+                        <p>使用顶部搜索框输入关键词快速定位特定工具。</p>
+                    </div>
+                    <div class="step-item">
+                        <h3>使用工具</h3>
+                        <p>点击"使用工具"按钮即可在当前页面使用该工具。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h2><i class="fas fa-cogs"></i> 主要功能</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-th-large"></i> 工具分类</h4>
+                        <p>工具按功能分为多个类别，包括文本处理、图片处理、开发工具、计算器等，方便您快速找到所需工具。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-search"></i> 智能搜索</h4>
+                        <p>支持按工具名称、描述和标签进行搜索，实时显示搜索结果和匹配数量。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-history"></i> 最近使用</h4>
+                        <p>自动记录您最近使用的工具，方便快速访问常用功能。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-chart-line"></i> 热门排行</h4>
+                        <p>查看最受欢迎的工具排行榜，发现更多实用工具。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-mobile-alt"></i> 响应式设计</h4>
+                        <p>完美适配各种设备，无论是电脑、平板还是手机都能流畅使用。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-share-alt"></i> 社交分享</h4>
+                        <p>支持将工具结果分享到社交媒体，与朋友分享有用的内容。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h2><i class="fas fa-list"></i> 工具分类说明</h2>
+                
+                <h3>📝 文本处理</h3>
+                <ul>
+                    <li><strong>JSON处理工具</strong> - JSON格式化、验证和转换</li>
+                    <li><strong>Markdown编辑器</strong> - 在线Markdown编辑和预览</li>
+                    <li><strong>Base64编码解码</strong> - 文本和文件的Base64编码转换</li>
+                    <li><strong>正则表达式测试</strong> - 正则表达式匹配测试</li>
+                </ul>
+                
+                <h3>🖼️ 图片处理</h3>
+                <ul>
+                    <li><strong>图片压缩工具</strong> - 在线图片压缩优化</li>
+                    <li><strong>图片格式转换</strong> - 支持多种图片格式互转</li>
+                    <li><strong>图片转PDF</strong> - 将图片转换为PDF文档</li>
+                    <li><strong>图片文字提取</strong> - OCR文字识别功能</li>
+                </ul>
+                
+                <h3>🔧 开发工具</h3>
+                <ul>
+                    <li><strong>代码美化工具</strong> - 代码格式化和美化</li>
+                    <li><strong>API测试工具</strong> - 在线API接口测试</li>
+                    <li><strong>颜色转换工具</strong> - 颜色值格式转换</li>
+                    <li><strong>编码转换工具</strong> - 各种编码格式转换</li>
+                </ul>
+                
+                <h3>🧮 计算器</h3>
+                <ul>
+                    <li><strong>BMI计算器</strong> - 身体质量指数计算</li>
+                    <li><strong>贷款计算器</strong> - 房贷、车贷计算</li>
+                    <li><strong>时区计算器</strong> - 世界时区转换</li>
+                    <li><strong>单位转换器</strong> - 各种单位换算</li>
+                </ul>
+            </div>
+
+            <div class="guide-section">
+                <h2><i class="fas fa-lightbulb"></i> 使用技巧</h2>
+                
+                <div class="tip-box">
+                    <h4><i class="fas fa-star"></i> 提示</h4>
+                    <p>使用键盘快捷键 Ctrl+F (Windows) 或 Cmd+F (Mac) 可以快速在页面中搜索特定工具。</p>
+                </div>
+                
+                <h3>高效使用建议</h3>
+                <ul>
+                    <li><strong>收藏常用工具</strong> - 将经常使用的工具添加到浏览器书签</li>
+                    <li><strong>利用分类筛选</strong> - 使用左侧分类快速缩小搜索范围</li>
+                    <li><strong>查看最近使用</strong> - 快速访问最近使用过的工具</li>
+                    <li><strong>关注热门工具</strong> - 发现其他用户推荐的实用工具</li>
+                    <li><strong>分享有用结果</strong> - 将工具处理结果分享给同事或朋友</li>
+                </ul>
+            </div>
+
+            <div class="guide-section">
+                <h2><i class="fas fa-question-circle"></i> 常见问题</h2>
+                
+                <h3>Q: 工具是否免费使用？</h3>
+                <p>A: 是的，所有工具都完全免费使用，无需注册或付费。</p>
+                
+                <h3>Q: 数据是否安全？</h3>
+                <p>A: 所有工具都在本地浏览器中运行，您的数据不会上传到服务器，确保隐私安全。</p>
+                
+                <h3>Q: 支持哪些浏览器？</h3>
+                <p>A: 支持所有现代浏览器，包括Chrome、Firefox、Safari、Edge等。</p>
+                
+                <h3>Q: 工具无法正常使用怎么办？</h3>
+                <p>A: 请尝试刷新页面或清除浏览器缓存，如果问题持续存在，请检查浏览器是否为最新版本。</p>
+                
+                <h3>Q: 如何反馈问题或建议？</h3>
+                <p>A: 您可以通过页面底部的联系方式向我们反馈问题或提出改进建议。</p>
+            </div>
+
+            <div class="guide-section">
+                <h2><i class="fas fa-heart"></i> 支持我们</h2>
+                <p>如果您觉得小鹿工具箱对您有帮助，欢迎：</p>
+                <ul>
+                    <li>分享给您的朋友和同事</li>
+                    <li>在社交媒体上推荐我们</li>
+                    <li>提供宝贵的使用反馈</li>
+                    <li>建议新的工具功能</li>
+                </ul>
+                
+                <div class="tip-box">
+                    <h4><i class="fas fa-info-circle"></i> 更新说明</h4>
+                    <p>我们会定期更新和添加新工具，请关注首页的"最近更新"部分了解最新功能。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚容器 -->
+    <div id="footer-container"></div>
+
+    <!-- 加载组件 -->
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script>
+        // 页面加载完成后初始化组件
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航栏
+            const navbar = new NavbarComponent();
+            navbar.render('navbar-container');
+            
+            // 初始化页脚
+            const footer = new FooterComponent();
+            footer.render('footer-container');
+        });
+    </script>
+</body>
+</html>

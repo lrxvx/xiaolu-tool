@@ -797,13 +797,656 @@
                 font-size: 0.8rem;
             }
         }
+    
+
+        /* 通用样式修复 - 解决工具页面布局混乱问题 */
+        
+        /* 重置和基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* 容器布局修复 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        /* 主布局修复 */
+        .main-layout {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        /* 内容区域修复 */
+        .content-area {
+            flex: 1;
+            min-width: 0;
+            width: 100%;
+            max-width: calc(100% - 280px); /* 为侧边栏留出空间 */
+        }
+        
+        /* 工具标题区域 */
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4f46e5;
+            margin-bottom: 15px;
+            word-wrap: break-word;
+        }
+        
+        .tool-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        /* 工具主体区域 */
+        .tool-main {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        /* 标签页修复 */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .tab.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+        
+        .tab:hover {
+            color: #4f46e5;
+            background-color: #f8fafc;
+        }
+        
+        /* 表单元素修复 */
+        .input-group {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .input-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+        
+        .textarea-field,
+        .input-field {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            resize: vertical;
+        }
+        
+        .textarea-field {
+            min-height: 300px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .textarea-field:focus,
+        .input-field:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        /* 按钮样式修复 */
+        .btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: #3730a3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #64748b;
+        }
+        
+        .btn-secondary:hover {
+            background: #475569;
+        }
+        
+        .btn-success {
+            background: #10b981;
+        }
+        
+        .btn-success:hover {
+            background: #059669;
+        }
+        
+        .btn-warning {
+            background: #f59e0b;
+        }
+        
+        .btn-warning:hover {
+            background: #d97706;
+        }
+        
+        .btn-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        /* 网格布局修复 */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .diff-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        /* 信息区域样式 */
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        
+        .info-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4f46e5;
+            margin-bottom: 20px;
+        }
+        
+        .info-content {
+            color: #1e293b;
+            line-height: 1.8;
+        }
+        
+        .info-content p {
+            margin-bottom: 15px;
+        }
+        
+        /* 特性网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .feature-item {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4f46e5;
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            color: #4f46e5;
+            margin-bottom: 10px;
+        }
+        
+        /* FAQ样式 */
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 0;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+            padding: 10px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            color: #4f46e5;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            font-size: 1.2rem;
+            color: #4f46e5;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            color: #64748b;
+            line-height: 1.6;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            max-height: 200px;
+            padding-top: 10px;
+        }
+        
+        /* 状态消息 */
+        .status-message {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            border: 1px solid;
+        }
+        
+        .status-success {
+            background: #dcfce7;
+            color: #16a34a;
+            border-color: #16a34a;
+        }
+        
+        .status-error {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #dc2626;
+        }
+        
+        .status-warning {
+            background: #fef3c7;
+            color: #d97706;
+            border-color: #d97706;
+        }
+        
+        /* 页脚信息 */
+        .footer-info {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+        }
+        
+        .footer-links {
+            margin-top: 15px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        /* 响应式设计修复 */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .content-area {
+                max-width: calc(100% - 250px);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .main-layout {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .content-area {
+                max-width: 100%;
+            }
+            
+            .tool-title {
+                font-size: 2.2rem;
+            }
+            
+            .grid-2,
+            .diff-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .tool-header {
+                padding: 30px 20px;
+                margin-bottom: 30px;
+            }
+            
+            .tool-title {
+                font-size: 1.8rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 1rem;
+            }
+            
+            .tool-main {
+                padding: 20px;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+                border-bottom: none;
+            }
+            
+            .tab {
+                flex: 1;
+                min-width: 120px;
+                border: 1px solid #e2e8f0;
+                border-radius: 6px;
+                margin: 2px;
+            }
+            
+            .tab.active {
+                background: #4f46e5;
+                color: white;
+                border-color: #4f46e5;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .btn {
+                margin-right: 0;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-section {
+                padding: 20px;
+            }
+            
+            .info-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tool-title {
+                font-size: 1.5rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .tool-main {
+                padding: 15px;
+            }
+            
+            .textarea-field {
+                min-height: 200px;
+                padding: 12px;
+            }
+            
+            .btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .tool-header,
+        .tool-main,
+        .info-section {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        /* 加载状态 */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+            position: relative;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #4f46e5;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* 工具特定样式修复 */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .result-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4f46e5;
+            margin-bottom: 5px;
+        }
+        
+        .result-label {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        /* 确保所有元素都有正确的盒模型 */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+        
+        /* 防止内容溢出 */
+        .content-area,
+        .tool-main,
+        .info-section {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* 图片响应式 */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* 表格响应式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+            
+            th,
+            td {
+                padding: 8px;
+            }
+        }
     </style>
 
     <!-- 导航栏和页脚组件 -->
-    <script src="../components/navbar.js"></script>
-    <script src="../components/footer.js"></script>
+    
+    
+    
 </head>
 <body>
+    <!-- 导航栏 -->
+    <div id="navbar-container"></div>
     <!-- 导航栏 -->
     
     <!-- 导航栏将通过JavaScript组件自动生成 -->
@@ -997,705 +1640,18 @@
     <!-- 引入html2canvas库 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
+    
+    <!-- 页脚容器 -->
+    <div id="footer-container"></div>
+
+    
     <script>
-        /**
-         * 内容卡片生成器 - 模块化实现
-         * 将功能拆分为独立模块，提高代码可维护性和可读性
-         */
-        const CardGenerator = (function() {
-            // 配置常量
-            /**
-             * 全局配置对象
-             * 包含应用的所有默认设置，如内容、颜色、字体大小等
-             * 修改这里的值会影响整个应用的默认行为
-             */
-            const CONFIG = {
-                /**
-                 * 默认内容配置
-                 * 定义所有文本字段的默认值
-                 */
-                defaultContent: {
-                    title: '凡是不赚钱的人脑子都非常复杂',
-                    subtitle: '越没钱的人，心里越复杂',
-                    leftTitle: '不赚钱的人每天都在想什么？',
-                    leftContent: '这项目到底靠不靠谱？<br>要是失败了可怎么办？<br>别人会不会笑话我？<br>现在开始做是不是太晚了？<br>我要不要再等两年？',
-                    rightTitle: '能赚钱的人想法简单直接：',
-                    rightContent: '先干了再说。<br>试试才知道。<br>别人笑我？管他呢。<br>市场饱和？<br>那是没本事的人说的。',
-                    footer: '其实赚钱很简单：少犹豫，多动手',
-                    brand: 'RAN BRAND CONSULTING'
-                },
-                
-                /**
-                 * 默认颜色配置
-                 * 定义卡片的背景色和默认文本颜色
-                 */
-                defaultColors: {
-                    background: '#fff5f7', // 卡片背景色
-                    text: '#333333'        // 默认文本颜色
-                },
-                
-                /**
-                 * 字体大小预设配置
-                 * 为每个文本元素定义小、中、大三种尺寸
-                 * 单位：像素(px)
-                 */
-                fontSizePresets: {
-                    title: { small: 24, medium: 28, large: 32 },         // 标题字号
-                    subtitle: { small: 16, medium: 20, large: 24 },       // 副标题字号
-                    leftContent: { small: 14, medium: 16, large: 18 },    // 左侧内容字号
-                    rightContent: { small: 14, medium: 16, large: 18 },   // 右侧内容字号
-                    footer: { small: 14, medium: 16, large: 18 }          // 页脚字号
-                },
-                
-                /**
-                 * 默认字体颜色配置
-                 * 为每个文本元素定义默认颜色
-                 * 格式：十六进制颜色代码
-                 */
-                defaultFontColors: {
-                    title: '#333333',       // 标题颜色
-                    subtitle: '#888888',    // 副标题颜色
-                    leftContent: '#333333', // 左侧内容颜色
-                    rightContent: '#333333',// 右侧内容颜色
-                    footer: '#ff2e63'       // 页脚颜色（突出显示）
-                }
-            };
-            
-            /**
-             * DOM元素缓存对象
-             * 存储所有需要操作的DOM元素引用，避免重复查询DOM
-             * 在initElements函数中初始化
-             */
-            const elements = {
-                inputs: {},      // 所有输入元素（文本框、文本域等）
-                previews: {},   // 所有预览元素（标题、内容、页脚等）
-                controls: {},   // 所有控制元素（按钮、颜色选项等）
-                fontSizeInputs: {}, // 字体大小输入框
-                colorPickers: {}    // 颜色选择器
-            };
-            
-            /**
-             * 应用状态对象
-             * 存储应用的当前状态，包括颜色、字体大小、自定义设置等
-             * 这些状态会影响UI的渲染和行为
-             */
-            const state = {
-                /**
-                 * 当前颜色设置
-                 * 存储当前选中的背景色和文本颜色
-                 */
-                currentBgColor: CONFIG.defaultColors.background,  // 当前背景颜色
-                currentTextColor: CONFIG.defaultColors.text,      // 当前文本颜色
-                
-                /**
-                 * 字体大小预设选择
-                 * 存储每个文本元素当前选中的字体大小预设（small/medium/large）
-                 */
-                fontSizes: {
-                    title: 'medium',        // 标题字体大小预设
-                    subtitle: 'medium',     // 副标题字体大小预设
-                    leftContent: 'medium',  // 左侧内容字体大小预设
-                    rightContent: 'medium', // 右侧内容字体大小预设
-                    footer: 'medium'        // 页脚字体大小预设
-                },
-                
-                /**
-                 * 自定义字体大小设置
-                 * 存储每个文本元素的具体字体大小值（像素）
-                 * 可以通过数字输入框自定义
-                 */
-                customFontSizes: {
-                    title: CONFIG.fontSizePresets.title.medium,
-                    subtitle: CONFIG.fontSizePresets.subtitle.medium,
-                    leftContent: CONFIG.fontSizePresets.leftContent.medium,
-                    rightContent: CONFIG.fontSizePresets.rightContent.medium,
-                    footer: CONFIG.fontSizePresets.footer.medium
-                },
-                
-                /**
-                 * 自定义字体颜色设置
-                 * 存储每个文本元素的具体颜色值
-                 * 可以通过颜色选择器自定义
-                 */
-                customFontColors: { ...CONFIG.defaultFontColors },
-                
-                /**
-                 * 文本选择信息
-                 * 存储当前选中的文本信息，用于划重点功能
-                 */
-                selectedTextInfo: {
-                    text: '',       // 选中的文本内容
-                    start: 0,       // 选中文本的起始位置
-                    end: 0,         // 选中文本的结束位置
-                    element: null   // 选中文本所在的DOM元素
-                }
-            };
-            
-            /**
-             * 初始化DOM元素引用
-             * 获取页面中所有需要操作的DOM元素，并存储在elements对象中
-             * 这样可以避免重复查询DOM，提高性能
-             */
-            function initElements() {
-                // 输入元素 - 用户可编辑的文本输入框
-                elements.inputs.cardTitle = document.getElementById('cardTitle');           // 卡片标题输入框
-                elements.inputs.cardSubtitle = document.getElementById('cardSubtitle');     // 卡片副标题输入框
-                elements.inputs.leftColumnTitle = document.getElementById('leftColumnTitle'); // 左列标题输入框
-                elements.inputs.leftColumnContent = document.getElementById('leftColumnContent'); // 左列内容输入框
-                elements.inputs.rightColumnTitle = document.getElementById('rightColumnTitle'); // 右列标题输入框
-                elements.inputs.rightColumnContent = document.getElementById('rightColumnContent'); // 右列内容输入框
-                elements.inputs.cardFooter = document.getElementById('cardFooter');        // 卡片页脚输入框
-                elements.inputs.brandName = document.getElementById('brandName');          // 品牌名称输入框
-                
-                // 控制元素 - 按钮和交互控件
-                elements.controls.generateBtn = document.getElementById('generateBtn');     // 生成卡片按钮
-                elements.controls.resetBtn = document.getElementById('resetBtn');           // 重置按钮
-                elements.controls.downloadBtn = document.getElementById('downloadBtn');     // 下载按钮
-                elements.controls.colorOptions = document.querySelectorAll('.color-option'); // 颜色选项列表
-                elements.controls.addHighlightBtn = document.getElementById('addHighlight'); // 添加划重点按钮
-                elements.controls.fontSizeBtns = document.querySelectorAll('.font-size-btn'); // 字体大小按钮
-                
-                // 字号输入框 - 用于自定义各部分文本的字体大小
-                elements.fontSizeInputs.title = document.getElementById('titleFontSize');         // 标题字体大小输入框
-                elements.fontSizeInputs.subtitle = document.getElementById('subtitleFontSize');   // 副标题字体大小输入框
-                elements.fontSizeInputs.leftContent = document.getElementById('leftContentFontSize'); // 左列内容字体大小输入框
-                elements.fontSizeInputs.rightContent = document.getElementById('rightContentFontSize'); // 右列内容字体大小输入框
-                elements.fontSizeInputs.footer = document.getElementById('footerFontSize');      // 页脚字体大小输入框
-                
-                // 颜色选择器 - 用于自定义各部分文本的颜色
-                elements.colorPickers.title = document.getElementById('titleColor');             // 标题颜色选择器
-                elements.colorPickers.subtitle = document.getElementById('subtitleColor');       // 副标题颜色选择器
-                elements.colorPickers.leftContent = document.getElementById('leftContentColor'); // 左列内容颜色选择器
-                elements.colorPickers.rightContent = document.getElementById('rightContentColor'); // 右列内容颜色选择器
-                elements.colorPickers.footer = document.getElementById('footerColor');           // 页脚颜色选择器
-                
-                // 预览元素 - 卡片预览区域的各个组件
-                elements.previews.contentCard = document.getElementById('contentCard');          // 整个卡片容器
-                elements.previews.cardInner = elements.previews.contentCard.querySelector('.card-inner'); // 卡片内部容器
-                elements.previews.title = document.getElementById('previewTitle');              // 预览区标题
-                elements.previews.subtitle = document.getElementById('previewSubtitle');        // 预览区副标题
-                elements.previews.leftTitle = document.getElementById('previewLeftTitle');      // 预览区左列标题
-                elements.previews.leftContent = document.getElementById('previewLeftContent');  // 预览区左列内容
-                elements.previews.rightTitle = document.getElementById('previewRightTitle');    // 预览区右列标题
-                elements.previews.rightContent = document.getElementById('previewRightContent'); // 预览区右列内容
-                elements.previews.footer = document.getElementById('previewFooter');           // 预览区页脚
-                elements.previews.brand = document.getElementById('cardBrand');                // 预览区品牌名称
-            }
-        
-            /**
-             * 防抖函数 - 减少频繁触发事件
-             * @param {Function} fn - 要执行的函数
-             * @param {number} delay - 延迟时间(毫秒)
-             * @returns {Function} - 防抖处理后的函数
-             */
-            function debounce(fn, delay = 300) {
-                let timer;
-                return function(...args) {
-                    clearTimeout(timer);
-                    timer = setTimeout(() => fn.apply(this, args), delay);
-                };
-            }
-            
-            /**
-             * 更新卡片颜色
-             * 根据当前状态中的颜色设置更新卡片预览区域的背景色和文本颜色
-             * 在颜色选择器值变化时调用
-             */
-            function updateCardColors() {
-                elements.previews.contentCard.style.backgroundColor = state.currentBgColor; // 设置卡片背景色
-                elements.previews.cardInner.style.color = state.currentTextColor;         // 设置卡片文本颜色
-            }
-            
-            /**
-             * 根据预设更新数字输入框的值
-             * 当用户选择字体大小预设（小/中/大）时，更新对应的数字输入框的值
-             * @param {string} target - 目标元素类型
-             * @param {string} size - 尺寸类型(small/medium/large)
-             */
-            function updateFontSizeInputs(target, size) {
-                // 从配置中获取预设字体大小
-                const fontSize = CONFIG.fontSizePresets[target][size];
-                
-                // 更新输入框值
-                elements.fontSizeInputs[target].value = fontSize;
-                
-                // 更新状态
-                state.customFontSizes[target] = fontSize;
-            }
-            
-            /**
-             * 应用字体大小和颜色到预览
-             * 将当前状态中的自定义字体大小和颜色应用到预览区域的各个元素
-             * 在字体大小或颜色变化时调用
-             */
-            function applyFontSizes() {
-                // 应用自定义字号 - 将状态中的字体大小值应用到预览元素
-                elements.previews.title.style.fontSize = `${state.customFontSizes.title}px`;         // 设置标题字体大小
-                elements.previews.subtitle.style.fontSize = `${state.customFontSizes.subtitle}px`;   // 设置副标题字体大小
-                elements.previews.leftContent.style.fontSize = `${state.customFontSizes.leftContent}px`; // 设置左列内容字体大小
-                elements.previews.rightContent.style.fontSize = `${state.customFontSizes.rightContent}px`; // 设置右列内容字体大小
-                elements.previews.footer.style.fontSize = `${state.customFontSizes.footer}px`;      // 设置页脚字体大小
-                
-                // 应用自定义颜色 - 将状态中的颜色值应用到预览元素
-                elements.previews.title.style.color = state.customFontColors.title;                 // 设置标题颜色
-                elements.previews.subtitle.style.color = state.customFontColors.subtitle;           // 设置副标题颜色
-                elements.previews.leftContent.style.color = state.customFontColors.leftContent;     // 设置左列内容颜色
-                elements.previews.rightContent.style.color = state.customFontColors.rightContent;   // 设置右列内容颜色
-                elements.previews.footer.style.color = state.customFontColors.footer;              // 设置页脚颜色
-            }
-            
-            /**
-             * 格式化内容，将每行转换为带<br>的HTML
-             * 用于将文本框中的换行符转换为HTML中的换行标签
-             * 在更新预览内容时调用
-             * 
-             * @param {string} content - 原始文本内容
-             * @returns {string} - 转换后的HTML格式内容
-             */
-            function formatContent(content) {
-                if (!content) return ''; // 如果内容为空，返回空字符串
-                return content.split('\n').join('<br>'); // 将所有换行符替换为<br>标签
-            }
-            
-            /**
-             * 净化输入内容，防止XSS攻击
-             * 转义HTML特殊字符，确保用户输入的内容不会被解释为HTML代码
-             * 在更新预览内容前调用
-             * 
-             * @param {string} input - 用户输入的原始内容
-             * @returns {string} - 经过安全处理的内容
-             */
-            function sanitizeInput(input) {
-                if (!input) return ''; // 如果输入为空，返回空字符串
-                return input
-                    .replace(/&/g, '&amp;')   // 替换 & 为 &amp;
-                    .replace(/</g, '&lt;')    // 替换 < 为 &lt;
-                    .replace(/>/g, '&gt;')    // 替换 > 为 &gt;
-                    .replace(/"/g, '&quot;')  // 替换 " 为 &quot;
-                    .replace(/'/g, '&#039;');  // 替换 ' 为 &#039;
-            }
-            
-            /**
-             * 初始化事件监听
-             * 为所有交互元素添加事件监听器，实现用户交互功能
-             * 在应用初始化时调用
-             */
-            function initEventListeners() {
-                // 实时输入更新事件 - 为所有输入框添加实时更新功能
-                const debouncedUpdate = debounce(updateCardContent, 200);
-                Object.values(elements.inputs).forEach(input => {
-                    if (input) {
-                        input.addEventListener('input', debouncedUpdate);
-                    }
-                });
-                // 颜色选择事件 - 处理背景颜色和文本颜色的选择
-                elements.controls.colorOptions.forEach(option => {
-                    option.addEventListener('click', () => {
-                        // 移除所有颜色选项的active类，重置选中状态
-                        elements.controls.colorOptions.forEach(opt => opt.classList.remove('active'));
-                        // 添加active类到当前选中的颜色选项
-                        option.classList.add('active');
-                        // 更新当前颜色状态
-                        state.currentBgColor = option.dataset.color; // 从data-color属性获取背景色
-                        state.currentTextColor = option.dataset.text; // 从data-text属性获取文本色
-                        // 更新预览卡片颜色
-                        updateCardColors();
-                    });
-                });
-                
-                // 字体大小选择事件 - 处理各文本元素的字体大小预设选择
-                elements.controls.fontSizeBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const target = btn.dataset.target; // 获取目标元素类型（标题、副标题等）
-                        const size = btn.dataset.size;     // 获取字体大小预设（small/medium/large）
-                        
-                        // 更新当前选中的按钮状态 - 同一组按钮中只能有一个处于选中状态
-                        document.querySelectorAll(`.font-size-btn[data-target="${target}"]`).forEach(b => {
-                            b.classList.remove('active'); // 移除同组所有按钮的active类
-                        });
-                        btn.classList.add('active'); // 为当前点击的按钮添加active类
-                        
-                        // 保存字体大小设置到应用状态
-                        state.fontSizes[target] = size;
-                        
-                        // 根据预设更新数字输入框的值
-                        updateFontSizeInputs(target, size);
-                        
-                        // 应用字体大小
-                        applyFontSizes();
-                    });
-                });
-                
-                // 初始化字号输入框事件
-                initFontSizeInputEvents();
-                
-                // 初始化字体颜色选择器事件
-                initFontColorPickerEvents();
-                
-                // 初始化文本选择功能
-                textSelection.init();
-            }
-        
-                /**
-                 * 初始化数字字号输入框事件
-                 */
-                function initFontSizeInputEvents() {
-                    // 遍历所有字号输入框
-                    Object.entries(elements.fontSizeInputs).forEach(([target, input]) => {
-                        const defaultSize = CONFIG.fontSizePresets[target].medium;
-                        
-                        // 使用防抖函数减少频繁更新
-                        const debouncedUpdate = debounce((value) => {
-                            // 验证输入值
-                            if (isNaN(value) || value < 8 || value > 72) {
-                                // 恢复到默认值
-                                input.value = defaultSize;
-                                state.customFontSizes[target] = defaultSize;
-                                alert('字体大小必须在8-72像素之间');
-                            } else {
-                                // 更新自定义字号设置
-                                state.customFontSizes[target] = value;
-                            }
-                            
-                            // 应用字体大小
-                            applyFontSizes();
-                        }, 300);
-                        
-                        // 监听输入事件
-                        input.addEventListener('input', () => {
-                            const value = parseInt(input.value) || defaultSize;
-                            debouncedUpdate(value);
-                        });
-                    });
-                }
-                
-                /**
-                 * 初始化字体颜色选择器事件
-                 */
-                function initFontColorPickerEvents() {
-                    // 遍历所有字体颜色选择器
-                    Object.entries(elements.colorPickers).forEach(([target, picker]) => {
-                        picker.addEventListener('input', () => {
-                            // 更新自定义颜色设置
-                            state.customFontColors[target] = picker.value;
-                            
-                            // 应用自定义颜色
-                            applyFontSizes(); // 已合并颜色应用功能
-                        });
-                    });
-                }
-        
-                /**
-                 * 文本选择相关功能
-                 */
-                const textSelection = (function() {
-                    let lastSelectedInput = null;
-                    let lastSelectionStart = 0;
-                    let lastSelectionEnd = 0;
-                    
-                    /**
-                     * 保存文本选择信息
-                     * @param {Event} e - 选择事件
-                     */
-                    function saveSelection(e) {
-                        const input = e.target;
-                        if (input.selectionStart !== undefined && input.selectionEnd !== undefined) {
-                            lastSelectedInput = input;
-                            lastSelectionStart = input.selectionStart;
-                            lastSelectionEnd = input.selectionEnd;
-                        }
-                    }
-                    
-                    /**
-                     * 添加划重点标记
-                     */
-                    function addHighlight() {
-                        if (lastSelectedInput && lastSelectionStart !== lastSelectionEnd) {
-                            const input = lastSelectedInput;
-                            const text = input.value;
-                            const selectedText = text.substring(lastSelectionStart, lastSelectionEnd);
-                            const newText = text.substring(0, lastSelectionStart) + 
-                                          '**' + selectedText + '**' + 
-                                          text.substring(lastSelectionEnd);
-                            
-                            input.value = newText;
-                            
-                            // 更新预览
-                            updateCardContent();
-                            
-                            // 重置选择
-                            lastSelectedInput = null;
-                        } else {
-                            // 提示用户选择文本
-                            alert('请先在输入框中选择要划重点的文字！');
-                        }
-                    }
-                    
-                    /**
-                     * 初始化文本选择功能
-                     */
-                    function init() {
-                        // 初始化划重点按钮事件
-                        elements.controls.addHighlightBtn.addEventListener('click', addHighlight);
-                        
-                        // 为所有文本输入框添加选择事件监听
-                        Object.values(elements.inputs).forEach(input => {
-                            if (input.tagName === 'TEXTAREA' || input.tagName === 'INPUT') {
-                                input.addEventListener('select', saveSelection);
-                            }
-                        });
-                    }
-                    
-                    return {
-                        init
-                    };
-                })();
-            }
-            
-            /**
-             * 初始化应用
-             * 应用的主入口函数，负责初始化所有组件和功能
-             * 在页面加载完成后调用
-             */
-            function init() {
-                // 步骤1: 初始化DOM元素引用 - 获取所有需要操作的DOM元素
-                initElements();
-                
-                // 步骤2: 初始化事件监听 - 为颜色选择器、字体大小按钮等添加事件监听
-                initEventListeners();
-                
-                // 步骤3: 初始化按钮事件 - 为生成卡片、下载图片等按钮添加事件监听
-                initButtonEvents();
-                
-                // 步骤4: 填充默认内容到输入框 - 使用CONFIG中的默认内容填充所有输入框
-                fillDefaultContent();
-                
-                // 步骤5: 初始化预览内容 - 根据输入框内容更新预览区域
-                updateCardContent();
-                
-                // 步骤6: 初始化卡片颜色 - 应用默认背景色和文本颜色
-                updateCardColors();
-                
-                // 步骤7: 初始化字体大小和颜色 - 应用默认字体大小和颜色设置
-                applyFontSizes();
-            }
-            
-            /**
-             * 填充默认内容到输入框
-             * 使用CONFIG中定义的默认内容填充所有输入框
-             * 在初始化和重置表单时调用
-             */
-            function fillDefaultContent() {
-                // 填充标题和副标题 - 使用CONFIG中的默认值
-                elements.inputs.cardTitle.value = CONFIG.defaultContent.title;       // 填充标题
-                elements.inputs.cardSubtitle.value = CONFIG.defaultContent.subtitle; // 填充副标题
-                
-                // 填充左右列标题和内容 - 将HTML中的<br>转换为文本框中的换行符\n
-                elements.inputs.leftColumnTitle.value = CONFIG.defaultContent.leftTitle; // 填充左列标题
-                elements.inputs.leftColumnContent.value = CONFIG.defaultContent.leftContent.replace(/<br>/g, '\n'); // 填充左列内容
-                elements.inputs.rightColumnTitle.value = CONFIG.defaultContent.rightTitle; // 填充右列标题
-                elements.inputs.rightColumnContent.value = CONFIG.defaultContent.rightContent.replace(/<br>/g, '\n'); // 填充右列内容
-                
-                // 填充底部内容和品牌 - 使用CONFIG中的默认值
-                elements.inputs.cardFooter.value = CONFIG.defaultContent.footer; // 填充页脚
-                elements.inputs.brandName.value = CONFIG.defaultContent.brand;   // 填充品牌名称
-            }
-        
-            /**
-             * 更新卡片内容
-             * 根据输入框的内容更新预览区域
-             * 在输入内容变化、初始化和重置表单时调用
-             */
-            function updateCardContent() {
-                // 处理标题中的划重点 - 将**文本**格式转换为<span class="highlight">文本</span>
-                const titleText = elements.inputs.cardTitle.value.replace(/\*\*(.*?)\*\*/g, '<span class="highlight">$1</span>');
-                // 更新预览区标题，如果输入为空则使用默认值
-                elements.previews.title.innerHTML = titleText || CONFIG.defaultContent.title;
-                
-                // 更新预览区副标题，如果输入为空则使用默认值
-                elements.previews.subtitle.textContent = elements.inputs.cardSubtitle.value || CONFIG.defaultContent.subtitle;
-                
-                // 更新预览区左列标题和内容，如果输入为空则使用默认值
-                elements.previews.leftTitle.textContent = elements.inputs.leftColumnTitle.value || CONFIG.defaultContent.leftTitle;
-                // 使用formatContent函数处理换行符，转换为HTML的<br>标签
-                elements.previews.leftContent.innerHTML = formatContent(elements.inputs.leftColumnContent.value) || CONFIG.defaultContent.leftContent;
-                
-                // 更新预览区右列标题和内容，如果输入为空则使用默认值
-                elements.previews.rightTitle.textContent = elements.inputs.rightColumnTitle.value || CONFIG.defaultContent.rightTitle;
-                // 使用formatContent函数处理换行符，转换为HTML的<br>标签
-                elements.previews.rightContent.innerHTML = formatContent(elements.inputs.rightColumnContent.value) || CONFIG.defaultContent.rightContent;
-                
-                // 更新预览区页脚，如果输入为空则使用默认值
-                elements.previews.footer.textContent = elements.inputs.cardFooter.value || CONFIG.defaultContent.footer;
-                
-                // 更新预览区品牌名称，如果输入为空则使用默认值
-                elements.previews.brand.textContent = elements.inputs.brandName.value || CONFIG.defaultContent.brand;
-            }
-            
-            /**
-             * 生成卡片
-             * 根据当前输入内容和设置更新预览区域
-             * 在用户点击生成卡片按钮时调用
-             */
-            function generateCard() {
-                // 步骤1: 更新预览内容 - 根据输入框内容更新预览区域文本
-                updateCardContent();
-                // 步骤2: 更新卡片颜色 - 应用当前选择的背景色和文本颜色
-                updateCardColors();
-                // 步骤3: 应用字体大小和颜色 - 应用当前设置的字体大小和颜色
-                applyFontSizes();
-            }
-            
-            /**
-             * 下载卡片为图片
-             * 使用html2canvas库将预览区域转换为图片并下载
-             * 在用户点击下载图片按钮时调用
-             */
-            function downloadCard() {
-                html2canvas(elements.previews.contentCard, {
-                    scale: 3, // 更高分辨率
-                    backgroundColor: state.currentBgColor,
-                    logging: false,
-                    useCORS: true, // 支持跨域图片
-                    allowTaint: true,
-                    letterRendering: true // 更好的文字渲染
-                }).then(canvas => {
-                    // 创建下载链接 - 使用HTML5的a标签和download属性实现下载
-                    const link = document.createElement('a');
-                    link.download = '小红书风格内容卡片.png'; // 设置下载文件名
-                    link.href = canvas.toDataURL('image/png'); // 将canvas转换为PNG格式的Data URL
-                    link.click(); // 模拟点击下载
-                }).catch(error => {
-                    // 错误处理 - 在控制台输出错误信息并提示用户
-                    console.error('生成图片时出错:', error);
-                    alert('生成图片时出错，请重试'); // 向用户显示友好的错误提示
-                });
-            }
-            
-            /**
-             * 初始化按钮事件
-             * 为生成卡片和下载图片按钮添加点击事件监听
-             * 在应用初始化时调用
-             */
-            function initButtonEvents() {
-                // 生成卡片按钮 - 点击时调用generateCard函数更新预览
-                elements.controls.generateBtn.addEventListener('click', generateCard);
-                
-                // 下载图片按钮 - 点击时调用downloadCard函数将预览转换为图片并下载
-                elements.controls.downloadBtn.addEventListener('click', downloadCard);
-            }
-        
-            /**
-             * 重置表单
-             * 将所有输入框、颜色选择、字体大小等重置为默认值
-             * 在用户点击重置按钮时调用
-             */
-            function resetForm() {
-                // 步骤1: 填充默认内容到输入框
-                fillDefaultContent(); // 调用fillDefaultContent函数重置所有文本输入框
-                
-                // 步骤2: 更新预览内容
-                updateCardContent(); // 使用重置后的输入内容更新预览区域
-                
-                // 步骤3: 重置颜色选择
-                // 先移除所有颜色选项的active类
-                elements.controls.colorOptions.forEach(opt => opt.classList.remove('active'));
-                
-                // 找到匹配默认背景颜色的选项并激活 - 确保UI状态与实际值一致
-                let defaultColorFound = false;
-                elements.controls.colorOptions.forEach(opt => {
-                    if (opt.dataset.color === CONFIG.defaultColors.background) {
-                        opt.classList.add('active'); // 为匹配的选项添加active类
-                        defaultColorFound = true;    // 标记已找到匹配项
-                    }
-                });
-                
-                // 如果没有找到匹配的选项，则激活第一个 - 确保总有一个选项被选中
-                if (!defaultColorFound) {
-                    elements.controls.colorOptions[0].classList.add('active');
-                }
-                
-                // 重置状态中的颜色值为默认值
-                state.currentBgColor = CONFIG.defaultColors.background;
-                state.currentTextColor = CONFIG.defaultColors.text;
-                
-                // 步骤4: 重置字体大小预设
-                // 将所有字体大小预设重置为'medium'
-                Object.keys(state.fontSizes).forEach(key => {
-                    state.fontSizes[key] = 'medium'; // 重置为中等大小
-                });
-                
-                // 步骤5: 重置字体大小按钮UI状态
-                // 移除所有按钮的active类，并为medium按钮添加active类
-                elements.controls.fontSizeBtns.forEach(btn => {
-                    btn.classList.remove('active'); // 移除所有按钮的active类
-                    if (btn.dataset.size === 'medium') {
-                        btn.classList.add('active'); // 为medium按钮添加active类
-                    }
-                });
-                
-                // 步骤6: 重置字号输入框和自定义字号设置
-                // 将所有字号输入框的值重置为对应的medium预设值
-                Object.keys(state.customFontSizes).forEach(key => {
-                    const defaultSize = CONFIG.fontSizePresets[key].medium;
-                    elements.fontSizeInputs[key].value = defaultSize; // 更新输入框值
-                    state.customFontSizes[key] = defaultSize;         // 更新状态
-                });
-                
-                // 步骤7: 重置字体颜色选择器和自定义字体颜色设置
-                // 将所有字体颜色选择器的值重置为默认值
-                Object.keys(state.customFontColors).forEach(key => {
-                    const defaultColor = CONFIG.defaultFontColors[key]; // 获取默认颜色值
-                    elements.colorPickers[key].value = defaultColor;     // 更新颜色选择器的值
-                    state.customFontColors[key] = defaultColor;         // 更新状态中的颜色值
-                });
-                
-                // 步骤8: 应用重置后的设置到预览
-                updateCardColors(); // 更新卡片背景色和文本颜色
-                applyFontSizes();   // 应用字体大小和颜色设置
-            }
-            
-            // 初始化重置按钮事件 - 绑定点击事件到resetForm函数
-            elements.controls.resetBtn.addEventListener('click', resetForm);
-            
-            // 返回公共方法
-            return {
-                init,
-                updateCardContent,
-                updateCardColors,
-                applyFontSizes,
-                generateCard,
-                downloadCard,
-                resetForm,
-                fillDefaultContent
-            };
-        })();
-    
-    // 页面加载完成后初始化
-    document.addEventListener('DOMContentLoaded', CardGenerator.init);
-    
-    // 移动菜单功能
-    document.addEventListener('DOMContentLoaded', function() {
-            // 初始化导航栏和页脚组件
-            const navbar = new NavbarComponent();
-            const navbarStyles = document.createElement('style');
-            navbarStyles.textContent = NavbarComponent.getStyles();
-            document.head.appendChild(navbarStyles);
-
-            const footer = new FooterComponent();
-            const footerStyles = document.createElement('style');
-            footerStyles.textContent = FooterComponent.getStyles();
-            document.head.appendChild(footerStyles);
-
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        // content-card-generator功能
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('content-card-generator已加载');
+            // 在这里添加具体的功能代码
         });
-    });
     </script>
-
-    <!-- 页脚 -->
-    
-    <!-- 页脚将通过JavaScript组件自动生成 -->
+    <script src="../components/component-manager.js"></script>
 </body>
 </html>
