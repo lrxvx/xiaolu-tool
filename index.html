@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
     
     <!-- Primary SEO Meta Tags -->
     <title>创作者工具箱 | AI驱动的专业创作工具集合 - 提升创作效率</title>
@@ -124,6 +124,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/category-styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
     <style>
         :root {
             --primary: #4361ee;
@@ -144,6 +145,63 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        /* 全局容器保护和视口限制 */
+        html {
+            min-width: 320px;
+            max-width: 100vw;
+            overflow-x: auto;
+            /* 防止极端缩放 */
+            zoom: 1;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        
+        /* 视口缩放保护 */
+        @media (max-width: 280px) {
+            html {
+                transform: scale(0.9);
+                transform-origin: top left;
+                width: 111.11%; /* 1/0.9 */
+            }
+            
+            body {
+                overflow-x: hidden;
+            }
+        }
+        
+        /* 防止内容溢出 */
+        * {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* 确保所有容器都有合理的最小宽度 */
+        .container, .page-container, main, section {
+            min-width: 0;
+            overflow-wrap: break-word;
+        }
+        
+        @media (min-width: 1920px) {
+            html {
+                font-size: 18px; /* 大屏幕下适当增大字体 */
+            }
+        }
+        
+        @media (min-width: 2560px) {
+            html {
+                font-size: 20px; /* 超大屏幕下进一步增大字体 */
+            }
+        }
+        
+        .container, .page-container {
+            min-width: 300px;
+            max-width: 1600px;
+            margin: 0 auto;
+            overflow-x: auto;
+            /* 响应式内边距 */
+            padding: 0 clamp(0.5rem, 2.5vw, 2rem);
+        }
+        
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             color: var(--dark);
@@ -151,6 +209,11 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            min-width: 320px;
+            max-width: 100vw;
+            overflow-x: auto;
+            /* 响应式字体大小 */
+            font-size: clamp(14px, 1.6vw, 16px);
         }
         
         /* 导航栏样式 */
@@ -162,23 +225,28 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 0 5%;
-            height: 80px;
+            padding: 0 clamp(1rem, 5vw, 3rem);
+            height: clamp(60px, 10vw, 80px);
+            min-width: 320px;
+            max-width: 100vw;
+            overflow-x: auto;
         }
         
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 0;
-            max-width: 1400px;
+            padding: clamp(0.8rem, 2vw, 1.2rem) 0;
+            max-width: 1600px;
             margin: 0 auto;
             height: 100%;
+            min-width: 300px;
+            white-space: nowrap;
         }
         
         /* 为固定导航栏添加body padding */
         body {
-            padding-top: 80px;
+            padding-top: clamp(60px, 10vw, 80px);
         }
         
         .logo {
@@ -214,6 +282,8 @@
         .nav-links {
             display: flex;
             gap: 2rem;
+            flex-wrap: nowrap;
+            min-width: 0;
         }
         
         .nav-links a {
@@ -253,44 +323,133 @@
             color: var(--dark);
             font-size: 1.5rem;
             cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        /* 小屏幕下的导航处理 */
+        @media (max-width: 480px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow);
+                gap: 1rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar {
+                min-width: 280px;
+            }
         }
         
         /* 英雄区域 - 现在在 main 外部 */
         .hero {
-            padding: 3rem 5%;
+            padding: 2rem 1rem;
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
+            min-width: 300px;
+        }
+        
+        @media (min-width: 768px) {
+            .hero {
+                padding: 3rem 5%;
+            }
         }
         
         /* 主要内容区域 */
         main {
             flex: 1;
-            padding: 0 5% 2rem;
+            padding: 0 0.5rem 1.5rem;
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
+            min-width: 300px;
+            box-sizing: border-box;
+        }
+        
+        /* 移动端主容器优化 */
+        @media (max-width: 480px) {
+            main {
+                padding: 0 0.25rem 1rem;
+            }
+        }
+        
+        /* 平板和桌面 */
+        @media (min-width: 769px) {
+            main {
+                padding: 0 2rem 2rem;
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            main {
+                padding: 0 3rem 2rem;
+            }
         }
         
         /* 英雄区域样式 */
         .hero {
             text-align: center;
-            padding: 3rem 0;
-            margin-bottom: 0; /* 移除底部边距，因为 main 已经有内边距 */
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            padding: 4rem 0;
+            margin-bottom: 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+        }
+        
+        .hero > * {
+            position: relative;
+            z-index: 1;
         }
         
         .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
             color: var(--dark);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
         }
         
         .hero p {
-            font-size: 1.2rem;
-            color: var(--gray);
-            max-width: 800px;
+            font-size: 1.25rem;
+            color: #64748b;
+            max-width: 600px;
             margin: 0 auto 2rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        @media (max-width: 768px) {
+            .hero p {
+                font-size: 1.1rem;
+            }
         }
         
 
@@ -300,158 +459,442 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
         
         .tools-heading h2 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--dark);
+            margin: 0;
+        }
+        
+        /* 移动端工具标题优化 */
+        @media (max-width: 480px) {
+            .tools-heading {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 0.75rem;
+                gap: 0.75rem;
+            }
+            
+            .tools-heading h2 {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* 桌面屏幕工具标题 */
+        @media (min-width: 769px) {
+            .tools-heading {
+                margin-bottom: 1.5rem;
+            }
+            
+            .tools-heading h2 {
+                font-size: 1.8rem;
+            }
         }
         
         .view-options {
             display: flex;
             gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        
+        /* 移动端视图选项优化 */
+        @media (max-width: 480px) {
+            .view-options {
+                gap: 0.25rem;
+                width: 100%;
+                justify-content: flex-start;
+            }
         }
         
         .view-btn {
-            background: none;
-            border: none;
-            color: var(--gray);
-            font-size: 1.2rem;
+            background: white;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            color: #64748b;
+            font-size: 1.1rem;
             cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 5px;
-            transition: var(--transition);
+            padding: 0.6rem;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            min-width: 40px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .view-btn:hover, 
+        /* 移动端视图按钮优化 */
+        @media (max-width: 480px) {
+            .view-btn {
+                font-size: 1rem;
+                padding: 0.5rem;
+                border-radius: 6px;
+                min-width: 36px;
+                min-height: 36px;
+            }
+        }
+        
+        /* 桌面屏幕视图按钮 */
+        @media (min-width: 769px) {
+            .view-btn {
+                font-size: 1.2rem;
+                padding: 0.75rem;
+                border-radius: 12px;
+                min-width: 44px;
+                min-height: 44px;
+            }
+        }
+        
+        .view-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.3s ease;
+        }
+        
+        .view-btn:hover::before {
+            left: 100%;
+        }
+        
+        .view-btn:hover {
+            color: #667eea;
+            background-color: rgba(102, 126, 234, 0.08);
+            border-color: rgba(102, 126, 234, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+        }
+        
         .view-btn.active {
-            color: var(--primary);
-            background-color: rgba(67, 97, 238, 0.1);
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #667eea;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
         }
         
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(0.8rem, 1.5vw, 1.2rem);
+            margin-bottom: clamp(1.5rem, 3vw, 2rem);
+            padding: 0 clamp(0.5rem, 1.5vw, 1.5rem);
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
         }
         
-        /* 响应式布局 */
-        @media (max-width: 1400px) {
-            .tools-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        @media (max-width: 1024px) {
-            .tools-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 640px) {
+        /* 极小屏幕保护 - 1列 */
+        @media (max-width: 480px) {
             .tools-grid {
                 grid-template-columns: 1fr;
+                gap: 0.8rem;
+                padding: 0 0.5rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        /* 小屏幕 - 2列 */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: clamp(0.6rem, 1.2vw, 1rem);
+                padding: 0 clamp(0.5rem, 1.5vw, 1rem);
+            }
+        }
+        
+        /* 平板和桌面 - 固定3列 */
+        @media (min-width: 769px) {
+            .tools-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: clamp(1rem, 1.5vw, 1.5rem);
+                padding: 0 clamp(1rem, 2vw, 2rem);
             }
         }
         
         .tool-card {
             background-color: white;
-            border-radius: 12px;
+            border-radius: clamp(4px, 0.8vw, 6px);
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            height: 100%;
+            height: auto;
+            min-height: clamp(90px, 10vw, 120px);
+            aspect-ratio: 3/2;
+            border: 1px solid #e5e7eb;
+            min-width: 0;
+            max-width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
         
         .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* 极小屏幕卡片保护 */
+        @media (max-width: 280px) {
+            .tool-card {
+                min-height: 80px;
+                aspect-ratio: 3/2;
+                border-radius: 6px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+        }
+        
+        /* 移动端卡片优化 */
+        @media (min-width: 281px) and (max-width: 480px) {
+            .tool-card {
+                min-height: clamp(90px, 12vw, 110px);
+                aspect-ratio: 3/2;
+                border-radius: clamp(6px, 1vw, 8px);
+                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            }
+        }
+        
+        /* 平板和桌面卡片优化 */
+        @media (min-width: 769px) {
+            .tool-card {
+                min-height: clamp(120px, 15vw, 160px);
+                aspect-ratio: 3/2;
+                border-radius: clamp(10px, 1.5vw, 14px);
+            }
+        }
+        
+        /* 超大屏幕卡片优化 */
+        @media (min-width: 1920px) {
+            .tool-card {
+                min-height: 180px;
+                aspect-ratio: 3/2;
+                border-radius: 16px;
+            }
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-color: #d1d5db;
         }
         
         .tool-card-header {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
+            padding: clamp(0.3rem, 0.8vw, 0.6rem) clamp(0.5rem, 1vw, 0.8rem);
+            background: #f8fafc;
+            color: #1f2937;
             position: relative;
+            border-bottom: 1px solid #e5e7eb;
+            flex: 1;
+            min-height: clamp(40px, 6vw, 60px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .tool-card-header h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+            font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+            margin-bottom: clamp(0.1rem, 0.2vw, 0.2rem);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: clamp(1.1, 1.2vw, 1.2);
+            color: #111827;
+            padding-right: 0;
+        }
+        
+        /* 极小屏幕头部保护 */
+        @media (max-width: 280px) {
+            .tool-card-header {
+                padding: 0.25rem 0.4rem;
+                min-height: 35px;
+            }
+            
+            .tool-card-header h3 {
+                font-size: 0.65rem;
+                padding-right: 0;
+                margin-bottom: 0.05rem;
+                line-height: 1.05;
+            }
+        }
+        
+        /* 移动端头部优化 */
+        @media (min-width: 281px) and (max-width: 480px) {
+            .tool-card-header {
+                padding: clamp(0.25rem, 0.6vw, 0.4rem) clamp(0.4rem, 0.8vw, 0.6rem);
+                min-height: clamp(35px, 6vw, 45px);
+            }
+            
+            .tool-card-header h3 {
+                font-size: clamp(0.65rem, 0.8vw, 0.75rem);
+                padding-right: 0;
+                margin-bottom: clamp(0.05rem, 0.1vw, 0.1rem);
+                line-height: clamp(1.05, 1.1vw, 1.15);
+            }
+        }
+        
+        /* 超大屏幕头部优化 */
+        @media (min-width: 1920px) {
+            .tool-card-header {
+                padding: 1.5rem 2rem;
+                min-height: 100px;
+            }
+            
+            .tool-card-header h3 {
+                font-size: 1.3rem;
+                padding-right: 3rem;
+                margin-bottom: 0.4rem;
+                line-height: 1.5;
+            }
         }
         
         .tool-card-header h3 a {
-            transition: var(--transition);
+            transition: color 0.2s ease;
+            color: inherit;
         }
         
         .tool-card-header h3 a:hover {
-            opacity: 0.8;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+            color: #3b82f6;
         }
         
         .tool-card-header p {
-            opacity: 0.9;
-            font-size: 0.9rem;
+            color: #6b7280;
+            font-size: clamp(0.55rem, 0.7vw, 0.65rem);
+            line-height: clamp(1.1, 1.1vw, 1.2);
+            font-weight: 400;
+            margin: 0 0 clamp(0.1rem, 0.2vw, 0.2rem) 0;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: block;
         }
         
-        .tool-icon {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            font-size: 2rem;
-            opacity: 0.2;
+        /* 当说明与标题重复时隐藏 */
+        .tool-card-header p.duplicate-desc {
+            display: none;
         }
         
-        .tool-card-body {
-            padding: 1.5rem;
-            flex: 1;
+        /* 极小屏幕说明文字保护 */
+        @media (max-width: 280px) {
+            .tool-card-header p {
+                font-size: 0.5rem;
+                max-width: 15ch;
+                line-height: 1.05;
+            }
         }
         
-        .tool-card-body p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
+
+        
+
         
         .tool-card-footer {
-            padding: 1rem 1.5rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: clamp(0.3rem, 0.8vw, 0.6rem) clamp(0.5rem, 1vw, 0.8rem);
+            background: white;
+            border-top: 1px solid #f3f4f6;
+        }
+        
+        /* 移动端底部优化 */
+        @media (max-width: 480px) {
+            .tool-card-footer {
+                padding: 0.25rem 0.4rem;
+            }
+        }
+        
+        /* 桌面屏幕底部 */
+        @media (min-width: 769px) {
+            .tool-card-footer {
+                padding: 1rem 1.25rem;
+            }
         }
         
         .tool-tags {
             display: flex;
-            gap: 0.5rem;
+            flex-wrap: wrap;
+            gap: clamp(0.2rem, 0.3vw, 0.3rem);
+            margin-top: 0;
         }
         
         .tool-tag {
-            background-color: rgba(67, 97, 238, 0.1);
-            color: var(--primary);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
+            background-color: rgba(59, 130, 246, 0.08);
+            color: #3b82f6;
+            padding: clamp(0.1rem, 0.2vw, 0.2rem) clamp(0.3rem, 0.5vw, 0.5rem);
+            border-radius: clamp(8px, 1vw, 12px);
+            font-size: clamp(0.5rem, 0.6vw, 0.6rem);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: clamp(40px, 10vw, 60px);
         }
         
         .tool-btn {
-            background-color: var(--primary);
+            background: #3b82f6;
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
             font-weight: 500;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.2s ease;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            min-height: 32px;
+            min-width: 70px;
+            white-space: nowrap;
+        }
+        
+        /* 移动端按钮优化 */
+        @media (max-width: 480px) {
+            .tool-btn {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.7rem;
+                min-height: 28px;
+                min-width: 60px;
+                border-radius: 4px;
+            }
+        }
+        
+        /* 桌面屏幕按钮 */
+        @media (min-width: 769px) {
+            .tool-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+                min-height: 36px;
+                min-width: 80px;
+            }
         }
         
         .tool-btn:hover {
-            background-color: var(--secondary);
+            background: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+        
+        .tool-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 4px rgba(59, 130, 246, 0.2);
         }
         
         /* 分类部分 */
@@ -470,46 +913,87 @@
         
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+        
+        @media (min-width: 576px) {
+            .categories-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .categories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
         }
         
         .category-card {
             background-color: white;
-            border-radius: 12px;
-            padding: 2rem 1.5rem; /* 增加上下内边距 */
-            min-height: 140px; /* 设置最小高度，拉长分类卡片 */
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            border-radius: 18px;
+            padding: 2rem 1.5rem;
+            min-height: 130px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .category-card {
+                padding: 2.5rem 2rem;
+                min-height: 150px;
+            }
         }
         
         .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.12);
+            border-color: rgba(102, 126, 234, 0.08);
         }
         
-        .category-icon {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
+        .category-card:hover::before {
+            opacity: 1;
         }
+        
+
         
         .category-card h3 {
-            font-size: 1.2rem;
-            margin: 0.8rem 0 0.5rem 0; /* 调整标题间距 */
+            font-size: 1.3rem;
+            margin: 0.5rem 0;
             color: var(--dark);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
         }
         
         .category-card p {
-            color: var(--gray);
+            color: #64748b;
             font-size: 0.9rem;
-            margin: 0.5rem 0; /* 调整描述间距 */
+            margin: 0.5rem 0;
+            line-height: 1.5;
+            font-weight: 400;
         }
         
         /* 分页样式 */
@@ -517,32 +1001,68 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 2rem 0;
+            margin: 3rem 0;
             gap: 0.5rem;
         }
         
         .pagination button {
-            padding: 0.5rem 1rem;
-            border: 1px solid #ddd;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(102, 126, 234, 0.1);
             background: white;
-            color: #333;
-            border-radius: 6px;
+            color: #64748b;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 40px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 44px;
             font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pagination button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.3s ease;
+        }
+        
+        .pagination button:hover::before {
+            left: 100%;
         }
         
         .pagination button:hover {
-            background: var(--primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border-color: var(--primary);
+            border-color: #667eea;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
         }
         
         .pagination button.active {
-            background: var(--primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border-color: var(--primary);
+            border-color: #667eea;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+        }
+        
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .pagination button:disabled:hover {
+            background: white;
+            color: #64748b;
+            border-color: rgba(102, 126, 234, 0.1);
+            transform: none;
+            box-shadow: none;
         }
         
         .pagination button:disabled {
@@ -568,6 +1088,8 @@
             background-color: white;
             padding: 3rem 5%;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+            min-width: 320px;
+            overflow-x: auto;
         }
         
         .footer-content {
@@ -576,6 +1098,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
+            min-width: 300px;
         }
         
         .footer-column h3 {
@@ -1705,7 +2228,7 @@
         class PaginationManager {
             constructor() {
                 this.currentPage = 1;
-                this.itemsPerPage = 16; // 每页4行 × 4列 = 16个工具
+                this.itemsPerPage = 12; // 每页4行 × 3列 = 12个工具（适应3-4个工具每行的布局）
                 this.allTools = [];
                 this.filteredTools = [];
             }
@@ -1754,8 +2277,12 @@
                 
                 tools.forEach(tool => {
                     const tagsString = tool.tags.join(',').toLowerCase();
-                    const displayTags = tool.tags.slice(0, 4);
+                    const displayTags = tool.tags.slice(0, 3);
                     const tagsHtml = displayTags.map(tag => `<span class="tool-tag">${tag}</span>`).join('');
+                    
+                    // 检查说明是否与标题重复或过于相似
+                    const isDuplicateDesc = this.isDescriptionDuplicate(tool.name, tool.shortDesc);
+                    const descClass = isDuplicateDesc ? 'duplicate-desc' : '';
                     
                     const toolCard = document.createElement('div');
                     toolCard.className = 'tool-card';
@@ -1764,25 +2291,46 @@
                     const category = tool.categories && tool.categories.length > 0 ? tool.categories[0] : (tool.category || '其他');
                     toolCard.setAttribute('data-category', category);
                     
+                    // 添加点击事件，点击整个卡片跳转
+                    toolCard.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        showToolUsage(tool.id, tool);
+                    });
+                    
+                    const shortDesc = tool.shortDesc.length > 20 ? tool.shortDesc.substring(0, 20) + '...' : tool.shortDesc;
+                    
                     toolCard.innerHTML = `
                         <div class="tool-card-header">
                             <h3>${tool.name}</h3>
-                            <p>${tool.shortDesc}</p>
-                            <i class="${tool.icon} tool-icon"></i>
-                        </div>
-                        <div class="tool-card-body">
-                            <p>${tool.description}</p>
+                            <p class="${descClass}">${shortDesc}</p>
                         </div>
                         <div class="tool-card-footer">
                             <div class="tool-tags">
                                 ${tagsHtml}
                             </div>
-                            <button class="tool-btn" onclick="showToolUsage('${tool.id}', ${JSON.stringify(tool).replace(/"/g, '&quot;')})">使用工具</button>
                         </div>
                     `;
                     
                     toolsContainer.appendChild(toolCard);
                 });
+            }
+            
+            // 检查说明文字是否与标题重复
+            isDescriptionDuplicate(name, shortDesc) {
+                if (!name || !shortDesc) return false;
+                
+                // 移除常见的后缀词汇进行比较
+                const cleanName = name.replace(/(工具|计算器|生成器|编辑器|转换器|处理器|模拟器|分析器)$/g, '').trim();
+                const cleanDesc = shortDesc.replace(/(工具|计算器|生成器|编辑器|转换器|处理器|模拟器|分析器)$/g, '').trim();
+                
+                // 如果清理后的文字相同或包含关系，则认为重复
+                if (cleanName === cleanDesc) return true;
+                if (cleanName.includes(cleanDesc) || cleanDesc.includes(cleanName)) return true;
+                
+                // 检查说明是否过长（超过20字符）
+                if (shortDesc.length > 20) return true;
+                
+                return false;
             }
             
             renderPagination() {
@@ -2535,6 +3083,7 @@
             }, 500);
         });
     </script>
-    <script src="./components/component-manager.js"></script>
+    <script src="components/component-manager.js"></script>
+    <script src="js/mobile-navigation.js"></script>
 </body>
 </html>

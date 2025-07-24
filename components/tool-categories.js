@@ -111,7 +111,6 @@ class ToolCategoriesComponent {
                         return `
                             <div class="category-item ${isActive ? 'active' : ''} ${isEmpty ? 'empty' : ''}" 
                                  data-category="${category.id}">
-                                <span class="category-icon">${category.icon}</span>
                                 <span class="category-name">${category.name}</span>
                                 <span class="category-count">${count}</span>
                             </div>
@@ -310,12 +309,7 @@ class ToolCategoriesComponent {
                     opacity: 0.5;
                 }
 
-                .category-icon {
-                    font-size: 1.2rem;
-                    margin-right: 10px;
-                    width: 20px;
-                    text-align: center;
-                }
+
 
                 .category-name {
                     flex: 1;

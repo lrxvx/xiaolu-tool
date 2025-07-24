@@ -2,7 +2,7 @@
   {
     "id": "json-processor",
     "name": "JSON处理工具",
-    "shortDesc": "在线JSON美化、比对、格式化工具",
+    "shortDesc": "JSON美化、比对、格式化工具",
     "icon": "fas fa-code",
     "description": "免费在线JSON处理工具，支持JSON美化格式化、JSON比对差异检测、JSON模板生成。提供乱码解码、排序、BigInt处理、编辑下载等功能。",
     "tags": ["JSON处理", "JSON美化", "JSON比对", "JSON格式化", "数据处理"],
@@ -12,7 +12,7 @@
   {
     "id": "menstrual-cycle-calculator",
     "name": "女性生理周期计算器",
-    "shortDesc": "智能预测经期、排卵期和安全期",
+    "shortDesc": "女性生理周期计算工具",
     "icon": "fas fa-calendar-alt",
     "description": "免费在线女性生理周期计算器，基于先进算法的智能预测系统，帮助您科学了解身体周期，合理安排生活计划。支持经期、排卵期、安全期精准预测，提供健康建议和生理周期管理。",
     "tags": ["生理周期", "经期预测", "排卵期", "女性健康", "周期管理"],
@@ -22,7 +22,7 @@
   {
     "id": "loan-prepayment-calculator",
     "name": "房贷提前还款计算器",
-    "shortDesc": "精准计算提前还款收益",
+    "shortDesc": "房贷提前还款计算器",
     "icon": "fas fa-calculator",
     "description": "免费在线房贷提前还款计算器，精准计算提前还款可节省的利息，优化还款计划，帮您做出最优的还款决策。支持等额本息、等额本金等多种还款方式。",
     "tags": ["房贷计算", "提前还款", "利息计算", "还款规划", "理财工具"],
@@ -32,7 +32,7 @@
   {
     "id": "markdown-editor",
     "name": "Markdown在线编辑器",
-    "shortDesc": "专业的Markdown即时渲染编辑器",
+    "shortDesc": "Markdown编辑预览工具",
     "icon": "fas fa-edit",
     "description": "免费、强大的Markdown在线编辑器，支持即时预览、语法高亮、导出多种格式。适合写作、文档编辑、笔记整理等场景。",
     "tags": ["Markdown", "编辑器", "写作工具", "文档编辑", "笔记工具"],
@@ -122,7 +122,7 @@
   {
     "id": "unit-converter",
     "name": "多功能单位换算器",
-    "shortDesc": "支持12种单位类型换算",
+    "shortDesc": "单位换算工具",
     "icon": "fas fa-exchange-alt",
     "description": "支持12种单位类型换算，包括温度、重量、面积、体积、长度、压力、功率、角度、电容、时间、速度、二进制，工程计算必备工具",
     "tags": ["单位换算", "单位转换", "度量衡", "工程计算", "进制转换"],
@@ -162,7 +162,7 @@
   {
     "id": "base64-encoder",
     "name": "Base64 编码解码",
-    "shortDesc": "文本与Base64互相转换",
+    "shortDesc": "Base64编码解码工具",
     "icon": "fas fa-code",
     "description": "快速将文本转换为Base64编码，或将Base64编码解码为原始文本，支持中文和特殊字符。",
     "tags": ["编码", "解码"],
@@ -202,7 +202,7 @@
   {
     "id": "daily-quote-card",
     "name": "每日一句卡片生成器",
-    "shortDesc": "生成精美的每日一句卡片",
+    "shortDesc": "每日一句卡片生成器",
     "icon": "fas fa-quote-left",
     "description": "输入名言警句或励志语录，生成精美的每日一句卡片，支持多种样式和颜色，可下载为图片。",
     "tags": ["名言", "卡片", "励志"],
@@ -212,7 +212,7 @@
   {
     "id": "idle-calculator",
     "name": "摸鱼计算器",
-    "shortDesc": "计算每秒钟赚了多少钱",
+    "shortDesc": "摸鱼时薪计算器",
     "icon": "fas fa-calculator",
     "description": "输入月薪、工作天数和时长，实时计算每秒钟赚取的金额，让摸鱼更有成就感。支持元、角、分单位切换。",
     "tags": ["计算器", "摸鱼", "薪资"],
@@ -222,7 +222,7 @@
   {
     "id": "wealth-freedom-calculator",
     "name": "财富自由计算器",
-    "shortDesc": "计算达到财富自由的时间",
+    "shortDesc": "财富自由计算器",
     "icon": "fas fa-chart-line",
     "description": "根据您的月收入、月支出和当前年龄，计算达到财富自由所需的时间，并提供实时倒计时和进度显示。",
     "tags": ["财富自由", "理财", "计算器"],
@@ -232,7 +232,7 @@
   {
     "id": "house-car-countdown",
     "name": "买房买车倒计时",
-    "shortDesc": "计算购房购车目标倒计时",
+    "shortDesc": "买房买车倒计时",
     "icon": "fas fa-home",
     "description": "设定购房或购车目标，计算还需多少时间和金钱达成目标，还能换算成奶茶杯数让目标更有趣。",
     "tags": ["买房", "买车", "倒计时", "理财"],
@@ -242,7 +242,7 @@
   {
     "id": "poster-batch-processor",
     "name": "海报批量处理工具",
-    "shortDesc": "批量合并背景图与前景图生成海报",
+    "shortDesc": "海报批量处理工具",
     "icon": "fas fa-images",
     "description": "专业的海报批量处理工具，支持背景图与多张图片合并，自动居中适配，支持缩放旋转，一键生成高质量海报。",
     "tags": ["海报", "图片合并", "批量处理", "设计"],
@@ -252,7 +252,7 @@
   {
     "id": "festival-countdown",
     "name": "节日倒计时",
-    "shortDesc": "全球节日提醒工具",
+    "shortDesc": "节日倒计时工具",
     "icon": "fas fa-calendar-alt",
     "description": "免费在线节日倒计时工具，支持全球节日查询，智能提醒节日活动和注意事项。自动识别用户所在地区，支持多语言，让您不错过任何重要节日。",
     "tags": ["节日", "倒计时", "日历", "假期", "提醒"],
@@ -262,7 +262,7 @@
   {
     "id": "image-to-pdf",
     "name": "图片转PDF工具",
-    "shortDesc": "将多张图片快速转换为PDF文档",
+    "shortDesc": "图片转PDF工具",
     "icon": "fas fa-file-pdf",
     "description": "支持JPG、PNG、GIF、BMP等格式，可拖拽上传多张图片，支持拖拽排序，一键生成PDF文档并下载。",
     "tags": ["PDF", "图片转换", "批量处理", "文档"],
@@ -272,7 +272,7 @@
   {
     "id": "file-encryptor",
     "name": "文件加密工具",
-    "shortDesc": "为PDF/Word/Excel文件添加密码保护",
+    "shortDesc": "文件加密工具",
     "icon": "fas fa-shield-alt",
     "description": "支持PDF、Word、Excel文件加密，使用军用级AES-256加密算法，支持批量加密，本地处理确保安全。",
     "tags": ["加密", "密码保护", "文档安全", "批量处理"],
@@ -282,7 +282,7 @@
   {
     "id": "pdf-watermark",
     "name": "PDF水印处理工具",
-    "shortDesc": "PDF加水印和去水印专业工具",
+    "shortDesc": "PDF水印处理工具",
     "icon": "fas fa-stamp",
     "description": "专业的PDF水印处理工具，支持添加自定义文字水印和移除水印，可调整字体大小、颜色、透明度、旋转角度和位置，支持批量处理。",
     "tags": ["PDF", "水印", "文档保护", "批量处理", "版权保护"],
@@ -292,7 +292,7 @@
   {
     "id": "image-text-extractor",
     "name": "图片文字提取工具",
-    "shortDesc": "OCR图片文字识别提取工具",
+    "shortDesc": "图片文字提取工具",
     "icon": "fas fa-text-width",
     "description": "使用先进OCR技术快速识别图片中的文字内容，支持中英文识别，支持多种图片格式，批量处理，本地处理保护隐私。",
     "tags": ["OCR", "文字识别", "图片处理", "批量处理", "文字提取"],
@@ -302,7 +302,7 @@
   {
     "id": "pdf-converter",
     "name": "PDF格式转换工具",
-    "shortDesc": "PDF转Word/Excel/图片/长图",
+    "shortDesc": "PDF格式转换工具",
     "icon": "fas fa-exchange-alt",
     "description": "支持PDF转Word、PDF转Excel、PDF转图片、PDF转长图等多种格式转换，高质量输出，本地处理保护隐私安全。",
     "tags": ["PDF转换", "格式转换", "Word", "Excel", "图片", "文档处理"],
@@ -312,7 +312,7 @@
   {
     "id": "image-format-converter",
     "name": "图片格式转换工具",
-    "shortDesc": "图片转Word/Excel/PDF/合并长图",
+    "shortDesc": "图片格式转换工具",
     "icon": "fas fa-images",
     "description": "支持图片转Word、图片转Excel、图片转PDF、合并长图等多种格式转换，支持JPG、PNG、GIF、BMP、WEBP等格式，本地处理保护隐私。",
     "tags": ["图片转换", "格式转换", "Word", "Excel", "PDF", "长图合并", "图片处理"],
@@ -322,7 +322,7 @@
   {
     "id": "anime-to-sketch",
     "name": "动漫图片转铅笔线稿",
-    "shortDesc": "将动漫图片转换为铅笔线稿",
+    "shortDesc": "动漫图片转线稿",
     "icon": "fas fa-pencil-alt",
     "description": "将动漫图片转换为铅笔线稿，适合儿童涂色使用。支持JPG、PNG等格式，可调整边缘检测强度、线条粗细和对比度，本地处理保护隐私。",
     "tags": ["动漫转线稿", "图片转铅笔画", "线稿生成", "涂色线稿", "图片处理", "儿童涂色"],
@@ -332,7 +332,7 @@
   {
     "id": "watermark-remover",
     "name": "图片水印去除工具",
-    "shortDesc": "智能AI水印检测与清除",
+    "shortDesc": "图片水印去除工具",
     "icon": "fas fa-eraser",
     "description": "专业的在线图片水印去除工具，支持AI智能检测和手动选择水印区域，一键清除各种水印。支持JPG、PNG、WEBP等多种格式，完全免费使用。",
     "tags": ["水印去除", "图片水印清除", "AI水印检测", "在线水印去除", "图片处理工具", "免费水印清除"],
@@ -342,7 +342,7 @@
   {
     "id": "timezone-calculator",
     "name": "全球时差计算器",
-    "shortDesc": "实时显示世界各地时间对比",
+    "shortDesc": "全球时差计算器",
     "icon": "fas fa-globe",
     "description": "专业的全球时差计算工具，实时显示世界各地时间、时区、日出日落时间，支持农历公历对比，完美解决时差问题。",
     "tags": ["时差计算", "世界时间", "时区转换", "日出日落", "农历公历", "全球时间"],
@@ -352,7 +352,7 @@
   {
     "id": "image-compressor",
     "name": "智能图片压缩工具",
-    "shortDesc": "高效压缩，保持清晰度",
+    "shortDesc": "智能图片压缩工具",
     "icon": "fas fa-compress-alt",
     "description": "专业的在线图片压缩工具，支持批量压缩JPG、PNG、WebP等格式，智能算法保持图片清晰度，自定义压缩率，完全免费使用。",
     "tags": ["图片压缩", "在线压缩", "批量压缩", "JPG压缩", "PNG压缩", "WebP压缩", "图片优化"],
@@ -362,7 +362,7 @@
   {
     "id": "zodiac-calculator",
     "name": "生肖计算器",
-    "shortDesc": "十二生肖年份查询工具",
+    "shortDesc": "生肖计算器",
     "icon": "fas fa-dragon",
     "description": "免费在线生肖计算器，支持年份查询生肖、生肖查询年份、年龄计算生肖等功能。提供完整的十二生肖年历表，准确计算生肖属相和年龄信息。",
     "tags": ["生肖计算器", "十二生肖", "生肖查询", "年份生肖", "属相计算", "生肖年历", "年龄计算器", "生肖属相查询"],
@@ -372,7 +372,7 @@
   {
     "id": "id-location-query",
     "name": "身份证前四位户籍查询工具",
-    "shortDesc": "快速查询户籍所在地信息",
+    "shortDesc": "身份证户籍查询",
     "icon": "fas fa-id-card",
     "description": "专业的身份证前四位户籍查询工具，输入身份证前四位数字，快速查询户籍所在地信息，支持全国各省市县区查询，完全免费使用。",
     "tags": ["身份证查询", "户籍查询", "身份证前四位", "户籍所在地", "身份证归属地", "行政区划代码"],
@@ -382,7 +382,7 @@
   {
     "id": "image-to-base64",
     "name": "图片转Base64编码工具",
-    "shortDesc": "图片与Base64编码互转工具",
+    "shortDesc": "图片Base64转换",
     "icon": "fas fa-image",
     "description": "专业的图片Base64编码转换工具，支持图片转Base64和Base64转图片双向转换。支持多种输入方式：文件上传、链接输入、拖拽、剪贴板粘贴等，完全免费使用。",
     "tags": ["图片转Base64", "Base64编码", "图片编码", "Base64转图片", "图片处理", "编码转换"],
@@ -392,7 +392,7 @@
   {
     "id": "encoding-converter",
     "name": "信息编码转换工具",
-    "shortDesc": "多格式信息编解码转换",
+    "shortDesc": "信息编码转换工具",
     "icon": "fas fa-code",
     "description": "专业的信息编码转换工具，支持Unicode、UTF-8、UTF-16、URL、Base64、MD5、Hex、Binary等多种格式的编解码转换，一键转换多种格式，完全免费使用。",
     "tags": ["编码转换", "Unicode", "UTF-8", "Base64", "URL编码", "MD5", "Hex", "Binary"],
@@ -402,7 +402,7 @@
   {
     "id": "timestamp-converter",
     "name": "时间戳转换工具",
-    "shortDesc": "时间戳与本地时间互转",
+    "shortDesc": "时间戳转换工具",
     "icon": "fas fa-clock",
     "description": "专业的时间戳转换工具，支持时间戳与本地时间双向转换，支持秒/毫秒时间戳，世界时区显示，实时时间更新，完全免费使用。",
     "tags": ["时间戳转换", "时间转换", "Unix时间戳", "世界时区", "时间格式化", "本地时间"],
@@ -412,7 +412,7 @@
   {
     "id": "color-converter",
     "name": "颜色转换工具",
-    "shortDesc": "多种颜色格式互转工具",
+    "shortDesc": "颜色转换工具",
     "icon": "fas fa-palette",
     "description": "专业的颜色转换工具，支持HEX、RGB、HSL、CMYK等多种颜色格式相互转换，实时颜色预览，调色板选择，随机颜色生成，完全免费使用。",
     "tags": ["颜色转换", "HEX转RGB", "RGB转HEX", "HSL", "CMYK", "调色板", "颜色代码"],
@@ -422,7 +422,7 @@
   {
     "id": "code-beautifier",
     "name": "代码美化工具",
-    "shortDesc": "多语言代码格式化美化工具",
+    "shortDesc": "代码美化工具",
     "icon": "fas fa-code",
     "description": "专业的多语言代码美化工具，支持JavaScript、CSS、HTML、XML、SQL、JSON等多种编程语言的代码格式化和美化，提供语法高亮、自动缩进、代码压缩等功能，完全免费使用。",
     "tags": ["代码美化", "代码格式化", "JavaScript", "CSS", "HTML", "XML", "SQL", "JSON", "语法高亮"],
@@ -432,7 +432,7 @@
   {
     "id": "api-tester",
     "name": "简易版Postman",
-    "shortDesc": "在线API接口测试工具",
+    "shortDesc": "简易版Postman",
     "icon": "fas fa-plug",
     "description": "专业的在线API接口测试工具，支持GET、POST、HEAD等HTTP请求方式，提供请求头配置、请求体编辑、JSON格式化、响应结果展示等功能，是开发调试的必备工具。",
     "tags": ["API测试", "接口调试", "HTTP请求", "Postman", "JSON格式化", "开发工具"],
@@ -442,7 +442,7 @@
   {
     "id": "wechat-cover-maker",
     "name": "公众号封面制作工具",
-    "shortDesc": "在线制作精美公众号封面",
+    "shortDesc": "公众号封面制作",
     "icon": "fas fa-image",
     "description": "专业的公众号封面在线制作工具，支持自定义文字、颜色、背景图片，提供多种模板和字体选择，一键生成高质量封面图片，完美适配微信公众号尺寸要求。",
     "tags": ["公众号封面", "封面制作", "微信公众号", "图片设计", "在线设计", "封面设计", "自媒体工具"],
@@ -452,7 +452,7 @@
   {
     "id": "regex-tester",
     "name": "JS正则表达式工具",
-    "shortDesc": "在线正则表达式测试器",
+    "shortDesc": "正则表达式工具",
     "icon": "fas fa-search",
     "description": "专业的在线JavaScript正则表达式测试工具，提供常用正则模板，支持实时匹配和高亮显示，正则表达式学习和调试的最佳选择。",
     "tags": ["正则表达式", "正则测试", "JavaScript正则", "正则匹配", "正则高亮", "正则工具", "在线正则", "开发工具", "文本匹配"],

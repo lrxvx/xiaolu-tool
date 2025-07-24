@@ -60,6 +60,7 @@
     
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/responsive.css">
     <style>
         :root {
             --primary: #4361ee;
@@ -80,7 +81,10 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
             color: var(--dark);
-            background-color: var(--light);
+            background-color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         /* 导航栏样式由组件提供 */
@@ -89,6 +93,9 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .main-layout {
             display: flex;
@@ -388,14 +395,7 @@
             scroll-behavior: smooth;
         }
         
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #1e293b;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+        /* 移除重复的body样式定义 */
         
         /* 容器布局修复 */
         .container {
@@ -1144,5 +1144,6 @@
         });
     </script>
     <script src="../components/component-manager.js"></script>
+    <script src="../js/mobile-navigation.js"></script>
 </body>
 </html>

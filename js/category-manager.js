@@ -242,9 +242,6 @@ class ToolCategoryManager {
                  data-category="${category.id}" 
                  style="--category-color: ${category.color}"
                  onclick="toolCategoryManager.handlers.categoryClick('${category.id}')">
-                <div class="category-icon">
-                    <i class="${category.icon}"></i>
-                </div>
                 <div class="category-info">
                     <div class="category-name">${category.name}</div>
                     <div class="category-count">${count}</div>

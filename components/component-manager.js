@@ -40,9 +40,14 @@ class ComponentManager {
     // 初始化导航栏
     async initNavbar() {
         try {
-            await this.loadScript(this.getScriptPath('navbar.js'));
-            this.components.navbar = new NavbarComponent();
-            this.components.navbar.render('navbar-container');
+            // 检查NavbarComponent是否已存在
+            if (typeof NavbarComponent === 'undefined') {
+                await this.loadScript(this.getScriptPath('navbar.js'));
+            }
+            if (!this.components.navbar) {
+                this.components.navbar = new NavbarComponent();
+                this.components.navbar.render('navbar-container');
+            }
         } catch (error) {
             console.error('Failed to initialize navbar:', error);
         }
@@ -51,9 +56,14 @@ class ComponentManager {
     // 初始化页脚
     async initFooter() {
         try {
-            await this.loadScript(this.getScriptPath('footer.js'));
-            this.components.footer = new FooterComponent();
-            this.components.footer.render('footer-container');
+            // 检查FooterComponent是否已存在
+            if (typeof FooterComponent === 'undefined') {
+                await this.loadScript(this.getScriptPath('footer.js'));
+            }
+            if (!this.components.footer) {
+                this.components.footer = new FooterComponent();
+                this.components.footer.render('footer-container');
+            }
         } catch (error) {
             console.error('Failed to initialize footer:', error);
         }
@@ -125,7 +135,9 @@ class ComponentManager {
     // 初始化方法 - 根据页面类型自动选择初始化策略
     async init() {
         const currentPath = window.location.pathname;
-        const isToolPage = currentPath.includes('/tools/') && currentPath.endsWith('.html');
+        const fileName = currentPath.split('/').pop();
+        const isToolPage = currentPath.includes('/tools/') || 
+                          (fileName && fileName.endsWith('.html') && fileName !== 'index.html' && fileName !== 'guide.html');
         
         console.log('Current path:', currentPath, 'Is tool page:', isToolPage);
         

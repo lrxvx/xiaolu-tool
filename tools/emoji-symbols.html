@@ -69,6 +69,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- 复制提示样式 -->
+    <link rel="stylesheet" href="../css/responsive.css">
     <style>
         :root {
             --primary: #4361ee;
@@ -1122,6 +1123,8 @@
 
         // 初始化页面
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('emoji-symbols已加载');
+            
             // 禁用腾讯统计相关请求
             const originalFetch = window.fetch;
             window.fetch = function(url, options) {
@@ -1135,17 +1138,7 @@
             initEmojiGrids();
         });
     </script>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        // emoji-symbols功能
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('emoji-symbols已加载');
-            // 在这里添加具体的功能代码
-        });
-    </script>
     <script src="../components/component-manager.js"></script>
+    <script src="../js/mobile-navigation.js"></script>
 </body>
 </html>

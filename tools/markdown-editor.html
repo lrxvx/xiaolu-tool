@@ -2,16 +2,8 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <!-- 导航栏和页脚组件 -->
-    
-    
-    
-
-    <!-- 导航栏和页脚组件 -->
-    
-    
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown编辑器 - 小鹿工具箱</title>
     
     <!-- Favicon and Icons -->
     <link rel="icon" type="image/svg+xml" href="../images/icon-192x192.png">
@@ -20,18 +12,298 @@
     <link rel="manifest" href="../site.webmanifest">
     
     <!-- 导航栏和页脚组件样式 -->
+    <link rel="stylesheet" href="../components/navbar.css">
+    <link rel="stylesheet" href="../components/footer.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4f46e5;
+            margin-bottom: 10px;
+        }
+        
+        .tool-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+        }
+        
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: 600px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .editor-panel {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .panel-header {
+            background: #f1f5f9;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 600;
+            color: #475569;
+        }
+        
+        .editor-textarea {
+            flex: 1;
+            border: none;
+            padding: 20px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: none;
+            outline: none;
+        }
+        
+        .preview-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: white;
+        }
+        
+        .toolbar {
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .toolbar-btn {
+            background: white;
+            border: 1px solid #d1d5db;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        
+        .toolbar-btn:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+        
+        .preview-content h1,
+        .preview-content h2,
+        .preview-content h3,
+        .preview-content h4,
+        .preview-content h5,
+        .preview-content h6 {
+            margin: 20px 0 10px 0;
+            color: #1e293b;
+        }
+        
+        .preview-content p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .preview-content code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+        
+        .preview-content pre {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .preview-content blockquote {
+            border-left: 4px solid #e2e8f0;
+            padding-left: 15px;
+            margin: 15px 0;
+            color: #64748b;
+        }
+        
+        .preview-content ul,
+        .preview-content ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        .preview-content li {
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .editor-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .editor-panel {
+                min-height: 300px;
+            }
+            
+            .tool-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏容器 -->
+    <div id="navbar-container"></div>
+    
+    <div class="container">
+        <div class="tool-header">
+            <h1 class="tool-title">Markdown编辑器</h1>
+            <p class="tool-subtitle">实时预览的Markdown编辑器，支持常用语法</p>
+        </div>
+        
+        <div class="editor-container">
+            <div class="editor-panel">
+                <div class="panel-header">编辑器</div>
+                <div class="toolbar">
+                    <button class="toolbar-btn" onclick="insertText('**', '**')">粗体</button>
+                    <button class="toolbar-btn" onclick="insertText('*', '*')">斜体</button>
+                    <button class="toolbar-btn" onclick="insertText('# ', '')">标题</button>
+                    <button class="toolbar-btn" onclick="insertText('- ', '')">列表</button>
+                    <button class="toolbar-btn" onclick="insertText('`', '`')">代码</button>
+                    <button class="toolbar-btn" onclick="insertText('[', '](url)')">链接</button>
+                    <button class="toolbar-btn" onclick="clearEditor()">清空</button>
+                </div>
+                <textarea 
+                    id="markdown-input" 
+                    class="editor-textarea" 
+                    placeholder="在这里输入Markdown内容...\n\n示例：\n# 标题\n\n这是一段**粗体**文字和*斜体*文字。\n\n- 列表项1\n- 列表项2\n\n```javascript\nconsole.log('Hello World');\n```"
+                    oninput="updatePreview()"></textarea>
+            </div>
+            
+            <div class="editor-panel">
+                <div class="panel-header">预览</div>
+                <div id="preview" class="preview-content">
+                    <p>在左侧编辑器中输入Markdown内容，这里将实时显示预览效果。</p>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- 页脚容器 -->
     <div id="footer-container"></div>
-
     
     <script>
-        // markdown-editor功能
+        // Markdown解析函数
+        function parseMarkdown(text) {
+            // 基础的Markdown解析
+            return text
+                // 标题
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                // 粗体和斜体
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                // 代码块
+                .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+                // 行内代码
+                .replace(/`(.*?)`/g, '<code>$1</code>')
+                // 链接
+                .replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+                // 列表
+                .replace(/^- (.*$)/gim, '<li>$1</li>')
+                .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+                // 引用
+                .replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>')
+                // 段落
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/^(.*)$/gim, '<p>$1</p>')
+                // 清理多余的p标签
+                .replace(/<p><\/p>/g, '')
+                .replace(/<p>(<h[1-6]>.*<\/h[1-6]>)<\/p>/g, '$1')
+                .replace(/<p>(<ul>.*<\/ul>)<\/p>/g, '$1')
+                .replace(/<p>(<blockquote>.*<\/blockquote>)<\/p>/g, '$1')
+                .replace(/<p>(<pre>.*<\/pre>)<\/p>/g, '$1');
+        }
+        
+        // 更新预览
+        function updatePreview() {
+            const input = document.getElementById('markdown-input');
+            const preview = document.getElementById('preview');
+            const markdown = input.value;
+            
+            if (markdown.trim() === '') {
+                preview.innerHTML = '<p>在左侧编辑器中输入Markdown内容，这里将实时显示预览效果。</p>';
+            } else {
+                preview.innerHTML = parseMarkdown(markdown);
+            }
+        }
+        
+        // 插入文本
+        function insertText(before, after) {
+            const textarea = document.getElementById('markdown-input');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end);
+            const newText = before + selectedText + after;
+            
+            textarea.value = textarea.value.substring(0, start) + newText + textarea.value.substring(end);
+            textarea.focus();
+            textarea.setSelectionRange(start + before.length, start + before.length + selectedText.length);
+            
+            updatePreview();
+        }
+        
+        // 清空编辑器
+        function clearEditor() {
+            document.getElementById('markdown-input').value = '';
+            updatePreview();
+        }
+        
+        // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', function() {
             console.log('markdown-editor已加载');
-            // 在这里添加具体的功能代码
+            updatePreview();
         });
     </script>
+    
     <script src="../components/component-manager.js"></script>
+    <script src="../js/mobile-navigation.js"></script>
 </body>
 </html>
