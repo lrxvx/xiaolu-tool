@@ -10,6 +10,16 @@
     "url": "tools/json-processor.html"
   },
   {
+    "id": "copybook-generator",
+    "name": "字帖生成工具",
+    "shortDesc": "专业的在线字帖生成工具",
+    "icon": "fas fa-pencil-alt",
+    "description": "专业的在线字帖生成工具，支持小学1-6年级模板，自定义文字，一键生成练字字帖，支持多种字体和格式，完全免费使用。",
+    "tags": ["字帖", "练字", "教育", "打印", "小学"],
+    "categories": ["utility"],
+    "url": "tools/copybook-generator.html"
+  },
+  {
     "id": "menstrual-cycle-calculator",
     "name": "女性生理周期计算器",
     "shortDesc": "女性生理周期计算工具",
