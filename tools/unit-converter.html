@@ -1910,17 +1910,6 @@
 
         // 页面初始化
         document.addEventListener('DOMContentLoaded', function() {
-            // 初始化导航栏和页脚组件
-            const navbar = 
-            const navbarStyles = document.createElement('style');
-            navbarStyles.textContent = NavbarComponent.getStyles();
-            document.head.appendChild(navbarStyles);
-
-            const footer = 
-            const footerStyles = document.createElement('style');
-            footerStyles.textContent = FooterComponent.getStyles();
-            document.head.appendChild(footerStyles);
-
             // 导入导航栏和页脚组件
             loadComponents();
             
