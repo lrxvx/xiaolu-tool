@@ -1,4 +1,6 @@
 // 组件管理器 - 统一管理导航栏、页脚和工具分类组件
+// 防止重复声明
+if (typeof window.ComponentManager === 'undefined') {
 class ComponentManager {
     constructor() {
         this.components = {
@@ -149,13 +151,20 @@ class ComponentManager {
     }
 }
 
-// 全局组件管理器实例
-window.componentManager = new ComponentManager();
+// 设置全局引用
+window.ComponentManager = ComponentManager;
 
-// 页面加载完成后自动初始化
-document.addEventListener('DOMContentLoaded', () => {
-    window.componentManager.init();
-});
+// 全局组件管理器实例
+if (!window.componentManager) {
+    window.componentManager = new ComponentManager();
+    
+    // 页面加载完成后自动初始化
+    document.addEventListener('DOMContentLoaded', () => {
+        window.componentManager.init();
+    });
+}
+
+} // 结束 ComponentManager 重复声明保护
 
 // 导出供其他模块使用
 if (typeof module !== 'undefined' && module.exports) {

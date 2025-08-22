@@ -955,8 +955,6 @@
 
         // 初始化组件
         document.addEventListener('DOMContentLoaded', function() {
-            // 初始化导航栏和页脚
-            initComponents();
             // 初始化抽签功能
             initFortune();
             // 初始化本地存储
@@ -967,19 +965,6 @@
             showHistory();
             showFavorites();
         });
-
-        // 初始化组件
-        function initComponents() {
-            const navbarStyles = document.createElement('style');
-            navbarStyles.textContent = NavbarComponent.getStyles();
-            document.head.appendChild(navbarStyles);
-            
-
-            const footerStyles = document.createElement('style');
-            footerStyles.textContent = FooterComponent.getStyles();
-            document.head.appendChild(footerStyles);
-            
-        }
 
         // 初始化抽签功能
         function initFortune() {

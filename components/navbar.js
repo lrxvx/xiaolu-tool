@@ -43,10 +43,20 @@ class NavbarComponent {
     // 获取导航栏CSS样式
     getCSS() {
         return `
+            /* CSS变量兼容性定义 */
+            :root {
+                --navbar-primary: #4361ee;
+                --navbar-secondary: #3f37c9;
+                --navbar-dark: #212529;
+                --navbar-gray: #6c757d;
+                --navbar-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+                --navbar-transition: all 0.3s ease;
+            }
+            
             /* 导航栏样式 */
             header {
                 background: rgba(255, 255, 255, 0.95);
-                box-shadow: var(--shadow);
+                box-shadow: var(--navbar-shadow, var(--shadow, 0 4px 20px rgba(0, 0, 0, 0.08)));
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -79,7 +89,7 @@ class NavbarComponent {
             }
             
             .logo-icon {
-                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                background: linear-gradient(135deg, var(--navbar-primary, var(--primary, #4361ee)), var(--navbar-secondary, var(--secondary, #3f37c9)));
                 color: white;
                 width: 42px;
                 height: 42px;
@@ -94,11 +104,11 @@ class NavbarComponent {
             .logo-text {
                 font-size: 1.5rem;
                 font-weight: 700;
-                color: var(--dark);
+                color: var(--navbar-dark, var(--dark, var(--text, #212529)));
             }
             
             .logo-text span {
-                color: var(--primary);
+                color: var(--navbar-primary, var(--primary, #4361ee));
             }
             
             .nav-center {
@@ -123,7 +133,7 @@ class NavbarComponent {
             .search-icon {
                 position: absolute;
                 left: 1rem;
-                color: var(--gray);
+                color: var(--navbar-gray, var(--gray, var(--text-light, #6c757d)));
                 z-index: 1;
             }
             
@@ -134,28 +144,28 @@ class NavbarComponent {
                 background: rgba(255, 255, 255, 0.9);
                 font-size: 0.9rem;
                 width: 250px;
-                transition: var(--transition);
+                transition: var(--navbar-transition, var(--transition, all 0.3s ease));
             }
             
             .search-input:focus {
                 outline: none;
-                border-color: var(--primary);
+                border-color: var(--navbar-primary, var(--primary, #4361ee));
                 box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
                 background: white;
             }
             
             .nav-links a {
                 text-decoration: none;
-                color: var(--gray);
+                color: var(--navbar-gray, var(--gray, var(--text-light, #6c757d)));
                 font-weight: 500;
-                transition: var(--transition);
+                transition: var(--navbar-transition, var(--transition, all 0.3s ease));
                 position: relative;
                 padding: 0.5rem 0;
             }
             
             .nav-links a:hover, 
             .nav-links a.active {
-                color: var(--primary);
+                color: var(--navbar-primary, var(--primary, #4361ee));
             }
             
             .nav-links a::after {
@@ -165,8 +175,8 @@ class NavbarComponent {
                 height: 2px;
                 bottom: 0;
                 left: 50%;
-                background: var(--primary);
-                transition: var(--transition);
+                background: var(--navbar-primary, var(--primary, #4361ee));
+                transition: var(--navbar-transition, var(--transition, all 0.3s ease));
                 transform: translateX(-50%);
             }
             
@@ -180,7 +190,7 @@ class NavbarComponent {
                 background: none;
                 border: none;
                 font-size: 1.5rem;
-                color: var(--dark);
+                color: var(--navbar-dark, var(--dark, var(--text, #212529)));
                 cursor: pointer;
             }
             
@@ -194,7 +204,7 @@ class NavbarComponent {
                     background: white;
                     flex-direction: column;
                     padding: 1rem;
-                    box-shadow: var(--shadow);
+                    box-shadow: var(--navbar-shadow, var(--shadow, 0 4px 20px rgba(0, 0, 0, 0.08)));
                     gap: 1rem;
                 }
                 

@@ -1,119 +1,56 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">    <!-- 导航栏和页脚组件 -->
-    
-    
-    
-
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Primary SEO Meta Tags -->
     <title>免费在线文件压缩工具 | 支持PDF、图片、视频压缩 | 小路工具箱</title>
-    <meta name="title" content="免费在线文件压缩工具 | 支持PDF、图片、视频压缩 | 小路工具箱">
-    <meta name="description" content="专业的在线文件压缩工具，支持PDF文档、图片、视频等多种格式，批量压缩处理，保持原有质量的同时显著减小文件体积。完全免费，无需注册，确保文件安全和隐私。">
-    <meta name="keywords" content="文件压缩,PDF压缩,图片压缩,视频压缩,在线压缩,批量压缩,免费压缩工具,文件大小优化,在线文件处理,小路工具箱">
+    <meta name="description" content="专业的在线文件压缩工具，支持PDF文档、图片、视频等多种格式，批量压缩处理，保持原有质量的同时显著减小文件体积。">
+    <meta name="keywords" content="文件压缩,PDF压缩,图片压缩,视频压缩,在线压缩,批量压缩,免费压缩工具">
     <meta name="author" content="小路工具箱">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://tools.xiaolu.com/tools/file-compressor.html">
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tools.xiaolu.com/tools/file-compressor.html">
-    <meta property="og:title" content="免费在线文件压缩工具 | 支持PDF、图片、视频压缩">
-    <meta property="og:description" content="专业的在线文件压缩工具，支持多种格式，批量处理，保持质量的同时显著减小文件体积。完全免费，无需注册！">
-    <meta property="og:image" content="https://tools.xiaolu.com/images/file-compressor-og.png">
-    <meta property="og:site_name" content="小路工具箱">
-    <meta property="og:locale" content="zh_CN">
-    <meta property="og:locale:alternate" content="en_US">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://tools.xiaolu.com/tools/file-compressor.html">
-    <meta property="twitter:title" content="免费在线文件压缩工具 - 轻松压缩各类文件">
-    <meta property="twitter:description" content="支持PDF、图片、视频等多种格式，批量压缩处理，显著减小文件体积。完全免费，无需注册！">
-    <meta property="twitter:image" content="https://tools.xiaolu.com/images/file-compressor-twitter.png">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "在线文件压缩工具",
-        "url": "https://tools.xiaolu.com/tools/file-compressor.html",
-        "description": "专业的在线文件压缩工具，支持多种格式，批量处理，保持质量的同时显著减小文件体积",
-        "applicationCategory": "UtilityApplication",
-        "operatingSystem": "All",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "featureList": [
-            "支持PDF文档压缩",
-            "支持图片压缩",
-            "支持视频压缩",
-            "批量文件处理",
-            "智能压缩算法",
-            "保持文件质量",
-            "完全免费使用",
-            "注重隐私保护"
-        ]
-    }
-    </script>
-     
-    <!-- 导航栏和页脚组件 -->
-    
-    
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="canonical" href="https://xiaolu.tools/tools/file-compressor.html">
     <link rel="stylesheet" href="../css/responsive.css">
+    
     <style>
         :root {
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --accent: #4895ef;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --success: #4cc9f0;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --secondary: #f8fafc;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
         
         body {
-            background: white;
-            color: var(--dark);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
         
         .container {
             max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin: 0 auto;
+            padding: 20px;
         }
+        
         .main-layout {
             display: flex;
             gap: 30px;
             align-items: flex-start;
         }
-
+        
         .content-area {
             flex: 1;
             min-width: 0;
@@ -121,94 +58,132 @@
         
         .tool-header {
             text-align: center;
-            margin-bottom: 2rem;
-            padding: 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 16px;
-            color: white;
+            margin-bottom: 40px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
         }
         
-        .tool-header h1 {
+        .tool-title {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
         }
         
-        .tool-header p {
+        .tool-subtitle {
             font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 800px;
+            color: var(--text-light);
+            max-width: 600px;
             margin: 0 auto;
         }
         
-        .feature-tags {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-        
-        .feature-tag {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .upload-section {
+        .tool-main {
             background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            border-radius: 20px;
+            padding: 40px;
             box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 15px;
+            padding: 40px;
             text-align: center;
-        }
-        
-        .upload-zone {
-            border: 2px dashed var(--primary);
-            border-radius: 12px;
-            padding: 3rem 2rem;
-            margin: 2rem 0;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: var(--transition);
         }
         
-        .upload-zone:hover {
-            background: rgba(67, 97, 238, 0.05);
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: var(--secondary);
         }
         
-        .upload-zone i {
+        .upload-area.dragover {
+            border-color: var(--primary);
+            background: rgba(79, 70, 229, 0.1);
+        }
+        
+        .upload-icon {
             font-size: 3rem;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
         }
         
-        .upload-zone p {
-            color: var(--gray);
+        .upload-text {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            background: var(--text-light);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: var(--text-light);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--text);
+        }
+        
+        .btn-success {
+            background: var(--success);
+        }
+        
+        .btn-success:hover {
+            background: #059669;
         }
         
         .file-list {
-            margin-top: 2rem;
+            margin: 20px 0;
         }
         
         .file-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem;
-            background: var(--light);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
+            padding: 15px;
+            background: var(--secondary);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
         }
         
         .file-info {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 15px;
+            flex: 1;
         }
         
         .file-icon {
@@ -216,132 +191,54 @@
             color: var(--primary);
         }
         
-        .file-details h3 {
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
+        .file-details h4 {
+            margin-bottom: 5px;
+            color: var(--text);
         }
         
         .file-details p {
             font-size: 0.9rem;
-            color: var(--gray);
+            color: var(--text-light);
         }
         
-        .file-actions button {
-            background: none;
-            border: none;
-            color: var(--gray);
-            cursor: pointer;
-            padding: 0.5rem;
-            transition: var(--transition);
-        }
-        
-        .file-actions button:hover {
-                color: var(--primary);
-            }
-
-            /* 进度条样式 */
-            .progress-bar {
-                width: 100%;
-                height: 4px;
-                background-color: #e9ecef;
-                border-radius: 2px;
-                margin-top: 8px;
-                overflow: hidden;
-            }
-
-            .progress {
-                width: 0;
-                height: 100%;
-                background-color: var(--primary);
-                transition: width 0.3s ease;
-            }
-
-            /* 压缩状态样式 */
-            .file-item.compressing {
-                background-color: #fff3cd;
-            }
-
-            .file-item.compressed {
-                background-color: #d4edda;
-            }
-
-            .file-item.error {
-                background-color: #f8d7da;
-            }
-        
-        .compress-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: var(--transition);
+        .file-actions {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 2rem auto;
+            gap: 10px;
         }
         
-        .compress-btn:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-        }
-        
-        .compress-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        /* 压缩设置样式 */
         .compression-settings {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            box-shadow: var(--shadow);
-            border: 2px solid #e9ecef;
-        }
-        
-        .compression-settings h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            background: var(--secondary);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid var(--border);
         }
         
         .setting-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
         }
         
-        .setting-group label {
+        .setting-label {
             display: block;
+            margin-bottom: 8px;
             font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
+            color: var(--text);
         }
         
-        .compression-slider-container,
-        .quality-slider-container {
-            position: relative;
-            margin-bottom: 0.5rem;
+        .slider-container {
+            margin-bottom: 10px;
         }
         
-        .compression-slider,
-        .quality-slider {
+        .slider {
             width: 100%;
             height: 6px;
             border-radius: 3px;
-            background: #e9ecef;
+            background: var(--border);
             outline: none;
             -webkit-appearance: none;
         }
         
-        .compression-slider::-webkit-slider-thumb,
-        .quality-slider::-webkit-slider-thumb {
+        .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
             width: 20px;
@@ -349,83 +246,45 @@
             border-radius: 50%;
             background: var(--primary);
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
-        .compression-slider::-moz-range-thumb,
-        .quality-slider::-moz-range-thumb {
+        .slider::-moz-range-thumb {
             width: 20px;
             height: 20px;
             border-radius: 50%;
             background: var(--primary);
             cursor: pointer;
             border: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         .slider-labels {
             display: flex;
             justify-content: space-between;
-            margin-top: 0.5rem;
+            margin-top: 5px;
             font-size: 0.8rem;
-            color: var(--gray);
-        }
-        
-        .compression-info,
-        .quality-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 0.5rem;
-        }
-        
-        .compression-info span:first-child,
-        .quality-info span:first-child {
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        .compression-desc,
-        .quality-desc {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        /* 压缩进度样式 */
-        .compression-progress {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            box-shadow: var(--shadow);
-            border: 2px solid #e3f2fd;
-        }
-        
-        .compression-progress h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            color: var(--text-light);
         }
         
         .progress-container {
-            margin-bottom: 1.5rem;
+            margin: 20px 0;
+            padding: 20px;
+            background: var(--secondary);
+            border-radius: 10px;
+            border: 1px solid var(--border);
         }
         
         .progress-bar {
             width: 100%;
-            height: 12px;
-            background-color: #e9ecef;
-            border-radius: 6px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
             overflow: hidden;
-            margin-bottom: 0.5rem;
+            margin: 10px 0;
         }
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 6px;
+            background: var(--primary);
             transition: width 0.3s ease;
             width: 0%;
         }
@@ -435,1138 +294,629 @@
             justify-content: space-between;
             align-items: center;
             font-size: 0.9rem;
+            color: var(--text-light);
         }
         
-        .progress-text span:first-child {
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        .progress-text span:last-child {
-            color: var(--gray);
-        }
-        
-        .file-progress-list {
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        
-        .file-progress-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        .file-progress-item:last-child {
-            border-bottom: none;
-        }
-        
-        .file-progress-name {
-            flex: 1;
-            font-size: 0.9rem;
-            color: var(--dark);
-            margin-right: 1rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .file-progress-status {
-            font-size: 0.8rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-        
-        .file-progress-status.waiting {
-            background: #f8f9fa;
-            color: var(--gray);
-        }
-        
-        .file-progress-status.processing {
-            background: #fff3cd;
-            color: #856404;
-        }
-        
-        .file-progress-status.completed {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .file-progress-status.error {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        
-        .guide-section,
-        .features-section,
-        .faq-section {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
-        }
-        
-        .section-title {
-            color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .guide-steps {
-            display: grid;
-            gap: 1.5rem;
-        }
-        
-        .guide-step {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-        
-        .step-number {
-            background: var(--primary);
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .feature-item {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-        
-        .feature-item i {
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
-        
-        .faq-item {
-            margin-bottom: 1.5rem;
-        }
-        
-        .faq-question {
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-        
-        .faq-answer {
-            color: var(--gray);
-        }
-        
-        .support-links {
-            text-align: center;
-            margin: 2rem 0;
-        }
-        
-        .support-links a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .support-links a:hover {
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                margin: 1rem auto;
-            }
-            
-            .tool-header {
-                padding: 1.5rem;
-            }
-            
-            .tool-header h1 {
-                font-size: 2rem;
-            }
-            
-            .feature-tag {
-                font-size: 0.8rem;
-            }
-            
-            .upload-zone {
-                padding: 2rem 1rem;
-            }
-            
-            .file-item {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-            
-            .file-info {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            .file-actions {
-                display: flex;
-                justify-content: center;
-                gap: 1rem;
-            }
-        }
-    
-
-        /* 通用样式修复 - 解决工具页面布局混乱问题 */
-        
-        /* 重置和基础样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #1e293b;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        /* 容器布局修复 */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            width: 100%;
-        }
-        
-        /* 主布局修复 */
-        .main-layout {
-            display: flex;
-            gap: 30px;
-            align-items: flex-start;
-            width: 100%;
-            max-width: 100%;
-        }
-        
-        /* 内容区域修复 */
-        .content-area {
-            flex: 1;
-            min-width: 0;
-            width: 100%;
-            max-width: calc(100% - 280px); /* 为侧边栏留出空间 */
-        }
-        
-        /* 工具标题区域 */
-        .tool-header {
-            text-align: center;
-            margin-bottom: 40px;
-            background: white;
-            padding: 40px 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            width: 100%;
-        }
-        
-        .tool-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #4f46e5;
-            margin-bottom: 15px;
-            word-wrap: break-word;
-        }
-        
-        .tool-subtitle {
-            font-size: 1.2rem;
-            color: #64748b;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-        
-        /* 工具主体区域 */
-        .tool-main {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            margin-bottom: 30px;
-            width: 100%;
-            overflow: hidden;
-        }
-        
-        /* 标签页修复 */
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #e2e8f0;
-            margin-bottom: 30px;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-        
-        .tab {
-            padding: 15px 25px;
-            background: none;
-            border: none;
-            font-size: 16px;
-            font-weight: 500;
-            color: #64748b;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        
-        .tab.active {
-            color: #4f46e5;
-            border-bottom-color: #4f46e5;
-        }
-        
-        .tab:hover {
-            color: #4f46e5;
-            background-color: #f8fafc;
-        }
-        
-        /* 表单元素修复 */
-        .input-group {
-            margin-bottom: 20px;
-            width: 100%;
-        }
-        
-        .input-label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: #1e293b;
-        }
-        
-        .textarea-field,
-        .input-field {
-            width: 100%;
-            padding: 16px;
-            border: 2px solid #e2e8f0;
+        .status-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
             border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-            resize: vertical;
-        }
-        
-        .textarea-field {
-            min-height: 300px;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .textarea-field:focus,
-        .input-field:focus {
-            outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-        
-        /* 按钮样式修复 */
-        .btn {
-            background: #4f46e5;
             color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            display: inline-block;
-            text-decoration: none;
-            text-align: center;
+            font-weight: 600;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
         }
         
-        .btn:hover {
-            background: #3730a3;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        .status-message.show {
+            transform: translateX(0);
         }
         
-        .btn-secondary {
-            background: #64748b;
+        .status-message.success {
+            background: var(--success);
         }
         
-        .btn-secondary:hover {
-            background: #475569;
+        .status-message.error {
+            background: var(--error);
         }
         
-        .btn-success {
-            background: #10b981;
+        .status-message.warning {
+            background: var(--warning);
         }
         
-        .btn-success:hover {
-            background: #059669;
-        }
-        
-        .btn-warning {
-            background: #f59e0b;
-        }
-        
-        .btn-warning:hover {
-            background: #d97706;
-        }
-        
-        .btn-group {
-            margin-bottom: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        /* 网格布局修复 */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            width: 100%;
-        }
-        
-        .diff-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-            width: 100%;
-        }
-        
-        /* 信息区域样式 */
         .info-section {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
             padding: 30px;
+            box-shadow: var(--shadow);
             margin-bottom: 30px;
-            width: 100%;
         }
         
         .info-title {
             font-size: 1.8rem;
             font-weight: 600;
-            color: #4f46e5;
+            color: var(--primary);
             margin-bottom: 20px;
         }
         
-        .info-content {
-            color: #1e293b;
-            line-height: 1.8;
-        }
-        
-        .info-content p {
-            margin-bottom: 15px;
-        }
-        
-        /* 特性网格 */
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-top: 20px;
-            width: 100%;
         }
         
         .feature-item {
-            background: #f8fafc;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
             padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #4f46e5;
+            background: var(--secondary);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
         }
         
-        .feature-title {
-            font-weight: 600;
-            color: #4f46e5;
-            margin-bottom: 10px;
+        .feature-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 5px;
         }
         
-        /* FAQ样式 */
-        .faq-item {
-            border-bottom: 1px solid #e2e8f0;
-            padding: 20px 0;
+        .feature-item h3 {
+            margin-bottom: 8px;
+            color: var(--text);
         }
         
-        .faq-question {
-            font-weight: 600;
-            color: #1e293b;
-            cursor: pointer;
-            padding: 10px 0;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        
-        .faq-question:hover {
-            color: #4f46e5;
-        }
-        
-        .faq-question::after {
-            content: '+';
-            position: absolute;
-            right: 0;
-            font-size: 1.2rem;
-            color: #4f46e5;
-            transition: transform 0.3s ease;
-        }
-        
-        .faq-question.active::after {
-            content: '-';
-            transform: rotate(180deg);
-        }
-        
-        .faq-answer {
-            color: #64748b;
-            line-height: 1.6;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        
-        .faq-answer.active {
-            max-height: 200px;
-            padding-top: 10px;
-        }
-        
-        /* 状态消息 */
-        .status-message {
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-weight: 500;
-            border: 1px solid;
-        }
-        
-        .status-success {
-            background: #dcfce7;
-            color: #16a34a;
-            border-color: #16a34a;
-        }
-        
-        .status-error {
-            background: #fef2f2;
-            color: #dc2626;
-            border-color: #dc2626;
-        }
-        
-        .status-warning {
-            background: #fef3c7;
-            color: #d97706;
-            border-color: #d97706;
-        }
-        
-        /* 页脚信息 */
-        .footer-info {
-            text-align: center;
-            color: white;
-            margin-top: 40px;
-            padding: 20px;
-        }
-        
-        .footer-links {
-            margin-top: 15px;
-        }
-        
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            opacity: 1;
-        }
-        
-        /* 响应式设计修复 */
-        @media (max-width: 1200px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .content-area {
-                max-width: calc(100% - 250px);
-            }
-        }
-        
-        @media (max-width: 992px) {
-            .main-layout {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .content-area {
-                max-width: 100%;
-            }
-            
-            .tool-title {
-                font-size: 2.2rem;
-            }
-            
-            .grid-2,
-            .diff-container {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .feature-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .tool-header {
-                padding: 30px 20px;
-                margin-bottom: 30px;
-            }
-            
-            .tool-title {
-                font-size: 1.8rem;
-            }
-            
-            .tool-subtitle {
-                font-size: 1rem;
-            }
-            
-            .tool-main {
-                padding: 20px;
-            }
-            
-            .tabs {
-                flex-wrap: wrap;
-                border-bottom: none;
-            }
-            
-            .tab {
-                flex: 1;
-                min-width: 120px;
-                border: 1px solid #e2e8f0;
-                border-radius: 6px;
-                margin: 2px;
-            }
-            
-            .tab.active {
-                background: #4f46e5;
-                color: white;
-                border-color: #4f46e5;
-            }
-            
-            .btn-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .btn {
-                margin-right: 0;
-                margin-bottom: 10px;
-                width: 100%;
-            }
-            
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .info-section {
-                padding: 20px;
-            }
-            
-            .info-title {
-                font-size: 1.5rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .tool-title {
-                font-size: 1.5rem;
-            }
-            
-            .tool-subtitle {
-                font-size: 0.9rem;
-            }
-            
-            .tool-main {
-                padding: 15px;
-            }
-            
-            .textarea-field {
-                min-height: 200px;
-                padding: 12px;
-            }
-            
-            .btn {
-                padding: 10px 16px;
-                font-size: 14px;
-            }
-        }
-        
-        /* 滚动条样式 */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-        
-        /* 动画效果 */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .tool-header,
-        .tool-main,
-        .info-section {
-            animation: fadeIn 0.6s ease-out;
-        }
-        
-        /* 加载状态 */
-        .loading {
-            opacity: 0.6;
-            pointer-events: none;
-            position: relative;
-        }
-        
-        .loading::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            margin: -10px 0 0 -10px;
-            border: 2px solid #4f46e5;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        
-        /* 工具特定样式修复 */
-        .calculator-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .result-card {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .result-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #4f46e5;
-            margin-bottom: 5px;
-        }
-        
-        .result-label {
-            color: #64748b;
+        .feature-item p {
+            color: var(--text-light);
             font-size: 0.9rem;
         }
         
-        /* 确保所有元素都有正确的盒模型 */
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
-        
-        /* 防止内容溢出 */
-        .content-area,
-        .tool-main,
-        .info-section {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        
-        /* 图片响应式 */
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        /* 表格响应式 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        
-        th,
-        td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        
-        th {
-            background-color: #f8fafc;
-            font-weight: 600;
-            color: #1e293b;
-        }
-        
         @media (max-width: 768px) {
-            table {
-                font-size: 14px;
+            .main-layout {
+                flex-direction: column;
             }
             
-            th,
-            td {
-                padding: 8px;
+            .tool-title {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .tool-main {
+                padding: 20px;
+            }
+            
+            .file-item {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .file-actions {
+                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
+    <!-- 导航栏容器 -->
     <div id="navbar-container"></div>
+    
     <div class="container">
-        <!-- 主要内容区域 -->
-        <div class="content-area">
-        <div class="tool-header">
-            <h1>在线文件压缩工具</h1>
-            <p>专业的文件压缩工具，支持PDF、图片、视频等多种格式，批量压缩处理，显著减小文件体积的同时保持原有质量</p>
-            <div class="feature-tags">
-                <div class="feature-tag">
-                    <i class="fas fa-file-pdf"></i>
-                    <span>PDF压缩</span>
+        <div class="main-layout">
+            <div class="content-area">
+                <!-- 工具标题 -->
+                <div class="tool-header">
+                    <h1 class="tool-title">🗜️ 文件压缩工具</h1>
+                    <p class="tool-subtitle">专业的在线文件压缩工具，支持图片、PDF等多种格式，智能压缩算法保持质量</p>
                 </div>
-                <div class="feature-tag">
-                    <i class="fas fa-image"></i>
-                    <span>图片压缩</span>
-                </div>
-                <div class="feature-tag">
-                    <i class="fas fa-video"></i>
-                    <span>视频压缩</span>
-                </div>
-                <div class="feature-tag">
-                    <i class="fas fa-layer-group"></i>
-                    <span>批量处理</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="upload-section">
-            <h2>开始压缩您的文件</h2>
-            <div class="upload-zone" id="dropZone">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <h3>拖放文件到这里或点击上传</h3>
-                <p>支持PDF、JPG、PNG、MP4等格式，单个文件最大100MB</p>
-                <input type="file" id="fileInput" multiple style="display: none">
-            </div>
-            
-            <div class="file-list" id="fileList">
-                <!-- 文件列表将通过JavaScript动态生成 -->
-            </div>
-            
-            <!-- 压缩设置 -->
-            <div class="compression-settings" id="compressionSettings" style="display: none;">
-                <h3><i class="fas fa-cog"></i> 压缩设置</h3>
-                <div class="setting-group">
-                    <label for="compressionLevel">压缩级别：</label>
-                    <div class="compression-slider-container">
-                        <input type="range" id="compressionLevel" min="1" max="4" value="2" class="compression-slider">
-                        <div class="slider-labels">
-                            <span>低</span>
-                            <span>中</span>
-                            <span>高</span>
-                            <span>极高</span>
+                
+                <!-- 工具主体 -->
+                <div class="tool-main">
+                    <!-- 文件上传区域 -->
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <p class="upload-text">拖拽文件到此处或点击上传</p>
+                        <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 15px;">支持 JPG, PNG, PDF, WebP 格式，单个文件最大 50MB</p>
+                        <button class="btn" onclick="document.getElementById('fileInput').click()">
+                            📂 选择文件
+                        </button>
+                        <input type="file" id="fileInput" class="file-input" accept=".jpg,.jpeg,.png,.pdf,.webp" multiple>
+                    </div>
+                    
+                    <!-- 文件列表 -->
+                    <div class="file-list" id="fileList" style="display: none;"></div>
+                    
+                    <!-- 压缩设置 -->
+                    <div class="compression-settings" id="compressionSettings" style="display: none;">
+                        <h3 style="margin-bottom: 20px;">⚙️ 压缩设置</h3>
+                        
+                        <div class="setting-group">
+                            <label class="setting-label">图片质量：</label>
+                            <div class="slider-container">
+                                <input type="range" id="qualitySlider" class="slider" min="10" max="95" value="80">
+                                <div class="slider-labels">
+                                    <span>低质量</span>
+                                    <span>中等质量</span>
+                                    <span>高质量</span>
+                                </div>
+                            </div>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 5px;">当前质量: <span id="qualityValue">80%</span></p>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <label class="setting-label">输出格式：</label>
+                            <select id="outputFormat" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 5px;">
+                                <option value="original">保持原格式</option>
+                                <option value="jpeg">JPEG</option>
+                                <option value="png">PNG</option>
+                                <option value="webp">WebP (推荐)</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="compression-info">
-                        <span id="compressionLevelValue">2 (中)</span>
-                        <span class="compression-desc">在压缩速度和效果之间取得平衡</span>
+                    
+                    <!-- 压缩进度 -->
+                    <div class="progress-container" id="progressContainer" style="display: none;">
+                        <h4>🔄 压缩进度</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span id="progressPercent">0%</span>
+                            <span id="progressStatus">准备中...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 操作按钮 -->
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button class="btn" id="compressBtn" onclick="startCompression()" disabled>
+                            🗜️ 开始压缩
+                        </button>
+                        <button class="btn btn-secondary" onclick="resetTool()" style="margin-left: 10px;">
+                            🔄 重置
+                        </button>
                     </div>
                 </div>
                 
-                <div class="setting-group">
-                    <label for="imageQuality">图片质量：</label>
-                    <div class="quality-slider-container">
-                        <input type="range" id="imageQuality" min="10" max="90" value="80" class="quality-slider">
-                        <div class="slider-labels">
-                            <span>10%</span>
-                            <span>50%</span>
-                            <span>90%</span>
+                <!-- 功能介绍 -->
+                <div class="info-section">
+                    <h2 class="info-title">🌟 功能特色</h2>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-image"></i>
+                            <div>
+                                <h3>智能图片压缩</h3>
+                                <p>支持JPG、PNG、WebP格式，智能算法保持图片质量的同时显著减小文件大小</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <div>
+                                <h3>PDF文档压缩</h3>
+                                <p>优化PDF文件结构，去除冗余数据，保持文档完整性</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-layer-group"></i>
+                            <div>
+                                <h3>批量处理</h3>
+                                <p>支持同时上传多个文件，一键批量压缩，提高工作效率</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h3>本地处理</h3>
+                                <p>所有文件在浏览器本地处理，不上传服务器，保护您的隐私安全</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-cog"></i>
+                            <div>
+                                <h3>自定义设置</h3>
+                                <p>可调节压缩质量和输出格式，满足不同使用需求</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-download"></i>
+                            <div>
+                                <h3>便捷下载</h3>
+                                <p>压缩完成后可单独下载或打包下载所有文件</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="quality-info">
-                        <span id="imageQualityValue">80%</span>
-                        <span class="quality-desc">推荐设置，平衡质量和文件大小</span>
-                    </div>
                 </div>
             </div>
-            
-            <!-- 压缩进度 -->
-            <div class="progress-container" id="progressContainer" style="display: none;">
-                <h3><i class="fas fa-spinner fa-spin"></i> 压缩进度</h3>
-                <div class="overall-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="overallProgress"></div>
-                    </div>
-                    <div class="progress-text">
-                        <span id="progressPercent">0%</span>
-                        <span id="progressStatus">准备中...</span>
-                    </div>
-                </div>
-                <div class="file-progress-list" id="fileProgressList">
-                    <!-- 单个文件进度将动态生成 -->
-                </div>
-            </div>
-            
-            <button class="compress-btn" id="compressBtn" disabled>
-                <i class="fas fa-compress-alt"></i>
-                开始压缩
-            </button>
-        </div>
-
-        <div class="guide-section">
-            <h2 class="section-title">
-                <i class="fas fa-book"></i>
-                使用指南
-            </h2>
-            <div class="guide-steps">
-                <div class="guide-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>选择文件</h3>
-                        <p>点击上传区域或直接拖放文件，支持批量上传多个文件</p>
-                    </div>
-                </div>
-                <div class="guide-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>开始压缩</h3>
-                        <p>点击"开始压缩"按钮，系统将自动优化压缩每个文件</p>
-                    </div>
-                </div>
-                <div class="guide-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>下载文件</h3>
-                        <p>压缩完成后，点击下载按钮获取压缩后的文件</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="features-section">
-            <h2 class="section-title">
-                <i class="fas fa-star"></i>
-                为什么选择我们的压缩工具？
-            </h2>
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <i class="fas fa-compress"></i>
-                    <div>
-                        <h3>智能压缩</h3>
-                        <p>采用先进的压缩算法，在保持质量的同时最大程度减小文件体积</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <div>
-                        <h3>安全可靠</h3>
-                        <p>文件在本地处理，不上传服务器，确保数据安全和隐私</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-bolt"></i>
-                    <div>
-                        <h3>快速处理</h3>
-                        <p>优化的处理流程，快速完成文件压缩</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-globe"></i>
-                    <div>
-                        <h3>全平台支持</h3>
-                        <p>支持各种设备和浏览器，随时随地使用</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="features-section">
-            <h2 class="section-title">
-                <i class="fas fa-list-check"></i>
-                核心功能
-            </h2>
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <i class="fas fa-file-pdf"></i>
-                    <div>
-                        <h3>PDF压缩</h3>
-                        <p>智能压缩PDF文件，保持文档质量和可读性</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-image"></i>
-                    <div>
-                        <h3>图片压缩</h3>
-                        <p>支持JPG、PNG等格式，保持清晰度的同时减小体积</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-video"></i>
-                    <div>
-                        <h3>视频压缩</h3>
-                        <p>压缩视频文件，保持画质的同时优化文件大小</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-layer-group"></i>
-                    <div>
-                        <h3>批量处理</h3>
-                        <p>同时处理多个文件，提高工作效率</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="features-section">
-            <h2 class="section-title">
-                <i class="fas fa-lightbulb"></i>
-                应用场景
-            </h2>
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                        <h3>邮件附件</h3>
-                        <p>压缩文件以符合邮件附件大小限制</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-cloud"></i>
-                    <div>
-                        <h3>云存储优化</h3>
-                        <p>减小文件体积，节省云存储空间</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-mobile-alt"></i>
-                    <div>
-                        <h3>移动设备</h3>
-                        <p>优化文件以适应移动设备存储</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-globe"></i>
-                    <div>
-                        <h3>网站优化</h3>
-                        <p>压缩网站资源，提升加载速度</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="faq-section">
-            <h2 class="section-title">
-                <i class="fas fa-question-circle"></i>
-                常见问题
-            </h2>
-            <div class="faq-item">
-                <div class="faq-question">Q：压缩后的文件质量会受影响吗？</div>
-                <div class="faq-answer">A：我们采用智能压缩算法，在最大程度减小文件体积的同时，尽可能保持原有的质量。对于图片和视频，您可以选择压缩级别来平衡质量和文件大小。</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Q：支持哪些文件格式？</div>
-                <div class="faq-answer">A：目前支持以下格式：
-                    <br>- 文档：PDF
-                    <br>- 图片：JPG、PNG、WebP
-                    <br>- 视频：MP4、WebM
-                    <br>我们会持续增加对更多格式的支持。</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Q：文件大小有限制吗？</div>
-                <div class="faq-answer">A：为了确保最佳性能，单个文件大小限制为500MB。如果您需要处理更大的文件，建议先将文件分割后再进行压缩。</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Q：压缩过程需要多长时间？</div>
-                <div class="faq-answer">A：压缩时间取决于文件大小和类型。一般情况下，几MB的文件只需要几秒钟。大文件可能需要更长时间，建议耐心等待。</div>
-            </div>
-        </div>
-
-        <!-- 工具详细介绍 -->
-        <div class="tool-info">
-            <h2 class="info-title">@2025工具详细介绍</h2>
-            <div class="info-content">
-                <p>在线文件压缩工具是小路工具箱推出的一款专业文件优化工具，专为需要处理大文件的用户设计。无论是PDF文档、图片还是视频文件，都能实现快速高效的压缩。</p>
-            </div>
-        </div>
-
-        <!-- 技术支持 -->
-        <div class="support-links">
-            <h3>技术支持和问题反馈</h3>
-            <p>如果您在使用过程中遇到问题或有改进建议，欢迎通过以下方式联系我们：</p>
-            <p><a href="https://t.zsxq.com/17wTksRxX" target="_blank">点击这里获取技术支持和问题反馈</a></p>
         </div>
     </div>
-
+    
+    <!-- 状态消息 -->
+    <div class="status-message" id="statusMessage"></div>
     
     <!-- 页脚容器 -->
     <div id="footer-container"></div>
-
     
     <script>
-        // file-compressor功能
+        let selectedFiles = [];
+        let compressedFiles = [];
+        
+        // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', function() {
             console.log('file-compressor已加载');
-            // 在这里添加具体的功能代码
+            initializeEventListeners();
         });
+        
+        // 初始化事件监听器
+        function initializeEventListeners() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const qualitySlider = document.getElementById('qualitySlider');
+            
+            // 文件拖拽事件
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('dragleave', handleDragLeave);
+            uploadArea.addEventListener('drop', handleDrop);
+            
+            // 文件选择事件
+            fileInput.addEventListener('change', handleFileSelect);
+            
+            // 质量滑块事件
+            qualitySlider.addEventListener('input', function() {
+                document.getElementById('qualityValue').textContent = this.value + '%';
+            });
+        }
+        
+        // 拖拽处理
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('dragover');
+        }
+        
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('dragover');
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files);
+            processFiles(files);
+        }
+        
+        // 文件选择处理
+        function handleFileSelect(e) {
+            const files = Array.from(e.target.files);
+            processFiles(files);
+        }
+        
+        // 处理文件
+        function processFiles(files) {
+            const validFiles = files.filter(file => {
+                const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'application/pdf'];
+                const maxSize = 50 * 1024 * 1024; // 50MB
+                
+                if (!validTypes.includes(file.type)) {
+                    showMessage(`文件 ${file.name} 格式不支持`, 'error');
+                    return false;
+                }
+                
+                if (file.size > maxSize) {
+                    showMessage(`文件 ${file.name} 超过50MB限制`, 'error');
+                    return false;
+                }
+                
+                return true;
+            });
+            
+            if (validFiles.length === 0) {
+                return;
+            }
+            
+            selectedFiles = [...selectedFiles, ...validFiles];
+            displayFileList();
+            showCompressionSettings();
+            
+            showMessage(`成功添加 ${validFiles.length} 个文件`, 'success');
+        }
+        
+        // 显示文件列表
+        function displayFileList() {
+            const fileList = document.getElementById('fileList');
+            
+            if (selectedFiles.length === 0) {
+                fileList.style.display = 'none';
+                return;
+            }
+            
+            fileList.style.display = 'block';
+            fileList.innerHTML = '<h4 style="margin-bottom: 15px;">📋 待压缩文件</h4>';
+            
+            selectedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div class="file-info">
+                        <div class="file-icon">${getFileIcon(file.type)}</div>
+                        <div class="file-details">
+                            <h4>${file.name}</h4>
+                            <p>${formatFileSize(file.size)} • ${file.type.split('/')[1].toUpperCase()}</p>
+                        </div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn btn-secondary" onclick="removeFile(${index})" style="padding: 8px 12px; font-size: 0.9rem;">
+                            🗑️ 移除
+                        </button>
+                    </div>
+                `;
+                fileList.appendChild(fileItem);
+            });
+            
+            // 更新压缩按钮状态
+            document.getElementById('compressBtn').disabled = selectedFiles.length === 0;
+        }
+        
+        // 显示压缩设置
+        function showCompressionSettings() {
+            const hasImages = selectedFiles.some(file => file.type.startsWith('image/'));
+            const settings = document.getElementById('compressionSettings');
+            
+            if (hasImages) {
+                settings.style.display = 'block';
+            }
+        }
+        
+        // 移除文件
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            displayFileList();
+            
+            if (selectedFiles.length === 0) {
+                document.getElementById('compressionSettings').style.display = 'none';
+            }
+        }
+        
+        // 开始压缩
+        async function startCompression() {
+            if (selectedFiles.length === 0) {
+                showMessage('请先选择文件', 'error');
+                return;
+            }
+            
+            const progressContainer = document.getElementById('progressContainer');
+            const progressFill = document.getElementById('progressFill');
+            const progressPercent = document.getElementById('progressPercent');
+            const progressStatus = document.getElementById('progressStatus');
+            const compressBtn = document.getElementById('compressBtn');
+            
+            // 显示进度条
+            progressContainer.style.display = 'block';
+            compressBtn.disabled = true;
+            compressedFiles = [];
+            
+            const quality = parseInt(document.getElementById('qualitySlider').value) / 100;
+            const outputFormat = document.getElementById('outputFormat').value;
+            
+            try {
+                for (let i = 0; i < selectedFiles.length; i++) {
+                    const file = selectedFiles[i];
+                    const progress = ((i + 1) / selectedFiles.length) * 100;
+                    
+                    progressFill.style.width = progress + '%';
+                    progressPercent.textContent = Math.round(progress) + '%';
+                    progressStatus.textContent = `正在压缩: ${file.name}`;
+                    
+                    let compressedFile;
+                    
+                    if (file.type.startsWith('image/')) {
+                        compressedFile = await compressImage(file, quality, outputFormat);
+                    } else if (file.type === 'application/pdf') {
+                        compressedFile = await compressPDF(file);
+                    } else {
+                        compressedFile = file; // 不支持的格式直接返回原文件
+                    }
+                    
+                    compressedFiles.push({
+                        original: file,
+                        compressed: compressedFile,
+                        compressionRatio: ((file.size - compressedFile.size) / file.size * 100).toFixed(1)
+                    });
+                }
+                
+                progressStatus.textContent = '压缩完成！';
+                showCompressedResults();
+                showMessage('所有文件压缩完成！', 'success');
+                
+            } catch (error) {
+                console.error('压缩过程中出错:', error);
+                showMessage('压缩过程中出现错误', 'error');
+            } finally {
+                compressBtn.disabled = false;
+            }
+        }
+        
+        // 压缩图片
+        async function compressImage(file, quality, outputFormat) {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                
+                img.onload = function() {
+                    // 计算新尺寸（如果图片太大则缩小）
+                    let { width, height } = img;
+                    const maxDimension = 2048;
+                    
+                    if (width > maxDimension || height > maxDimension) {
+                        const ratio = Math.min(maxDimension / width, maxDimension / height);
+                        width *= ratio;
+                        height *= ratio;
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    
+                    // 绘制图片
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    // 确定输出格式
+                    let mimeType;
+                    let extension;
+                    
+                    if (outputFormat === 'original') {
+                        mimeType = file.type;
+                        extension = file.name.split('.').pop();
+                    } else if (outputFormat === 'jpeg') {
+                        mimeType = 'image/jpeg';
+                        extension = 'jpg';
+                    } else if (outputFormat === 'png') {
+                        mimeType = 'image/png';
+                        extension = 'png';
+                    } else if (outputFormat === 'webp') {
+                        mimeType = 'image/webp';
+                        extension = 'webp';
+                    }
+                    
+                    // 转换为Blob
+                    canvas.toBlob((blob) => {
+                        const fileName = file.name.replace(/\.[^/.]+$/, '') + '_compressed.' + extension;
+                        const compressedFile = new File([blob], fileName, { type: mimeType });
+                        resolve(compressedFile);
+                    }, mimeType, quality);
+                };
+                
+                img.src = URL.createObjectURL(file);
+            });
+        }
+        
+        // 压缩PDF（简化版本）
+        async function compressPDF(file) {
+            // 注意：真实的PDF压缩需要专门的库，这里只是示例
+            // 实际应用中可以使用PDF-lib等库来实现PDF压缩
+            showMessage('PDF压缩功能需要专门的库支持，当前返回原文件', 'warning');
+            return file;
+        }
+        
+        // 显示压缩结果
+        function showCompressedResults() {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '<h4 style="margin-bottom: 15px;">✅ 压缩完成</h4>';
+            
+            compressedFiles.forEach((item, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                
+                const originalSize = formatFileSize(item.original.size);
+                const compressedSize = formatFileSize(item.compressed.size);
+                const ratio = item.compressionRatio;
+                
+                fileItem.innerHTML = `
+                    <div class="file-info">
+                        <div class="file-icon">${getFileIcon(item.compressed.type)}</div>
+                        <div class="file-details">
+                            <h4>${item.compressed.name}</h4>
+                            <p>${originalSize} → ${compressedSize} (减少 ${ratio}%)</p>
+                        </div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn btn-success" onclick="downloadFile(${index})" style="padding: 8px 12px; font-size: 0.9rem;">
+                            💾 下载
+                        </button>
+                    </div>
+                `;
+                fileList.appendChild(fileItem);
+            });
+            
+            // 添加批量下载按钮
+            if (compressedFiles.length > 1) {
+                const batchDownload = document.createElement('div');
+                batchDownload.style.textAlign = 'center';
+                batchDownload.style.marginTop = '20px';
+                batchDownload.innerHTML = `
+                    <button class="btn btn-success" onclick="downloadAllFiles()">
+                        📦 下载所有文件
+                    </button>
+                `;
+                fileList.appendChild(batchDownload);
+            }
+        }
+        
+        // 下载单个文件
+        function downloadFile(index) {
+            const item = compressedFiles[index];
+            const url = URL.createObjectURL(item.compressed);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = item.compressed.name;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // 下载所有文件（打包为ZIP）
+        async function downloadAllFiles() {
+            // 注意：真实的ZIP打包需要JSZip库
+            // 这里简化为逐个下载
+            for (let i = 0; i < compressedFiles.length; i++) {
+                setTimeout(() => {
+                    downloadFile(i);
+                }, i * 500); // 延迟下载避免浏览器阻止
+            }
+            showMessage('开始下载所有文件...', 'success');
+        }
+        
+        // 重置工具
+        function resetTool() {
+            selectedFiles = [];
+            compressedFiles = [];
+            
+            document.getElementById('fileList').style.display = 'none';
+            document.getElementById('compressionSettings').style.display = 'none';
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('fileInput').value = '';
+            document.getElementById('compressBtn').disabled = true;
+            document.getElementById('qualitySlider').value = 80;
+            document.getElementById('qualityValue').textContent = '80%';
+            document.getElementById('outputFormat').value = 'original';
+            
+            showMessage('工具已重置', 'success');
+        }
+        
+        // 获取文件图标
+        function getFileIcon(type) {
+            if (type.startsWith('image/')) {
+                return '🖼️';
+            } else if (type === 'application/pdf') {
+                return '📄';
+            } else {
+                return '📁';
+            }
+        }
+        
+        // 格式化文件大小
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // 显示消息
+        function showMessage(message, type = 'success') {
+            const messageDiv = document.getElementById('statusMessage');
+            messageDiv.textContent = message;
+            messageDiv.className = `status-message ${type} show`;
+            
+            setTimeout(() => {
+                messageDiv.classList.remove('show');
+            }, 3000);
+        }
     </script>
+    
     <script src="../components/component-manager.js"></script>
     <script src="../js/mobile-navigation.js"></script>
 </body>

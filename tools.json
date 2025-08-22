@@ -468,5 +468,115 @@
     "tags": ["正则表达式", "正则测试", "JavaScript正则", "正则匹配", "正则高亮", "正则工具", "在线正则", "开发工具", "文本匹配"],
     "categories": ["coding"],
     "url": "tools/regex-tester.html"
+  },
+  {
+    "id": "2048-game",
+    "name": "2048游戏",
+    "shortDesc": "经典数字拼图游戏",
+    "icon": "fas fa-gamepad",
+    "description": "经典的2048数字拼图游戏，通过滑动合并相同数字，挑战你的逻辑思维和策略规划能力。简单易上手，趣味无穷。",
+    "tags": ["2048游戏", "数字游戏", "拼图游戏", "益智游戏", "休闲游戏"],
+    "categories": ["game"],
+    "url": "tools/2048-game.html"
+  },
+  {
+    "id": "credit-card-calculator",
+    "name": "信用卡计算器",
+    "shortDesc": "信用卡还款计算工具",
+    "icon": "fas fa-credit-card",
+    "description": "专业的信用卡还款计算器，帮助您计算最低还款额、利息费用、还款期限等，合理规划信用卡使用和还款计划。",
+    "tags": ["信用卡计算", "还款计算", "利息计算", "理财工具", "金融计算"],
+    "categories": ["finance"],
+    "url": "tools/credit-card-calculator.html"
+  },
+  {
+    "id": "gomoku-game",
+    "name": "五子棋游戏",
+    "shortDesc": "经典五子棋对战游戏",
+    "icon": "fas fa-chess-board",
+    "description": "经典的五子棋对战游戏，支持人机对战和双人对战模式，锻炼逻辑思维和策略规划能力。",
+    "tags": ["五子棋", "棋类游戏", "策略游戏", "益智游戏", "对战游戏"],
+    "categories": ["game"],
+    "url": "tools/gomoku-game.html"
+  },
+  {
+    "id": "medical-insurance-calculator",
+    "name": "医保计算器",
+    "shortDesc": "医疗保险费用计算工具",
+    "icon": "fas fa-hospital",
+    "description": "专业的医疗保险费用计算器，帮助您计算医保报销比例、个人承担费用等，合理规划医疗支出。",
+    "tags": ["医保计算", "医疗保险", "费用计算", "保险工具", "健康理财"],
+    "categories": ["health"],
+    "url": "tools/medical-insurance-calculator.html"
+  },
+  {
+    "id": "minesweeper-game",
+    "name": "扫雷游戏",
+    "shortDesc": "经典扫雷益智游戏",
+    "icon": "fas fa-bomb",
+    "description": "经典的扫雷益智游戏，通过数字提示找出所有地雷，锻炼逻辑推理和观察能力。支持多种难度级别。",
+    "tags": ["扫雷游戏", "益智游戏", "逻辑游戏", "经典游戏", "休闲游戏"],
+    "categories": ["game"],
+    "url": "tools/minesweeper-game.html"
+  },
+  {
+    "id": "personal-tax-calculator",
+    "name": "个人所得税计算器",
+    "shortDesc": "个人所得税计算工具",
+    "icon": "fas fa-calculator",
+    "description": "专业的个人所得税计算器，支持最新税率标准，帮助您准确计算应纳税额、税后收入等，合理进行税务规划。",
+    "tags": ["个人所得税", "税务计算", "税后收入", "理财工具", "税务规划"],
+    "categories": ["finance"],
+    "url": "tools/personal-tax-calculator.html"
+  },
+  {
+    "id": "snake-game",
+    "name": "贪吃蛇游戏",
+    "shortDesc": "经典贪吃蛇游戏",
+    "icon": "fas fa-gamepad",
+    "description": "经典的贪吃蛇游戏，控制小蛇吃食物长大，避免撞墙和咬到自己。简单有趣，考验反应速度和操作技巧。",
+    "tags": ["贪吃蛇", "经典游戏", "休闲游戏", "反应游戏", "操作游戏"],
+    "categories": ["game"],
+    "url": "tools/snake-game.html"
+  },
+  {
+    "id": "social-security-calculator",
+    "name": "社保计算器",
+    "shortDesc": "社会保险费用计算工具",
+    "icon": "fas fa-shield-alt",
+    "description": "专业的社会保险费用计算器，帮助您计算养老保险、医疗保险、失业保险等各项社保费用，合理规划社保缴费。",
+    "tags": ["社保计算", "社会保险", "养老保险", "医疗保险", "保险工具"],
+    "categories": ["finance"],
+    "url": "tools/social-security-calculator.html"
+  },
+  {
+    "id": "sudoku-game",
+    "name": "数独游戏",
+    "shortDesc": "经典数独益智游戏",
+    "icon": "fas fa-th",
+    "description": "经典的数独益智游戏，在9x9的网格中填入数字，使每行、每列、每个3x3小方格都包含1-9的数字。锻炼逻辑思维能力。",
+    "tags": ["数独游戏", "益智游戏", "逻辑游戏", "数字游戏", "思维训练"],
+    "categories": ["game"],
+    "url": "tools/sudoku-game.html"
+  },
+  {
+    "id": "tetris-game",
+    "name": "俄罗斯方块",
+    "shortDesc": "经典俄罗斯方块游戏",
+    "icon": "fas fa-cubes",
+    "description": "经典的俄罗斯方块游戏，通过旋转和移动不同形状的方块，填满水平线来消除方块。考验空间想象力和反应速度。",
+    "tags": ["俄罗斯方块", "经典游戏", "益智游戏", "反应游戏", "空间游戏"],
+    "categories": ["game"],
+    "url": "tools/tetris-game.html"
+  },
+  {
+    "id": "whack-a-mole-game",
+    "name": "打地鼠游戏",
+    "shortDesc": "经典打地鼠反应游戏",
+    "icon": "fas fa-hammer",
+    "description": "经典的打地鼠反应游戏，快速点击出现的地鼠获得分数，锻炼反应速度和手眼协调能力。简单有趣，适合放松娱乐。",
+    "tags": ["打地鼠", "反应游戏", "休闲游戏", "点击游戏", "娱乐游戏"],
+    "categories": ["game"],
+    "url": "tools/whack-a-mole-game.html"
   }
 ]

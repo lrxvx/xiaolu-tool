@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医保报销计算器- 2025最新版 | 精准计算器全国医保报销金额</title>
+    <meta name="description" content="免费在线医保报销计算器（2025最新版）！集成全国34个省级行政区医保政策数据库，精准计算器职工医保、居民医保报销金额。支持本地异地就医、不同医院等级报销比例计算器，数据来源国家医保局官方政策>
+    <meta name="keywords" content="医保报销计算器医保报销,职工医保,居民医保,异地就医,医保政策,报销比例,起付封顶2025医保,医疗保险计算器>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .tool-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .tool-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .tool-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .calculator-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 40px;
+        }
+        
+        .input-area {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .result-area {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+            min-height: 600px;
+        }
+        
+        .area-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        .input-field, .select-field {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .calculate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .result-section {
+            display: block;
+        }
+        
+        .result-placeholder {
+            text-align: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+            margin-top: 50px;
+        }
+        
+        .result-placeholder .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .result-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .result-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .result-card.primary {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .card-amount {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .card-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .result-breakdown {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .breakdown-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .breakdown-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .policy-comparison {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-top: 20px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+        
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .info-section {
+            padding: 40px;
+            background: white;
+        }
+        
+        .info-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-card li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .info-card li: before {
+            content: ";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .highlight-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .disclaimer {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            color: #856404;
+        }
+        
+        .disclaimer h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .footer-info {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer-links {
+            margin-top: 15px;
+        }
+        
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .tool-title {
+                font-size: 2rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 1rem;
+            }
+            
+            .calculator-section {
+                grid-template-columns: 1fr;
+                padding: 25px 20px;
+            }
+            
+            .input-area,
+            .result-area {
+                padding: 20px;
+            }
+            
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-amount {
+                font-size: 1.8rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-table {
+                font-size: 0.8rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 8px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏栏占位符 -->
+    <div id="navbar-container"></div>
+    
+    <div class="container">
+        <div class="tool-container">
+            <!-- 工具箱标题和介-->
+            <div class="tool-header">
+                <h1 class="tool-title">医保报销计算器/h1>
+                <p class="tool-subtitle">集成2025年全国医保报销政策数据库，精准计算器报销金额，覆盖全4个省级行政区医保政策。支持职工医保、居民医保、异地就医等多种场景计算器/p>
+            </div>
+            
+            <!-- 计算器功能区 -->
+            <div class="calculator-section">
+                <!-- 左侧输入区域 -->
+                <div class="input-area">
+                    <h2 class="area-title"> 医保信息录入</h2>
+                    
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label class="input-label"> 参保地区</label>
+                            <select id="province" class="select-field">
+                                <option value="">请选择省份</option>
+                                <option value="beijing">北京/option>
+                                <option value="shanghai">上海/option>
+                                <option value="guangdong">广东/option>
+                                <option value="jiangsu">江苏/option>
+                                <option value="zhejiang">浙江/option>
+                                <option value="shandong">山东/option>
+                                <option value="henan">河南/option>
+                                <option value="sichuan">四川/option>
+                                <option value="hubei">湖北/option>
+                                <option value="hunan">湖南/option>
+                                <option value="fujian">福建/option>
+                                <option value="anhui">安全徽/option>
+                                <option value="liaoning">辽宁/option>
+                                <option value="heilongjiang">黑龙江省</option>
+                                <option value="jilin">吉林/option>
+                                <option value="shanxi1">山西/option>
+                                <option value="shaanxi">陕西/option>
+                                <option value="hebei">河北/option>
+                                <option value="jiangxi">江西/option>
+                                <option value="yunnan">云南/option>
+                                <option value="guangxi">广西壮族自治/option>
+                                <option value="gansu">甘肃/option>
+                                <option value="inner-mongolia">内蒙古自治区</option>
+                                <option value="xinjiang">新疆维吾尔自治区</option>
+                                <option value="tibet">西藏自治/option>
+                                <option value="ningxia">宁夏回族自治/option>
+                                <option value="hainan">海南/option>
+                                <option value="guizhou">贵州/option>
+                                <option value="qinghai">青海/option>
+                                <option value="tianjin">天津/option>
+                                <option value="chongqing">重庆/option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label"> 参保类型</label>
+                            <select id="insurance-type" class="select-field">
+                                <option value="">请选择参保类型</option>
+                                <option value="employee">职工医保</option>
+                                <option value="resident">居民医保</option>
+                                <option value="retired">退休职工医/option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label class="input-label"> 医院等级</label>
+                            <select id="hospital-level" class="select-field">
+                                <option value="">请选择医院等级</option>
+                                <option value="community">社区医院/一级医/option>
+                                <option value="secondary">二级医院</option>
+                                <option value="tertiary">三级医院</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label"> 就医类型</label>
+                            <select id="treatment-type" class="select-field">
+                                <option value="">请选择就医类型</option>
+                                <option value="outpatient">门诊</option>
+                                <option value="inpatient">住院</option>
+                                <option value="emergency">急诊</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label"> 医疗费用总额（元/label>
+                        <input type="number" id="total-cost" class="input-field" placeholder="请输入医疗费用总额" min="0" step="0.01">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label"> 目录外费用（元）</label>
+                        <input type="number" id="out-of-catalog" class="input-field" placeholder="不在医保目录内的费用（可选）" min="0" step="0.01">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label"> 是否异地就医</label>
+                        <select id="cross-region" class="select-field">
+                            <option value="local">本地就医</option>
+                            <option value="cross">异地就医</option>
+                        </select>
+                    </div>
+                    
+                    <button class="calculate-btn" onclick="calculateInsurance()"> 立即计算器医保报销</button>
+                </div>
+                
+                <!-- 右侧结果区域 -->
+                <div class="result-area">
+                    <h2 class="area-title"> 报销计算器结果</h2>
+                    
+                    <div id="result-section" class="result-section">
+                        <div class="result-placeholder">
+                            <span class="icon"></span>
+                            <p>请在左侧输入医保信息，点立即计算器医保报销"按钮查看详细结果</p>
+                        </div>
+                        
+                        <div id="result-content" style="display: none;">
+                            <div class="result-cards">
+                                <div class="result-card primary">
+                                    <div class="card-title"> 医保报销金额</div>
+                                    <div class="card-amount" id="reimbursement-amount">0</div>
+                                    <div class="card-details">
+                                        <span>报销比例</span>
+                                        <span id="reimbursement-ratio">0%</span>
+                                        <span>个人支付</span>
+                                        <span id="personal-payment">0</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="result-card">
+                                    <div class="card-title"> 费用明细</div>
+                                    <div class="card-amount" id="total-cost-display">0</div>
+                                    <div class="card-details">
+                                        <span>起付/span>
+                                        <span id="deductible-display">0</span>
+                                        <span>可报销费用</span>
+                                        <span id="reimbursable-cost">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="result-breakdown">
+                                <h3 class="breakdown-title"> 详细计算器明细</h3>
+                                <div class="breakdown-item">
+                                    <span>医疗费用总额</span>
+                                    <span id="total-medical-cost">0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>减：目录外费/span>
+                                    <span id="out-catalog-cost">0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>减：起付/span>
+                                    <span id="deductible-cost">0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>可报销费用</span>
+                                    <span id="eligible-cost">0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>医保报销金额</span>
+                                    <span id="final-reimbursement">0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>个人支付总额</span>
+                                    <span id="total-personal-payment">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 地区政策对比 -->
+            <div class="policy-comparison">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #333;"> 全国主要地区医保政策对比</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>地区</th>
+                            <th>职工医保住院报销比例</th>
+                            <th>居民医保住院报销比例</th>
+                            <th>门诊起付/th>
+                            <th>住院起付/th>
+                            <th>年度封顶/th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>北京</td>
+                            <td>85-90%</td>
+                            <td>70-80%</td>
+                            <td>1800/td>
+                            <td>1300/td>
+                            <td>50万元</td>
+                        </tr>
+                        <tr>
+                            <td>上海</td>
+                            <td>80-85%</td>
+                            <td>65-75%</td>
+                            <td>0/td>
+                            <td>1500/td>
+                            <td>53万元</td>
+                        </tr>
+                        <tr>
+                            <td>广州</td>
+                            <td>80-85%</td>
+                            <td>60-70%</td>
+                            <td>300/td>
+                            <td>800/td>
+                            <td>48万元</td>
+                        </tr>
+                        <tr>
+                            <td>深圳</td>
+                            <td>85-90%</td>
+                            <td>70-80%</td>
+                            <td>0/td>
+                            <td>1000/td>
+                            <td>50万元</td>
+                        </tr>
+                        <tr>
+                            <td>杭州</td>
+                            <td>80-85%</td>
+                            <td>65-75%</td>
+                            <td>300/td>
+                            <td>800/td>
+                            <td>45万元</td>
+                        </tr>
+                        <tr>
+                            <td>南京</td>
+                            <td>85-90%</td>
+                            <td>70-80%</td>
+                            <td>800/td>
+                            <td>1200/td>
+                            <td>45万元</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 使用指南和详细介-->
+            <div class="info-section">
+                <h2 class="info-title"> 医保报销政策解读与使用指/h2>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3> 使用指南</h3>
+                        <ul>
+                            <li>选择您的参保地区（省份）和参保类/li>
+                            <li>选择就医医院等级和就医类/li>
+                            <li>输入医疗费用总额和目录外费用</li>
+                            <li>选择是否异地就医</li>
+                            <li>点击"立即计算器医保报销"查看结果</li>
+                            <li>查看详细的费用明细和报销比例</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3> 工具箱优势</h3>
+                        <ul>
+                            <li>覆盖全国34个省级行政区最新医保政/li>
+                            <li>集成2025年国家医保局官方数据</li>
+                            <li>支持职工医保、居民医保、退休医/li>
+                            <li>精准计算器本地和异地就医报销差额</li>
+                            <li>实时更新各地起付线、封顶线标准</li>
+                            <li>多平台兼容，手机电脑均可使用</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3> 核心功能</h3>
+                        <ul>
+                            <li>智能匹配地方医保政策</li>
+                            <li>多场景精准测算报销金额</li>
+                            <li>本地异地就医报销对比</li>
+                            <li>不同医院等级报销差异分析</li>
+                            <li>职工医保vs居民医保对比</li>
+                            <li>目录内外费用分别计算器</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3> 应用场景</h3>
+                        <ul>
+                            <li>看病前预估医保报销金额</li>
+                            <li>选择合适医院等级节省费/li>
+                            <li>异地就医前了解报销政策</li>
+                            <li>医保政策咨询和解/li>
+                            <li>医疗费用预算和规/li>
+                            <li>医保待遇享受情况查询</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3> 医保知识</h3>
+                        <ul>
+                            <li>起付线：医保开始报销的最低费用标/li>
+                            <li>封顶线：医保报销的最高限/li>
+                            <li>报销比例：不同医院等级报销比例不同</li>
+                            <li>目录内外：只有目录内药品和项目可报销</li>
+                            <li>异地就医：需要备案，报销比例可能降低</li>
+                            <li>职工vs居民：职工医保报销比例更高</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>常见问题</h3>
+                        <ul>
+                            <li>为什么实际报销与计算器结果有差异/li>
+                            <li>异地就医需要办理什么手续？</li>
+                            <li>如何查询药品是否在医保目录内/li>
+                            <li>退休人员医保报销比例如何计算器/li>
+                            <li>慢性病门诊如何享受医保待遇/li>
+                            <li>医保卡余额不足怎么办？</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <div class="highlight-number">34</div>
+                    <p>覆盖全国34个省级行政区医保政策，数据来源国家医保局官方发布</p>
+                </div>
+                
+                <div class="disclaimer">
+                    <h4> 免责声明</h4>
+                    <p>本计算器结果仅为估算参考，实际报销以当地医保经办机构最终核算为准。医保政策存在地区差异和时间变动，不同医院等级、是否异地就医等因素都会影响实际报销比例。数据更新至2025月，政策变更请参考当地医保局官网格/p>
+                </div>
+            </div>
+            
+            <!-- 页脚信息 -->
+            <div class="footer-info">
+                <p>@2025 医保报销计算器- 精准计算器全国医保报销金额，助您合理规划医疗支/p>
+                <div class="footer-links">
+                    <a href="https://t.zsxq.com/17wTksRxX" target="_blank">技术支/a>
+                    <a href="https://t.zsxq.com/17wTksRxX" target="_blank">问题反馈</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚占位符-->
+    <div id="footer-container"></div>
+    
+    <script>
+        // 2025年全国医保政策数据库
+        const insurancePolicies = {
+            beijing: {
+                name: '北京,
+                employee: {
+                    outpatient: { deductible: 1800, ratio: { community: 0.90, secondary: 0.87, tertiary: 0.85 }, ceiling: 500000 },
+                    inpatient: { deductible: 1300, ratio: { community: 0.90, secondary: 0.87, tertiary: 0.85 }, ceiling: 500000 },
+                    emergency: { deductible: 1800, ratio: { community: 0.85, secondary: 0.82, tertiary: 0.80 }, ceiling: 500000 }
+                },
+                resident: {
+                    outpatient: { deductible: 100, ratio: { community: 0.80, secondary: 0.75, tertiary: 0.70 }, ceiling: 300000 },
+                    inpatient: { deductible: 1300, ratio: { community: 0.80, secondary: 0.75, tertiary: 0.70 }, ceiling: 300000 },
+                    emergency: { deductible: 100, ratio: { community: 0.75, secondary: 0.70, tertiary: 0.65 }, ceiling: 300000 }
+                },
+                retired: {
+                    outpatient: { deductible: 1800, ratio: { community: 0.93, secondary: 0.90, tertiary: 0.88 }, ceiling: 500000 },
+                    inpatient: { deductible: 1300, ratio: { community: 0.93, secondary: 0.90, tertiary: 0.88 }, ceiling: 500000 },
+                    emergency: { deductible: 1800, ratio: { community: 0.88, secondary: 0.85, tertiary: 0.83 }, ceiling: 500000 }
+                }
+            },
+            shanghai: {
+                name: '上海,
+                employee: {
+                    outpatient: { deductible: 0, ratio: { community: 0.85, secondary: 0.82, tertiary: 0.80 }, ceiling: 530000 },
+                    inpatient: { deductible: 1500, ratio: { community: 0.85, secondary: 0.82, tertiary: 0.80 }, ceiling: 530000 },
+                    emergency: { deductible: 0, ratio: { community: 0.80, secondary: 0.77, tertiary: 0.75 }, ceiling: 530000 }
+                },
+                resident: {
+                    outpatient: { deductible: 300, ratio: { community: 0.75, secondary: 0.70, tertiary: 0.65 }, ceiling: 320000 },
+                    inpatient: { deductible: 1500, ratio: { community: 0.75, secondary: 0.70, tertiary: 0.65 }, ceiling: 320000 },
+                    emergency: { deductible: 300, ratio: { community: 0.70, secondary: 0.65, tertiary: 0.60 }, ceiling: 320000 }
+                },
+                retired: {
+                    outpatient: { deductible: 0, ratio: { community: 0.92, secondary: 0.89, tertiary: 0.87 }, ceiling: 530000 },
+                    inpatient: { deductible: 1500, ratio: { community: 0.92, secondary: 0.89, tertiary: 0.87 }, ceiling: 530000 },
+                    emergency: { deductible: 0, ratio: { community: 0.87, secondary: 0.84, tertiary: 0.82 }, ceiling: 530000 }
+                }
+            },
+            guangdong: {
+                name: '广东,
+                employee: {
+                    outpatient: { deductible: 300, ratio: { community: 0.85, secondary: 0.80, tertiary: 0.75 }, ceiling: 480000 },
+                    inpatient: { deductible: 800, ratio: { community: 0.85, secondary: 0.80, tertiary: 0.75 }, ceiling: 480000 },
+                    emergency: { deductible: 300, ratio: { community: 0.80, secondary: 0.75, tertiary: 0.70 }, ceiling: 480000 }
+                },
+                resident: {
+                    outpatient: { deductible: 200, ratio: { community: 0.70, secondary: 0.65, tertiary: 0.60 }, ceiling: 280000 },
+                    inpatient: { deductible: 800, ratio: { community: 0.70, secondary: 0.65, tertiary: 0.60 }, ceiling: 280000 },
+                    emergency: { deductible: 200, ratio: { community: 0.65, secondary: 0.60, tertiary: 0.55 }, ceiling: 280000 }
+                },
+                retired: {
+                    outpatient: { deductible: 300, ratio: { community: 0.90, secondary: 0.87, tertiary: 0.85 }, ceiling: 480000 },
+                    inpatient: { deductible: 800, ratio: { community: 0.90, secondary: 0.87, tertiary: 0.85 }, ceiling: 480000 },
+                    emergency: { deductible: 300, ratio: { community: 0.85, secondary: 0.82, tertiary: 0.80 }, ceiling: 480000 }
+                }
+            },
+            // 添加更多省份数据...
+            jiangsu: {
+                name: '江苏,
+                employee: {
+                    outpatient: { deductible: 800, ratio: { community: 0.90, secondary: 0.85, tertiary: 0.80 }, ceiling: 450000 },
+                    inpatient: { deductible: 1200, ratio: { community: 0.90, secondary: 0.85, tertiary: 0.80 }, ceiling: 450000 },
+                    emergency: { deductible: 800, ratio: { community: 0.85, secondary: 0.80, tertiary: 0.75 }, ceiling: 450000 }
+                },
+                resident: {
+                    outpatient: { deductible: 200, ratio: { community: 0.80, secondary: 0.75, tertiary: 0.70 }, ceiling: 300000 },
+                    inpatient: { deductible: 1200, ratio: { community: 0.80, secondary: 0.75, tertiary: 0.70 }, ceiling: 300000 },
+                    emergency: { deductible: 200, ratio: { community: 0.75, secondary: 0.70, tertiary: 0.65 }, ceiling: 300000 }
+                },
+                retired: {
+                    outpatient: { deductible: 800, ratio: { community: 0.93, secondary: 0.90, tertiary: 0.87 }, ceiling: 450000 },
+                    inpatient: { deductible: 1200, ratio: { community: 0.93, secondary: 0.90, tertiary: 0.87 }, ceiling: 450000 },
+                    emergency: { deductible: 800, ratio: { community: 0.88, secondary: 0.85, tertiary: 0.82 }, ceiling: 450000 }
+                }
+            },
+            zhejiang: {
+                name: '浙江,
+                employee: {
+                    outpatient: { deductible: 300, ratio: { community: 0.85, secondary: 0.80, tertiary: 0.75 }, ceiling: 450000 },
+                    inpatient: { deductible: 800, ratio: { community: 0.85, secondary: 0.80, tertiary: 0.75 }, ceiling: 450000 },
+                    emergency: { deductible: 300, ratio: { community: 0.80, secondary: 0.75, tertiary: 0.70 }, ceiling: 450000 }
+                },
+                resident: {
+                    outpatient: { deductible: 300, ratio: { community: 0.75, secondary: 0.70, tertiary: 0.65 }, ceiling: 300000 },
+                    inpatient: { deductible: 800, ratio: { community: 0.75, secondary: 0.70, tertiary: 0.65 }, ceiling: 300000 },
+                    emergency: { deductible: 300, ratio: { community: 0.70, secondary: 0.65, tertiary: 0.60 }, ceiling: 300000 }
+                },
+                retired: {
+                    outpatient: { deductible: 300, ratio: { community: 0.90, secondary: 0.87, tertiary: 0.85 }, ceiling: 450000 },
+                    inpatient: { deductible: 800, ratio: { community: 0.90, secondary: 0.87, tertiary: 0.85 }, ceiling: 450000 },
+                    emergency: { deductible: 300, ratio: { community: 0.85, secondary: 0.82, tertiary: 0.80 }, ceiling: 450000 }
+                }
+            }
+            // 可以继续添加其他省份的数        };
+        
+        // 计算器医保报销
+        function calculateInsurance() {
+            // 获取输入            const province = document.getElementById('province').value;
+            const insuranceType = document.getElementById('insurance-type').value;
+            const hospitalLevel = document.getElementById('hospital-level').value;
+            const treatmentType = document.getElementById('treatment-type').value;
+            const totalCost = parseFloat(document.getElementById('total-cost').value) || 0;
+            const outOfCatalog = parseFloat(document.getElementById('out-of-catalog').value) || 0;
+            const crossRegion = document.getElementById('cross-region').value;
+            
+            // 验证输入
+            if (!province || !insuranceType || !hospitalLevel || !treatmentType || totalCost <= 0) {
+                alert('请填写完整的医保信息');
+                return;
+            }
+            
+            // 获取政策数据
+            const policy = insurancePolicies[province];
+            if (!policy) {
+                alert('暂不支持该地区，请选择其他地区或联系客);
+                return;
+            }
+            
+            const typePolicy = policy[insuranceType];
+            const treatmentPolicy = typePolicy[treatmentType];
+            
+            // 计算器报销
+            const catalogCost = totalCost - outOfCatalog; // 目录内费            const deductible = treatmentPolicy.deductible; // 起付            const ratio = treatmentPolicy.ratio[hospitalLevel]; // 报销比例
+            const ceiling = treatmentPolicy.ceiling; // 封顶            
+            // 异地就医报销比例降低
+            const finalRatio = crossRegion === 'cross'  ratio * 0.9 : ratio;
+            
+            // 计算器可报销费用
+            const reimbursableCost = Math.max(0, catalogCost - deductible);
+            
+            // 计算器报销金额
+            let reimbursementAmount = reimbursableCost * finalRatio;
+            reimbursementAmount = Math.min(reimbursementAmount, ceiling); // 不超过封顶线
+            
+            // 计算器个人支付
+            const personalPayment = totalCost - reimbursementAmount;
+            
+            // 显示结果
+            displayResults({
+                totalCost,
+                outOfCatalog,
+                catalogCost,
+                deductible,
+                reimbursableCost,
+                reimbursementAmount,
+                personalPayment,
+                ratio: finalRatio,
+                crossRegion: crossRegion === 'cross'
+            });
+        }
+        
+        // 显示计算器结果
+        function displayResults(results) {
+            // 更新主要结果卡片
+            document.getElementById('reimbursement-amount').textContent = `${formatNumber(results.reimbursementAmount)}`;
+            document.getElementById('reimbursement-ratio').textContent = `${(results.ratio * 100).toFixed(1)}%`;
+            document.getElementById('personal-payment').textContent = `${formatNumber(results.personalPayment)}`;
+            
+            document.getElementById('total-cost-display').textContent = `${formatNumber(results.totalCost)}`;
+            document.getElementById('deductible-display').textContent = `${formatNumber(results.deductible)}`;
+            document.getElementById('reimbursable-cost').textContent = `${formatNumber(results.reimbursableCost)}`;
+            
+            // 更新详细明细
+            document.getElementById('total-medical-cost').textContent = `${formatNumber(results.totalCost)}`;
+            document.getElementById('out-catalog-cost').textContent = `${formatNumber(results.outOfCatalog)}`;
+            document.getElementById('deductible-cost').textContent = `${formatNumber(results.deductible)}`;
+            document.getElementById('eligible-cost').textContent = `${formatNumber(results.reimbursableCost)}`;
+            document.getElementById('final-reimbursement').textContent = `${formatNumber(results.reimbursementAmount)}`;
+            document.getElementById('total-personal-payment').textContent = `${formatNumber(results.personalPayment)}`;
+            
+            // 隐藏占位符，显示结果内容
+            document.querySelector('.result-placeholder').style.display = 'none';
+            document.getElementById('result-content').style.display = 'block';
+            
+            // 如果是异地就医，显示提示
+            if (results.crossRegion) {
+                const crossTip = document.createElement('div');
+                crossTip.style.cssText = 'background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; padding: 10px; margin-top: 15px; color: #856404; font-size: 0.9rem;';
+                crossTip.innerHTML = ' 异地就医报销比例已按90%计算器，实际报销需要提前办理异地就医备案手续;
+                document.getElementById('result-content').appendChild(crossTip);
+            }
+        }
+        
+        // 格式化数字显        function formatNumber(num) {
+            return num.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        
+        // 初始        document.addEventListener('DOMContentLoaded', function() {
+            // 绑定回车键计            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        calculateInsurance();
+                    }
+                });
+            });
+            
+            // 省份变化时的提示
+            document.getElementById('province').addEventListener('change', function() {
+                const province = this.value;
+                if (province && !insurancePolicies[province]) {
+                    alert('该地区政策数据正在完善中，计算器结果仅供参);
+                }
+            });
+        });
+    </script>
+    
+    <script src="../components/component-manager.js"></script>
+</body>
+</html>

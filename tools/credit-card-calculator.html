@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信用卡还款计算器 - 最低还分期还款利息计算器工具箱 | 小路工具箱/title>
+    <meta name="description" content="免费在线信用卡还款计算器！实时计算器最低还款、分期还款和全额还款的成本差异，精准计算器每期还款额、总利息支出与还款时间，助您做出最优财务决策，节省不必要利息，早日摆脱债务压力>
+    <meta name="keywords" content="信用卡还款计算器,信用卡分期计算器,最低还款计信用卡利息计分期手续费计信用卡债务规划,还款方式对比,信用卡理财工>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xiaolu.tools/tools/credit-card-calculator.html">
+    <meta property="og:title" content="信用卡还款计算器 - 最低还分期还款利息计算器工具箱">
+    <meta property="og:description" content="免费在线信用卡还款计算器！实时计算器最低还款、分期还款和全额还款的成本差异，助您做出最优财务决策>
+    <meta property="og:image" content="https://xiaolu.tools/images/credit-card-calculator.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://xiaolu.tools/tools/credit-card-calculator.html">
+    <meta property="twitter:title" content="信用卡还款计算器 - 最低还分期还款利息计算器工具箱">
+    <meta property="twitter:description" content="免费在线信用卡还款计算器！实时计算器最低还款、分期还款和全额还款的成本差异，助您做出最优财务决策>
+    <meta property="twitter:image" content="https://xiaolu.tools/images/credit-card-calculator.png">
+    
+    <!-- 结构化数-->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "信用卡还款计算器",
+        "description": "免费在线信用卡还款计算器，实时计算器最低还款、分期还款和全额还款的成本差,
+        "url": "https://xiaolu.tools/tools/credit-card-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "All",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .tool-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .tool-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .tool-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .calculator-section {
+            padding: 40px;
+        }
+        
+        .input-area {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 30px;
+        }
+        
+        .area-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        .input-field, .select-field {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .calculate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .result-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 30px;
+        }
+        
+        .result-placeholder {
+            text-align: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+            margin-top: 50px;
+        }
+        
+        .result-placeholder .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .comparison-table tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .best-option {
+            background: #d4edda !important;
+            border-left: 4px solid #28a745;
+        }
+        
+        .worst-option {
+            background: #f8d7da !important;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .payment-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .detail-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid #667eea;
+        }
+        
+        .detail-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+        }
+        
+        .info-section {
+            padding: 40px;
+            background: white;
+        }
+        
+        .info-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-card li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .info-card li: before {
+            content: ";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .highlight-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            color: #856404;
+        }
+        
+        .warning-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .footer-info {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer-links {
+            margin-top: 15px;
+        }
+        
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            transition: width 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .tool-title {
+                font-size: 2rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 1rem;
+            }
+            
+            .calculator-section {
+                padding: 25px 20px;
+            }
+            
+            .input-area,
+            .result-section {
+                padding: 20px;
+            }
+            
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-table {
+                font-size: 0.8rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 8px 4px;
+            }
+            
+            .payment-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏栏占位符 -->
+    <div id="navbar-container"></div>
+    
+    <div class="container">
+        <div class="tool-container">
+            <!-- 工具箱标题和介-->
+            <div class="tool-header">
+                <h1 class="tool-title">信用卡还款计算器</h1>
+                <p class="tool-subtitle">实时计算器最低还款、分期还款和全额还款的成本差异，助您做出最优财务决策，节省不必要利息，早日摆脱债务压力/p>
+            </div>
+            
+            <!-- 计算器功能区 -->
+            <div class="calculator-section">
+                <!-- 输入区域 -->
+                <div class="input-area">
+                    <h2 class="area-title"> 信用卡账单信/h2>
+                    
+                    <div class="input-group">
+                        <label class="input-label"> 信用卡账单总额（元/label>
+                        <input type="number" id="total-amount" class="input-field" placeholder="请输入信用卡账单总额" min="100" step="0.01">
+                    </div>
+                    
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label class="input-label"> 年利率（%/label>
+                            <input type="number" id="annual-rate" class="input-field" placeholder="通常18%左右" value="18" min="0" max="50" step="0.01">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label"> 最低还款比例（%/label>
+                            <input type="number" id="min-payment-rate" class="input-field" placeholder="通常5-10%" value="10" min="1" max="50" step="0.1">
+                        </div>
+                    </div>
+                    
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label class="input-label"> 分期期数</label>
+                            <select id="installment-periods" class="select-field">
+                                <option value="3">3/option>
+                                <option value="6">6/option>
+                                <option value="9">9/option>
+                                <option value="12" selected>12/option>
+                                <option value="18">18/option>
+                                <option value="24">24/option>
+                                <option value="36">36/option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label class="input-label"> 分期手续费率/期）</label>
+                            <input type="number" id="installment-fee-rate" class="input-field" placeholder="每期手续费率" value="0.6" min="0" max="5" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label"> 每月固定还款额（最低还款模式，元）</label>
+                        <input type="number" id="monthly-payment" class="input-field" placeholder="高于最低还款额的固定还款金 min="0" step="0.01">
+                    </div>
+                    
+                    <button class="calculate-btn" onclick="calculateCreditCard()"> 立即计算器还款方案</button>
+                </div>
+                
+                <!-- 结果展示区域 -->
+                <div class="result-section">
+                    <h2 class="area-title"> 还款方案对比</h2>
+                    
+                    <div id="result-content" style="display: none;">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>还款方式</th>
+                                    <th>每月还款/th>
+                                    <th>总还款金/th>
+                                    <th>总利手续/th>
+                                    <th>还款时间</th>
+                                    <th>推荐指数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="full-payment-row">
+                                    <td><strong>全额还款</strong></td>
+                                    <td id="full-monthly">-</td>
+                                    <td id="full-total">-</td>
+                                    <td id="full-interest">-</td>
+                                    <td id="full-time">-</td>
+                                    <td>/td>
+                                </tr>
+                                <tr id="installment-row">
+                                    <td><strong>分期还款</strong></td>
+                                    <td id="installment-monthly">-</td>
+                                    <td id="installment-total">-</td>
+                                    <td id="installment-interest">-</td>
+                                    <td id="installment-time">-</td>
+                                    <td></td>
+                                </tr>
+                                <tr id="minimum-row">
+                                    <td><strong>最低还/strong></td>
+                                    <td id="minimum-monthly">-</td>
+                                    <td id="minimum-total">-</td>
+                                    <td id="minimum-interest">-</td>
+                                    <td id="minimum-time">-</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="payment-details">
+                            <div class="detail-card">
+                                <h3> 全额还款详情</h3>
+                                <div class="detail-item">
+                                    <span>本期账单</span>
+                                    <span id="full-principal">0</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>利息费用</span>
+                                    <span id="full-fee">0</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>节省金额</span>
+                                    <span id="full-savings">0</span>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-card">
+                                <h3> 分期还款详情</h3>
+                                <div class="detail-item">
+                                    <span>每期本金</span>
+                                    <span id="installment-principal">0</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>每期手续/span>
+                                    <span id="installment-fee">0</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>实际年利/span>
+                                    <span id="installment-apr">0%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-card">
+                                <h3> 最低还款详/h3>
+                                <div class="detail-item">
+                                    <span>最低还款额</span>
+                                    <span id="minimum-amount">0</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>循环利息</span>
+                                    <span id="minimum-cycle-interest">0</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>还款进度条</span>
+                                    <span id="minimum-progress">0%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="recommendation" class="highlight-box">
+                            <div class="highlight-number" id="savings-amount">0</div>
+                            <p id="recommendation-text">选择最优还款方案，节省利息支出</p>
+                        </div>
+                    </div>
+                    
+                    <div id="result-placeholder" class="result-placeholder">
+                        <span class="icon"></span>
+                        <p>请在上方输入信用卡账单信息，点击"立即计算器还款方案"查看详细对比结果</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 使用指南和详细介-->
+            <div class="info-section">
+                <h2 class="info-title"> 信用卡还款策略指/h2>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3> 使用指南</h3>
+                        <ul>
+                            <li>输入您的信用卡账单总额</li>
+                            <li>设置置信用卡年利率（通常18%左右/li>
+                            <li>选择分期期数和手续费/li>
+                            <li>设置置最低还款比例（通常5-10%/li>
+                            <li>点击"立即计算器还款方案"查看对比</li>
+                            <li>根据结果选择最适合的还款方/li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3> 工具箱优势</h3>
+                        <ul>
+                            <li>精准计算器：基于真实利率和手续费计/li>
+                            <li>全面对比：同时展示三种还款方/li>
+                            <li>实时更新：输入数据后即时显示结果</li>
+                            <li>详细明细：提供每期还款和利息详情</li>
+                            <li>智能推荐：自动标识最优还款方/li>
+                            <li>移动友好：完美适配手机和电脑端</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3> 核心功能</h3>
+                        <ul>
+                            <li>分期还款计算器：精确计算器每期本金和手续/li>
+                            <li>最低还款模拟器：循环利息和还款时间预/li>
+                            <li>全额还款对比：展示一次性还清的优势</li>
+                            <li>实际年利率计算器：揭示分期的真实成/li>
+                            <li>还款进度条跟踪：可视化还款进度条/li>
+                            <li>节省金额提示：直观显示可节省的利/li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3> 应用场景</h3>
+                        <ul>
+                            <li>信用卡账单规划：选择最优还款策/li>
+                            <li>分期购物决策：评估分期付款真实成/li>
+                            <li>债务管理规划：制定合理的还款计划</li>
+                            <li>理财决策支持：对比投资收益和还款成本</li>
+                            <li>财务教育工具箱：了解信用卡利息机制</li>
+                            <li>银行产品对比：比较不同银行分期费/li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3> 还款策略建议</h3>
+                        <ul>
+                            <li>优先选择：有能力时选择全额还款</li>
+                            <li>分期考虑：大额消息费可考虑短期分期</li>
+                            <li>避免最低：长期最低还款成本极/li>
+                            <li>提前还款：分期中途可考虑提前结清</li>
+                            <li>利率对比：选择手续费率较低的银/li>
+                            <li>合理规划：根据收入情况制定还款计/li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>常见问题</h3>
+                        <ul>
+                            <li>为什么分期实际利率比表面费率高？</li>
+                            <li>最低还款额包含哪些费用/li>
+                            <li>分期手续费是否可以减免？</li>
+                            <li>提前还款是否有违约金/li>
+                            <li>如何选择最适合的分期期数？</li>
+                            <li>循环利息是如何计算器的/li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="warning-box">
+                    <h4> 重要提醒</h4>
+                    <p>本计算器结果仅供参考，实际费用以银行最终计算器为准。不同银行的利率、手续费率和计算器方式可能存在差异。建议在做出还款决策前，详细咨询您的发卡银行，了解具体的费用标准和优惠政策。合理使用信用卡，避免过度负债/p>
+                </div>
+            </div>
+            
+            <!-- 页脚信息 -->
+            <div class="footer-info">
+                <p>@2025 信用卡还款计算器 - 助您做出最优财务决策，节省不必要利/p>
+                <div class="footer-links">
+                    <a href="https://t.zsxq.com/17wTksRxX" target="_blank">技术支/a>
+                    <a href="https://t.zsxq.com/17wTksRxX" target="_blank">问题反馈</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚占位符-->
+    <div id="footer-container"></div>
+    
+    <script>
+        // 信用卡还款计算器
+        function calculateCreditCard() {
+            // 获取输入            const totalAmount = parseFloat(document.getElementById('total-amount').value) || 0;
+            const annualRate = parseFloat(document.getElementById('annual-rate').value) || 18;
+            const minPaymentRate = parseFloat(document.getElementById('min-payment-rate').value) || 10;
+            const installmentPeriods = parseInt(document.getElementById('installment-periods').value) || 12;
+            const installmentFeeRate = parseFloat(document.getElementById('installment-fee-rate').value) || 0.6;
+            const monthlyPayment = parseFloat(document.getElementById('monthly-payment').value) || 0;
+            
+            // 验证输入
+            if (totalAmount <= 0) {
+                alert('请输入有效的信用卡账单总额');
+                return;
+            }
+            
+            // 计算器各种还款方式
+            const fullPayment = calculateFullPayment(totalAmount);
+            const installment = calculateInstallment(totalAmount, installmentPeriods, installmentFeeRate);
+            const minimum = calculateMinimumPayment(totalAmount, annualRate, minPaymentRate, monthlyPayment);
+            
+            // 显示结果
+            displayResults(fullPayment, installment, minimum);
+        }
+        
+        // 全额还款计算器
+        function calculateFullPayment(amount) {
+            return {
+                monthlyPayment: amount,
+                totalPayment: amount,
+                totalInterest: 0,
+                months: 1,
+                savings: 0
+            };
+        }
+        
+        // 分期还款计算器
+        function calculateInstallment(amount, periods, feeRate) {
+            const monthlyPrincipal = amount / periods;
+            const monthlyFee = amount * (feeRate / 100);
+            const monthlyPayment = monthlyPrincipal + monthlyFee;
+            const totalPayment = monthlyPayment * periods;
+            const totalFee = monthlyFee * periods;
+            
+            // 计算器实际年利率（IRR近似计算器            const actualAPR = (feeRate * 12) / (1 - feeRate / 100) * 100;
+            
+            return {
+                monthlyPayment: monthlyPayment,
+                totalPayment: totalPayment,
+                totalInterest: totalFee,
+                months: periods,
+                monthlyPrincipal: monthlyPrincipal,
+                monthlyFee: monthlyFee,
+                actualAPR: actualAPR
+            };
+        }
+        
+        // 最低还款计        function calculateMinimumPayment(amount, annualRate, minRate, fixedPayment) {
+            const monthlyRate = annualRate / 100 / 12;
+            const minPayment = amount * (minRate / 100);
+            const actualMonthlyPayment = fixedPayment > 0  Math.max(fixedPayment, minPayment) : minPayment;
+            
+            let balance = amount;
+            let totalInterest = 0;
+            let months = 0;
+            const maxMonths = 600; // 最0年，防止无限循环
+            
+            while (balance > 0.01 && months < maxMonths) {
+                const interest = balance * monthlyRate;
+                const principal = Math.min(actualMonthlyPayment - interest, balance);
+                
+                if (principal <= 0) {
+                    // 如果还款额不足以覆盖利息，设置置为无法还清
+                    months = maxMonths;
+                    break;
+                }
+                
+                balance -= principal;
+                totalInterest += interest;
+                months++;
+            }
+            
+            const totalPayment = amount + totalInterest;
+            
+            return {
+                monthlyPayment: actualMonthlyPayment,
+                totalPayment: totalPayment,
+                totalInterest: totalInterest,
+                months: months >= maxMonths  '无法还清' : months,
+                minAmount: minPayment,
+                cycleInterest: amount * monthlyRate,
+                progress: months >= maxMonths  0 : 100
+            };
+        }
+        
+        // 显示计算器结果
+        function displayResults(full, installment, minimum) {
+            // 更新对比表格
+            document.getElementById('full-monthly').textContent = `${formatNumber(full.monthlyPayment)}`;
+            document.getElementById('full-total').textContent = `${formatNumber(full.totalPayment)}`;
+            document.getElementById('full-interest').textContent = `${formatNumber(full.totalInterest)}`;
+            document.getElementById('full-time').textContent = `${full.months}个月`;
+            
+            document.getElementById('installment-monthly').textContent = `${formatNumber(installment.monthlyPayment)}`;
+            document.getElementById('installment-total').textContent = `${formatNumber(installment.totalPayment)}`;
+            document.getElementById('installment-interest').textContent = `${formatNumber(installment.totalInterest)}`;
+            document.getElementById('installment-time').textContent = `${installment.months}个月`;
+            
+            document.getElementById('minimum-monthly').textContent = `${formatNumber(minimum.monthlyPayment)}`;
+            document.getElementById('minimum-total').textContent = typeof minimum.months === 'string'  '无法计算器' : `${formatNumber(minimum.totalPayment)}`;
+            document.getElementById('minimum-interest').textContent = typeof minimum.months === 'string'  '极高' : `${formatNumber(minimum.totalInterest)}`;
+            document.getElementById('minimum-time').textContent = typeof minimum.months === 'string'  minimum.months : `${minimum.months}个月`;
+            
+            // 更新详细信息
+            document.getElementById('full-principal').textContent = `${formatNumber(full.totalPayment)}`;
+            document.getElementById('full-fee').textContent = `${formatNumber(full.totalInterest)}`;
+            
+            document.getElementById('installment-principal').textContent = `${formatNumber(installment.monthlyPrincipal)}`;
+            document.getElementById('installment-fee').textContent = `${formatNumber(installment.monthlyFee)}`;
+            document.getElementById('installment-apr').textContent = `${installment.actualAPR.toFixed(2)}%`;
+            
+            document.getElementById('minimum-amount').textContent = `${formatNumber(minimum.minAmount)}`;
+            document.getElementById('minimum-cycle-interest').textContent = `${formatNumber(minimum.cycleInterest)}`;
+            document.getElementById('minimum-progress').textContent = typeof minimum.months === 'string'  '0%' : `${minimum.progress.toFixed(1)}%`;
+            
+            // 更新进度条            const progressFill = document.getElementById('progress-fill');
+            if (typeof minimum.months !== 'string') {
+                progressFill.style.width = `${Math.min(minimum.progress, 100)}%`;
+            } else {
+                progressFill.style.width = '0%';
+            }
+            
+            // 计算器最优方案和节省金额
+            const options = [
+                { name: 'full', total: full.totalPayment, row: 'full-payment-row' },
+                { name: 'installment', total: installment.totalPayment, row: 'installment-row' },
+                { name: 'minimum', total: typeof minimum.months === 'string'  Infinity : minimum.totalPayment, row: 'minimum-row' }
+            ];
+            
+            options.sort((a, b) => a.total - b.total);
+            const best = options[0];
+            const worst = options[options.length - 1];
+            
+            // 重置样式式
+            options.forEach(option => {
+                document.getElementById(option.row).classList.remove('best-option', 'worst-option');
+            });
+            
+            // 标记最优和最差方            document.getElementById(best.row).classList.add('best-option');
+            if (worst.total !== Infinity) {
+                document.getElementById(worst.row).classList.add('worst-option');
+            }
+            
+            // 更新推荐信息
+            const savings = worst.total === Infinity  installment.totalPayment - full.totalPayment : worst.total - best.total;
+            document.getElementById('savings-amount').textContent = `${formatNumber(Math.abs(savings))}`;
+            
+            let recommendationText = '';
+            if (best.name === 'full') {
+                recommendationText = '推荐全额还款，可节省所有利息费;
+            } else if (best.name === 'installment') {
+                recommendationText = '分期还款相对划算，但建议尽早还清';
+            } else {
+                recommendationText = '建议增加加还款金额，避免长期债务';
+            }
+            
+            document.getElementById('recommendation-text').textContent = recommendationText;
+            
+            // 计算器全额还款相比其他方案的节省金            const fullSavingsVsInstallment = installment.totalPayment - full.totalPayment;
+            const fullSavingsVsMinimum = typeof minimum.months === 'string'  '无法计算器' : minimum.totalPayment - full.totalPayment;
+            
+            document.getElementById('full-savings').textContent = `${formatNumber(Math.max(fullSavingsVsInstallment, typeof fullSavingsVsMinimum === 'string'  0 : fullSavingsVsMinimum))}`;
+            
+            // 显示结果，隐藏占位符
+            document.getElementById('result-placeholder').style.display = 'none';
+            document.getElementById('result-content').style.display = 'block';
+        }
+        
+        // 格式化数字显        function formatNumber(num) {
+            if (isNaN(num) || num === Infinity) return '0.00';
+            return num.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        
+        // 初始        document.addEventListener('DOMContentLoaded', function() {
+            // 绑定回车键计            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        calculateCreditCard();
+                    }
+                });
+            });
+            
+            // 自动设置置最低还款额
+            document.getElementById('total-amount').addEventListener('input', function() {
+                const totalAmount = parseFloat(this.value) || 0;
+                const minRate = parseFloat(document.getElementById('min-payment-rate').value) || 10;
+                const minPayment = totalAmount * (minRate / 100);
+                
+                const monthlyPaymentInput = document.getElementById('monthly-payment');
+                if (!monthlyPaymentInput.value) {
+                    monthlyPaymentInput.placeholder = `建议不低${formatNumber(minPayment)}`;
+                }
+            });
+            
+            // 最低还款比例变化时更新提示
+            document.getElementById('min-payment-rate').addEventListener('input', function() {
+                const totalAmount = parseFloat(document.getElementById('total-amount').value) || 0;
+                const minRate = parseFloat(this.value) || 10;
+                const minPayment = totalAmount * (minRate / 100);
+                
+                const monthlyPaymentInput = document.getElementById('monthly-payment');
+                monthlyPaymentInput.placeholder = `建议不低${formatNumber(minPayment)}`;
+            });
+        });
+    </script>
+    
+    <script src="../components/component-manager.js"></script>
+</body>
+</html>

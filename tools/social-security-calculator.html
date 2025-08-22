@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五险一金计算器 - 精确计算器社保公积金缴费金额及实发工资 | 小路工具箱/title>
+    <meta name="description" content="专业的五险一金计算器，支持全00+城市最新缴费比例，精确计算器个人所得税、社保公积金缴纳金额及实发工资秒快速测算养老保险、医疗保险、失业保险、工伤保险、生育保险及住房公积金，助您精准规划税后收入>
+    <meta name="keywords" content="五险一金计算器,社保计算器公积金计算器,个人所得税计算器,实发工资计算器,社保缴费比例,公积金缴费基税后收入计算器">
+    <meta name="author" content="小路工具箱>
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://xiaolu-tools.com/tools/social-security-calculator.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xiaolu-tools.com/tools/social-security-calculator.html">
+    <meta property="og:title" content="五险一金计算器 - 精确计算器社保公积金缴费金额及实发工资">
+    <meta property="og:description" content="专业的五险一金计算器，支持全00+城市最新缴费比例，3秒快速测算养老保险、医疗保险等各项社保公积金缴费金>
+    <meta property="og:image" content="https://xiaolu-tools.com/assets/images/social-security-calculator-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://xiaolu-tools.com/tools/social-security-calculator.html">
+    <meta property="twitter:title" content="五险一金计算器 - 精确计算器社保公积金缴费金额及实发工资">
+    <meta property="twitter:description" content="专业的五险一金计算器，支持全00+城市最新缴费比例，3秒快速测算各项社保公积金缴费金额">
+    <meta property="twitter:image" content="https://xiaolu-tools.com/assets/images/social-security-calculator-preview.jpg">
+    
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .tool-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .tool-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tool-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .calculator-section {
+            padding: 40px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .calculator-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .input-panel, .result-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .panel-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .input-with-suffix {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .input-with-suffix .input-field {
+            padding-right: 50px;
+        }
+        
+        .input-suffix {
+            position: absolute;
+            right: 15px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .ratio-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .ratio-btn {
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .ratio-btn:hover {
+            border-color: #667eea;
+            background: #f0f2ff;
+        }
+        
+        .ratio-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .ratio-btn.custom {
+            background: #f8f9fa;
+            color: #666;
+        }
+        
+        .result-header {
+            margin-bottom: 25px;
+        }
+        
+        .result-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .result-card {
+            padding: 25px;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-card.primary {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: white;
+        }
+        
+        .result-card.secondary {
+            background: linear-gradient(135deg, #00bcd4 0%, #4caf50 100%);
+            color: white;
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .card-amount {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .card-details {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px 15px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .city-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .city-btn {
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .city-btn:hover {
+            border-color: #667eea;
+            background: #f0f2ff;
+            transform: translateY(-2px);
+        }
+        
+        .city-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .calculate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .results-section {
+            display: none;
+            padding: 40px;
+        }
+        
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .summary-amount {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .summary-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .result-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .result-item:last-child {
+            border-bottom: 2px solid #667eea;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 10px;
+        }
+        
+        .info-section {
+            padding: 40px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .info-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .info-content {
+            line-height: 1.8;
+            color: #555;
+            font-size: 1.05rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        
+        .faq-section {
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            padding: 20px 25px;
+            background: #f8f9fa;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 25px;
+            display: none;
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .footer-info {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-top: 3px solid #667eea;
+        }
+        
+        .footer-links {
+            margin-top: 15px;
+        }
+        
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .highlight-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        /* 高级设置置样式式 */
+        .toggle-btn {
+            width: 100%;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .toggle-btn:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+        
+        .settings-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .settings-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .half-width {
+            grid-column: span 1;
+        }
+        
+        .quarter-width {
+            grid-column: span 1;
+        }
+        
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+        }
+        
+        .preset-btn {
+            padding: 12px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .preset-btn:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .preset-btn:active {
+            transform: translateY(0);
+        }
+        
+        #advanced-settings {
+             margin-top: 20px;
+             padding: 20px;
+             background: #f8f9fa;
+             border-radius: 12px;
+             border: 1px solid #e9ecef;
+         }
+         
+         /* 结果摘要样式式 */
+         .result-summary {
+             margin-top: 30px;
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+             gap: 20px;
+         }
+         
+         .summary-card {
+             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+             color: white;
+             padding: 25px;
+             border-radius: 15px;
+             text-align: center;
+             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+             transition: transform 0.3s ease;
+         }
+         
+         .summary-card:hover {
+             transform: translateY(-5px);
+         }
+         
+         .summary-title {
+             font-size: 1.1rem;
+             margin-bottom: 10px;
+             opacity: 0.9;
+         }
+         
+         .summary-amount {
+             font-size: 2.5rem;
+             font-weight: bold;
+             margin: 0;
+         }
+         
+         /* 明细区域样式式 */
+         .details-section {
+             margin-top: 40px;
+             padding: 30px;
+             background: white;
+             border-radius: 12px;
+             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+         }
+         
+         .section-title {
+             font-size: 1.3rem;
+             font-weight: bold;
+             color: #333;
+             margin-bottom: 25px;
+             padding-bottom: 15px;
+             border-bottom: 2px solid #667eea;
+         }
+         
+         .insurance-details {
+             margin-bottom: 30px;
+         }
+         
+         .insurance-item {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             padding: 15px 20px;
+             margin-bottom: 12px;
+             background: #f8f9fa;
+             border-radius: 8px;
+             border-left: 4px solid #ddd;
+             transition: all 0.3s ease;
+         }
+         
+         .insurance-item:hover {
+             background: #f0f2ff;
+             border-left-color: #667eea;
+         }
+         
+         .insurance-item.highlight {
+             background: linear-gradient(135deg, #e3f2fd 0%, #e8f5e8 100%);
+             border-left-color: #4caf50;
+         }
+         
+         .insurance-info {
+             display: flex;
+             flex-direction: column;
+             gap: 5px;
+         }
+         
+         .insurance-name {
+             font-weight: 600;
+             color: #333;
+             font-size: 1.1rem;
+         }
+         
+         .insurance-rate {
+             font-size: 0.9rem;
+             color: #666;
+         }
+         
+         .insurance-amounts {
+             display: flex;
+             gap: 20px;
+             align-items: center;
+         }
+         
+         .personal-amount {
+             color: #4285f4;
+             font-weight: 600;
+             font-size: 1.1rem;
+             min-width: 80px;
+             text-align: right;
+         }
+         
+         .company-amount {
+             color: #00bcd4;
+             font-weight: 600;
+             font-size: 1.1rem;
+             min-width: 80px;
+             text-align: right;
+         }
+         
+         .action-buttons {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+             gap: 15px;
+         }
+         
+         .action-btn {
+             padding: 15px 25px;
+             border: none;
+             border-radius: 10px;
+             font-size: 1rem;
+             font-weight: 600;
+             cursor: pointer;
+             transition: all 0.3s ease;
+             text-align: center;
+         }
+         
+         .action-btn.download {
+             background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+             color: white;
+         }
+         
+         .action-btn.download:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+         }
+         
+         .action-btn.recalculate {
+             background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+             color: white;
+         }
+         
+         .action-btn.recalculate:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 6px 20px rgba(33, 150, 243, 0.3);
+         }
+         
+         .action-btn.compare {
+             background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+             color: white;
+         }
+         
+         .action-btn.compare:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3);
+         }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .tool-title {
+                font-size: 2rem;
+            }
+            
+            .tool-subtitle {
+                font-size: 1rem;
+            }
+            
+            .calculator-section,
+            .results-section,
+            .info-section,
+            .faq-section {
+                padding: 25px 20px;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .city-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .summary-amount {
+                font-size: 2.2rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .preset-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .settings-section {
+                padding: 15px;
+            }
+            
+            .settings-title {
+                font-size: 1.1rem;
+            }
+            
+            .calculator-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .result-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-amount {
+                font-size: 1.8rem;
+            }
+            
+            .insurance-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .insurance-amounts {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .ratio-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .result-summary {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .summary-amount {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏栏占位符 -->
+    <div id="navbar-container"></div>
+    
+    <div class="container">
+        <div class="tool-container">
+            <!-- 工具箱标题和介-->
+            <div class="tool-header">
+                <h1 class="tool-title">五险一金计算器</h1>
+                <p class="tool-subtitle">精确计算器个人所得税、社保公积金缴纳金额及实发工资，支持全国主要城市最新缴费比例与基数，可自定义各项参数满足个性化需/p>
+            </div>
+            
+            <!-- 计算器功能区 -->
+            <div class="calculator-section">
+                <div class="input-group">
+                    <label class="input-label"> 税前月薪（元/label>
+                    <input type="number" id="salary" class="input-field" placeholder="请输入税前月 min="0" step="100">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">参保城市</label>
+                    <div class="city-grid">
+                        <button type="button" class="city-btn active" data-city="beijing">北京</button>
+                        <button type="button" class="city-btn" data-city="shanghai">上海</button>
+                        <button type="button" class="city-btn" data-city="guangzhou">广州</button>
+                        <button type="button" class="city-btn" data-city="shenzhen">深圳</button>
+                        <button type="button" class="city-btn" data-city="hangzhou">杭州</button>
+                        <button type="button" class="city-btn" data-city="nanjing">南京</button>
+                        <button type="button" class="city-btn" data-city="chengdu">成都</button>
+                        <button type="button" class="city-btn" data-city="wuhan">武汉</button>
+                        <button type="button" class="city-btn" data-city="xian">西安全</button>
+                        <button type="button" class="city-btn" data-city="custom">自定义参/button>
+                    </div>
+                </div>
+                
+                <!-- 计算器结果摘要 -->
+                <div class="result-summary" id="result-summary" style="display: none;">
+                    <div class="summary-card">
+                        <div class="summary-title"> 实发工资</div>
+                        <div class="summary-amount" id="net-salary-display">0</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-title"> 单位总支/div>
+                        <div class="summary-amount" id="total-cost-display">0</div>
+                    </div>
+                </div>
+                
+                <!-- 五险一金明细区-->
+                <div class="details-section" id="details-section" style="display: none;">
+                    <h3 class="section-title"> 五险一金明/h3>
+                    
+                    <div class="insurance-details">
+                        <div class="insurance-item">
+                            <div class="insurance-info">
+                                <span class="insurance-name">养老保/span>
+                                <span class="insurance-rate">个人8%  单位16%</span>
+                            </div>
+                            <div class="insurance-amounts">
+                                <span class="personal-amount" id="pension-personal">1296.00</span>
+                                <span class="company-amount" id="pension-company">32.40</span>
+                            </div>
+                        </div>
+                        
+                        <div class="insurance-item">
+                            <div class="insurance-info">
+                                <span class="insurance-name">医疗保险</span>
+                                <span class="insurance-rate">个人2%  单位8%</span>
+                            </div>
+                            <div class="insurance-amounts">
+                                <span class="personal-amount" id="medical-personal">324.00</span>
+                                <span class="company-amount" id="medical-company">129.60</span>
+                            </div>
+                        </div>
+                        
+                        <div class="insurance-item">
+                            <div class="insurance-info">
+                                <span class="insurance-name">失业保险</span>
+                                <span class="insurance-rate">个人0.2%  单位0.8%</span>
+                            </div>
+                            <div class="insurance-amounts">
+                                <span class="personal-amount" id="unemployment-personal">32.40</span>
+                                <span class="company-amount" id="unemployment-company">300.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="insurance-item">
+                            <div class="insurance-info">
+                                <span class="insurance-name">工伤保险</span>
+                                <span class="insurance-rate">个人  单位0.2%承担</span>
+                            </div>
+                            <div class="insurance-amounts">
+                                <span class="personal-amount">-</span>
+                                <span class="company-amount" id="injury-company">48.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="insurance-item">
+                            <div class="insurance-info">
+                                <span class="insurance-name">生育保险</span>
+                                <span class="insurance-rate">个人  单位0.8%承担</span>
+                            </div>
+                            <div class="insurance-amounts">
+                                <span class="personal-amount">-</span>
+                                <span class="company-amount" id="maternity-company">300.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="insurance-item highlight">
+                            <div class="insurance-info">
+                                <span class="insurance-name">住房公积/span>
+                                <span class="insurance-rate">个人12%  单位12%</span>
+                            </div>
+                            <div class="insurance-amounts">
+                                <span class="personal-amount" id="housing-personal">1944.00</span>
+                                <span class="company-amount" id="housing-company">1944.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 操作按钮 -->
+                    <div class="action-buttons">
+                        <button class="action-btn download" onclick="downloadReport()">
+                             下载详细报告
+                        </button>
+                        <button class="action-btn recalculate" onclick="calculateSocialSecurity()">
+                             重新计算器
+                        </button>
+                        <button class="action-btn compare" onclick="showCompareModal()">
+                             比较其他城市
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 高级设置置区域 -->
+                <div class="input-group">
+                    <label class="input-label"> 高级设置置</label>
+                    <button type="button" class="toggle-btn" onclick="toggleAdvancedSettings()">
+                        <span id="toggle-text">展开自定义参/span>
+                        <span id="toggle-icon">/span>
+                    </button>
+                </div>
+                
+                <div id="advanced-settings" style="display: none;">
+                    <!-- 社保缴费基数设置置 -->
+                    <div class="settings-section">
+                        <h3 class="settings-title"> 社保缴费基数设置置</h3>
+                        <div class="input-row">
+                            <div class="input-group half-width">
+                                <label class="input-label">社保缴费基数（元/label>
+                                <input type="number" id="social-base" class="input-field" placeholder="默认等于工资">
+                            </div>
+                            <div class="input-group half-width">
+                                <label class="input-label">公积金缴费基数（元）</label>
+                                <input type="number" id="housing-base" class="input-field" placeholder="默认等于工资">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 个人缴费比例设置置 -->
+                    <div class="settings-section">
+                        <h3 class="settings-title"> 个人缴费比例设置置</h3>
+                        <div class="input-row">
+                            <div class="input-group quarter-width">
+                                <label class="input-label">养老保险（%/label>
+                                <input type="number" id="personal-pension-rate" class="input-field" placeholder="8" min="0" max="20" step="0.1">
+                            </div>
+                            <div class="input-group quarter-width">
+                                <label class="input-label">医疗保险/label>
+                                <input type="number" id="personal-medical-rate" class="input-field" placeholder="2" min="0" max="10" step="0.1">
+                            </div>
+                            <div class="input-group quarter-width">
+                                <label class="input-label">失业保险/label>
+                                <input type="number" id="personal-unemployment-rate" class="input-field" placeholder="0.2" min="0" max="2" step="0.1">
+                            </div>
+                            <div class="input-group quarter-width">
+                                <label class="input-label">公积金（%/label>
+                                <input type="number" id="personal-housing-rate" class="input-field" placeholder="12" min="5" max="12" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 单位缴费比例设置置 -->
+                    <div class="settings-section">
+                        <h3 class="settings-title"> 单位缴费比例设置置</h3>
+                        <div class="input-row">
+                            <div class="input-group quarter-width">
+                                <label class="input-label">养老保险（%/label>
+                                <input type="number" id="company-pension-rate" class="input-field" placeholder="16" min="0" max="30" step="0.1">
+                            </div>
+                            <div class="input-group quarter-width">
+                                <label class="input-label">医疗保险/label>
+                                <input type="number" id="company-medical-rate" class="input-field" placeholder="9" min="0" max="15" step="0.1">
+                            </div>
+                            <div class="input-group quarter-width">
+                                <label class="input-label">失业保险/label>
+                                <input type="number" id="company-unemployment-rate" class="input-field" placeholder="0.8" min="0" max="3" step="0.1">
+                            </div>
+                            <div class="input-group quarter-width">
+                                <label class="input-label">公积金（%/label>
+                                <input type="number" id="company-housing-rate" class="input-field" placeholder="12" min="5" max="12" step="0.1">
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group quarter-width">
+                                <label class="input-label">工伤保险/label>
+                                <input type="number" id="company-injury-rate" class="input-field" placeholder="0.5" min="0" max="2" step="0.1">
+                            </div>
+                            <div class="input-group quarter-width">
+                                <label class="input-label">生育保险/label>
+                                <input type="number" id="company-maternity-rate" class="input-field" placeholder="0.8" min="0" max="2" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 快速预设置按-->
+                    <div class="settings-section">
+                        <h3 class="settings-title"> 快速预/h3>
+                        <div class="preset-buttons">
+                            <button type="button" class="preset-btn" onclick="applyPreset('beijing')">北京标准</button>
+                            <button type="button" class="preset-btn" onclick="applyPreset('shanghai')">上海标准</button>
+                            <button type="button" class="preset-btn" onclick="applyPreset('guangzhou')">广州标准</button>
+                            <button type="button" class="preset-btn" onclick="applyPreset('shenzhen')">深圳标准</button>
+                            <button type="button" class="preset-btn" onclick="resetToDefault()">恢复默认</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateSocialSecurity()"> 开始计/button>
+            </div>
+            
+
+            
+            <!-- 使用指南 -->
+            <div class="info-section">
+                <h2 class="info-title"> 三步轻松操作指南</h2>
+                <div class="info-content">
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">1</div>
+                            <div class="feature-title">输入基数</div>
+                            <p>填写税前月薪，支持年薪自动折/p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">2</div>
+                            <div class="feature-title">选择地区</div>
+                            <p>选择参保城市，自动匹配当地社保政/p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">3</div>
+                            <div class="feature-title">自定义参/div>
+                            <p>展开高级设置置，自定义缴费比例和基/p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">4</div>
+                            <div class="feature-title">获取报告</div>
+                            <p>生成详细缴费明细，附带政策依/p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 工具箱详细介绍 -->
+            <div class="info-section">
+                <h2 class="info-title"> 五险一金的核心价/h2>
+                <div class="info-content">
+                    <p>根据《社会保险法》，五险一金是劳动者权益的基石/p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <div class="feature-title">养老保/div>
+                            <p>累计缴满15年可享退休金，保障老年生活</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <div class="feature-title">医疗保险</div>
+                            <p>报销70%-90%医疗费用，减轻就医负/p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <div class="feature-title">住房公积/div>
+                            <p>贷款享低.8%利率025年基准）</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">/div>
+                            <div class="feature-title">三险保障</div>
+                            <p>覆盖失业/工伤/生育的兜底保/p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 工具箱优势 -->
+            <div class="info-section">
+                <h2 class="info-title"> 我们的计算器能做什么？</h2>
+                <div class="info-content">
+                    <p>输入税前工资与参保城市，即可自动生成/p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <div class="feature-title">明细分析</div>
+                            <p>养老保险：个人8% | 单位16%<br>医疗保险：个% | 单位9%<br>住房公积金：个人12%（最高可缴）</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <div class="feature-title">实得工资可视/div>
+                            <p>图表展示扣除五险一金及个税后的到手金额</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <div class="feature-title">跨城对比</div>
+                            <p>一键切换城市查看上广州/深圳等差/p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <div class="feature-title">高度自定/div>
+                            <p>支持自定义个单位缴费比例、社公积金基/p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <div class="feature-title">快速预/div>
+                            <p>内置北京、上海等主要城市标准，一键应/p>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <div class="highlight-number">238,600+</div>
+                        <p>用户通过本计算器厘清薪资结构/p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 应用场景 -->
+            <div class="info-section">
+                <h2 class="info-title"> 应用场景</h2>
+                <div class="info-content">
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <div class="feature-title">求职谈薪</div>
+                            <p>面试时快速计算器实际到手收入，合理评估offer价/p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <div class="feature-title">用工合规</div>
+                            <p>HR和财务人员核算用工成本，确保合规缴费</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <div class="feature-title">购房规划</div>
+                            <p>计算器公积金缴存额度，规划购房贷款能力</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <div class="feature-title">跳槽决策</div>
+                            <p>对比不同城市薪资待遇，做出最优职业选择</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 常见问题 -->
+        <div class="faq-section">
+            <h2 class="info-title">常见问题解答</h2>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">五险一金的缴费基数如何确定/div>
+                <div class="faq-answer">
+                    <p>缴费基数通常以上年度月平均工资为准，但有上下限限制：</p>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>下限：当地社会平均工资的60%</li>
+                        <li>上限：当地社会平均工资的300%</li>
+                        <li>实际工资在此区间内的，按实际工资作为缴费基数</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">不同城市的缴费比例有什么差异？</div>
+                <div class="faq-answer">
+                    <p>各城市在国家政策框架内可能有细微调整/p>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>养老保险：个人8%，单6%（全国统一/li>
+                        <li>医疗保险：个%，单%-10%（各地略有差异）</li>
+                        <li>住房公积金：5%-12%（各地差异较大）</li>
+                        <li>失业、工伤、生育保险比例各地可能不/li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">个人所得税是如何计算器的/div>
+                <div class="faq-answer">
+                    <p>个人所得税采用累进税率制：</p>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>应纳税所得额 = 税前工资 - 五险一金个人缴- 5000元（起征点）</li>
+                        <li>税率%-45%七级累进税率</li>
+                        <li>3万元以下%?12万：10%?2?25万：20%/li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">计算器结果的准确性如何保证？</div>
+                <div class="faq-answer">
+                    <p>我们的计算器具有以下保障/p>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>数据来源：基025年人社部最新政/li>
+                        <li>实时更新：定期同步各地最新缴费标/li>
+                        <li>免责声明：实际缴费以单位申报为准，本工具箱仅供参/li>
+                        <li>建议：重要决策请咨询当地社保部门</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 重要提示 -->
+        <div class="info-section">
+            <h2 class="info-title"> 重要提示</h2>
+            <div class="info-content">
+                <ul style="margin: 15px 0; padding-left: 20px; line-height: 1.8;">
+                    <li>数据来源：基025年最新社保政策，涵盖北京/上海/广州/深圳大城<mcreference link="https: //www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202408/t20240801_3764100.html" index="2">2</mcreference></li>
+                    <li>北京2024年社保基数：上限35,283，下限,821 <mcreference link="https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202408/t20240801_3764100.html" index="2">2</mcreference></li>
+                    <li>公积金缴存比例：5%-12%，北024年度基数上限35,283 <mcreference link="https://gjj.beijing.gov.cn/web/zwgk61/2024zcjd/543368467/index.html" index="4">4</mcreference></li>
+                    <li>高级功能：支持自定义个人/单位缴费比例、社公积金基/li>
+                    <li>免责声明：实际参保金额需以单位申报为准，本工具箱仅作参/li>
+                    <li>用工合规自查、跳槽涨薪谈判、退休规划必备工具箱！</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 页脚信息 -->
+        <div class="footer-info">
+            <p>@2025 五险一金计算器 - 精确计算器社保公积金缴费金额及实发工资的专业工/p>
+            <div class="footer-links">
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank">技术支/a>
+                <a href="https://t.zsxq.com/17wTksRxX" target="_blank">问题反馈</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚占位符-->
+    <div id="footer-container"></div>
+    
+    <script src="../components/component-manager.js"></script>
+    
+    
+    <script>
+        // 城市社保配置数据（基025年最新标准）
+        const cityConfigs = {
+            beijing: {
+                name: '北京',
+                pension: { personal: 8, company: 16 },
+                medical: { personal: 2, company: 9 },
+                unemployment: { personal: 0.2, company: 0.8 },
+                injury: { personal: 0, company: 0.5 },
+                maternity: { personal: 0, company: 0.8 },
+                housing: { personal: 12, company: 12 },
+                baseMin: 6821,
+                baseMax: 35283
+            },
+            shanghai: {
+                name: '上海',
+                pension: { personal: 8, company: 16 },
+                medical: { personal: 2, company: 9.5 },
+                unemployment: { personal: 0.5, company: 0.5 },
+                injury: { personal: 0, company: 0.5 },
+                maternity: { personal: 0, company: 1 },
+                housing: { personal: 7, company: 7 },
+                baseMin: 6520,
+                baseMax: 36549
+            },
+            guangzhou: {
+                name: '广州',
+                pension: { personal: 8, company: 14 },
+                medical: { personal: 2, company: 5.5 },
+                unemployment: { personal: 0.2, company: 0.64 },
+                injury: { personal: 0, company: 0.2 },
+                maternity: { personal: 0, company: 0.85 },
+                housing: { personal: 5, company: 5 },
+                baseMin: 2300,
+                baseMax: 33786
+            },
+            shenzhen: {
+                name: '深圳',
+                pension: { personal: 8, company: 16 },
+                medical: { personal: 2, company: 5 },
+                unemployment: { personal: 0.2, company: 0.8 },
+                injury: { personal: 0, company: 0.2 },
+                maternity: { personal: 0, company: 0.45 },
+                housing: { personal: 5, company: 5 },
+                baseMin: 6733,
+                baseMax: 33666
+            },
+            hangzhou: {
+                name: '杭州',
+                pension: { personal: 8, company: 16 },
+                medical: { personal: 2, company: 9.9 },
+                unemployment: { personal: 0.5, company: 0.5 },
+                injury: { personal: 0, company: 0.4 },
+                maternity: { personal: 0, company: 1.2 },
+                housing: { personal: 12, company: 12 },
+                baseMin: 3957,
+                baseMax: 23685
+            },
+            nanjing: {
+                name: '南京',
+                pension: { personal: 8, company: 16 },
+                medical: { personal: 2, company: 9 },
+                unemployment: { personal: 0.5, company: 0.5 },
+                injury: { personal: 0, company: 0.5 },
+                maternity: { personal: 0, company: 0.8 },
+                housing: { personal: 8, company: 8 },
+                baseMin: 4494,
+                baseMax: 25695
+            },
+            chengdu: {
+                name: '成都',
+                pension: { personal: 8, company: 16 },
+                medical: { personal: 2, company: 6.5 },
+                unemployment: { personal: 0.4, company: 0.6 },
+                injury: { personal: 0, company: 0.6 },
+                maternity: { personal: 0, company: 0.8 },
+                housing: { personal: 6, company: 6 },
+                baseMin: 4071,
+                baseMax: 20355
+            },
+            wuhan: {
+                name: '武汉',
+                pension: { personal: 8, company: 16 },
+                medical: { personal: 2, company: 8 },
+                unemployment: { personal: 0.3, company: 0.7 },
+                injury: { personal: 0, company: 0.4 },
+                maternity: { personal: 0, company: 0.7 },
+                housing: { personal: 8, company: 8 },
+                baseMin: 3739,
+                baseMax: 18696
+            },
+            xian: {
+                name: '西安全',
+                pension: { personal: 8, company: 16 },
+                medical: { personal: 2, company: 6 },
+                unemployment: { personal: 0.3, company: 0.7 },
+                injury: { personal: 0, company: 0.32 },
+                maternity: { personal: 0, company: 1 },
+                housing: { personal: 5, company: 5 },
+                baseMin: 3889,
+                baseMax: 19443
+            },
+            custom: {
+                name: '自定义参,
+                pension: { personal: 8, company: 16 },
+                medical: { personal: 2, company: 8 },
+                unemployment: { personal: 0.3, company: 0.7 },
+                injury: { personal: 0, company: 0.5 },
+                maternity: { personal: 0, company: 0.8 },
+                housing: { personal: 8, company: 8 },
+                baseMin: 3000,
+                baseMax: 25000
+            }
+        };
+        
+        let currentCity = 'beijing';
+        let isAdvancedMode = false;
+        
+        // 初始        document.addEventListener('DOMContentLoaded', function() {
+            // 组件管理器会自动初始化，无需手动调用
+            
+            // 绑定城市选择事件
+            document.querySelectorAll('.city-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.city-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCity = this.dataset.city;
+                    
+                    // 如果选择自定义参数，自动展开高级设置置
+                    if (currentCity === 'custom' && !isAdvancedMode) {
+                        toggleAdvancedSettings();
+                    }
+                    
+                    // 应用城市预设置
+                    if (currentCity !== 'custom') {
+                        applyPreset(currentCity);
+                    }
+                });
+            });
+            
+            // 绑定回车键计            document.getElementById('salary').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    calculateSocialSecurity();
+                }
+            });
+        });
+        
+        // 切换高级设置置显示
+        function toggleAdvancedSettings() {
+            const advancedSettings = document.getElementById('advanced-settings');
+            const toggleText = document.getElementById('toggle-text');
+            const toggleIcon = document.getElementById('toggle-icon');
+            
+            isAdvancedMode = !isAdvancedMode;
+            
+            if (isAdvancedMode) {
+                advancedSettings.style.display = 'block';
+                toggleText.textContent = '收起自定义参;
+                toggleIcon.textContent = ';
+                // 填充当前城市的默认                fillAdvancedSettings();
+            } else {
+                advancedSettings.style.display = 'none';
+                toggleText.textContent = '展开自定义参;
+                toggleIcon.textContent = ';
+            }
+        }
+        
+        // 填充高级设置置的默认        function fillAdvancedSettings() {
+            const config = cityConfigs[currentCity];
+            const salary = parseFloat(document.getElementById('salary').value) || 0;
+            
+            // 填充缴费基数
+            document.getElementById('social-base').value = salary || '';
+            document.getElementById('housing-base').value = salary || '';
+            
+            // 填充个人缴费比例
+            document.getElementById('personal-pension-rate').value = config.pension.personal;
+            document.getElementById('personal-medical-rate').value = config.medical.personal;
+            document.getElementById('personal-unemployment-rate').value = config.unemployment.personal;
+            document.getElementById('personal-housing-rate').value = config.housing.personal;
+            
+            // 填充单位缴费比例
+            document.getElementById('company-pension-rate').value = config.pension.company;
+            document.getElementById('company-medical-rate').value = config.medical.company;
+            document.getElementById('company-unemployment-rate').value = config.unemployment.company;
+            document.getElementById('company-housing-rate').value = config.housing.company;
+            document.getElementById('company-injury-rate').value = config.injury.company;
+            document.getElementById('company-maternity-rate').value = config.maternity.company;
+        }
+        
+        // 应用城市预设置
+        function applyPreset(cityKey) {
+            if (!cityConfigs[cityKey]) return;
+            
+            const config = cityConfigs[cityKey];
+            
+            // 如果高级设置置已展开，更新所有字            if (isAdvancedMode) {
+                fillAdvancedSettings();
+            }
+        }
+        
+        // 重置为默认        function resetToDefault() {
+            currentCity = 'beijing';
+            document.querySelectorAll('.city-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('[data-city="beijing"]').classList.add('active');
+            
+            if (isAdvancedMode) {
+                fillAdvancedSettings();
+            }
+        }
+        
+        // 获取当前的缴费配置（考虑自定义参数）
+        function getCurrentConfig() {
+            const baseConfig = cityConfigs[currentCity];
+            
+            if (!isAdvancedMode) {
+                return baseConfig;
+            }
+            
+            // 从高级设置置中读取自定义参            const customConfig = {
+                ...baseConfig,
+                pension: {
+                    personal: parseFloat(document.getElementById('personal-pension-rate').value) || baseConfig.pension.personal,
+                    company: parseFloat(document.getElementById('company-pension-rate').value) || baseConfig.pension.company
+                },
+                medical: {
+                    personal: parseFloat(document.getElementById('personal-medical-rate').value) || baseConfig.medical.personal,
+                    company: parseFloat(document.getElementById('company-medical-rate').value) || baseConfig.medical.company
+                },
+                unemployment: {
+                    personal: parseFloat(document.getElementById('personal-unemployment-rate').value) || baseConfig.unemployment.personal,
+                    company: parseFloat(document.getElementById('company-unemployment-rate').value) || baseConfig.unemployment.company
+                },
+                injury: {
+                    personal: 0,
+                    company: parseFloat(document.getElementById('company-injury-rate').value) || baseConfig.injury.company
+                },
+                maternity: {
+                    personal: 0,
+                    company: parseFloat(document.getElementById('company-maternity-rate').value) || baseConfig.maternity.company
+                },
+                housing: {
+                    personal: parseFloat(document.getElementById('personal-housing-rate').value) || baseConfig.housing.personal,
+                    company: parseFloat(document.getElementById('company-housing-rate').value) || baseConfig.housing.company
+                }
+            };
+            
+            return customConfig;
+        }
+        
+        // 获取缴费基数
+        function getContributionBases(salary) {
+            const config = cityConfigs[currentCity];
+            
+            let socialBase = salary;
+            let housingBase = salary;
+            
+            if (isAdvancedMode) {
+                const customSocialBase = parseFloat(document.getElementById('social-base').value);
+                const customHousingBase = parseFloat(document.getElementById('housing-base').value);
+                
+                if (customSocialBase && customSocialBase > 0) {
+                    socialBase = customSocialBase;
+                }
+                if (customHousingBase && customHousingBase > 0) {
+                    housingBase = customHousingBase;
+                }
+            }
+            
+            // 应用基数上下            socialBase = Math.max(config.baseMin, Math.min(socialBase, config.baseMax));
+            housingBase = Math.max(config.baseMin, Math.min(housingBase, config.baseMax));
+            
+            return { socialBase, housingBase };
+        }
+        
+        // 计算器五险一        function calculateSocialSecurity() {
+            const salary = parseFloat(document.getElementById('salary').value);
+            
+            if (!salary || salary <= 0) {
+                alert('请输入有效的税前月薪');
+                return;
+            }
+            
+            const config = getCurrentConfig();
+            const { socialBase, housingBase } = getContributionBases(salary);
+            
+            // 计算器个人缴费
+            const personalPension = socialBase * config.pension.personal / 100;
+            const personalMedical = socialBase * config.medical.personal / 100;
+            const personalUnemployment = socialBase * config.unemployment.personal / 100;
+            const personalHousing = housingBase * config.housing.personal / 100;
+            
+            const personalSocialTotal = personalPension + personalMedical + personalUnemployment + personalHousing;
+            
+            // 计算器个人所得税
+            const taxableIncome = salary - personalSocialTotal - 5000; // 减去起征            const personalTax = calculatePersonalTax(taxableIncome);
+            
+            const personalTotal = personalSocialTotal + personalTax;
+            
+            // 计算器单位缴费
+            const companyPension = socialBase * config.pension.company / 100;
+            const companyMedical = socialBase * config.medical.company / 100;
+            const companyUnemployment = socialBase * config.unemployment.company / 100;
+            const companyInjury = socialBase * config.injury.company / 100;
+            const companyMaternity = socialBase * config.maternity.company / 100;
+            const companyHousing = housingBase * config.housing.company / 100;
+            
+            const companyTotal = companyPension + companyMedical + companyUnemployment + 
+                               companyInjury + companyMaternity + companyHousing;
+            
+            // 计算器实发工资
+            const netSalary = salary - personalTotal;
+            
+            // 显示结果
+            displayResults({
+                netSalary,
+                personalPension,
+                personalMedical,
+                personalUnemployment,
+                personalHousing,
+                personalTax,
+                personalTotal,
+                companyPension,
+                companyMedical,
+                companyUnemployment,
+                companyInjury,
+                companyMaternity,
+                companyHousing,
+                companyTotal
+            });
+        }
+        
+        // 计算器个人所得税（累进税率）
+        function calculatePersonalTax(taxableIncome) {
+            if (taxableIncome <= 0) return 0;
+            
+            const taxBrackets = [
+                { min: 0, max: 3000, rate: 0.03, deduction: 0 },
+                { min: 3000, max: 12000, rate: 0.10, deduction: 210 },
+                { min: 12000, max: 25000, rate: 0.20, deduction: 1410 },
+                { min: 25000, max: 35000, rate: 0.25, deduction: 2660 },
+                { min: 35000, max: 55000, rate: 0.30, deduction: 4410 },
+                { min: 55000, max: 80000, rate: 0.35, deduction: 7160 },
+                { min: 80000, max: Infinity, rate: 0.45, deduction: 15160 }
+            ];
+            
+            for (const bracket of taxBrackets) {
+                if (taxableIncome > bracket.min && taxableIncome <= bracket.max) {
+                    return taxableIncome * bracket.rate - bracket.deduction;
+                }
+            }
+            
+            return 0;
+        }
+        
+        // 显示计算器结果
+        function displayResults(results) {
+            const config = getCurrentConfig();
+            const salary = parseFloat(document.getElementById('salary').value) || 0;
+            
+            // 更新结果摘要
+            document.getElementById('net-salary-display').textContent = `${results.netSalary.toFixed(2)}`;
+            document.getElementById('total-cost-display').textContent = `${(salary + results.companyTotal).toFixed(2)}`;
+            
+            // 显示结果区域
+            document.getElementById('result-summary').style.display = 'grid';
+            document.getElementById('details-section').style.display = 'block';
+            
+            // 更新明细区域的数            updateInsuranceDetails(results, config);
+            
+            // 滚动到结果摘            document.getElementById('result-summary').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // 更新明细区域的数        function updateInsuranceDetails(results, config) {
+            // 更新缴费比例显示
+            document.querySelector('.insurance-item:nth-child(1) .insurance-rate').textContent = `个人${config.pension.personal}%  单位${config.pension.company}%`;
+            document.querySelector('.insurance-item:nth-child(2) .insurance-rate').textContent = `个人${config.medical.personal}%  单位${config.medical.company}%`;
+            document.querySelector('.insurance-item:nth-child(3) .insurance-rate').textContent = `个人${config.unemployment.personal}%  单位${config.unemployment.company}%`;
+            document.querySelector('.insurance-item:nth-child(4) .insurance-rate').textContent = `个人0%  单位${config.injury.company}%`;
+            document.querySelector('.insurance-item:nth-child(5) .insurance-rate').textContent = `个人0%  单位${config.maternity.company}%`;
+            document.querySelector('.insurance-item:nth-child(6) .insurance-rate').textContent = `个人${config.housing.personal}%  单位${config.housing.company}%`;
+            
+            // 更新缴费金额
+            document.getElementById('pension-personal').textContent = results.personalPension.toFixed(2);
+            document.getElementById('pension-company').textContent = results.companyPension.toFixed(2);
+            document.getElementById('medical-personal').textContent = results.personalMedical.toFixed(2);
+            document.getElementById('medical-company').textContent = results.companyMedical.toFixed(2);
+            document.getElementById('unemployment-personal').textContent = results.personalUnemployment.toFixed(2);
+            document.getElementById('unemployment-company').textContent = results.companyUnemployment.toFixed(2);
+            document.getElementById('injury-company').textContent = results.companyInjury.toFixed(2);
+            document.getElementById('maternity-company').textContent = results.companyMaternity.toFixed(2);
+            document.getElementById('housing-personal').textContent = results.personalHousing.toFixed(2);
+            document.getElementById('housing-company').textContent = results.companyHousing.toFixed(2);
+        }
+        
+        // 下载报告功能
+        function downloadReport() {
+            const salary = parseFloat(document.getElementById('salary').value) || 0;
+            const citySelect = document.querySelector('.city-btn.active');
+            const cityName = citySelect  citySelect.textContent : '未知城市';
+            
+            if (!salary || salary <= 0) {
+                alert('请先输入税前月薪并计算器结);
+                return;
+            }
+            
+            const config = getCurrentConfig();
+            const { socialBase, housingBase } = getContributionBases(salary);
+            
+            // 重新计算器结果以确保数据准            const personalPension = socialBase * config.pension.personal / 100;
+            const personalMedical = socialBase * config.medical.personal / 100;
+            const personalUnemployment = socialBase * config.unemployment.personal / 100;
+            const personalHousing = housingBase * config.housing.personal / 100;
+            const personalSocialTotal = personalPension + personalMedical + personalUnemployment + personalHousing;
+            const taxableIncome = salary - personalSocialTotal - 5000;
+            const personalTax = calculatePersonalTax(taxableIncome);
+            const personalTotal = personalSocialTotal + personalTax;
+            
+            const companyPension = socialBase * config.pension.company / 100;
+            const companyMedical = socialBase * config.medical.company / 100;
+            const companyUnemployment = socialBase * config.unemployment.company / 100;
+            const companyInjury = socialBase * config.injury.company / 100;
+            const companyMaternity = socialBase * config.maternity.company / 100;
+            const companyHousing = housingBase * config.housing.company / 100;
+            const companyTotal = companyPension + companyMedical + companyUnemployment + companyInjury + companyMaternity + companyHousing;
+            
+            const netSalary = salary - personalTotal;
+            
+            const reportContent = `五险一金计算器报==================
+
+基本信息- 税前月薪：{salary.toFixed(2)}
+- 所在城市：${cityName}
+- 计算器时间{new Date().toLocaleString()}
+
+缴费基数- 社保缴费基数：{socialBase.toFixed(2)}
+- 公积金缴费基数：${housingBase.toFixed(2)}
+
+个人缴费明细- 养老保(${config.pension.personal}%)：{personalPension.toFixed(2)}
+- 医疗保险 (${config.medical.personal}%)：{personalMedical.toFixed(2)}
+- 失业保险 (${config.unemployment.personal}%)：{personalUnemployment.toFixed(2)}
+- 住房公积(${config.housing.personal}%)：{personalHousing.toFixed(2)}
+- 个人所得税：{personalTax.toFixed(2)}
+- 个人缴费合计：{personalTotal.toFixed(2)}
+
+单位缴费明细- 养老保(${config.pension.company}%)：{companyPension.toFixed(2)}
+- 医疗保险 (${config.medical.company}%)：{companyMedical.toFixed(2)}
+- 失业保险 (${config.unemployment.company}%)：{companyUnemployment.toFixed(2)}
+- 工伤保险 (${config.injury.company}%)：{companyInjury.toFixed(2)}
+- 生育保险 (${config.maternity.company}%)：{companyMaternity.toFixed(2)}
+- 住房公积(${config.housing.company}%)：{companyHousing.toFixed(2)}
+- 单位缴费合计：{companyTotal.toFixed(2)}
+
+汇总信息：
+- 实发工资：{netSalary.toFixed(2)}
+- 单位总支出：${(salary + companyTotal).toFixed(2)}
+- 五险一金总额：{(personalSocialTotal + companyTotal).toFixed(2)}
+
+说明本报告基于当前政策标准计算器，仅供参考实际缴费可能因地区政策差异而有所不同            `;
+            
+            const blob = new Blob([reportContent], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `五险一金计算器报告_${cityName}_${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        // 显示比较城市模态框
+        function showCompareModal() {
+            alert('城市比较功能正在开发中，敬请期待！\n\n您可以通过切换城市选择来比较不同城市的缴费标准);
+        }
+        
+        // 切换FAQ答案显示
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const isVisible = answer.style.display === 'block';
+            
+            // 隐藏所有FAQ答案
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                ans.style.display = 'none';
+            });
+            
+            // 移除所有active            document.querySelectorAll('.faq-question').forEach(q => {
+                q.classList.remove('active');
+            });
+            
+            // 切换当前FAQ答案
+            if (!isVisible) {
+                answer.style.display = 'block';
+                element.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

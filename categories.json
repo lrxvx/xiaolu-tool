@@ -49,6 +49,13 @@
     "color": "#4361ee"
   },
   {
+    "id": "game",
+    "name": "休闲游戏",
+    "icon": "fas fa-gamepad",
+    "description": "2048、贪吃蛇、俄罗斯方块等经典休闲益智游戏",
+    "color": "#4361ee"
+  },
+  {
     "id": "entertainment",
     "name": "娱乐工具",
     "icon": "fas fa-gamepad",
