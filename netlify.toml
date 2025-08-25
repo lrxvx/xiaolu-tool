@@ -40,6 +40,19 @@
   [headers.values]
     Cache-Control = "public, max-age=3600"
 
+# Allow direct access to important files
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain"
+    Cache-Control = "public, max-age=3600"
+
 # Redirects for SPA-like behavior
 [[redirects]]
   from = "/tools/*"
